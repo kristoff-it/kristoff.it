@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Loris Cro's Personal Blog]]></title><description><![CDATA[A blog about computer science and design.]]></description><link>https://kristoff.it/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 12 Jan 2021 22:50:51 GMT</lastBuildDate><item><title><![CDATA[The First Zig Website Redesign]]></title><description><![CDATA[Up until the publication of this post, if you went to the front page of https://ziglang.org, you would be greeted with a multi-page…]]></description><link>https://kristoff.it//blog/first-zig-website-redesign/</link><guid isPermaLink="false">https://kristoff.it//blog/first-zig-website-redesign/</guid><pubDate>Tue, 12 Jan 2021 23:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Up until the publication of this post, if you went to the front page of &lt;a href=&quot;https://ziglang.org&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://ziglang.org&lt;/a&gt;, you would be greeted with a multi-page explanation about how Zig improves over the systems programming toolchains that today we take for granted.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Loris Cro's Personal Blog]]></title><description><![CDATA[A blog about computer science and design.]]></description><link>https://kristoff.it/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 12 Jan 2021 23:05:51 GMT</lastBuildDate><item><title><![CDATA[The First Zig Website Redesign]]></title><description><![CDATA[Up until the publication of this post, if you went to the front page of https://ziglang.org, you would be greeted with a multi-page…]]></description><link>https://kristoff.it//blog/first-zig-website-redesign/</link><guid isPermaLink="false">https://kristoff.it//blog/first-zig-website-redesign/</guid><pubDate>Tue, 12 Jan 2021 23:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Up until the publication of this post, if you went to the front page of &lt;a href=&quot;https://ziglang.org&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://ziglang.org&lt;/a&gt;, you would be greeted with a multi-page explanation about how Zig improves over the systems programming toolchains that today we take for granted.&lt;/p&gt;
 &lt;p&gt;If you have done enough of that kind of programming, you’ll immediately see how Zig is tackling relevant problems, but if you don’t have such experience, then the front page could very easily look like a never-ending list of things you don’t have an opinion about.&lt;/p&gt;
 &lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
     &lt;span
@@ -270,7 +270,7 @@
 
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
+            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem; background-color: transparent;&quot;
           &gt;
             &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/APiugylcAJw&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;
             position: absolute;
@@ -497,7 +497,7 @@
 
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
+            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem; background-color: transparent;&quot;
           &gt;
             &lt;iframe src=&quot;https://player.vimeo.com/video/491488902&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; fullscreen&quot; allowfullscreen style=&quot;
             position: absolute;
@@ -756,7 +756,7 @@ To revert back to blocking I/O, all we have to do is delete the special declarat
 
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
+            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem; background-color: transparent;&quot;
           &gt;
             &lt;iframe src=&quot;https://www.youtube.com/embed/zeLToGnjIUM&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;
             position: absolute;
@@ -914,7 +914,7 @@ color: #D4D4D4;
 
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
+            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem; background-color: transparent;&quot;
           &gt;
             &lt;iframe src=&quot;https://www.youtube-nocookie.com/embed/OseOb_wBsi4&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&quot; allowfullscreen style=&quot;
             position: absolute;
@@ -932,7 +932,7 @@ color: #D4D4D4;
 
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
-            style=&quot;padding-bottom: 60.967741935483865%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
+            style=&quot;padding-bottom: 60.967741935483865%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem; background-color: transparent;&quot;
           &gt;
             &lt;iframe src=&quot;https://clips.twitch.tv/embed?clip=RamshackleArbitraryBillJKanStyle&amp;amp;autoplay=false&amp;amp;parent=kristoff.it&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;true&quot; scrolling=&quot;no&quot; style=&quot;
             position: absolute;
