@@ -1,4 +1,221 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Loris Cro's Personal Blog]]></title><description><![CDATA[A blog about computer science and design.]]></description><link>https://kristoff.it/</link><generator>RSS for Node</generator><lastBuildDate>Thu, 24 Dec 2020 00:04:29 GMT</lastBuildDate><item><title><![CDATA[You Should Play Secret Hitler]]></title><description><![CDATA[In games like D&D, you start by creating a character for yourself. The character has a background, a set of skills and a personality of…]]></description><link>https://kristoff.it//blog/you-should-play-secret-hitler/</link><guid isPermaLink="false">https://kristoff.it//blog/you-should-play-secret-hitler/</guid><pubDate>Wed, 21 Oct 2020 22:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In games like D&amp;#x26;D, you start by creating a character for yourself. The character has a background, a set of skills and a personality of their own. Ideally, you should try to play characters with a different disposition than yours, and part of the enjoyment is acting like them, to the point of even occasionally making disastrous choices knowingly, because that’s what the character would do.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Loris Cro's Personal Blog]]></title><description><![CDATA[A blog about computer science and design.]]></description><link>https://kristoff.it/</link><generator>RSS for Node</generator><lastBuildDate>Tue, 12 Jan 2021 22:30:59 GMT</lastBuildDate><item><title><![CDATA[The First Zig Website Redesign]]></title><description><![CDATA[Up until the publication of this post, if you went to the front page of https://ziglang.org, you would be greeted with a multi-page…]]></description><link>https://kristoff.it//blog/first-zig-website-redesign/</link><guid isPermaLink="false">https://kristoff.it//blog/first-zig-website-redesign/</guid><pubDate>Tue, 12 Jan 2021 23:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Up until the publication of this post, if you went to the front page of &lt;a href=&quot;https://ziglang.org&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://ziglang.org&lt;/a&gt;, you would be greeted with a multi-page explanation about how Zig improves over the systems programming toolchains that today we take for granted.&lt;/p&gt;
+&lt;p&gt;If you have done enough of that kind of programming, you’ll immediately see how Zig is tackling relevant problems, but if you don’t have such experience, then the front page could very easily look like a never-ending list of things you don’t have an opinion about.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 400px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/534b1bc1bc6f429e8bf3182eb5230216/bb7a5/old-zig-website.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 98.11507936507937%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAACXBIWXMAABYlAAAWJQFJUiTwAAADYElEQVQ4y5WT3W7jRBTHvWzYfLi2k7j+SNLYThyncZo4sVMnsZ20iAvUsFu1IOjuqqUbIVar5QIhgQQXSFyj8gK8B72Ah0G+5g1QYx/OOG20DS0LFz+d0Yz98//MjCmKEt6xW+qk3VYfj93BwcibzDxkjLTMzkzT9Jmq1meqVl/WNRS1NtsUpAPkcbWqChRFMbxr98PBeASBP4Hp3vvg+VMYjSfQtRxoGC3QG9v3QtbdoQcYAKpK7ZSqCBk5GBjh0V4T9gI3OvjwMHaH4xgTxaJUikulrVguVVaUVnU5X65UY7PduWrvWLApiHPqdJKVfv6sEP50koJvPv8guri4iH/84fs4GLtxOvUgzrO5mN3I/Ct09t0rhk4DQ2deUBzLSN+9ehJ+++pj+Pr1efTV6zl8+fIMXs6fwunJ4Yrz58dw+skTOP/0CM6eHcH5s+Mlz4/js5PDxdOPDrDD3TmVzeUkw7TCHdyvdseKdjoWtHe60On2oNd3oGc7Se3bg1Vd4SQ1RhZWz4ZaXZ/joVCSjYeyv78HQeBHQRDAdDohY/B9H3Z3d2E4dBMcxwHXdWEwcHBs4xjXXDf2fW/R7XSgUikvhZZlhZ7nQb/fj8gLw+GQjAHnoV6vg67rCWS8Ds7HyKLRaEC5jEKOYyXTNMMuttjtWlGz2QSazgLDbCAM5PP5txEji0KhQJ6fU6nUQ4nn+VDVTNje9iNdH2B0AwShBMXi5vVLHJAX7iFGFsViEViWnVOZDC1xHBNK0hY0mwEmnKB4Co3GGBmBpvVBFCuJ+D4hSfiGMIdCNpTlKhhNknAIS9wEkrZQKK4Ed4hvC9PprIQthaJYwk12IiKp1WySNmmbYXJJy/jRlWxNui7MJEJBkFBoJwnr9QHcVEmqAs+L13vK3yVdbzmLLXO4h2UwDC+6aZUINa2HaR1Q1S7IsnIt5Nbbvy189CiNCfMhmVAUMzkUciCkZUXpQLVqokxNkpbLDazK21pO9vAPUZRR5F5tt/YXuIcLWdYSBKGMd6x4CyJY4y8iR+ELcsoyCv8kp9xqTZdXxhhhq32obBmYhr3jqhT/MYd3mQi/wIudyuMN/wX/jN95Xv5VlvVLUVQuOa5wybLcJa79V36jafo98i8/QLIIh7DXcP+Dm+c3kId/A4yo2OEvD0jJAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/534b1bc1bc6f429e8bf3182eb5230216/f5e3c/old-zig-website.webp 100w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/f2fbe/old-zig-website.webp 200w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/e227a/old-zig-website.webp 400w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/965c5/old-zig-website.webp 600w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/0cbce/old-zig-website.webp 800w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/823bd/old-zig-website.webp 2016w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/534b1bc1bc6f429e8bf3182eb5230216/c0399/old-zig-website.png 100w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/9ec3c/old-zig-website.png 200w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/c7805/old-zig-website.png 400w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/34e8a/old-zig-website.png 600w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/8ff1e/old-zig-website.png 800w,
+/static/534b1bc1bc6f429e8bf3182eb5230216/bb7a5/old-zig-website.png 2016w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/534b1bc1bc6f429e8bf3182eb5230216/c7805/old-zig-website.png&quot;
+          alt=&quot;The original homepage&quot;
+          title=&quot;The original homepage featured a pretty big ToC&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;The original homepage featured a pretty big ToC&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;When the Zig project started, its audience was almost exclusively people with a lot of relevant experience, since those would be the only ones able to evaluate the promise and limits of the newborn language.&lt;/p&gt;
+&lt;p&gt;Today we’re at a point where Zig is becoming increasingly compelling for people coming from all layers of the stack. People have written &lt;a href=&quot;https://github.com/Hejsil/mecha&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;parser combinators&lt;/a&gt;, &lt;a href=&quot;https://github.com/prime31/zig-gamekit&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;2d game rendering libraries&lt;/a&gt;, &lt;a href=&quot;https://www.mattkeeter.com/projects/futureproof/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;a live editor for GPU shaders&lt;/a&gt;, and much more. &lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 400px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/95e0e4b253811f7ad42c415ffd4d13bb/6ff5e/seascape-futureproof.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 72.5%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAACXBIWXMAABYlAAAWJQFJUiTwAAAD/UlEQVQ4y6WSXUxbZRjHid5MvYBtsA9YS0vb0xYK5bSnH6c9p+05bSlfLXTAxkfp6RjjY2AzlCAJoGbOOY0fzGPc1AtijDFeeGWii7vCKzYh0S0R1yGgZmbqtUro6fv3UGbivW/yy/Pmvfjl+b/PU7L2xVLiq5UbQ6sra+lbK7ekPW6v3C6y+s2a9PXysvTljZvS9+sbUu7+pnR/Y1va3PpZ2lLZ+HFbfdsavJfbHLlzd50p2Ts93fHtk93t6OxsRTLZVqSjowWJhEpHK8JhHh99fhM/5YG7f+zizu+7WPv1L6w++BPf/baDbx/+jYcAltcffFAUutz0PatVj1pbTb6+3qjU2WoUk0mrmKhqxahWjaZC6c3OKROLnylds+8onTOy0v7MotI29ZYSy76utEy9uZN55WOcfm7xelHIhXw5xutGkHEWWL+L2BvsxGqlCGXWE7PFQMzmamKN9BLH4AvEk54nXul54larOHqJMKk5QvfN7jqli7B1Zt8rCoMCl2vig4g00AXR6wFjs8NltaLBYoQqhMmkge/kWXDnXkZj7wz8ZxbQlr2M7pk31Ps8qMRk3pGaR0Nycl8YELmcn+cgetyFeLwZPlVqoWpgMetB7UFpwbQPwDEwB2ffDLjMHFwD02DTM+iafg2JC1fy4vhlNCYn9oVcmM/5hAiSLF84nepBiA+jttYKc60JFquKWYej7hYci43DlJiAMT4OY9sYqPgo6FNPIzIynxfGXgLbN/UosioUfEHEXd5Ce1MEMacXYqMfAs3B0UjDaq3BYWcMJZ5BPMH2oZRP4aiYgb55GNqohNjoQv78q0tw9/wbOcDmQowDLEMXWLsNLroe9TYKdpul+IdmNXIZ3YTS0DlURodRIWSgjQ3D0DqidjmC2s7xPDe0AK7vwr7QF/DkwrQDEY+3EPU2ItwaRDDiRigSgEWNbVYjU8GkGjeLg4FBHFGFleEMqsISqsQUGrsm84GzC7DFh/eFfs6dCwTVoTiZAs96iV/kiD/kJ5zAExfLEA/rJHWRHnIolCHHxQzRNg0RTTRDqsQ0qRRSRDgzuzt88TpqwgOPhsJ7fhDUDkMOOu921Sm0vUGx2WzqglsUI6VTKHW5jzFRpSyQVsoD/Uo5369UBPqUw1yvUtsxpti7JncW3v0Up7Iv7i92a3v0l85YFDHRh2gziyZRhBAIQwjx8PkZ+H0OGEJJlAUlHOQHUMr1Q6cO5IiQhrv/WfUPz2P66ieYvnJtqSg0mfSzBrP+WrVe+7ZGe0LW6irlat1xWV+jkQ1GnWwwaOVyipYPUD75SYqVnzL75BNMVD5UH5R1nmb5gNFzVedteb8+lOgu+c95/H/y2J5EuvRhyT9S4+51sNdB7QAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/95e0e4b253811f7ad42c415ffd4d13bb/f5e3c/seascape-futureproof.webp 100w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/f2fbe/seascape-futureproof.webp 200w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/e227a/seascape-futureproof.webp 400w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/965c5/seascape-futureproof.webp 600w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/0cbce/seascape-futureproof.webp 800w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/6bc95/seascape-futureproof.webp 1200w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/95e0e4b253811f7ad42c415ffd4d13bb/c0399/seascape-futureproof.png 100w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/9ec3c/seascape-futureproof.png 200w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/c7805/seascape-futureproof.png 400w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/34e8a/seascape-futureproof.png 600w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/8ff1e/seascape-futureproof.png 800w,
+/static/95e0e4b253811f7ad42c415ffd4d13bb/6ff5e/seascape-futureproof.png 1200w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/95e0e4b253811f7ad42c415ffd4d13bb/c7805/seascape-futureproof.png&quot;
+          alt=&quot;Futureproof, a live editor for GPU shaders&quot;
+          title=&quot;Futureproof, a live editor for GPU shaders&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Futureproof, a live editor for GPU shaders&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Don’t get me wrong: all these projects have been developed by early adopters who wanted to try &lt;a href=&quot;https://www.merriam-webster.com/dictionary/buggy&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;a new and exciting&lt;/a&gt; ecosystem. Zig is not yet stable, and won’t be for a while, but we’re getting there, and in the meantime Zig is already delivering big time on at least one promise: &lt;strong&gt;making it possible to learn more about programming without having to first buy into vast amounts of accidental complexity&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;This redesign had two main goals and, as always, a few practical constraints. When it comes to constraints, it’s mostly my web design and project management skills, and the scope that can be addressed in no more than a couple of months, since we needed a new website &lt;em&gt;now&lt;/em&gt; and not one year from now. Let’s now take a look at the goals.&lt;/p&gt;
+&lt;h2 id=&quot;a-friendlier-first-impression&quot;&gt;&lt;a href=&quot;#a-friendlier-first-impression&quot; aria-label=&quot;a friendlier first impression permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;A friendlier first impression&lt;/h2&gt;
+&lt;p&gt;The first goal addressed stems directly from the introduction of this blog post: we wanted to make the website more appealing to people that are looking at Zig as an opportunity to learn more about programming. For this reason, the lengthy breakdown has been moved to the Learn section and, in its place, we now have three short paragraphs that highlight some of Zig’s major features, followed by a code sample that gives you a first taste of the syntax. &lt;/p&gt;
+&lt;p&gt;Above the main introduction we still have the same slogan as before:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Zig is a general-purpose programming language and toolchain for maintaining &lt;strong&gt;robust&lt;/strong&gt;, &lt;strong&gt;optimal&lt;/strong&gt;, and &lt;strong&gt;reusable&lt;/strong&gt; software.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Andrew did an outstanding job at formulating it and I believe it’s the one bit of the entire website that should probably never change.&lt;/p&gt;
+&lt;p&gt;Next to the slogan there’s a new cluster of buttons. This is where I wanted to come up with an interesting compromise: we follow the popular trend of putting a big call to action for new users, but we also use that block of space to create a single hotspot where regulars can get access to critical information. &lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 400px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/14fc54ffd1ae3940e6e81fe6b1532e61/af83c/button-cluster.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54.347826086956516%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAACAUlEQVQoz21SyW4aQRCdzwFm2FcDNjMsNktYjFjEJnHgELPZZnUuSc5JBCQGszv505euGo1lKTk8VVXXq1fV1S0pioJIJCKgvrOG/+5cVXX8k9NjVeQcDgckr9eH8WSK6WyOyXSG0XjCoJhAPp0/jiYCY+ZSbHANf/70CVo0SoJeJlKS7Hqzwel8xna3x7fvP/Cy3WErcDydcT6/4iTsbn/A/nDE4XjiBlRHoqqmGRNO3jo+P6/x+vsPVj9/4fOXr9hsXrBYLrFe642WqxUWi6UQO3IzqiPR2fwJmiYm9Hi8GAzvMbx/YNsfDNHt9Rm9/gB33R7j412XQecUkyUu1RAeHke8T4keJRgM6giF4Pf7EQ6HEY3FREcNsVgcsXicu1+J5V9eXiFxfY24OPP7A2+1IVFrs9kgmc1mWK1WDux2OywWCxKJBMrlMrLZLFKpFPulUgnpdJoL8/k8kskk8406sqQlUUB7JFGLLOtWiJpMJpiFJZ+IZGkin4+4NhHLkAWf8wIul0vArQt6PB50Oh1Uq1UUi0XUajXU63U0m000Gg3OJZM3CAQCcLvdqIiJ2+0284nTarV4VU6nExJ9RiJlMhm+Si6XwwdxVcMnFG5vERV/7OIiyLehj0zrKBQKLFapVLgZTcmPQoKKYgX5/4MsQDsiHoFuZeQsvBaZpyPOX6A/rUU2yObPAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/14fc54ffd1ae3940e6e81fe6b1532e61/f5e3c/button-cluster.webp 100w,
+/static/14fc54ffd1ae3940e6e81fe6b1532e61/f2fbe/button-cluster.webp 200w,
+/static/14fc54ffd1ae3940e6e81fe6b1532e61/e227a/button-cluster.webp 400w,
+/static/14fc54ffd1ae3940e6e81fe6b1532e61/a9736/button-cluster.webp 552w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/14fc54ffd1ae3940e6e81fe6b1532e61/c0399/button-cluster.png 100w,
+/static/14fc54ffd1ae3940e6e81fe6b1532e61/9ec3c/button-cluster.png 200w,
+/static/14fc54ffd1ae3940e6e81fe6b1532e61/c7805/button-cluster.png 400w,
+/static/14fc54ffd1ae3940e6e81fe6b1532e61/af83c/button-cluster.png 552w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/14fc54ffd1ae3940e6e81fe6b1532e61/c7805/button-cluster.png&quot;
+          alt=&quot;The new button cluster&quot;
+          title=&quot;The new button cluster&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;The new button cluster&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;My hope is for the big button to make new visitors become aware of that block and that, over time, checking there for docs and new releases just becomes muscle memory. That said, I know we’ll have to tweak the design once the auto-generated docs for the standard library become good enough for the front page.&lt;/p&gt;
+&lt;p&gt;Below everything I just described, we introduce the community and the Zig Software Foundation. The Zig project has grown to a point where governance matters and we want to show we’re doing everything the right way, up to the point of having formed a &lt;a href=&quot;https://ziglang.org/zsf/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;nonprofit organization with a clear scope and mission statement&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&quot;internationalization&quot;&gt;&lt;a href=&quot;#internationalization&quot; aria-label=&quot;internationalization permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Internationalization&lt;/h2&gt;
+&lt;p&gt;The second goal of this redesign was to open the door to hosting multiple translations of the website. Having an i18n-enabled website is beneficial for multiple reasons: it helps with the first goal (i.e. help a wider range of programmers get started with Zig), it’s a good way of getting more use out of the informative materials we’ll progressively add to the website, and it’s also well aligned with the mission of the Zig Software Foundation. Lastly, I’m personally invested in the idea that we must ensure we don’t leave it to third parties to be the sole owners of all content available in a given language, as we’ve already seen bad actors exploit their position to implement a form of cultural arbitrage.&lt;/p&gt;
+&lt;p&gt;We’re well aware that keeping up with translations to multiple languages can quickly become an effort black hole. For this reason, I’ve tried to make sure the tooling would help in making the process as smooth as possible (more on that later), and I’ve also made sure to clarify in the design how translations are community-provided and thus best-effort.&lt;/p&gt;
+&lt;p&gt;&lt;figure class=&quot;gatsby-resp-image-figure&quot; style=&quot;&quot;&gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 400px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d2f40c1cc91417d645fdd614ae7aa9f5/c6a5f/translation-link.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 10.81081081081081%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAACCAYAAABYBvyLAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAbElEQVQI10WKWw6DMAwEuQJBeSi240iopYRC73+6rRsQ/bA8s7uDcxNSqgiBEWO5OQQyVnifr1yRonb+9f/deUTVuohhHB2YFjC/oGWH6tFdeEXVjw2fEFlRyrv3Ig05P8w34607c8M87/YJX1JnNUJ56mtAAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;picture&gt;
+        &lt;source
+          srcset=&quot;/static/d2f40c1cc91417d645fdd614ae7aa9f5/f5e3c/translation-link.webp 100w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/f2fbe/translation-link.webp 200w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/e227a/translation-link.webp 400w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/965c5/translation-link.webp 600w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/0cbce/translation-link.webp 800w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/ffd30/translation-link.webp 1628w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/webp&quot;
+        /&gt;
+        &lt;source
+          srcset=&quot;/static/d2f40c1cc91417d645fdd614ae7aa9f5/c0399/translation-link.png 100w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/9ec3c/translation-link.png 200w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/c7805/translation-link.png 400w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/34e8a/translation-link.png 600w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/8ff1e/translation-link.png 800w,
+/static/d2f40c1cc91417d645fdd614ae7aa9f5/c6a5f/translation-link.png 1628w&quot;
+          sizes=&quot;(max-width: 400px) 100vw, 400px&quot;
+          type=&quot;image/png&quot;
+        /&gt;
+        &lt;img
+          class=&quot;gatsby-resp-image-image&quot;
+          src=&quot;/static/d2f40c1cc91417d645fdd614ae7aa9f5/c7805/translation-link.png&quot;
+          alt=&quot;Link present on all translated pages&quot;
+          title=&quot;Link present on all translated pages&quot;
+        /&gt;
+      &lt;/picture&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;
+    &lt;figcaption class=&quot;gatsby-resp-image-figcaption&quot;&gt;Link present on all translated pages&lt;/figcaption&gt;
+  &lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;At the moment of publication, the website can only offer &lt;a href=&quot;https://ziglang.org/translatons/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;an Italian translation&lt;/a&gt; written by me. Italian was chosen out of necessity (i.e. it’s the only other language I speak), but it served the purpose of making me try out the ergonomics of producing a translation, and it can also act as documentation for others.&lt;/p&gt;
+&lt;p&gt;Finally, I should point out that there are some parts of the website we don’t plan to translate, like the News section, for example. This is another choice made out of necessity: we want to restrict translations to content with a long shelf life to reduce the amount of effort, but I don’t exclude that one day we might have enough resources to get rid of this compromise.&lt;/p&gt;
+&lt;h2 id=&quot;implementation-details&quot;&gt;&lt;a href=&quot;#implementation-details&quot; aria-label=&quot;implementation details permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Implementation details&lt;/h2&gt;
+&lt;p&gt;The new website is statically generated by &lt;a href=&quot;https://gohugo.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Hugo&lt;/a&gt;. I also considered &lt;a href=&quot;https://www.getzola.org/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Zola&lt;/a&gt;, but its i18n support is not complete yet. The website lists a number of Zig code snippets, with relative output. Andrew originally implemented a program to produce release notes and language reference. That program takes in code samples, applies syntax highlighting, runs the code, and reports the output as HTML (it even retains colors from the terminal). I took the original code and packaged it as a tool with a more general interface. I called it &lt;a href=&quot;https://github.com/kristoff-it/zig-doctest&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;zig-doctest&lt;/a&gt; and it can be easily integrated with all kinds of static content generation tools.&lt;/p&gt;
+&lt;p&gt;Now a successful CI build of the &lt;a href=&quot;https://github.com/ziglang/zig&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;ziglang/zig&lt;/a&gt; repository triggers a build of the website, allowing us to catch outdated code examples much more easily. This addresses concerns raised in the past by people that would occasionally stumble upon a broken code sample.&lt;/p&gt;
+&lt;p&gt;Testing all code snippets is not instant as some tests include running the executable and capturing its output, so I made sure to integrate with Hugo’s caching system. I also noticed that Hugo processes tags sequentially within the same page, so I also &lt;a href=&quot;https://github.com/kristoff-it/hugo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;added to it&lt;/a&gt; a warmup routine that makes sure to parallelize the testing when loading the development server the first time.&lt;/p&gt;
+&lt;p&gt;The result is a very enjoyable development experience that only depends on Zig and two additional executables (Hugo and doctest) to be able to develop the Zig website locally, resulting in an acceptable experience for potential contributors. &lt;/p&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;&lt;a href=&quot;#conclusion&quot; aria-label=&quot;conclusion permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;I hope this post explains adequately the intent of this work and the practical limits of its execution. There’s still more work to do, but this seems a reasonable milestone for a first release, so I’m looking forward to working alongside the community to improve and add translations to the website.&lt;/p&gt;
+&lt;p&gt;For the next iteration I work on improving accessibility, but first I have to focus on &lt;a href=&quot;https://fosdem.org/2021/schedule/track/zig_programming_language/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;FOSDEM, since we have a Zig dev room&lt;/a&gt; and I have a bunch of duties to attend to. &lt;/p&gt;
+&lt;p&gt;When I first discovered Zig, I saw it as a way for me to learn more about all the aspects of programming I missed when working with interpreted and/or garbage-collected languages. Turns out I got to learn that &lt;a href=&quot;https://ziglang.org/news/announcing-zig-software-foundation/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;and much more&lt;/a&gt;, and I can’t tell you how excited I am about what’s to come. Despite everything, 2020 was a great year for Zig, and I fully expect 2021 to be even better.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[You Should Play Secret Hitler]]></title><description><![CDATA[In games like D&D, you start by creating a character for yourself. The character has a background, a set of skills and a personality of…]]></description><link>https://kristoff.it//blog/you-should-play-secret-hitler/</link><guid isPermaLink="false">https://kristoff.it//blog/you-should-play-secret-hitler/</guid><pubDate>Wed, 21 Oct 2020 22:00:00 GMT</pubDate><content:encoded>&lt;p&gt;In games like D&amp;#x26;D, you start by creating a character for yourself. The character has a background, a set of skills and a personality of their own. Ideally, you should try to play characters with a different disposition than yours, and part of the enjoyment is acting like them, to the point of even occasionally making disastrous choices knowingly, because that’s what the character would do.&lt;/p&gt;
 &lt;p&gt;In Secret Hitler, you are but yourself and the only thing that changes is whether your goal is to subvert the German republic or to maintain democracy. This is in my opinion a beautiful inversion of what you can get out of role-playing games; one that has great teaching potential, especially when implemented in a game as elegant as Secret Hitler.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
