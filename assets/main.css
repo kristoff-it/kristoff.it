@@ -1,0 +1,218 @@
+ ol, ul {
+     list-style-position: outside;
+     padding-left: 0;
+}
+ dt {
+     font-weight: bold;
+}
+ li {
+     margin-bottom: calc(1.75rem / 2);
+}
+ code .bold {
+     font-weight: bold;
+}
+ .twitter-tweet {
+     align-self:center;
+}
+ h1,h2,h3,h4,h5 {
+     text-rendering: optimizeLegibility;
+     margin-bottom: 0;
+}
+ h1 {
+     font-family: 'Montserrat', sans-serif;
+     font-weight: 900;
+     font-size: 2.5rem;
+     line-height: 1.1;
+}
+ h2 {
+     font-size:1.73286rem;
+}
+ h4 {
+     text-transform: uppercase;
+     letter-spacing: 0.140625em;
+}
+ hr {
+     width: 100%;
+}
+ body {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     word-wrap: break-word;
+}
+ html {
+     font:100%/1.75 'Merriweather','Georgia',serif;
+     box-sizing:border-box;
+     overflow-y:scroll;
+}
+ #content {
+     max-width: 42rem;
+     width: 100vw;
+     padding: 2.625rem 1.3125rem;
+}
+ div.highlight {
+     border-radius: 6px;
+}
+ pre code {
+     border: none;
+     padding: 15px;
+     font-family: monospace, monospace;
+     font-size:0.85rem;
+     line-height: 1rem;
+     display: inline-block;
+     box-sizing: border-box;
+     min-width: 100%;
+}
+ pre {
+     color: white;
+     border-radius: 6px;
+     margin: 0;
+     padding: 0;
+     background-color: #1E1E1E !important;
+     font-size: 0.85rem;
+     line-height: 1.75rem;
+     overflow: auto;
+}
+ code {
+     border-radius: 4px;
+     border: 1px solid #d3d3d3;
+     padding: 3px;
+     font-size: 1.1rem;
+     line-height: 1.75rem;
+}
+ blockquote {
+     margin-left: -1.75rem;
+     margin-right: 1.75rem;
+     margin-top: 0;
+     padding-bottom: 0;
+     padding-left: 1.42188rem;
+     padding-right: 0;
+     padding-top: 0;
+     margin-bottom: 1.75rem;
+     font-size: 1.20112rem;
+     line-height: 1.75rem;
+     color: hsla(0,0%,0%,0.59);
+     font-style: italic;
+     border-left: 0.32813rem solid hsla(0,0%,0%,0.9);
+}
+ blockquote p {
+     margin: 0;
+}
+ @media (prefers-color-scheme:dark) {
+     code {
+         color: white;
+    }
+     body {
+         background:#111;
+         color:#bbb 
+    }
+     h1, h2, h3, h4, h5, h6, strong {
+         color:#e8e8e8 
+    }
+     hr {
+         border-top:1px solid #797979 
+    }
+     a {
+         color:#8bc2e7 
+    }
+     blockquote {
+         border-color:#fff;
+         color:inherit 
+    }
+     .time {
+         color:#8bc2e7!important 
+    }
+}
+ .highlight {
+     background-color: #1E1E1E;
+     color: #D4D4D4;
+}
+ p:empty{
+     margin:0;
+}
+ * {
+     box-sizing:inherit;
+}
+ *:before {
+     box-sizing:inherit;
+}
+ *:after {
+     box-sizing:inherit;
+}
+ .post-link {
+     display: block;
+     font-family: 'Montserrat', sans-serif;
+     font-weight: 800;
+     font-size: 1.3rem;
+     line-height: 1.5rem;
+}
+ .post-byline {
+     font-size: 0.83255rem;
+     line-height: 1.75rem;
+     display: block;
+     margin-bottom: 1.75rem;
+     margin-top: 0;
+}
+ #post-body p:nth-of-type(1) {
+     margin-top: 0;
+}
+ #post-body {
+     margin-top: 1.75rem;
+     display: flex;
+     flex-direction: column;
+}
+ #post-description {
+     margin-top:1.75rem;
+     text-align: right;
+     font-style: italic;
+     font-weight: 100;
+}
+ h1:nth-of-type(1) {
+     margin-bottom: 0;
+}
+ figure {
+     margin: 0;
+     padding: 0;
+     margin-bottom: 1.75rem;
+}
+ figcaption {
+     text-align:center;
+}
+ iframe {
+     align-self: center;
+}
+ .video-container {
+     position: relative;
+     padding-bottom: 56.25%;
+     padding-top: 30px;
+     height: 0;
+     overflow: hidden;
+}
+ .video-container iframe, .video-container object, .video-container embed {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+}
+ #header {
+     font-size: 1.7rem;
+     margin: 0;
+     padding: 0;
+}
+ .reset-a, .reset-a:hover, .reset-a:visited, .reset-a:focus, .reset-a:active {
+     text-decoration: none;
+     color: inherit;
+     outline: 0;
+}
+ #prev-next {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+ @media screen and (min-width:500px) {
+     p {
+         text-align: justify;
+    }
+}
+ 

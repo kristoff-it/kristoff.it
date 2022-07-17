@@ -1,0 +1,45 @@
+{{ define "head" }}
+  <meta name="description" content="{{.Summary}}">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@croloris">
+  <meta name="twitter:image" content="https://kristoff.it/logo.png">
+  <meta name="twitter:author" content="@croloris">
+  <meta name="twitter:description" content="{{.Summary}}">
+  <meta name="twitter:title" content="{{.Title}}">
+  <meta property="og:title" content="{{.Title}}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://krisoff.it/logo.png">
+  {{ $style := resources.Get "term-highlight.css" | toCSS | minify | fingerprint }}
+  <link type="text/css" rel="stylesheet" href="{{ $style.Permalink }}">
+{{ end }}
+{{ define "main" }}
+  {{ partial "small-header.html" }}
+  <h1>{{.Title}}</h1>
+  {{ $readTime :=  math.Round (div (countwords .Content) 220.0)}}
+  <p class="post-byline">
+    {{.Date.Format "January 02, 2006"}} • {{ $readTime }} min read • by <b>Loris Cro</b>
+    {{ if .Params.coauthor }}
+     and <a href="{{.Params.coauthor_link}}" target="_blank"><b>{{.Params.coauthor}}</b></a>
+    {{ end }}
+  </p>
+  {{ if .Params.summary }}
+  <div id="post-description">{{.Params.summary | safeHTML }}</div>
+  {{ end }}
+  <div id="post-body">
+	  {{ .Content }}
+  </div>
+  <hr>
+  <div id="prev-next">
+    {{ with .Prev }}
+    {{ if . }}<a href="{{.RelPermalink}}">← {{.Title}}</a> {{ end }}
+    {{ end }}
+    {{ if (and .Prev .Next) }}&nbsp; • &nbsp;{{ end }}
+    {{ with .Next }}
+    {{ if . }}<a href="{{.RelPermalink}}">{{.Title}} →</a> {{ end }}
+    {{ end }}
+    {{ if (or .Prev .Next) }}<small>&nbsp; or &nbsp;</small>{{ end }}
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+{{ end }}

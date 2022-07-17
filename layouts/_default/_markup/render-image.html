@@ -1,0 +1,6 @@
+<figure style="display:flex;flex-direction:column;align-items:center;">
+  <a href="{{.Destination | safeURL }}" target="_blank">
+    <img style="max-width:400px;width:100vw;" src="{{ .Destination | safeURL }}" alt="{{ .Text }}">
+  </a>
+  <figcaption><i><small>{{ .Title }}</small></i></figcaption>
+</figure>

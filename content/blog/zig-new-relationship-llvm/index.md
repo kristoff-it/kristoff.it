@@ -1,0 +1,72 @@
+---
+title: Zig's New Relationship with LLVM
+date: "2020-09-28T00:00:00"
+summary: "While not yet at version 1.0, Zig is about to reach a new level of maturity and stability."
+draft: false
+notwitch: true
+coauthor: Andrew Kelley
+coauthor_link: https://andrewkelley.me
+---
+
+In the early days, Zig was but a thin frontend in front of LLVM. This was instrumental for getting started quickly and filling in gaps of Andrew’s knowledge as a compiler developer. Now, the training wheels of the bicycle are coming off, and LLVM is transitioning into an optional component.
+
+![](./protty1.png)
+
+The work to replace the current C++ compiler implementation with a new pure Zig version has begun. Moving to a self-hosted implementation is usually considered a step towards maturity, with most benefits being felt by developers of the language itself. As an example, [Go lost](https://www.youtube.com/watch?v=cF1zJYkBW4A) some speed of compilation by switching to the self-hosted compiler but, in exchange, it streamlined the toolchain, removed dependencies, and improved the whole development experience.
+
+The move to a self-hosted compiler for Zig has similar advantages for the core contributors, but it also **makes LLVM an optional dependency**, **increases compilation speed** (instead of losing it), and adds an amazing feature for debug builds of your code: **incremental compilation with in-place binary patching**, [another](/blog/what-is-zig-comptime/) [unique](/blog/zig-colorblind-async-await/) Zig feature.
+
+## Speeding up compilation
+Most languages offer some form of caching to speed up compilation, starting from C’s compilation units, up to modules, packages, and other comparable boundaries in more modern languages.
+
+Zig also implements a caching system that comes particularly handy when building a project that mixes C and Zig source code, or when using Zig as a C compiler with the `zig cc` command. Zig keeps track of all the files involved in the compilation, so it can very easily know when an object file can be reused, and this is [only one of the advantages](https://andrewkelley.me/post/zig-cc-powerful-drop-in-replacement-gcc-clang.html) of using Zig to compile C code.
+
+Zig sources always get bundled into a single compilation unit, so the caching system in its current form doesn’t provide any speedup when editing and recompiling a pure Zig project. The upside is that, not only compiling Zig code is very fast, but also that incremental compilation will provide smart caching for Zig code, more than making up for what we can’t get from simple caching.
+
+## Incremental compilation
+Incremental compilation is a form of caching that acts at a higher granularity level than normal “compilation unit”-level caching. The Rust blog has a [great post](https://blog.rust-lang.org/2016/09/08/incremental.html) that explains how it works.
+
+
+![](./rust.png "Taken from the Rust blog post linked above.")
+
+
+In the case of Rust, the compiler builds a dependency graph at the AST level and then saves it to disk alongside the cached intermediate results (object files). When a new compilation is requested, the compiler will be able to easily notice which parts of the AST have changed and thus invalidate all the intermediate results that depend on it.
+
+One important detail about this graph is the fact that the right-most box is always invalidated. In other words, the final executable is always re-linked from scratch starting from a mix of old and newly generated object files. It’s clear that this has to be the case, since the final executable depends on everything else and so any meaningful change to the code will invalidate it, but this is where the Zig self-hosted compiler brings a new ingenious idea to the table.
+
+## In-Place Binary Patching
+As of Zig version 0.6.0, regardless of the type of release (debug, release-safe, release-fast), there is always a final step delegated to **LLVM, which takes at least 70% of the total compilation time** including when compiling a debug build, where optimizations aren’t even enabled.
+
+**The self-hosted compiler will not depend on LLVM for debug builds** and will be able to cut compilation time considerably, **basically reducing that 70% to almost zero**, just by virtue of being a simpler piece of software compared to LLVM. 
+
+On top of that, since the compiler will have full control over the whole process, it will generate machine code using an ad-hoc strategy optimized for incremental compilation, allowing the compiler to patch the final executable in-place with the new changes. 
+
+In-place binary patching is based on a granularity of top-level declarations. Each global variable and function can be independently patched because the final binary is structured as a sequence of loosely coupled blocks. Another important characteristic is that all this information is kept in memory, so the compiler will stay open between compilations.
+
+ If you want to see the self-hosted compiler in action, here’s a 5 minute demo by Andrew:
+
+<div class="video-container">
+<iframe src="https://player.vimeo.com/video/491488902" width="560" height="315" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
+
+## Designing machine code for incremental compilation
+Efficient in-place binary patching is something that can only be accomplished by tightly coupling the compiler frontend and backend. Part of the reason this feature is so rarely seen in the wild is that it goes against our better sense of abstraction and clean code organization. But we must never forget: abstraction is just a tool to reach a practical outcome, and not always the most appropriate one.
+
+In order to perform in-place binary patching, we need code to be [position independent](https://en.wikipedia.org/wiki/Position-independent_code). This allows us to move it around in virtual memory when a function grows outside its allocated boundary. We also need to be able to reference virtual addresses indirectly, so that N callsites do not need to be updated when a function is moved to a new virtual address.
+
+To accomplish this Zig uses a Global Offset Table for all function calls.
+
+However, that only solves functions. There are more components to consider here, such as debug information. When we add new lines to a function, that modifies the debug information, which is used to print stack traces! Solving this involves creatively organizing an allocation scheme for debug line information, and figuring out how to do NOPs. Andrew’s journey here involved creating a [proposal for a new DWARF line number opcode](http://dwarfstd.org/ShowIssue.php?issue=200803.1).
+
+This problem must be solved repeatedly for each kind of linking backend - ELF, DWARF, PE, PDB, MachO, and WebAssembly. Special thanks for the contributors who have stepped up and taken on the added challenge of supporting in-place binary patching: [Alexandros Naskos](https://github.com/alexnask), [Jakub Konka](http://www.jakubkonka.com/), and [Isaac Freund](https://ifreund.xyz/).
+
+Be on the lookout for a more technical post on [Andrew’s blog](https://andrewkelley.me), where he’ll dive into some of these fascinating details -- **including how this design gets us 90% of the way to hot code swapping!**
+
+## When is it going to be ready?
+The self-hosted backend is [still a work in progress](https://github.com/ziglang/zig/projects/2), but all the functionalities presented in this post have been designed and prototyped to the point where it’s just a matter of doing the methodical part of the work.
+
+The self-hosted backend will ship in Zig 0.7.0 behind a flag, supporting only a subset of the Zig language. In the meantime, the core development team and a few other contributors are sprinting forward with more language support and additional targets. The current aim is to fully replace the C++ implementation with the self-hosted backend for Zig 0.8.0, roughly 7 months from now.
+
+If you like where Zig is going, there’s no better time [to join the Zig community](https://github.com/ziglang/zig/wiki/Community) than now, and if you want to help speed the development up, please [consider donating to the Zig Software Foundation](https://ziglang.org/zsf/) to allow core developers to spend more time working on Zig.
+
+![](./protty2.png "Thanks to kprotty for the cute doodles!")
