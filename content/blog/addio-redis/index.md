@@ -24,7 +24,7 @@ This is where I imagined I would spell out my take on Redis, but [now that Antir
 
 Since this is my goodbye post to Redis, let me add an over-the-top Italian skit before jumping into the lessons learned.
 
-##If Redis were pasta
+## If Redis were pasta
 If Redis were pasta, it would be served in a restaurant called Salvatore’s. It would be a plate of spaghetti with tomato sauce and a single leaf of basil on top; basically the Italian symbol for a simple, versatile meal. 
 
 Big tech would be like McDonald’s and Burger King: convinced that the future of nutrition is fast-food and constantly screaming that Redis can’t be considered a real meal as it doesn’t contain any bacon: “Come eat our new burger, which now contains an extra 4th layer of meat, exquisitely designed to make it easier to digest the meal!”
@@ -33,7 +33,7 @@ On a table you would find Jepsen, essentially the equivalent of Yelp, ideally me
 
 Antirez, largely preferring cooking over serving, would end up selling the restaurant to the waiters, who at that point would make their priority to turn the restaurant into an Olive Garden.
 
-##Lessons learned 
+## Lessons learned 
 So where’s the Redis community in this story? Well, those are just the silent, mostly anonymous regulars that come, eat, and then go on with their lives. 
 
 It’s the people that occasionally show up on HN and point out that they’re happy with what Redis does for them, and that they rarely think about it even, as the software tends to chug along nicely. As much as I sympathize with them, the ultimate lesson I learned is that a passive community will inevitably lead to the death of a project.
