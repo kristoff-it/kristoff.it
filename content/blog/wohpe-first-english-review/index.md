@@ -34,8 +34,8 @@ stories.
 That is not to say that Wohpe is lacking when it comes to world building. 
 Antirez usually doesn't stop too long to describe the world, an instead often 
 opts for sprinkling details about how it functions as they are needed to move a 
-scene forward. The result is that you get a taste of how the world functions, 
-but without losing momentum. For example you learn that elevators keep track of 
+scene forward. The result is that you get a taste of how it feels to live in this future, 
+but without losing narrative momentum. For example you learn that elevators keep track of 
 each person's habitual stops only once a protagonist hops into one and the 
 elevator immediately suggests a specific destination, at which point some 
 context is added by the narrator. This is done multiple times during the story 
