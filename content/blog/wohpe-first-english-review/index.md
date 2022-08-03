@@ -47,7 +47,8 @@ Antirez seems extremely (almost weirdly) optimistic about the future of
 technology. In Wohpe, technology has not only advanced compared to our times, 
 but it has also been designed for human comfort and resource efficiency to a 
 degree that we simply don't see today. I almost wish he wrote about how Web3 
-and the Metaverse gave way to actually useful and tasteful use of technology.
+and the Metaverse gave way to actually useful and tasteful use of technology,
+because that part seems more sci-fi than the creation of stong AI.
 
 I don't know how the English translation will end up being, but some readers 
 might be amused at how the characters talk to one another. This is just my 
