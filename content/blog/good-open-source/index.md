@@ -36,7 +36,7 @@ And it doesn't end here!
 
 While a single copyright owner could at some point decide to stop issuing Open Source licenses, real Open Source projects with many contributors in practice find that very difficult. Whenever a contributor submits a GitHub Pull Request, they retain copyright of their code and implicitly grant the project the same license that the project is distributed with. So if you send a PR to a MIT project, you retain copyright of your work and grant the project an MIT license to use your work.
 
-**This means that Open Source projects with many contributors are not only more likely to survive over time, but also less likely to ever change of license**, partially because of social norms, and partially because relicensing requires asking each contributor for permission to do so.
+**This means that Open Source projects with many contributors are not only more likely to survive over time, but also less likely to ever change license**, partially because of social norms, and partially because relicensing requires asking each contributor for permission to do so.
 
 
 ## Read more
