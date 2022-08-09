@@ -27,7 +27,7 @@ This is all reasonable and a recurring theme in the Handmade community, but I wa
 
 When you download Open Source code you're not only given the source, but also a license that allows you to use, modify and redistribute the code that you just received. There are many Open Source licenses and each has its own minor differences, but the core point remains the same: Open Source software is yours, for real.
 
-This is obviously not a guarantee that the maintainers of the project will work on it indefinitely, so you might eventually end up with a discontinued tool on hand, but no Open Source license allows the copyright owners to force users to delete all code from their computer, and if you've invested a lot of resources into the tool, you will always be legally allowed to continue its development as a separate fork.
+This is obviously not a guarantee that the maintainers of the project will work on it indefinitely, so you might eventually end up with a discontinued tool in hand, but no Open Source license allows the copyright owners to force users to delete all code from their computer, and if you've invested a lot of resources into the tool, you will always be legally allowed to continue its development as a separate fork.
 
 And it doesn't end here!
 
@@ -36,7 +36,7 @@ And it doesn't end here!
 
 While a single copyright owner could at some point decide to stop issuing Open Source licenses, real Open Source projects with many contributors in practice find that very difficult. Whenever a contributor submits a GitHub Pull Request, they retain copyright of their code and implicitly grant the project the same license that the project is distributed with. So if you send a PR to a MIT project, you retain copyright of your work and grant the project an MIT license to use your work.
 
-**This means that Open Source projects with many contributors are not only more likely to survive over time, but also less likely to ever change license**, partially because of social norms, and partially because relicensing requires asking each contributor for permission to do so.
+**This means that Open Source projects with many contributors are not only more likely to survive over time, but also less likely to ever change license**, partially because of social norms, and partially because relicensing often requires asking each contributor for permission to do so.
 
 
 ## Read more
