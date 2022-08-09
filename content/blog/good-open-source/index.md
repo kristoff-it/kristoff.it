@@ -8,8 +8,8 @@ If you read my blog in the past, you know I'm often complaining about Open Sourc
 
 I'm going to give a full introduction to the context that I'm referring to, but 
 I also want to point out that I'm writing this in part for the benefit of the 
-[Handmade Network](https://handmade.network/), since the events that I'll 
-mention soon impacted the community directly.
+[Handmade Network](https://handmade.network/), since the events that I'm about
+to mention impacted the community directly.
 
 
 ## Our Machinery, but not yours
