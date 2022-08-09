@@ -46,7 +46,7 @@ In this blog post I've been fast and loose in describing what you get from Open 
 
 ## Conclusion
 
-While self-reliance is an obvious way to never be disappointed by somebody else's behavior, a fully autarchic programmer is limited in what they can achieve. As disappointing as human beings often are, collaboration is a catalyst for much greater achievements, especially when competent professionals learn to work together.
+While self-reliance is an effective way to never be disappointed by somebody else's behavior, a fully autarchic programmer is limited in what they can achieve. As disappointing as human beings often are, collaboration is a catalyst for much greater achievements, especially when competent professionals learn to work together.
 
 Open Source is ultimately a tool to keep freely-available software digestible for big tech companies, but it has the side-effect of granting the same benefits to the rest of us. Use Open Source software and know that nobody will be able to rugpull you thanks to a unilateral EULA update. In other words, referring back to Ryan's post: Open Source is a form of ownership.
 
