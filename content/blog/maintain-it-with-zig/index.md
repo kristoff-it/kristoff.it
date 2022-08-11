@@ -11,14 +11,14 @@ C and C++ are kings when it comes to writing efficient software and the C ABI is
 
 The reason why we can often get away with using languages like Python or JavaScript to drive resource-intensive computations, is because under the hood somebody took years to perfect a C implementation of a key procedure and shared it with the world under a permissive license.
 
-All this infrastructure has provided immeasurable value to the software industry but it's not all sunshine and rainbows. **Over the years these projects have accumulated technical debt of all kinds and maintenance has been lacking**, partially because the C/C++ ecosystem isn't exactly inviting for new programmers, and partially because FOSS development sustainability is all but a solved problem**.**
+All this infrastructure has provided immeasurable value to the software industry but it's not all sunshine and rainbows. **Over the years these projects have accumulated technical debt of all kinds and maintenance has been lacking**, partially because the C/C++ ecosystem isn't exactly inviting for new programmers, and partially because FOSS development sustainability is all but a solved problem.
 
 
 ## The economics of real change
 
 Learning how to contribute to a popular FOSS C/C++ project is not easy for a new developer. You have to learn at least one of the two languages ([which already takes quite some time and effort](https://dustri.org/b/my-favourite-c-footgun.html)) and how the surrounding ecosystem works. Even building a project is non-trivial if you're not already familiar with Make, CMake, Ninja, Autotools, etc; and that's just the entry point to systems programming.
 
-Compare this to learning, say, JavaScript. While far from perfect, JS is easier to learn, build and distribute. The ecosystem is still messy but it's undeniable that it's more newbie-friendly than C/C++, and once you learn JS you can do web development (backend included, using Node), write desktop apps (Electron), mobile apps (React Native), video games (Unity) and more. Why work harder to get access to a smaller pool of potential jobs when JS and web development open so many doors?
+Compare this to learning, say, JavaScript. While far from perfect, JS is easier to learn, build and distribute. The ecosystem is still messy but it's undeniable that it's more newbie-friendly than C/C++, and once you learn JS you can do web development (backend included, using Node), write desktop apps (Electron), mobile apps (React Native), video games and more. Why work harder to get access to a smaller pool of potential jobs when JS and web development open so many doors?
 
 **Some consider this the ultimate proof of contemporary decadence of software engineering, but that's simply the structure of economic incentives that we built for ourselves**: for most people learning a high level language opens more career possibilities than learning C and, even when one wants to branch out, it's still more useful careerwise to learn Kubernetes than it is to learn CMake. 
 
