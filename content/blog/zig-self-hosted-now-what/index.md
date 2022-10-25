@@ -69,16 +69,16 @@ const nums = [3]usize {42, 42, 42};
 const chars = [3]u8 {'a', 'b', 'c'};
 
 // easy "zip" iteration (all arguments must have the same length)
-for (nums, chars) |n, c| { … }
+for (nums, chars) |n, c| { ... }
 
 // easy range loops
-for (0..3) |idx| { … } 
+for (0..3) |idx| { ... } 
 
 // but this won't work anymore (old syntax)
-for (chars) |c, idx| { … }
+for (chars) |c, idx| { ... }
 
 // now you need a range if you want an index
-for (chars, 0..) |elem, idx| { … }
+for (chars, 0..) |elem, idx| { ... }
 ```
 
 Having language-level support for multi-argument for loops: 
