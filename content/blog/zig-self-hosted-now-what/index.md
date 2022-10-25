@@ -82,9 +82,12 @@ for (chars, 0..) |elem, idx| { … }
 ```
 
 Having language-level support for multi-argument for loops: 
-* allows us to hoist out-of-bounds checks, improving performance in safe build modes (Debug, ReleaseSafe)
-* encourages memory access patterns [that play well with MultiArrayList](https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0) and other data-oriented design techniques
-* provides a concise syntax to loop over ranges
+* Allows us to hoist out-of-bounds checks, improving performance in safe build 
+  modes (Debug, ReleaseSafe).
+* Encourages memory access patterns 
+  [that play well with MultiArrayList](https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0) 
+  and other data-oriented design techniques.
+* Provides a concise syntax to loop over ranges.
 
 You can read more about [this language proposal](https://github.com/ziglang/zig/issues/7257) on GitHub.
 
