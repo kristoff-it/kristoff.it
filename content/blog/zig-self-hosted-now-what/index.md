@@ -1,7 +1,7 @@
 ---
 title: "Zig is Self-hosted Now, What's Next?"
 date: "2022-10-25T00:00:00"
-summary: "Why self-host Zig? For great justice, of course… and also a few more reasons actually." 
+summary: "Why self-host Zig?<br> For great justice, of course… and also a few more reasons actually." 
 draft: false
 ---
 
