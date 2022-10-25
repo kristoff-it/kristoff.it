@@ -94,23 +94,40 @@ You can read more about [this language proposal](https://github.com/ziglang/zig/
 
 ## The official package manager
 
-Once the self-hosted compiler reaches feature-parity with the bootstrap compiler, we're going to start working on the first iteration of the official package manager. We don't expect to nail every design aspect first try, but we do know in which general direction we want to move.
+Once the self-hosted compiler reaches feature-parity with the bootstrap 
+compiler, we're going to start working on the first iteration of the official 
+package manager. We don't expect to nail every design aspect first try, but we 
+do know in which general direction we want to move.
 
-The main goal of this first iteration is to enable simple usage of dependencies to start building a package ecosystem, and to make sure that we can easily package C/C++ projects, not just Zig. The Zig build system can already build C/C++ projects, so we want to [make sure we can leverage](https://kristoff.it/blog/maintain-it-with-zig/) 40+ years of Open Source work, and not just Zig rewrites. 
+The main goal of this first iteration is to enable simple usage of dependencies 
+to start building a package ecosystem, and to make sure that we can easily 
+package C/C++ projects, not just Zig. The Zig build system can already build 
+C/C++ projects, so we want to 
+  [make sure we can leverage](https://kristoff.it/blog/maintain-it-with-zig/) 
+40+ years of Open Source work, and not just Zig rewrites. 
 
-That said, supporting C/C++ is not only for Zig's benefit, as we believe that Zig can help simplify the process of fetching and building dependencies for projects that only intend to use Zig as a compiler and build system.
+That said, supporting C/C++ is not only for Zig's benefit, as we believe that 
+Zig can help simplify the process of fetching and building dependencies for 
+projects that only intend to use Zig as a compiler and build system.
 
-When it comes to specific features of the official package manager, this is our current take:
-* The package manager will be part of the compiler instead of being a separate executable. Zig is a language and a compiler toolchain.
-* The package manager will not assume the presence of a central package index. We don't plan to create an official package index.
-* Version resolution will be the similar to Go's Minimal Version Selection, but with one extra limitation: v1 packages will only be able to depend on v1 packages.
+When it comes to specific features of the official package manager, this is our 
+current take:
+* The package manager will be part of the compiler instead of being a separate 
+  executable. Zig is a language and a compiler toolchain.
+* The package manager will not assume the presence of a central package index. 
+  We don't plan to create an official package index.
+* Version resolution will be the similar to Go's Minimal Version Selection, 
+  but with one extra limitation: stable packages will only be able to depend on 
+  other stable packages (eg a `v1.x` package cannot depend on a `v0.y` package).
 
-We are fairly confident in those decisions, except maybe for the v1 constraint. The good news is that if it proves to be too draconian, we can always remove it without breaking existing packages.
+We are fairly confident in those decisions, except maybe for the stability 
+constraint. The good news is that if it proves to be too draconian, we can 
+always remove it without breaking existing packages.
 
 
 ## Was the rewrite worth it?
 
-The self-host compiler brings many advantages, but it did cost us a significant amount of effort and time. While Zig is still going up in popularity and starting to make a [tiny dent](https://jakstys.lt/2022/how-uber-uses-zig/) in the industry, people that have been following along for long enough will know that this work has reduced our momentum in the last two years. 
+The self-hosted compiler brings many advantages, but it did cost us a significant amount of effort and time. While Zig is still going up in popularity and starting to make a [tiny dent](https://jakstys.lt/2022/how-uber-uses-zig/) in the industry, people that have been following along for long enough will know that this work has reduced our momentum in the last two years. 
 
 Bug fixes in the compiler have been often put on hold since fixing the bootstrap compiler was  ultimately useless, and accepted feature proposals have been piling up because it would have required implementing everything twice.
 
