@@ -9,7 +9,7 @@ With the upcoming 0.10.0 release of Zig on November 1st, we are going to ship
 the new self-hosted compiler. This is the result of a huge amount of work that 
 brings a lot of benefits, some obvious, some others less so. 
 
-Even though the self-hosted compiler is now shipped, ther's still more work 
+Even though the self-hosted compiler is now shipped, there's still more work 
 to do on it but, at the same time, now the door has opened to more exciting 
 features, like Zig's official package manager. 
 
