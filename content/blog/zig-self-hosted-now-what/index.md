@@ -75,7 +75,7 @@ for (nums, chars) |n, c| { … }
 for (0..3) |idx| { … } 
 
 // but this won't work anymore (old syntax)
-for (chars) |c, idx| { ... }
+for (chars) |c, idx| { … }
 
 // now you need a range if you want an index
 for (chars, 0..) |elem, idx| { … }
