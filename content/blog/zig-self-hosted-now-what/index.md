@@ -1,5 +1,5 @@
 ---
-title: "Zig is Self-hosted Now, What's Next?"
+title: "Zig Is Self-Hosted Now, What's Next?"
 date: "2022-10-25T00:00:00"
 summary: "Why self-host Zig?<br> For great justice, of course… and also a few more reasons actually." 
 draft: false
@@ -122,7 +122,7 @@ current take:
 
 We are fairly confident in those decisions, except maybe for the stability 
 constraint. The good news is that if it proves to be too draconian, we can 
-always remove it without breaking existing packages.
+always relax it without breaking existing packages.
 
 
 ## Was the rewrite worth it?
