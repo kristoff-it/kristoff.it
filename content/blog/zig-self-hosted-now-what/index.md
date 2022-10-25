@@ -16,7 +16,7 @@ features, like Zig's official package manager.
 Let's take a look at what's next for the Zig project.
 
 
-# Performance improvements
+## Performance improvements
 
 **The new self-hosted compiler reduces memory usage 3x** compared to the old C++ implementation, also known as the bootstrap compiler. 
 
@@ -29,7 +29,7 @@ The memory efficiency gains come in good part also thanks to the use of data-ori
 <br>In this talk Andrew explains how to use data-oriented design principles in practice, using the Zig compiler as a concrete example of what you can gain.
 
 
-## Custom backends
+### Custom backends
 
 While we're very happy with the memory savings, the self-hosted compiler is not particularly faster than the old one (7% faster at building itself, as a data point), yet. As mentioned in [Zig's New Relationship with LLVM](https://kristoff.it/blog/zig-new-relationship-llvm/), compilation times are dominated by LLVM so the only way to improve compilation speed is for Zig to have its own custom backends.
 
@@ -38,14 +38,14 @@ The work to build custom backends for the most common architectures has already 
 Having full control over the code generation pipeline will also allow us to move forward with our plans for incremental compilation with in-place binary patching, which will enable sub-millisecond incremental rebuilds of arbitrarily large codebases. See the aforementioned blog post for more info on that.
 
 
-## C backend
+### C backend
 
 We are also working on a special backend, one that produces C source code. Progress on the C backend has recently shot forward (87% and counting) thanks to an [insanely good](https://github.com/ziglang/zig/pull/13093) recent contribution.
 
 What's interesting about this backend is that it will play a role in our plan to replace the old bootstrap compiler implementation and, perhaps even more interestingly, it will allow Zig to target architectures not supported by LLVM, **including ones that force you to use a specific C compiler, like certain game console platforms**.
 
 
-# Compiler development speed
+## Compiler development speed
 
 As a user of the language, you won't directly experience the difference between the bootstrap compiler codebase vs the new one, but this change will impact you as well, since it will influence the total amount of effort being spent on the compiler. 
 
@@ -54,7 +54,7 @@ In fact, it already has. Zig has started getting more contributions to the compi
 Now that contributing to the compiler is easier, we should expect a gradual return to our pre-self-hosting routine of implementing proposals (and causing breaking changes!) at a much higher speed. 
 
 
-## New for loop syntax
+### New for loop syntax
 
 One such example is the upcoming implementation of new for loop syntax which also supports ranges. Note that this is not going to be part of the 0.10.0 release.
 
@@ -83,7 +83,7 @@ Having language-level support for multi-argument for loops:
 You can read more about [this language proposal](https://github.com/ziglang/zig/issues/7257) on GitHub.
 
 
-# The official package manager
+## The official package manager
 
 Once the self-hosted compiler reaches feature-parity with the bootstrap compiler, we're going to start working on the first iteration of the official package manager. We don't expect to nail every design aspect first try, but we do know in which general direction we want to move.
 
@@ -99,7 +99,7 @@ When it comes to specific features of the official package manager, this is our 
 We are fairly confident in those decisions, except maybe for the v1 constraint. The good news is that if it proves to be too draconian, we can always remove it without breaking existing packages.
 
 
-# Was the rewrite worth it?
+## Was the rewrite worth it?
 
 The self-host compiler brings many advantages, but it did cost us a significant amount of effort and time. While Zig is still going up in popularity and starting to make a [tiny dent](https://jakstys.lt/2022/how-uber-uses-zig/) in the industry, people that have been following along for long enough will know that this work has reduced our momentum in the last two years. 
 
@@ -112,7 +112,7 @@ When we started this work [we knew perfectly well](https://kristoff.it/blog/main
 In a sense, this is the main theme of the Zig project: by tackling technical issues from the ground up, we gain a level of control that would otherwise be impossible to have. Sometimes that's a flashy adventure down unexplored paths, some other times it's a matter of putting in a lot of work, plain and simple.
 
 
-# Thank you to our sponsors
+## Thank you to our sponsors
 
 This work would have never been possible without the support from our sponsors. We are deeply thankful to all those who have [donated to the Zig Software Foundation](https://ziglang.org/zsf), and to those who have been following along despite the lack of shiny new features to play with every other week.
 
