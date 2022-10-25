@@ -40,9 +40,15 @@ Having full control over the code generation pipeline will also allow us to move
 
 ### C backend
 
-We are also working on a special backend, one that produces C source code. Progress on the C backend has recently shot forward (87% and counting) thanks to an [insanely good](https://github.com/ziglang/zig/pull/13093) recent contribution.
+We are also working on a special backend, one that produces C source code. 
+Progress on the C backend has recently shot forward (87% and counting) thanks 
+to [an amazing](https://github.com/ziglang/zig/pull/13093) recent contribution.
 
-What's interesting about this backend is that it will play a role in our plan to replace the old bootstrap compiler implementation and, perhaps even more interestingly, it will allow Zig to target architectures not supported by LLVM, **including ones that force you to use a specific C compiler, like certain game console platforms**.
+What's interesting about this backend is that it will play a role in our plan 
+to replace the old bootstrap compiler implementation and, perhaps even more 
+interestingly, it will allow Zig to target architectures not supported by LLVM, 
+**including ones that force you to use a specific C compiler, like certain game 
+console platforms**.
 
 
 ## Compiler development speed
