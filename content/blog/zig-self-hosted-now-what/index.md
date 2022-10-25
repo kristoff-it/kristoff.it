@@ -42,7 +42,7 @@ Having full control over the code generation pipeline will also allow us to move
 
 We are also working on a special backend, one that produces C source code. 
 Progress on the C backend has recently shot forward (87% and counting) thanks 
-to [an amazing](https://github.com/ziglang/zig/pull/13093) recent contribution.
+to [an amazing](https://github.com/ziglang/zig/pull/13093) contribution.
 
 What's interesting about this backend is that it will play a role in our plan 
 to replace the old bootstrap compiler implementation and, perhaps even more 
@@ -116,7 +116,7 @@ current take:
   executable. Zig is a language and a compiler toolchain.
 * The package manager will not assume the presence of a central package index. 
   We don't plan to create an official package index.
-* Version resolution will be the similar to Go's Minimal Version Selection, 
+* Version resolution will be similar to Go's Minimal Version Selection, 
   but with one extra limitation: stable packages will only be able to depend on 
   other stable packages (eg a `v1.x` package cannot depend on a `v0.y` package).
 
