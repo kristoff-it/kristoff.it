@@ -95,7 +95,7 @@ The new multi-sequence syntax allows you to loop over
 two or more arrays or slices at the same time:
 
 ```zig
-var elems = [_][]const u8 { "water", "earth", "fire", "wind" };
+var elems = [_][]const u8 { "water", "earth", "fire", "air" };
 var nats = [_][]const u8 { "tribes", "kingdom", "nation", "nomads" };
 
 for (elems, nats) |e, n| {
@@ -109,7 +109,7 @@ This prints:
 water tribes
 earth kingdom
 fire nation
-wind nomads
+air nomads
 ```
 
 There's only one simple rule when it comes to the 
@@ -128,7 +128,7 @@ of the range and let Zig automatically infer it from
 the other sequences**.
 
 ```zig
-var elems = [_][]const u8 { "water", "earth", "fire", "wind" };
+var elems = [_][]const u8 { "water", "earth", "fire", "air" };
 var nats = [_][]const u8 { "tribes", "kingdom", "nation", "nomads" };
 
 for (elems, nats, 0..) |e, n, idx| {
@@ -142,7 +142,7 @@ This prints:
 0 - water tribes
 1 - earth kingdom
 2 - fire nation
-3 - wind nomads
+3 - air nomads
 ```
 
 
