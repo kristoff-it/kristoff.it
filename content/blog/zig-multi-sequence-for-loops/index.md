@@ -263,7 +263,7 @@ mean that each monster instance wastes roughly 14% of
 its size just for padding.
 
 One technique that lets us prevent that waste is to avoid 
-representing our monsters as arrays of structs (AoS), and 
+representing our monsters as an array of structs (AoS), and 
 instead "deconstruct" them into multiple arrays, one per 
 field (also known as struct-of-arrays, SoA):
 
