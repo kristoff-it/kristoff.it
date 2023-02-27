@@ -57,8 +57,8 @@
      border: none;
      padding: 15px;
      font-family: monospace, monospace;
-     font-size:0.85rem;
-     line-height: 1rem;
+     font-size:1em;
+     line-height: 1.75em;
      display: inline-block;
      box-sizing: border-box;
      min-width: 100%;
@@ -69,16 +69,16 @@
      margin: 0;
      padding: 0;
      background-color: #1E1E1E !important;
-     font-size: 0.85rem;
-     line-height: 1.75rem;
+     font-size: 0.85em;
+     line-height: 1.75em;
      overflow: auto;
 }
  code {
      border-radius: 4px;
      border: 1px solid #d3d3d3;
      padding: 3px;
-     font-size: 1.1rem;
-     line-height: 1.75rem;
+     font-size: 1.1em;
+     line-height: 1.75em;
 }
  blockquote {
      margin-left: -1.75rem;
