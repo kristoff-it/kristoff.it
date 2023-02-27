@@ -254,12 +254,12 @@ alignment (because its type is `usize`, which has
 Luckily, this is done automatically by Zig (you can 
 use a `extern struct` if you want field ordering to 
 work like in C), but even then, the struct has 
-alignment 8 and size 35, which means that it needs 
-13 bytes of padding at the end to keep the alignment 
+alignment 8 and size 42, which means that it needs 
+6 bytes of padding at the end to keep the alignment 
 consistent in an array (ie `@sizeOf([2]Monster) == 96`), 
 so in the end some padding is inevitable given the size 
-of our fields. 13 bytes might not seem much, but it does 
-mean that each monster instance wastes roughly 14% of 
+of our fields. 6 bytes might not seem much, but it does 
+mean that each monster instance wastes roughly 15% of 
 its size just for padding.
 
 One technique that lets us prevent that waste is to avoid 
@@ -283,9 +283,9 @@ increment its `hp` by one.
 
 If we were to do this with the original array-of-structs 
 layout, for each monster we would have to load from 
-memory 46 bytes of data that we don't care about (33 
-from the `dna` field, plus 13 of padding) over the 9 
-bytes that we do need. That's a waste rate of 500%!
+memory 39 bytes of data that we don't care about (33 
+from the `dna` field, plus 6 of padding) over the 9 
+bytes that we do need. That's a waste rate of more than 400%!
 
 With the struct-of-arrays layout we only load from memory 
 data that we do care about, which can have a tremendous 
