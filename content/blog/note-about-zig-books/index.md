@@ -32,7 +32,7 @@ The publisher will assign a person to you who will ping you regularly about your
 
 Personally I don't think of the first part (the nagging) as a service, but some people do. Having an editor correct your work is universally valuable instead, and in fact if you plan to self-publish you should definitely consider paying an editor to review your work. Partnering with a publisher means that you don't have to shoulder this cost, but publishers are not charities and in the end you will pay the editor (and the nagging guy, and their manager's manager) with the percentage of the revenue that the publisher will take from sales.
 
-Additionally, you will only have access to editors that he publisher employs, meaning that you won't be able to choose someone you trust. I would expect the average publisher's editors to be fine, but still, I look at writing a book as an artistic endeavor and wouldn't like having other people dictate what should be put in it or not. 
+Additionally, you will only have access to editors that the publisher employs, meaning that you won't be able to choose someone you trust. I would expect the average publisher's editors to be fine, but still, I look at writing a book as an artistic endeavor and wouldn't like having other people dictate what should be put in it or not. 
 
 As far as I'm aware you editor will not have power over you when it comes to choice of words, but you both will be subject to the publisher's guidelines which will force you to include things like a legend that explains to the reader that colorful text written in a monospace font between two horizontal separators is... (*oot_opening_chest_jingle.wav*) ...source code!
 
