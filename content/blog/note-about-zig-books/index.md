@@ -12,7 +12,7 @@ without one.
 
 Before I jump into the meat of the discussion, here are my own personal plans, which are not a big secret (I've mentioned this to a few people at the Zig events I've been to), but that I've never mentioned so publicly: **I'm working on a "intro to Zig / systems programming" book**. It's my first time doing this type of work so I don't know precisely how long it will take, which is also the reason why I avoided making any public announcement before now (ie I don't want to be subject to an endless stream of "when is the book going to be ready?" questions). 
 
-For my book I'm most probably going to self-publish using Amazon Kindle Self Publishing (note: it's a service that will also print physical copies of the book) or some other similar platform.
+For my book I'm most probably going to self-publish using Amazon Kindle Direct Self Publishing (note: despite the name it's not kindle-only, it also lets you create physical copies of the book) or some other similar platform.
 
 Ok, now back to you.
 
@@ -44,7 +44,7 @@ Publishers will help you with the printing process, but they will also have rule
 
 Unfortunately this is the kind of stuff that pretty much no matter who you are, you will have to partner with somebody to get done, but nowadays thankfully we're not forced anymore to either get the full publisher package or nothing. 
 
-As I mentioned earlier, now we have services like Amazon Kindle Self Publishing that just take care of this part without any other overhead.
+As I mentioned earlier, now we have services like Amazon Kindle Direct Self Publishing that just take care of this part without any other overhead.
 
 If you go this route you will have to design your own book cover (or pay an artist to do that for you), but that's it.
 
