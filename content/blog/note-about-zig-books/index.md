@@ -78,4 +78,9 @@ For example in my book I plan to stay away from the stdlib as much as I can and 
 
 If you plan to write a Zig book or are in talks with a publisher, consider joining the [Software You Can Love Discord server](https://discord.gg/dCJm5WCSm2) where you will find other content creators and active members of the Zig community (including me) who will be happy to share their perspective with you about these matters.
 
+The Zig community can surely use more learning materials and 
+I'm hopeful that more of us will be willing to take on the mantle 
+of author in order to satisfy that neeed. That said, I fail to see
+any real advantage in partnering with a publisher.
+
 Whatever you choose to do, I wish you good luck. 
