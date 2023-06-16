@@ -237,7 +237,7 @@ kids).
 
 ```zig
 const Monster = struct {
-   elem_type: enum{ fire, water, air, earth },
+   elem_type: enum{ fire, water, wind, earth },
    hp: usize,
    dna: [33]u8, // gambling department demands 
                 // we use exactly 33 bytes
