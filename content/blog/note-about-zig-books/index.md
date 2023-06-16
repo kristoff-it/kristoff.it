@@ -16,7 +16,7 @@ For my book I'm most probably going to self-publish using Amazon Kindle Self Pub
 
 Ok, now back to you.
 
-First of all, if you are interested in writing a Zig book and are worried about my announcement just now, don't be: mine nor anybody's book is going to be anointed as "official", so we all play on a plain field from that perspective.
+First of all, if you are interested in writing a Zig book and are worried about my announcement just now, don't be: neither mine nor anybody's book is going to be anointed as "official", so we all play on a plain field from that perspective.
 
 Now, should you make a deal with a publisher or not? 
 
