@@ -1,0 +1,50 @@
+<extend template="base.html"/>
+
+<title id="title" var="$page.title"></title>
+
+<head id="head">
+	<link type="text/css" rel="stylesheet" href="/term-highlight.css">
+</head>
+
+<div id="content" class="foo">
+  <center>
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+       &nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+       &nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a> 
+       &nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+       &nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </center>
+	<h1 var="$page.title"></h1>
+  <p class="post-byline">
+		<span var="$page.date.format('January 02, 2006')"></span>	• 
+		<span var="$page.word_count.div(220).plus(1)"></span> min read • by 
+		<b var="$page.author"></b>
+		<span ifctx="$page.custom.get('coauthor')"> and 
+			<a href="$ctx.link" target="_blank"><b xvar="$ctx.name"></b></a>
+		</span>
+  </p>
+  <div id="post-description" var="$page.description"></div>
+  <div id="post-body" var="$page.content"></div>
+  <hr>
+  <div id="prev-next">
+		<span if="$page.prev">
+	    <a href="$if.relPermalink()">← <span var="$if.title"></span></a>
+		</span>
+    <span if="$page.has('prev','next')">&nbsp; • &nbsp;</span>
+		<span if="$page.next">
+	    <a href="$if.relPermalink()"><span var="$if.title"></span> →</a>
+		</span>
+    <small if="$page.hasAny('prev','next')">&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+</div>
