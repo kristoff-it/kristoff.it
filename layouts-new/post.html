@@ -25,7 +25,7 @@
 	<h1 var="$page.title"></h1>
   <p class="post-byline">
 		<span var="$page.date.format('January 02, 2006')"></span>	• 
-		<span var="$page.word_count.div(220).plus(1)"></span> min read • by 
+		<span var="$page.wordCount().div(220).plus(1)"></span> min read • by 
 		<b var="$page.author"></b>
 		<span ifctx="$page.custom.get('coauthor')"> and 
 			<a href="$ctx.link" target="_blank"><b xvar="$ctx.name"></b></a>
@@ -35,14 +35,14 @@
   <div id="post-body" var="$page.content"></div>
   <hr>
   <div id="prev-next">
-		<span if="$page.prev">
+		<span if="$page.prevPage()">
 	    <a href="$if.relPermalink()">← <span var="$if.title"></span></a>
 		</span>
-    <span if="$page.has('prev','next')">&nbsp; • &nbsp;</span>
-		<span if="$page.next">
+    <span if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
+		<span if="$page.nextPage()">
 	    <a href="$if.relPermalink()"><span var="$if.title"></span> →</a>
 		</span>
-    <small if="$page.hasAny('prev','next')">&nbsp; or &nbsp;</small>
+    <small if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
     <small>
       <a href="/">Back to the Homepage</a>
     </small>
