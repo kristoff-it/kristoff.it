@@ -21,7 +21,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: zig-cache
-        key: zig-cache          
+          key: zig-cache          
 
       - name: Build
         run: zig build
