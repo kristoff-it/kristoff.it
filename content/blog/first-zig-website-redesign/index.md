@@ -1,9 +1,12 @@
 ---
-title: The First Zig Website Redesign
-date: "2021-01-13T00:00:00"
-summary: "A friendlier first impression for programmers with a wider range of backgrounds." 
-draft: false
-notwitch: true
+{
+  "title": "The First Zig Website Redesign",
+  "description": "A friendlier first impression for programmers with a wider range of backgrounds.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2021-01-13T00:00:00",
+  "draft": false
+}
 ---
 
 Up until the publication of this post, if you went to the front page of [https://ziglang.org](https://ziglang.org), you would be greeted with a multi-page explanation about how Zig improves over the systems programming toolchains that today we take for granted.

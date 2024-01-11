@@ -1,9 +1,16 @@
 ---
-title: Addio Redis, I'm leaving Redis Labs
-date: "2020-07-06T00:00:00"
-summary: "Thanks Antirez for the code, the Redis manifesto, and for the free karma especially." 
-draft: false
-notwitch: true
+{
+  "title": "Addio Redis, I'm leaving Redis Labs",
+  "description": 
+      "Thanks Antirez for the code, the Redis manifesto, and for the free karma especially.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2020-07-06T00:00:00",
+  "draft": false,
+  "custom": {
+    "notwitch": true
+  }
+}
 ---
 
 Last week I resigned from my position as developer advocate at Redis Labs.
@@ -52,3 +59,4 @@ You can find more info at https://zig.show.
 
 
 ![A photo I took at the last AWS reinvent.](IMG_5653.jpg "Fuck you AWS.")
+<center><i>Fuck you AWS</i></center>

@@ -1,8 +1,12 @@
 ---
-title: Maintain it With Zig
-date: "2021-09-08T00:00:00"
-summary: "No matter what language you program in or what applications you use: everything you do with a computer today is powered at some level by a piece of C/C++ code." 
-draft: false
+{
+  "title": "Maintain it With Zig",
+  "description": "No matter what language you program in or what applications you use: everything you do with a computer today is powered at some level by a piece of C/C++ code.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2021-09-08T00:00:00",
+  "draft": false
+}
 ---
 
 C and C++ are kings when it comes to writing efficient software and the C ABI is the lingua franca of software interoperability, allowing C libraries to be used by almost any other language. This ubiquity, coupled with the rise of free and open source software development, has created over the course of the last 40 years a humongous collection of libraries and tools that make up what can be rightfully described as **the critical infrastructure of modern software**.

@@ -1,7 +1,12 @@
 ---
-title: Zig's Curious Multi-Sequence For Loops
-date: "2023-02-27T00:00:00"
-draft: false
+{
+  "title": "Zig's Curious Multi-Sequence For Loops",
+  "description": "", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2023-02-27T00:00:00",
+  "draft": false
+}
 ---
 
 Zig has just gained new for loop syntax that allows

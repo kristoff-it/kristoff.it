@@ -1,0 +1,69 @@
+<extend template="base.html"/>
+
+<title id="title">Home</title>
+
+<head id="head"></head>
+
+<div id="content">
+  <style>
+    h1,h2,h3 { text-align: center; }
+    .profile-pic {
+      border-radius: 50%;
+      border: 5px solid lightblue;
+      margin-top: 1rem;
+    }
+  </style>
+  <div>
+    <h1 style="margin-bottom:0;"> Loris Cro </h1>
+    <h3 style="margin-top:0;"><i> Personal Website </i></h3>
+    <center><img src="/loris-face.jpg" height=200 class="profile-pic"></center>
+    <div>
+      <p>
+        Hi, I'm VP of Community at the <a href="https://ziglang.org/zsf/">Zig Software Foundation</a>
+        and the host of <a href="https://zig.show">Zig SHOWTIME</a>, a 
+        live-streamed snow that runs on 
+        <a href="https://youtube.com/c/ZigSHOWTIME/">my YouTube channel</a>.
+      </p>
+      <p>
+        I'm also the curator of  <a href="https://sycl.it">Software You Can Love</a>, 
+        an in-person conference dedicated to celebrating the art of creating software for humans.
+      </p>
+      <p>
+        You can often find me livecoding and chatting about Zig <a href="https://twitch.tv/kristoff_it">on Twitch</a>.
+      </p>
+      <h2> Open Source </h2>
+      <div>
+        Some Open Source software I created and maintain:
+        <dl>
+          <dt><strong>Zig's Autodoc Tool</strong></dt>
+          <dd>The tool that generates documentation automatically for Zig projects and Zig's stdlib. 
+            Based on the original work from Andrew Kelley.</dd>
+        
+          <dt><strong><a href="https://github.com/kristoff-it/bork">bork</a></strong></dt>
+          <dd>A TUI Twitch chat client designed for livecoders.</dd>
+        
+          <dt><strong><a href="https://github.com/kristoff-it/zig-okredis">zig-okredis</a></strong></dt>
+          <dd>A zero-allocation Redis client for Zig that works both in blocking and async mode.</dd>
+        
+          <dt></dt>
+          <dd></dd>
+        </dl>
+        If you like what I do, I recommend <a href="https://ziglang.org/zsf/">sponsoring the Zig Software Foundation</a>
+        first and <a href="https://github.com/sponsors/kristoff-it/">me</a> second.
+      </div>
+    </div>
+
+    <div>
+      <h2 style="margin-bottom: 1.75rem;"> Blog </h2>
+    	<div loop="$site.pages()">
+    	  <a href="$loop.it.permalink()" class="post-link" var="$loop.it.title"></a>
+        <span class="post-byline" style="margin-bottom: 1rem;"
+              var="$loop.it.date.format('January 02, 2006')"></span>
+    	</div>
+    </div>
+  
+    <div>
+    TODO: RSS
+    </div>
+  </div>
+</div>

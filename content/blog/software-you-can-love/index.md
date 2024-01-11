@@ -1,14 +1,18 @@
 ---
-title: A Conference About Software You Can Love
-date: "2022-05-27T00:00:00"
-description: "" 
-draft: false
+{
+  "title": "A Conference About Software You Can Love",
+  "description": "", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2022-05-27T00:00:00",
+  "draft": false
+}
 ---
 
 This October I'm going to host "Software You Can Love" (SYCL, pronounced "cycle"), an in-person conference about the art of creating software for humans. If that sounds interesting already, you can find information about the location and ticket prices [on the official website](https://sycl.it).
 
 
-# What does SYCL mean?
+## What does SYCL mean?
 
 Software you can love is software whose **main goal** is to serve the end user, and it's alarming how rarely we get to deliver this kind of software professionally. I believe I'm not alone in saying that there's pride and pleasure in creating software that others want to use because it solves a problem with elegance, so the big question is: how can we make more of that? 
 
@@ -27,7 +31,7 @@ This last point is particularly relevant because **the second question that I wa
 That said, I would love for my desktop applications to be more conservative with resources and visually more consistent with the OS than what Electron allows, and I believe the only realistic way to achieve that goal is to make native development more compelling for the developer.
 
 
-# Software that serves the end user… isn't that Free and Open Source Software?
+## Software that serves the end user… isn't that Free and Open Source Software?
 
 I wish. Maybe it used to be, but I don't see modern FOSS as embodying these values anymore. 
 
@@ -44,7 +48,7 @@ What I find appalling about the Free Software movement, is how tragicomically in
 It's unacceptable to me how nonchalantly you are being asked to make sacrifices (never use any proprietary software ever!) by people who think that a new GNU C manual is exactly what we need to improve the state of software. Users need to be protected from hostile design, but the solution is not retreating to a free software monastery to study the (GNU C manual) book.
 
 
-# In conclusion
+## In conclusion
 
 If you too think that there's an important quality often missing from both proprietary software and modern FOSS, then [join us this October for the first ever SYCL in-person event](https://sycl.it). 
 

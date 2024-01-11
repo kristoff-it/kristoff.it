@@ -122,6 +122,69 @@
      .time {
          color:#8bc2e7!important 
     }
+
+    
+
+
+pre, code {
+  font-size: 12pt;
+  direction: ltr;
+}
+
+pre > code {
+  overflow: auto;
+  padding: 0.5em;
+  background: #f8f8f8;
+  color: black;
+  line-height: normal;
+}
+
+.tok {
+  color: #333;
+  font-style: normal;
+}
+
+.code {
+  font-family: monospace;
+  font-size: 0.8em;
+}
+
+.tok-kw {
+  color: #333;
+  font-weight: bold;
+}
+
+.tok-str {
+  color: #d14;
+}
+
+.tok-builtin {
+  color: #0086b3;
+}
+
+code.zig {
+  color: #777;
+  font-style: italic;
+}
+
+.tok-fn {
+  color: #900;
+  font-weight: bold;
+}
+
+.tok-null {
+  color: #008080;
+}
+
+.tok-number {
+  color: #008080;
+}
+
+.tok-type {
+  color: #458;
+  font-weight: bold;
+}
+    
 }
  .highlight {
      background-color: #1E1E1E;
@@ -170,6 +233,25 @@
  h1:nth-of-type(1) {
      margin-bottom: 0;
 }
+
+
+img[title] {
+  display: block;
+  max-width:400px;
+  width:100vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0;
+  
+}
+
+figure[data-title]:after {
+  display: block;
+  content: attr(data-title);
+  font-style: italic;
+  text-align: center;
+}
+
  figure {
      margin: 0;
      padding: 0;
@@ -216,3 +298,48 @@
     }
 }
  
+
+
+
+ pre > code {
+    background: #1e1e1e;
+    color: #f8f8f2;
+    line-height: normal;
+  }
+
+  .tok {
+    color: #ccc;
+    font-style: normal;
+  }
+
+  .tok-kw {
+    color: #eee;
+  }
+
+  .tok-str {
+    color: #2e5;
+  }
+
+  .tok-builtin {
+    color: #ff894c;
+  }
+
+  code.zig {
+    color: #aa7;
+  }
+
+  .tok-fn {
+    color: #e33;
+  }
+
+  .tok-null {
+    color: #ff8080;
+  }
+
+  .tok-number {
+    color: #ff8080;
+  }
+
+  .tok-type {
+    color: #68f;
+  }

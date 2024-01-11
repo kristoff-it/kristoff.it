@@ -1,8 +1,13 @@
 ---
-title: What is Zig's Comptime?
-date: "2019-08-05T00:00:00"
-summary: Let's take a quick look at what compile-time execution looks like in Zig.
-draft: false
+{
+  "title": "What is Zig's Comptime?",
+  "description": 
+      "Let's take a quick look at what compile-time execution looks like in Zig.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2019-08-05T00:00:00",
+  "custom": {}
+}
 ---
 
 If you've only experienced compile-time execution in the form of macros, generics or codegen, be ready to be surprised by what Zig can do.

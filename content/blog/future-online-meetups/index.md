@@ -1,8 +1,12 @@
 ---
-title: The Upcoming Future of Online Meetups
-date: "2020-06-13T00:00:00"
-draft: false
-notwitch: true
+{
+  "title": "The Upcoming Future of Online Meetups",
+  "description": "", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2020-06-13T00:00:00",
+  "draft": false
+}
 ---
 
 As we adventure into the phase where society needs to learn to cohabit with the virus, the tech industry comes to the full realization that in-person conferences and meetups are not going to resume anytime soon. Good, but not good enough, especially when it comes to online events.
