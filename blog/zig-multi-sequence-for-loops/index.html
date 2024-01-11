@@ -1,227 +1,152 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel=stylesheet><link type=text/css rel=stylesheet href=https://kristoff.it/main.min.6f92aaf634316ffad7b5bb25fbbb6bcde4ed248d1dcf604ea80dd541e5829bb1.css><script async src=https://platform.twitter.com/widgets.js></script><script defer type=text/javascript src=https://api.pirsch.io/pirsch.js id=pirschjs data-code=CnorXJVVDmhCee3FBtXSQISdHIUmqp3o></script><title>Zig's Curious Multi-Sequence For Loops | Loris Cro's Blog</title>
-<meta name=description content="Zig has just gained new for loop syntax that allows you to iterate on multiple slices / arrays at the same time. In this blog post I&rsquo;m going to explain in detail the rationale behind this choice, while also introducing you to a couple useful patterns that the syntax is meant to encourage.
-If you want to try it out, you will need an unstable build of Zig, which you can get from the downloads page."><meta name=twitter:card content="summary"><meta name=twitter:site content="@croloris"><meta name=twitter:image content="https://kristoff.it/logo.png"><meta name=twitter:author content="@croloris"><meta name=twitter:description content="Zig has just gained new for loop syntax that allows you to iterate on multiple slices / arrays at the same time. In this blog post I&rsquo;m going to explain in detail the rationale behind this choice, while also introducing you to a couple useful patterns that the syntax is meant to encourage.
-If you want to try it out, you will need an unstable build of Zig, which you can get from the downloads page."><meta name=twitter:title content="Zig's Curious Multi-Sequence For Loops"><meta property="og:title" content="Zig's Curious Multi-Sequence For Loops"><meta property="og:type" content="website"><meta property="og:image" content="https://krisoff.it/logo.png"><link type=text/css rel=stylesheet href=https://kristoff.it/term-highlight.min.72dc284af3ddc852ffaaf0b1722b02a3d7bef69b924c63162a3addbf2b11a6d3.css></head><body><div id=content><center><h1 id=header><a class=reset-a href=/>Loris Cro</a></h1><small><i>Personal Website</i></small><div style=display:flex;justify-content:center;font-size:small><a href=/>About</a>
-&nbsp; • &nbsp;
-<a href=https://twitter.com/croloris>Twitter</a>
-&nbsp; • &nbsp;
-<a href=https://twitch.tv/kristoff_it>Twitch</a>
-&nbsp; • &nbsp;
-<a href=https://youtube.com/c/ZigSHOWTIME/>YouTube</a>
-&nbsp; • &nbsp;
-<a href=https://github.com/kristoff-it>GitHub</a></div></center><h1>Zig's Curious Multi-Sequence For Loops</h1><p class=post-byline>February 27, 2023 • 8 min read • by <b>Loris Cro</b></p><div id=post-body><p>Zig has just gained new for loop syntax that allows
-you to iterate on multiple slices / arrays at the same time.
-In this blog post I&rsquo;m going to explain in detail the
-rationale behind this choice, while also introducing
-you to a couple useful patterns that the syntax is
-meant to encourage.</p><p>If you want to try it out, you will need an unstable
-build of Zig, which you can get from
-<a href=https://ziglang.org/download/>the downloads page</a>.</p><h2 id=basic-syntax>Basic syntax</h2><p>The most basic for loop syntax in Zig is still the
-same as before.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>const</span> elems <span style=color:#f92672>=</span> [<span style=color:#ae81ff>4</span>]<span style=color:#66d9ef>usize</span>{ <span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>20</span>, <span style=color:#ae81ff>30</span>, <span style=color:#ae81ff>40</span> };
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (elems) <span style=color:#f92672>|</span>x<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   std.debug.print(<span style=color:#e6db74>&#34;{} &#34;</span>, .{x});
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This prints:</p><pre tabindex=0><code>10 20 30 40 
-</code></pre><p>If you&rsquo;re new to Zig, you might be surprised
-by the <code>|x|</code> syntax. That&rsquo;s called a capture
-in Zig and in the case of <code>for</code> loops is how
-you can, well, <em>capture</em> the iteration value
-and give it a name.</p><h3 id=ranges>Ranges</h3><p>The new syntax also supports ranges, which are
-a new construct in Zig.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#ae81ff>0</span>..<span style=color:#ae81ff>4</span>) <span style=color:#f92672>|</span>n<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   std.debug.print(<span style=color:#e6db74>&#34;{} &#34;</span>, .{n});
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This prints:</p><pre tabindex=0><code>0 1 2 3 
-</code></pre><p>Ranges can also start from something other than zero.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#ae81ff>1</span>..<span style=color:#ae81ff>5</span>) <span style=color:#f92672>|</span>n<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   std.debug.print(<span style=color:#e6db74>&#34;{} &#34;</span>, .{n});
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This prints:</p><pre tabindex=0><code>1 2 3 4 
-</code></pre><p>Ranges can only exist as an argument to a <code>for</code> loop. This means that you can&rsquo;t store them in variables, but you can use variables to specify their bounds.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>var</span> a<span style=color:#f92672>:</span> <span style=color:#66d9ef>usize</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> b<span style=color:#f92672>:</span> <span style=color:#66d9ef>usize</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>15</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (a..b) <span style=color:#f92672>|</span>n<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   std.debug.print(<span style=color:#e6db74>&#34;{} &#34;</span>, .{n});
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This prints:</p><pre tabindex=0><code>10 11 12 13 14
-</code></pre><h2 id=multi-sequence-syntax>Multi-sequence syntax</h2><p>The new multi-sequence syntax allows you to loop over
-two or more arrays or slices at the same time:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>var</span> elems <span style=color:#f92672>=</span> [_][]<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>u8</span> { <span style=color:#e6db74>&#34;water&#34;</span>, <span style=color:#e6db74>&#34;earth&#34;</span>, <span style=color:#e6db74>&#34;fire&#34;</span>, <span style=color:#e6db74>&#34;air&#34;</span> };
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> nats <span style=color:#f92672>=</span> [_][]<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>u8</span> { <span style=color:#e6db74>&#34;tribes&#34;</span>, <span style=color:#e6db74>&#34;kingdom&#34;</span>, <span style=color:#e6db74>&#34;nation&#34;</span>, <span style=color:#e6db74>&#34;nomads&#34;</span> };
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (elems, nats) <span style=color:#f92672>|</span>e, n<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   std.debug.print(<span style=color:#e6db74>&#34;{s} {s}</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, .{e, n});
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This prints:</p><pre tabindex=0><code>water tribes
+<!DOCTYPE html>
+<html lang="en">
+    <head id="head">
+        <meta charset="utf-8"/>
+			  <title id="title">Zig's Curious Multi-Sequence For Loops | Loris Cro's Blog</title>
+			  <meta name="description" content="Loris Cro's Blog">
+			  <meta name="twitter:card" content="summary">
+			  <meta name="twitter:site" content="@croloris">
+			  <meta name="twitter:image" content="https://kristoff.it/logo.png">
+			  <meta name="twitter:author" content="@croloris">
+			  <meta name="twitter:description" content="Loris Cro's Blog">
+			  <meta name="twitter:title" content="Zig's Curious Multi-Sequence For Loops">
+			  <meta property="og:title" content="Zig's Curious Multi-Sequence For Loops">
+			  <meta property="og:type" content="website">
+			  <meta property="og:image" content="https://kristoff.it/logo.png">
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+	      <link type="text/css" rel="stylesheet" href="/main.css">
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
+				
+	<link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+    </head>
+    <body>
+        <div id="content">
+				    
+  <center>
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+       &nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+       &nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a> 
+       &nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+       &nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </center>
+	<h1 >Zig's Curious Multi-Sequence For Loops</h1>
+  <p class="post-byline">
+		<span >February 27, 2023</span>	• 
+		<span >9</span> min read • by 
+		<b >Loris Cro</b>
+		<span ></span>
+  </p>
+  <div id="post-description" ></div>
+  <div id="post-body" ><p>Zig has just gained new for loop syntax that allows you to iterate on multiple slices / arrays at the same time. In this blog post I'm going to explain in detail the rationale behind this choice, while also introducing you to a couple useful patterns that the syntax is meant to encourage.</p><p>If you want to try it out, you will need an unstable build of Zig, which you can get from <a href="https://ziglang.org/download/">the downloads page</a>.</p><h2>Basic syntax</h2><p>The most basic for loop syntax in Zig is still the same as before.</p><pre><code class="zig"><span class="tok tok-kw">const</span> <span class="tok">elems</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">[</span><span class="tok tok-number">4</span><span class="tok tok-symbol">]</span><span class="tok tok-type">usize</span><span class="tok tok-symbol">{</span> <span class="tok tok-number">10</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">20</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">30</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">40</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">elems</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">x</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">std</span><span class="tok tok-symbol">.</span><span class="tok">debug</span><span class="tok tok-symbol">.</span><span class="tok">print</span><span class="tok tok-symbol">(</span><span class="tok tok-str">&quot;{} &quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok">x</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>This prints:</p><pre><code>10 20 30 40 
+</code></pre><p>If you're new to Zig, you might be surprised by the <code>|x|</code> syntax. That's called a capture in Zig and in the case of <code>for</code> loops is how you can, well, <i>capture</i> the iteration value and give it a name.</p><h3>Ranges</h3><p>The new syntax also supports ranges, which are a new construct in Zig.</p><pre><code class="zig"><span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok tok-number">0</span><span class="tok tok-symbol">..</span><span class="tok tok-number">4</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">n</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">std</span><span class="tok tok-symbol">.</span><span class="tok">debug</span><span class="tok tok-symbol">.</span><span class="tok">print</span><span class="tok tok-symbol">(</span><span class="tok tok-str">&quot;{} &quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok">n</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>This prints:</p><pre><code>0 1 2 3 
+</code></pre><p>Ranges can also start from something other than zero.</p><pre><code class="zig"><span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok tok-number">1</span><span class="tok tok-symbol">..</span><span class="tok tok-number">5</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">n</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">std</span><span class="tok tok-symbol">.</span><span class="tok">debug</span><span class="tok tok-symbol">.</span><span class="tok">print</span><span class="tok tok-symbol">(</span><span class="tok tok-str">&quot;{} &quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok">n</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>This prints:</p><pre><code>1 2 3 4 
+</code></pre><p>Ranges can only exist as an argument to a <code>for</code> loop. This means that you can't store them in variables, but you can use variables to specify their bounds.</p><pre><code class="zig"><span class="tok tok-kw">var</span> <span class="tok">a</span><span class="tok tok-symbol">:</span> <span class="tok tok-type">usize</span> <span class="tok tok-symbol">=</span> <span class="tok tok-number">10</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-kw">var</span> <span class="tok">b</span><span class="tok tok-symbol">:</span> <span class="tok tok-type">usize</span> <span class="tok tok-symbol">=</span> <span class="tok tok-number">15</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">a</span><span class="tok tok-symbol">..</span><span class="tok">b</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">n</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">std</span><span class="tok tok-symbol">.</span><span class="tok">debug</span><span class="tok tok-symbol">.</span><span class="tok">print</span><span class="tok tok-symbol">(</span><span class="tok tok-str">&quot;{} &quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok">n</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>This prints:</p><pre><code>10 11 12 13 14
+</code></pre><h2>Multi-sequence syntax</h2><p>The new multi-sequence syntax allows you to loop over two or more arrays or slices at the same time:</p><pre><code class="zig"><span class="tok tok-kw">var</span> <span class="tok">elems</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">[</span><span class="tok">_</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-kw">const</span> <span class="tok tok-type">u8</span> <span class="tok tok-symbol">{</span> <span class="tok tok-str">&quot;water&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;earth&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;fire&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;air&quot;</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-kw">var</span> <span class="tok">nats</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">[</span><span class="tok">_</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-kw">const</span> <span class="tok tok-type">u8</span> <span class="tok tok-symbol">{</span> <span class="tok tok-str">&quot;tribes&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;kingdom&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;nation&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;nomads&quot;</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">elems</span><span class="tok tok-symbol">,</span> <span class="tok">nats</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">e</span><span class="tok tok-symbol">,</span> <span class="tok">n</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">std</span><span class="tok tok-symbol">.</span><span class="tok">debug</span><span class="tok tok-symbol">.</span><span class="tok">print</span><span class="tok tok-symbol">(</span><span class="tok tok-str">&quot;{s} {s}\n&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok">e</span><span class="tok tok-symbol">,</span> <span class="tok">n</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>This prints:</p><pre><code>water tribes
 earth kingdom
 fire nation
 air nomads
-</code></pre><p>There&rsquo;s only one simple rule when it comes to the
-length of the sequences: <strong>all lengths must match</strong>.
-Passing arrays of different length is safety-checked
-UB (i.e. you will get a panic in safe release modes).</p><h2 id=ranges-as-indexes>Ranges as indexes</h2><p>To iterate over a sequence and also keep track of the
-element&rsquo;s index, you can add a range to the list of
-sequences you want to iterate. <strong>Since all sequences
-must have the same length, you can omit the upper end
-of the range and let Zig automatically infer it from
-the other sequences</strong>.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>var</span> elems <span style=color:#f92672>=</span> [_][]<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>u8</span> { <span style=color:#e6db74>&#34;water&#34;</span>, <span style=color:#e6db74>&#34;earth&#34;</span>, <span style=color:#e6db74>&#34;fire&#34;</span>, <span style=color:#e6db74>&#34;air&#34;</span> };
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> nats <span style=color:#f92672>=</span> [_][]<span style=color:#66d9ef>const</span> <span style=color:#66d9ef>u8</span> { <span style=color:#e6db74>&#34;tribes&#34;</span>, <span style=color:#e6db74>&#34;kingdom&#34;</span>, <span style=color:#e6db74>&#34;nation&#34;</span>, <span style=color:#e6db74>&#34;nomads&#34;</span> };
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (elems, nats, <span style=color:#ae81ff>0</span>..) <span style=color:#f92672>|</span>e, n, idx<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   std.debug.print(<span style=color:#e6db74>&#34;{} - {s} {s}</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, .{idx, e, n});
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><p>This prints:</p><pre tabindex=0><code>0 - water tribes
+</code></pre><p>There's only one simple rule when it comes to the length of the sequences: <strong>all lengths must match</strong>. Passing arrays of different length is safety-checked UB (i.e. you will get a panic in safe release modes).</p><h2>Ranges as indexes</h2><p>To iterate over a sequence and also keep track of the element's index, you can add a range to the list of sequences you want to iterate. <strong>Since all sequences must have the same length, you can omit the upper end of the range and let Zig automatically infer it from the other sequences</strong>.</p><pre><code class="zig"><span class="tok tok-kw">var</span> <span class="tok">elems</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">[</span><span class="tok">_</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-kw">const</span> <span class="tok tok-type">u8</span> <span class="tok tok-symbol">{</span> <span class="tok tok-str">&quot;water&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;earth&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;fire&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;air&quot;</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-kw">var</span> <span class="tok">nats</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">[</span><span class="tok">_</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-kw">const</span> <span class="tok tok-type">u8</span> <span class="tok tok-symbol">{</span> <span class="tok tok-str">&quot;tribes&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;kingdom&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;nation&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-str">&quot;nomads&quot;</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">elems</span><span class="tok tok-symbol">,</span> <span class="tok">nats</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">0</span><span class="tok tok-symbol">..</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">e</span><span class="tok tok-symbol">,</span> <span class="tok">n</span><span class="tok tok-symbol">,</span> <span class="tok">idx</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">std</span><span class="tok tok-symbol">.</span><span class="tok">debug</span><span class="tok tok-symbol">.</span><span class="tok">print</span><span class="tok tok-symbol">(</span><span class="tok tok-str">&quot;{} - {s} {s}\n&quot;</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok">idx</span><span class="tok tok-symbol">,</span> <span class="tok">e</span><span class="tok tok-symbol">,</span> <span class="tok">n</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>This prints:</p><pre><code>0 - water tribes
 1 - earth kingdom
 2 - fire nation
 3 - air nomads
-</code></pre><h2 id=other-properties-of-for-loops>Other properties of <code>for</code> loops</h2><p>Up until now we saw the new changes to <code>for</code> loops,
-but if you&rsquo;re new to Zig you might not know all the
-other things they support, so I&rsquo;ll quickly recap
-them in this section.</p><h3 id=pointer-to-the-element>Pointer to the element</h3><p>Value captures in Zig should always be understood as
-immutable copies. To ask for a pointer you can add
-a <code>*</code> before the capture name.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>var</span> good_digits<span style=color:#f92672>:</span> [<span style=color:#ae81ff>3</span>]<span style=color:#66d9ef>usize</span> <span style=color:#f92672>=</span> .{<span style=color:#ae81ff>4</span>, <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>0</span>};
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>for</span> (<span style=color:#f92672>&amp;</span>good_digits) <span style=color:#f92672>|*</span>d<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   d.<span style=color:#f92672>*</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>6</span>;
-</span></span><span style=display:flex><span>}
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#75715e>// for (good_digits) |d| {
-</span></span></span><span style=display:flex><span><span style=color:#75715e>//    d = 6;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>// }
-</span></span></span><span style=display:flex><span><span style=color:#75715e>//
-</span></span></span><span style=display:flex><span><span style=color:#75715e>// error: cannot assign to constant
-</span></span></span><span style=display:flex><span><span style=color:#75715e>//     	d = 6;
-</span></span></span><span style=display:flex><span><span style=color:#75715e>//     	^
-</span></span></span></code></pre></div><h3 id=labels-break-and-continue>Labels, <code>break</code> and <code>continue</code></h3><p>You can give labels to loops, which helps breaking
-and continuing iteration at the right level.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>const</span> vowels <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;aeiou&#34;</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> text <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;lorem ipsum&#34;</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>var</span> missing <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>outer<span style=color:#f92672>:</span> <span style=color:#66d9ef>for</span> (vowels) <span style=color:#f92672>|</span>v<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>for</span> (text) <span style=color:#f92672>|</span>x<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (x <span style=color:#f92672>==</span> v) <span style=color:#66d9ef>continue</span> <span style=color:#f92672>:</span>outer;
-</span></span><span style=display:flex><span>   }
-</span></span><span style=display:flex><span>   missing <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>break</span> <span style=color:#f92672>:</span>outer;
-</span></span><span style=display:flex><span>}
-</span></span></code></pre></div><h3 id=else-for-for-loops><code>else</code> for <code>for</code> loops</h3><p>In Zig you can give an <code>else</code> branch to a <code>for</code> loop.
-The <code>else</code> branch triggers when the loop ends naturally,
-as opposed to breaking from it.</p><p>This models beautifully searching for an element in a
-sequence: if the element is found, you will <code>break</code>
-from the loop, while if it&rsquo;s not found then the loop
-will end naturally, at which point the <code>else</code> branch
-will allow you to implement the &ldquo;not found&rdquo; case.</p><p><code>for</code> loops can also be used as expressions, which
-works particularly well in this case.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>const</span> text <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;abcdef&#34;</span>;
-</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> needle <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;e&#39;</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>const</span> match<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#66d9ef>usize</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>for</span> (text, <span style=color:#ae81ff>0</span>..) <span style=color:#f92672>|</span>x, idx<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> (x <span style=color:#f92672>==</span> needle) <span style=color:#66d9ef>break</span> idx;
-</span></span><span style=display:flex><span>} <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>null</span>;
-</span></span></code></pre></div><h3 id=inlined-for-loops>Inlined <code>for</code> loops</h3><p>It&rsquo;s possible to operate on heterogeneous sequences
-of values with <code>for</code> loops when doing comptime
-metaprogramming. You can learn more in
-<a href=https://kristoff.it/blog/what-is-zig-comptime/>this old blog post</a>
-of mine.</p><h2 id=multi-sequence-for-loops-and-data-oriented-design-dod>Multi-sequence <code>for</code> loops and data oriented design (DOD)</h2><p>Say that you have a game where each monster has an
-element type, a counter for hit points, and a unique
-&ldquo;dna&rdquo; string used to procedurally generate stats for
-each monster&rsquo;s offspring (and to give an early taste
-of how it feels to play with slot machines to young
-kids).</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>const</span> Monster <span style=color:#f92672>=</span> <span style=color:#66d9ef>struct</span> {
-</span></span><span style=display:flex><span>   elem_type<span style=color:#f92672>:</span> <span style=color:#66d9ef>enum</span>{ fire, water, wind, earth },
-</span></span><span style=display:flex><span>   hp<span style=color:#f92672>:</span> <span style=color:#66d9ef>usize</span>,
-</span></span><span style=display:flex><span>   dna<span style=color:#f92672>:</span> [<span style=color:#ae81ff>33</span>]<span style=color:#66d9ef>u8</span>, <span style=color:#75715e>// gambling department demands 
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#75715e>// we use exactly 33 bytes
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>};
-</span></span></code></pre></div><p>First of all, you would probably want the in-memory
-representation of this struct to place <code>hp</code> at the
-top of the struct in order to avoid the need for
-padding inside the struct to maintain its natural
-alignment (because its type is <code>usize</code>, which has
-8 byte alignment on common 64bit machines).</p><p>Luckily, this is done automatically by Zig (you can
-use a <code>extern struct</code> if you want field ordering to
-work like in C), but even then, the struct has
-alignment 8 and size 42, which means that it needs
-6 bytes of padding at the end to keep the alignment
-consistent in an array (ie <code>@sizeOf([2]Monster) == 96</code>),
-so in the end some padding is inevitable given the size
-of our fields. 6 bytes might not seem much, but it does
-mean that each monster instance wastes roughly 15% of
-its size just for padding.</p><p>One technique that lets us prevent that waste is to avoid
-representing our monsters as an array of structs (AoS), and
-instead &ldquo;deconstruct&rdquo; them into multiple arrays, one per
-field (also known as struct-of-arrays, SoA):</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span>monster_hps<span style=color:#f92672>:</span> []<span style=color:#66d9ef>usize</span>,
-</span></span><span style=display:flex><span>monster_dnas<span style=color:#f92672>:</span> [][<span style=color:#ae81ff>33</span>]<span style=color:#66d9ef>u8</span>,
-</span></span><span style=display:flex><span>monster_elem_types<span style=color:#f92672>:</span> []<span style=color:#66d9ef>enum</span>{ fire, water, air, earth },
-</span></span></code></pre></div><p>This memory layout wastes no bytes and also lets us
-operate more efficiently on our data.</p><p>Let&rsquo;s say that <code>fire</code> monsters gain one hit point every
-tick of our game. This means that every tick we want to
-look at each monster&rsquo;s <code>elem_type</code> and based on that we
-increment its <code>hp</code> by one.</p><p>If we were to do this with the original array-of-structs
-layout, for each monster we would have to load from
-memory 39 bytes of data that we don&rsquo;t care about (33
-from the <code>dna</code> field, plus 6 of padding) over the 9
-bytes that we do need. That&rsquo;s a waste rate of more than 400%!</p><p>With the struct-of-arrays layout we only load from memory
-data that we do care about, which can have a tremendous
-effect on performance.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>for</span> (monster_elem_types, monster_hps) <span style=color:#f92672>|</span>et, <span style=color:#f92672>*</span>hp<span style=color:#f92672>|</span> {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> (et <span style=color:#f92672>==</span> .fire) hp.<span style=color:#f92672>*</span> <span style=color:#f92672>+|=</span> <span style=color:#ae81ff>1</span>; <span style=color:#75715e>// saturating addition
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>} 
-</span></span></code></pre></div><p>The Zig standard library has <code>MultiArrayList</code>, a data
-structure that helps make DOD style programming even
-more ergonomic. <a href=https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0>Here you can read more about it</a>.</p><h2 id=hoisting-safety-checks>Hoisting safety checks</h2><p>In low-level programming languages, accessing an array
-item corresponds to adding an offset to a pointer value
-and then dereferencing it. This operation is very fast
-but, if the logic is wrong, one could end up reading
-past the end of an array and the program wouldn&rsquo;t even
-notice.</p><p>In Zig out-of-bounds array accesses are safety-checked
-in safe build modes which means that the compiler adds
-a hidden assertion whenever an array access is about
-to happen.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>var</span> idx<span style=color:#f92672>:</span> <span style=color:#66d9ef>usize</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>;
-</span></span><span style=display:flex><span>assert(idx <span style=color:#f92672>&lt;</span> my_slice.len); <span style=color:#75715e>// secretly added by the compiler
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>_ <span style=color:#f92672>=</span> my_slice[idx];
-</span></span></code></pre></div><p>If we were to implement the previous game feature
-(fire monsters getting 1 hp every tick) without
-multi-sequence <code>for</code> loops, we would have to do
-something like this:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>var</span> idx<span style=color:#f92672>:</span> <span style=color:#66d9ef>usize</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#66d9ef>while</span> (idx <span style=color:#f92672>&lt;</span> monster_count) <span style=color:#f92672>:</span> (idx <span style=color:#f92672>+=</span> <span style=color:#ae81ff>1</span>) {
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>const</span> et <span style=color:#f92672>=</span> monster_elem_types[idx]; <span style=color:#75715e>// potential oob
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>   <span style=color:#66d9ef>const</span> hp <span style=color:#f92672>=</span> <span style=color:#f92672>&amp;</span>monster_hps[idx]; <span style=color:#75715e>// potential oob
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span>   <span style=color:#66d9ef>if</span> (et <span style=color:#f92672>==</span> .fire) hp.<span style=color:#f92672>*</span> <span style=color:#f92672>+|=</span> <span style=color:#ae81ff>1</span>;
-</span></span><span style=display:flex><span>} 
-</span></span></code></pre></div><p>Unfortunately, the Zig compiler would have to insert
-two hidden assertions with this version of the code:
-one before the assignment to <code>et</code>, and one before
-the assignment to <code>hp</code>.</p><p>In the multi-sequence <code>for</code> loop version it&rsquo;s only
-necessary to test once at the beginning of the loop
-that the two arrays have equal size, instead of
-having 2 assertions run every loop iteration. The
-multi-sequence <code>for</code> loop syntax helps convey
-intention more clearly to the compiler, which in turn
-lets it generate more efficient code.</p><p>Of course, with sophisticated-enough static analysis
-the compiler could prove that <code>monster_count</code> is
-always equivalent to <code>monster_elem_types.len</code> and
-<code>monster_hps.len</code>, and thus it could elide the
-assertions, but static analysis slows compilation
-times and tends to be a fragile thing, like
-<a href=https://leveluppp.ghost.io/loop-optimizations-in-various-compilers/>this amazing blog post about loop optimizations in C#</a> shows.</p><p><strong>Multi-sequence <code>for</code> loop syntax doesn&rsquo;t slow down
-compilation times and guarantees that you get good
-performance also in debug builds, where advanced
-optimizations are disabled and compilation times
-matter the most.</strong></p><h2 id=conclusion>Conclusion</h2><p>Zig is already a compelling programming language and
-toolchain, but there&rsquo;s more design space to explore
-ahead of us before we can tag v1.0.</p><p>We <a href=https://kristoff.it/blog/zig-self-hosted-now-what/>recently self-hosted the compiler</a> and <a href=https://ziglang.org/news/goodbye-cpp/>optimized our development process</a>
-in order to make it as smooth as possible to explore
-new design ideas like multi-sequence <code>for</code> loops.</p><p>Zig describes itself as a programming language for
-maintaining <strong>robust</strong>, <strong>optimal</strong> and <strong>reusable</strong>
-code, and multi-sequence for loops are a shining
-example of how the language tries to strike a
-compelling balance between clarity, performance and safety.</p><p>Comptime metaprogramming allows us to have
-<code>std.MultiArrayList</code>, <a href=https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0>a userland implementation of AoS/SoA transformation</a>,
-which makes it easier to do DOD-style programming, while
-multi-sequence <code>for</code> loops ensure that we get all the
-safety of out-of-bounds checks without impacting runtime
-performance nor compromising on compilation times.</p><p>If you like where we&rsquo;re going, please consider
-<a href=https://ziglang.org/zsf/>sponsoring the Zig Software Foundation</a>.</p></div><hr><div id=prev-next><a href=/blog/zig-self-hosted-now-what/>← Zig Is Self-Hosted Now, What's Next?</a>
-&nbsp; • &nbsp;
-<a href=/blog/note-about-zig-books/>A Note About Zig Books for the Zig Community →</a>
-<small>&nbsp; or &nbsp;</small>
-<small><a href=/>Back to the Homepage</a></small></div></div></body></html>
+</code></pre><h2>Other properties of <code>for</code> loops</h2><p>Up until now we saw the new changes to <code>for</code> loops, but if you're new to Zig you might not know all the other things they support, so I'll quickly recap them in this section.</p><h3>Pointer to the element</h3><p>Value captures in Zig should always be understood as immutable copies. To ask for a pointer you can add a <code>*</code> before the capture name.</p><pre><code class="zig"><span class="tok tok-kw">var</span> <span class="tok">good_digits</span><span class="tok tok-symbol">:</span> <span class="tok tok-symbol">[</span><span class="tok tok-number">3</span><span class="tok tok-symbol">]</span><span class="tok tok-type">usize</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">.</span><span class="tok tok-symbol">{</span><span class="tok tok-number">4</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">2</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">0</span><span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok tok-symbol">&amp;</span><span class="tok">good_digits</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok tok-symbol">*</span><span class="tok">d</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">d</span><span class="tok tok-symbol">.*</span> <span class="tok tok-symbol">=</span> <span class="tok tok-number">6</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span>
+
+// for (good_digits) |d| {
+//    d = 6;
+// }
+//
+// error: cannot assign to constant
+//     	d = 6;
+//     	^</code></pre><h3>Labels, <code>break</code> and <code>continue</code></h3><p>You can give labels to loops, which helps breaking and continuing iteration at the right level.</p><pre><code class="zig"><span class="tok tok-kw">const</span> <span class="tok">vowels</span> <span class="tok tok-symbol">=</span> <span class="tok tok-str">&quot;aeiou&quot;</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-kw">const</span> <span class="tok">text</span> <span class="tok tok-symbol">=</span> <span class="tok tok-str">&quot;lorem ipsum&quot;</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-kw">var</span> <span class="tok">missing</span> <span class="tok tok-symbol">=</span> <span class="tok">false</span><span class="tok tok-symbol">;</span>
+
+<span class="tok">outer</span><span class="tok tok-symbol">:</span> <span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">vowels</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">v</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">text</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">x</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+      <span class="tok tok-kw">if</span> <span class="tok tok-symbol">(</span><span class="tok">x</span> <span class="tok tok-symbol">==</span> <span class="tok">v</span><span class="tok tok-symbol">)</span> <span class="tok tok-kw">continue</span> <span class="tok tok-symbol">:</span><span class="tok">outer</span><span class="tok tok-symbol">;</span>
+   <span class="tok tok-symbol">}</span>
+   <span class="tok">missing</span> <span class="tok tok-symbol">=</span> <span class="tok">true</span><span class="tok tok-symbol">;</span>
+   <span class="tok tok-kw">break</span> <span class="tok tok-symbol">:</span><span class="tok">outer</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><h3><code>else</code> for <code>for</code> loops</h3><p>In Zig you can give an <code>else</code> branch to a <code>for</code> loop. The <code>else</code> branch triggers when the loop ends naturally, as opposed to breaking from it.</p><p>This models beautifully searching for an element in a sequence: if the element is found, you will <code>break</code> from the loop, while if it's not found then the loop will end naturally, at which point the <code>else</code> branch will allow you to implement the "not found" case.</p><p><code>for</code> loops can also be used as expressions, which works particularly well in this case.</p><pre><code class="zig"><span class="tok tok-kw">const</span> <span class="tok">text</span> <span class="tok tok-symbol">=</span> <span class="tok tok-str">&quot;abcdef&quot;</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-kw">const</span> <span class="tok">needle</span> <span class="tok tok-symbol">=</span> <span class="tok tok-str">'e'</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">const</span> <span class="tok">match</span><span class="tok tok-symbol">:</span> <span class="tok tok-symbol">?</span><span class="tok tok-type">usize</span> <span class="tok tok-symbol">=</span> <span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">text</span><span class="tok tok-symbol">,</span> <span class="tok tok-number">0</span><span class="tok tok-symbol">..</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">x</span><span class="tok tok-symbol">,</span> <span class="tok">idx</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok tok-kw">if</span> <span class="tok tok-symbol">(</span><span class="tok">x</span> <span class="tok tok-symbol">==</span> <span class="tok">needle</span><span class="tok tok-symbol">)</span> <span class="tok tok-kw">break</span> <span class="tok">idx</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span> <span class="tok tok-kw">else</span> <span class="tok">null</span><span class="tok tok-symbol">;</span></code></pre><h3>Inlined <code>for</code> loops</h3><p>It's possible to operate on heterogeneous sequences of values with <code>for</code> loops when doing comptime metaprogramming. You can learn more in <a href="https://kristoff.it/blog/what-is-zig-comptime/">this old blog post</a> of mine.</p><h2>Multi-sequence <code>for</code> loops and data oriented design (DOD)</h2><p>Say that you have a game where each monster has an element type, a counter for hit points, and a unique "dna" string used to procedurally generate stats for each monster's offspring (and to give an early taste of how it feels to play with slot machines to young kids).</p><pre><code class="zig"><span class="tok tok-kw">const</span> <span class="tok">Monster</span> <span class="tok tok-symbol">=</span> <span class="tok tok-kw">struct</span> <span class="tok tok-symbol">{</span>
+   <span class="tok">elem_type</span><span class="tok tok-symbol">:</span> <span class="tok tok-kw">enum</span><span class="tok tok-symbol">{</span> <span class="tok">fire</span><span class="tok tok-symbol">,</span> <span class="tok">water</span><span class="tok tok-symbol">,</span> <span class="tok">wind</span><span class="tok tok-symbol">,</span> <span class="tok">earth</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">,</span>
+   <span class="tok">hp</span><span class="tok tok-symbol">:</span> <span class="tok tok-type">usize</span><span class="tok tok-symbol">,</span>
+   <span class="tok">dna</span><span class="tok tok-symbol">:</span> <span class="tok tok-symbol">[</span><span class="tok tok-number">33</span><span class="tok tok-symbol">]</span><span class="tok tok-type">u8</span><span class="tok tok-symbol">,</span> // gambling department demands 
+                // we use exactly 33 bytes
+<span class="tok tok-symbol">}</span><span class="tok tok-symbol">;</span></code></pre><p>First of all, you would probably want the in-memory representation of this struct to place <code>hp</code> at the top of the struct in order to avoid the need for padding inside the struct to maintain its natural alignment (because its type is <code>usize</code>, which has 8 byte alignment on common 64bit machines).</p><p>Luckily, this is done automatically by Zig (you can use a <code>extern struct</code> if you want field ordering to work like in C), but even then, the struct has alignment 8 and size 42, which means that it needs 6 bytes of padding at the end to keep the alignment consistent in an array (ie <code>@sizeOf([2]Monster) == 96</code>), so in the end some padding is inevitable given the size of our fields. 6 bytes might not seem much, but it does mean that each monster instance wastes roughly 15% of its size just for padding.</p><p>One technique that lets us prevent that waste is to avoid representing our monsters as an array of structs (AoS), and instead "deconstruct" them into multiple arrays, one per field (also known as struct-of-arrays, SoA):</p><pre><code class="zig"><span class="tok">monster_hps</span><span class="tok tok-symbol">:</span> <span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-type">usize</span><span class="tok tok-symbol">,</span>
+<span class="tok">monster_dnas</span><span class="tok tok-symbol">:</span> <span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">[</span><span class="tok tok-number">33</span><span class="tok tok-symbol">]</span><span class="tok tok-type">u8</span><span class="tok tok-symbol">,</span>
+<span class="tok">monster_elem_types</span><span class="tok tok-symbol">:</span> <span class="tok tok-symbol">[</span><span class="tok tok-symbol">]</span><span class="tok tok-kw">enum</span><span class="tok tok-symbol">{</span> <span class="tok">fire</span><span class="tok tok-symbol">,</span> <span class="tok">water</span><span class="tok tok-symbol">,</span> <span class="tok">air</span><span class="tok tok-symbol">,</span> <span class="tok">earth</span> <span class="tok tok-symbol">}</span><span class="tok tok-symbol">,</span></code></pre><p>This memory layout wastes no bytes and also lets us operate more efficiently on our data.</p><p>Let's say that <code>fire</code> monsters gain one hit point every tick of our game. This means that every tick we want to look at each monster's <code>elem_type</code> and based on that we increment its <code>hp</code> by one.</p><p>If we were to do this with the original array-of-structs layout, for each monster we would have to load from memory 39 bytes of data that we don't care about (33 from the <code>dna</code> field, plus 6 of padding) over the 9 bytes that we do need. That's a waste rate of more than 400%!</p><p>With the struct-of-arrays layout we only load from memory data that we do care about, which can have a tremendous effect on performance.</p><pre><code class="zig"><span class="tok tok-kw">for</span> <span class="tok tok-symbol">(</span><span class="tok">monster_elem_types</span><span class="tok tok-symbol">,</span> <span class="tok">monster_hps</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">|</span><span class="tok">et</span><span class="tok tok-symbol">,</span> <span class="tok tok-symbol">*</span><span class="tok">hp</span><span class="tok tok-symbol">|</span> <span class="tok tok-symbol">{</span>
+   <span class="tok tok-kw">if</span> <span class="tok tok-symbol">(</span><span class="tok">et</span> <span class="tok tok-symbol">==</span> <span class="tok tok-symbol">.</span><span class="tok">fire</span><span class="tok tok-symbol">)</span> <span class="tok">hp</span><span class="tok tok-symbol">.*</span> <span class="tok tok-symbol">+|=</span> <span class="tok tok-number">1</span><span class="tok tok-symbol">;</span> // saturating addition
+<span class="tok tok-symbol">}</span></code></pre><p>The Zig standard library has <code>MultiArrayList</code>, a data structure that helps make DOD style programming even more ergonomic. <a href="https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0">Here you can read more about it</a>.</p><h2>Hoisting safety checks</h2><p>In low-level programming languages, accessing an array item corresponds to adding an offset to a pointer value and then dereferencing it. This operation is very fast but, if the logic is wrong, one could end up reading past the end of an array and the program wouldn't even notice.</p><p>In Zig out-of-bounds array accesses are safety-checked in safe build modes which means that the compiler adds a hidden assertion whenever an array access is about to happen.</p><pre><code class="zig"><span class="tok tok-kw">var</span> <span class="tok">idx</span><span class="tok tok-symbol">:</span> <span class="tok tok-type">usize</span> <span class="tok tok-symbol">=</span> <span class="tok tok-number">5</span><span class="tok tok-symbol">;</span>
+<span class="tok">assert</span><span class="tok tok-symbol">(</span><span class="tok">idx</span> <span class="tok tok-symbol">&lt;</span> <span class="tok">my_slice</span><span class="tok tok-symbol">.</span><span class="tok">len</span><span class="tok tok-symbol">)</span><span class="tok tok-symbol">;</span> // secretly added by the compiler
+<span class="tok">_</span> <span class="tok tok-symbol">=</span> <span class="tok">my_slice</span><span class="tok tok-symbol">[</span><span class="tok">idx</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">;</span></code></pre><p>If we were to implement the previous game feature (fire monsters getting 1 hp every tick) without multi-sequence <code>for</code> loops, we would have to do something like this:</p><pre><code class="zig"><span class="tok tok-kw">var</span> <span class="tok">idx</span><span class="tok tok-symbol">:</span> <span class="tok tok-type">usize</span> <span class="tok tok-symbol">=</span> <span class="tok tok-number">0</span><span class="tok tok-symbol">;</span>
+
+<span class="tok tok-kw">while</span> <span class="tok tok-symbol">(</span><span class="tok">idx</span> <span class="tok tok-symbol">&lt;</span> <span class="tok">monster_count</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">:</span> <span class="tok tok-symbol">(</span><span class="tok">idx</span> <span class="tok tok-symbol">+=</span> <span class="tok tok-number">1</span><span class="tok tok-symbol">)</span> <span class="tok tok-symbol">{</span>
+   <span class="tok tok-kw">const</span> <span class="tok">et</span> <span class="tok tok-symbol">=</span> <span class="tok">monster_elem_types</span><span class="tok tok-symbol">[</span><span class="tok">idx</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">;</span> // potential oob
+   <span class="tok tok-kw">const</span> <span class="tok">hp</span> <span class="tok tok-symbol">=</span> <span class="tok tok-symbol">&amp;</span><span class="tok">monster_hps</span><span class="tok tok-symbol">[</span><span class="tok">idx</span><span class="tok tok-symbol">]</span><span class="tok tok-symbol">;</span> // potential oob
+
+   <span class="tok tok-kw">if</span> <span class="tok tok-symbol">(</span><span class="tok">et</span> <span class="tok tok-symbol">==</span> <span class="tok tok-symbol">.</span><span class="tok">fire</span><span class="tok tok-symbol">)</span> <span class="tok">hp</span><span class="tok tok-symbol">.*</span> <span class="tok tok-symbol">+|=</span> <span class="tok tok-number">1</span><span class="tok tok-symbol">;</span>
+<span class="tok tok-symbol">}</span></code></pre><p>Unfortunately, the Zig compiler would have to insert two hidden assertions with this version of the code: one before the assignment to <code>et</code>, and one before the assignment to <code>hp</code>.</p><p>In the multi-sequence <code>for</code> loop version it's only necessary to test once at the beginning of the loop that the two arrays have equal size, instead of having 2 assertions run every loop iteration. The multi-sequence <code>for</code> loop syntax helps convey intention more clearly to the compiler, which in turn lets it generate more efficient code.</p><p>Of course, with sophisticated-enough static analysis the compiler could prove that <code>monster_count</code> is always equivalent to <code>monster_elem_types.len</code> and <code>monster_hps.len</code>, and thus it could elide the assertions, but static analysis slows compilation times and tends to be a fragile thing, like <a href="https://leveluppp.ghost.io/loop-optimizations-in-various-compilers/">this amazing blog post about loop optimizations in C#</a> shows.</p><p><strong>Multi-sequence <code>for</code> loop syntax doesn't slow down compilation times and guarantees that you get good performance also in debug builds, where advanced optimizations are disabled and compilation times matter the most.</strong></p><h2>Conclusion</h2><p>Zig is already a compelling programming language and toolchain, but there's more design space to explore ahead of us before we can tag v1.0.</p><p>We <a href="https://kristoff.it/blog/zig-self-hosted-now-what/">recently self-hosted the compiler</a> and <a href="https://ziglang.org/news/goodbye-cpp/">optimized our development process</a> in order to make it as smooth as possible to explore new design ideas like multi-sequence <code>for</code> loops.</p><p>Zig describes itself as a programming language for maintaining <strong>robust</strong>, <strong>optimal</strong> and <strong>reusable</strong> code, and multi-sequence for loops are a shining example of how the language tries to strike a compelling balance between clarity, performance and safety.</p><p>Comptime metaprogramming allows us to have <code>std.MultiArrayList</code>, <a href="https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0">a userland implementation of AoS/SoA transformation</a>, which makes it easier to do DOD-style programming, while multi-sequence <code>for</code> loops ensure that we get all the safety of out-of-bounds checks without impacting runtime performance nor compromising on compilation times.</p><p>If you like where we're going, please consider <a href="https://ziglang.org/zsf/">sponsoring the Zig Software Foundation</a>.</p></div>
+  <hr>
+  <div id="prev-next">
+		<span >
+	    <a href="/blog/zig-self-hosted-now-what/">← <span >Zig Is Self-Hosted Now, What's Next?</span></a>
+		</span>
+    <span >&nbsp; • &nbsp;</span>
+		<span >
+	    <a href="/blog/note-about-zig-books/"><span >A Note About Zig Books for the Zig Community</span> →</a>
+		</span>
+    <small >&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+        </div>
+    </body>
+</html>
