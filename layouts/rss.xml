@@ -1,0 +1,17 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Loris Cro's Personal Website</title>
+		<link>https://kristoff.it/</link>
+		<description>Recent content on Loris Cro's Personal Website</description>
+		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
+		<language>en-us</language>
+		<lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate>
+		<atom:link href="https://kristoff.it/index.xml" rel="self" type="application/rss+xml"/>
+		<item inline-loop="$site.pages()">
+			<title var="$loop.it.title"></title>
+			<link var="$site.base_url.suffix($loop.it.permalink())"></link>
+			<pubDate var="$loop.it.date.formatHTTP()"></pubDate>
+			<guid var="$site.base_url.suffix($loop.it.permalink())"></guid>
+		</item>
+	</channel>
+</rss>

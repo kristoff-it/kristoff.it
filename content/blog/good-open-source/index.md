@@ -1,7 +1,12 @@
 ---
-title: The Good Parts of Open Source
-date: "2022-08-09T00:00:00"
-draft: false
+{
+  "title": "The Good Parts of Open Source",
+  "description": "", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2022-08-09T00:00:00",
+  "draft": false
+}
 ---
 
 If you read my blog in the past, you know I'm often complaining about Open Source, but today I'm here to say something supportive for once. This doesn't change the fact that I'm still running [Software You Can Love](https://sycl.it) this October as an explicit departure from the general "Microsoft ❤️ Open Source" mentality, but recent events are a good excuse to talk about **the one thing that Open Source does well: reduce risk when using somebody else's code**.

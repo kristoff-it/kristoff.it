@@ -1,8 +1,12 @@
 ---
-title: The Good, the Bad and the Ugly Standup
-date: "2020-01-26T00:00:00"
-summary: "“In this world there are two types of standup, my friend: comedy and meetings.<br/>You do meetings.”" 
-draft: false
+{
+  "title": "The Good, the Bad and the Ugly Standup",
+  "description": "“In this world there are two types of standup, my friend: comedy and meetings.<br>You do meetings.”", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2020-01-26T00:00:00",
+  "draft": false
+}
 ---
 
 It's not always easy to understand what makes meetings successful and since Zen stories aren't the learning tool of choice in the business world, we have certified practitioners teach people what they call "ceremonies": rituals that you're supposed to imitate with the expectation that, hopefully, illumination will eventually dawn on you.

@@ -1,9 +1,12 @@
 ---
-title: You Should Play Secret Hitler
-date: "2020-10-22T00:00:00"
-summary: Let's talk about Secret Hitler, now that everyone is playing Among Us and Among U.S.
-draft: false
-notwitch: true
+{
+  "title": "You Should Play Secret Hitler",
+  "description": "Let's talk about Secret Hitler, now that everyone is playing Among Us and Among U.S.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2020-10-22T00:00:00",
+  "draft": false
+}
 ---
 
 In games like D&D, you start by creating a character for yourself. The character has a background, a set of skills and a personality of their own. Ideally, you should try to play characters with a different disposition than yours, and part of the enjoyment is acting like them, to the point of even occasionally making disastrous choices knowingly, because that’s what the character would do.

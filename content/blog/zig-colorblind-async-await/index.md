@@ -1,8 +1,12 @@
 ---
-title: What is Zig's “Colorblind” Async/Await?
-date: "2020-06-21T00:00:00"
-summary: "An introduction to Zig's curious concurrent programming API."
-draft: false
+{
+  "title": "What is Zig's “Colorblind” Async/Await?",
+  "description": "An introduction to Zig's curious concurrent programming API.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2020-06-21T00:00:00",
+  "draft": false
+}
 ---
 
 Zig is a new, general-purpose programming language that is rethinking from the ground up the way languages and related tooling should work. I’ve [already discussed compile-time code execution](/blog/what-is-zig-comptime), and now I’m going to introduce another innovative concept from the language: async/await.

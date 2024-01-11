@@ -1,11 +1,16 @@
 ---
-title: Zig's New Relationship with LLVM
-date: "2020-09-28T00:00:00"
-summary: "While not yet at version 1.0, Zig is about to reach a new level of maturity and stability."
-draft: false
-notwitch: true
-coauthor: Andrew Kelley
-coauthor_link: https://andrewkelley.me
+{
+  "title": "Zig's New Relationship with LLVM",
+  "description": "While not yet at version 1.0, Zig is about to reach a new level of maturity and stability.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2020-09-28T00:00:00",
+  "draft": false,
+  "custom": {
+    "coauthor": "Andrew Kelley",
+    "coauthor_link": "https://andrewkelley.me"
+  }
+}
 ---
 
 In the early days, Zig was but a thin frontend in front of LLVM. This was instrumental for getting started quickly and filling in gaps of Andrew’s knowledge as a compiler developer. Now, the training wheels of the bicycle are coming off, and LLVM is transitioning into an optional component.

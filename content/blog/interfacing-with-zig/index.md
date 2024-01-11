@@ -1,7 +1,12 @@
 ---
-title: Interfacing with Zig, a BDFL-run Project
-date: "2021-12-10T00:00:00"
-draft: false
+{
+  "title": "Interfacing with Zig, a BDFL-run Project",
+  "description": "", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2021-12-10T00:00:00",
+  "draft": false
+}
 ---
 
 If you are interested in contributing to the ecosystem of a programming language (or any big software project really), it's important to know its governance model and how that reflects on the community.

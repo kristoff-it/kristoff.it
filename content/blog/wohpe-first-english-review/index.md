@@ -1,7 +1,12 @@
 ---
-title: The First English Review of Wohpe
-date: "2022-08-03T00:00:00"
-draft: false
+{
+  "title": "The First English Review of Wohpe",
+  "description": "", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2022-08-03T00:00:00",
+  "draft": false
+}
 ---
 
 Wohpe is a sci-fi novel by Antirez, who doesn't need any introduction on this 

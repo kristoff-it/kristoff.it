@@ -1,8 +1,12 @@
 ---
-title: "Zig Is Self-Hosted Now, What's Next?"
-date: "2022-10-25T00:00:00"
-summary: "Why self-host Zig?<br> For great justice, of course… and also a few more reasons actually." 
-draft: false
+{
+  "title": "Zig Is Self-Hosted Now, What's Next?",
+  "description": "Why self-host Zig?<br> For great justice, of course… and also a few more reasons actually.", 
+  "author": "Loris Cro",
+  "layout": "post.html",
+  "date": "2022-10-25T00:00:00",
+  "draft": false
+}
 ---
 
 With the upcoming 0.10.0 release of Zig on November 1st, we are going to ship 
