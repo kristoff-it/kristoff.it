@@ -1,7 +1,0 @@
-baseURL = 'https://kristoff.it/'
-languageCode = 'en-us'
-title = "Loris Cro's Personal Website"
-theme = 'default'
-
-[markup.goldmark.renderer]
-unsafe = true
