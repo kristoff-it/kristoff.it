@@ -1,12 +1,11 @@
 ---
 {
-  "title": "What is Zig's Comptime?",
-  "description": 
-      "Let's take a quick look at what compile-time execution looks like in Zig.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2019-08-05T00:00:00",
-  "custom": {}
+    .title = "What is Zig's Comptime?",
+    .description = "Let's take a quick look at what compile-time execution looks like in Zig.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2019-08-05T00:00:00"),
+    .custom = {},
 }
 ---
 

@@ -1,18 +1,16 @@
 ---
 {
-  "title": "Addio Redis, I'm leaving Redis Labs",
-  "description": 
-      "Thanks Antirez for the code, the Redis manifesto, and for the free karma especially.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-07-06T00:00:00",
-  "draft": false,
-  "custom": {
-    "notwitch": true
-  }
+    .title = "Addio Redis, I'm leaving Redis Labs",
+    .description = "Thanks Antirez for the code, the Redis manifesto, and for the free karma especially.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-07-06T00:00:00"),
+    .draft = false,
+    .custom = {
+        "notwitch": true,
+    },
 }
 ---
-
 Last week I resigned from my position as developer advocate at Redis Labs.
 
 I’ve never talked much about Redis on this blog because I made a point of trying to write interesting posts about different topics, and also to avoid any form of conflict of interest: I didn’t want people to think this blog was being used as a marketing outlet by Redis Labs.

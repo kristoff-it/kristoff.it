@@ -1,11 +1,11 @@
 ---
 {
-  "title": "The First Zig Website Redesign",
-  "description": "A friendlier first impression for programmers with a wider range of backgrounds.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2021-01-13T00:00:00",
-  "draft": false
+    .title = "The First Zig Website Redesign",
+    .description = "A friendlier first impression for programmers with a wider range of backgrounds.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2021-01-13T00:00:00"),
+    .draft = false,
 }
 ---
 

@@ -1,11 +1,11 @@
 ---
 {
-  "title": "Playing the Open Source Game",
-  "description": "You've surely read plenty about how simple is good, but what's wrong with easy?", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2021-04-12T00:00:00",
-  "draft": false
+    .title = "Playing the Open Source Game",
+    .description = "You've surely read plenty about how simple is good, but what's wrong with easy?",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2021-04-12T00:00:00"),
+    .draft = false,
 }
 ---
 The Zig project has a non-profit foundation that needs to be managed, a community to shape, and the actual language to develop. These are all big, complex problems that don't default to a positive outcome without active care. 

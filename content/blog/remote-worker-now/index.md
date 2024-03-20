@@ -1,11 +1,11 @@
 ---
 {
-  "title": "So you're a Remote Worker Now",
-  "description": "Make the most of the global remote-working experiment.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-04-05T00:00:00",
-  "draft": false
+    .title = "So you're a Remote Worker Now",
+    .description = "Make the most of the global remote-working experiment.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-04-05T00:00:00"),
+    .draft = false,
 }
 ---
 

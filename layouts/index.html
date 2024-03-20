@@ -1,4 +1,4 @@
-<extend template="base.html"/>
+<extend template="base.html" />
 
 <title id="title">Home</title>
 
@@ -6,7 +6,12 @@
 
 <div id="content">
   <style>
-    h1,h2,h3 { text-align: center; }
+    h1,
+    h2,
+    h3 {
+      text-align: center;
+    }
+
     .profile-pic {
       border-radius: 50%;
       border: 5px solid lightblue;
@@ -20,12 +25,12 @@
     <div>
       <p>
         Hi, I'm VP of Community at the <a href="https://ziglang.org/zsf/">Zig Software Foundation</a>
-        and the host of <a href="https://zig.show">Zig SHOWTIME</a>, a 
-        live-streamed snow that runs on 
+        and the host of <a href="https://zig.show">Zig SHOWTIME</a>, a
+        live-streamed snow that runs on
         <a href="https://youtube.com/c/ZigSHOWTIME/">my YouTube channel</a>.
       </p>
       <p>
-        I'm also the creator of  <a href="https://softwareyoucan.love">Software You Can Love</a>, 
+        I'm also the creator of <a href="https://softwareyoucan.love">Software You Can Love</a>,
         an in-person conference dedicated to celebrating the art of creating software for humans.
       </p>
       <p>
@@ -37,17 +42,17 @@
         <dl>
           <dt><strong><a href="https://github.com/kristoff-it/zine">Zine</a></strong></dt>
           <dd>A static site generator written in Zig.</dd>
-          
+
           <dt><strong>Zig's Autodoc Tool</strong></dt>
           <dd>The tool that generates documentation automatically for Zig projects and Zig's stdlib.
           </dd>
-        
+
           <dt><strong><a href="https://github.com/kristoff-it/bork">bork</a></strong></dt>
           <dd>A TUI Twitch chat client designed for livecoders.</dd>
-        
+
           <dt><strong><a href="https://github.com/kristoff-it/zig-okredis">zig-okredis</a></strong></dt>
           <dd>A zero-allocation Redis client for Zig that works both in blocking and async mode.</dd>
-        
+
           <dt></dt>
           <dd></dd>
         </dl>
@@ -58,15 +63,14 @@
 
     <div>
       <h2 style="margin-bottom: 1.75rem;"> Blog </h2>
-    	<div loop="$site.pages()">
-    	  <a href="$loop.it.permalink()" class="post-link" var="$loop.it.title"></a>
-        <span class="post-byline" style="margin-bottom: 1rem;"
-              var="$loop.it.date.format('January 02, 2006')"></span>
-    	</div>
+      <div loop="$page.subpages()">
+        <a href="$loop.it.permalink()" class="post-link" var="$loop.it.title"></a>
+        <span class="post-byline" style="margin-bottom: 1rem;" var="$loop.it.date.format('January 02, 2006')"></span>
+      </div>
     </div>
-  
+
     <div>
-    <small><a href="https://kristoff.it/index.xml" rel="alternate" type="application/rss+xml">RSS feed</a></small>
+      <small><a href="https://kristoff.it/index.xml" rel="alternate" type="application/rss+xml">RSS feed</a></small>
     </div>
   </div>
 </div>

@@ -1,11 +1,11 @@
 ---
 {
-  "title": "What is Zig's “Colorblind” Async/Await?",
-  "description": "An introduction to Zig's curious concurrent programming API.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-06-21T00:00:00",
-  "draft": false
+    .title = "What is Zig's \xe2\x80\x9cColorblind\xe2\x80\x9d Async/Await?",
+    .description = "An introduction to Zig's curious concurrent programming API.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-06-21T00:00:00"),
+    .draft = false,
 }
 ---
 

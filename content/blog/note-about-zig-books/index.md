@@ -1,11 +1,11 @@
 ---
 {
-  "title": "A Note About Zig Books for the Zig Community",
-  "description": "", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2023-06-16T00:00:00",
-  "draft": false
+    .title = "A Note About Zig Books for the Zig Community",
+    .description = "",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2023-06-16T00:00:00"),
+    .draft = false,
 }
 ---
 In the last few weeks I've heard reports of quite a few people in the Zig community being contacted by multiple publishers about writing a Zig book for them.

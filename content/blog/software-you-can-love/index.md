@@ -1,11 +1,11 @@
 ---
 {
-  "title": "A Conference About Software You Can Love",
-  "description": "", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2022-05-27T00:00:00",
-  "draft": false
+    .title = "A Conference About Software You Can Love",
+    .description = "",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2022-05-27T00:00:00"),
+    .draft = false,
 }
 ---
 

@@ -1,11 +1,11 @@
 ---
 {
-  "title": "The Good, the Bad and the Ugly Standup",
-  "description": "“In this world there are two types of standup, my friend: comedy and meetings.<br>You do meetings.”", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-01-26T00:00:00",
-  "draft": false
+    .title = "The Good, the Bad and the Ugly Standup",
+    .description = "\xe2\x80\x9cIn this world there are two types of standup, my friend: comedy and meetings.<br>You do meetings.\xe2\x80\x9d",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-01-26T00:00:00"),
+    .draft = false,
 }
 ---
 

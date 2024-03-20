@@ -1,11 +1,11 @@
 ---
 {
-  "title": "The Upcoming Future of Online Meetups",
-  "description": "", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-06-13T00:00:00",
-  "draft": false
+    .title = "The Upcoming Future of Online Meetups",
+    .description = "",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-06-13T00:00:00"),
+    .draft = false,
 }
 ---
 

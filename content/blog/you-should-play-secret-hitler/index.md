@@ -1,11 +1,11 @@
 ---
 {
-  "title": "You Should Play Secret Hitler",
-  "description": "Let's talk about Secret Hitler, now that everyone is playing Among Us and Among U.S.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-10-22T00:00:00",
-  "draft": false
+    .title = "You Should Play Secret Hitler",
+    .description = "Let's talk about Secret Hitler, now that everyone is playing Among Us and Among U.S.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-10-22T00:00:00"),
+    .draft = false,
 }
 ---
 

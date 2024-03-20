@@ -1,11 +1,11 @@
 ---
 {
-  "title": "I Want Simple, Not Just Easy",
-  "description": "You've surely read plenty about how simple is good, but what's wrong with easy?", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2019-07-21T00:00:00",
-  "draft": false
+    .title = "I Want Simple, Not Just Easy",
+    .description = "You've surely read plenty about how simple is good, but what's wrong with easy?",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2019-07-21T00:00:00"),
+    .draft = false,
 }
 ---
 <span style="text-align:left; display:inline-block;"><b>Simple → Complex</b></span> is the dimension that describes how irregular and interconnected a system is. Simple systems can be broken down into smaller pieces that are understandable in isolation. If you make changes to one of those pieces, you don't have to fear unexpected ramifications in parts not directly connected to what you're operating on. Complex systems are the exact opposite: you'll need to keep in mind a lot of things and tread carefully.

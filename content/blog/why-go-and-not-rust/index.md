@@ -1,11 +1,11 @@
 ---
 {
-  "title": "Why Go and not Rust?",
-  "description": "What's the role of Go in a universe where Rust exists?", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2019-09-10T00:00:00",
-  "draft": false
+    .title = "Why Go and not Rust?",
+    .description = "What's the role of Go in a universe where Rust exists?",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2019-09-10T00:00:00"),
+    .draft = false,
 }
 ---
 Imagine you're a developer who mainly works with Go. You go to an event and, while chatting with some people, you decide to share with them the news that you wrote a small tool that does *something*. You claim that since you wrote it in Go, it's fairly fast, it's a single binary, etc. The group seems pleased with your recount and you start feeling good, but then you notice a stranger approaching from behind. A bone-chilling wind blows and you hear: "Why Go and not Rust?"

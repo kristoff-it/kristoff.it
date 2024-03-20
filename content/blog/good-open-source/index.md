@@ -1,11 +1,11 @@
 ---
 {
-  "title": "The Good Parts of Open Source",
-  "description": "", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2022-08-09T00:00:00",
-  "draft": false
+    .title = "The Good Parts of Open Source",
+    .description = "",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2022-08-09T00:00:00"),
+    .draft = false,
 }
 ---
 

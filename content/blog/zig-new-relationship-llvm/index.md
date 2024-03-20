@@ -1,15 +1,15 @@
 ---
 {
-  "title": "Zig's New Relationship with LLVM",
-  "description": "While not yet at version 1.0, Zig is about to reach a new level of maturity and stability.", 
-  "author": "Loris Cro",
-  "layout": "post.html",
-  "date": "2020-09-28T00:00:00",
-  "draft": false,
-  "custom": {
-    "coauthor": "Andrew Kelley",
-    "coauthor_link": "https://andrewkelley.me"
-  }
+    .title = "Zig's New Relationship with LLVM",
+    .description = "While not yet at version 1.0, Zig is about to reach a new level of maturity and stability.",
+    .author = "Loris Cro",
+    .layout = "post.html",
+    .date = @date("2020-09-28T00:00:00"),
+    .draft = false,
+    .custom = {
+        "coauthor": "Andrew Kelley",
+        "coauthor_link": "https://andrewkelley.me",
+    },
 }
 ---
 
