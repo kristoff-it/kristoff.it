@@ -1,0 +1,162 @@
+:root {
+  --light-yellow: #e5c07b;
+  --dark-yellow: #d19a66;
+  --blue: #61afef;
+  --cyan: #56b6c2;
+  --light-red: #e06c75;
+  --dark-red: #be5046;
+  --comment-gray: #5c6370;
+  --magenta: #c678dd;
+}
+
+code .comment {
+  color: var(--comment-gray);
+}
+
+
+code.html {}
+
+code.html .string {
+  color: var(--dark-yellow);
+}
+
+code.html .tag {
+  color: var(--blue);
+}
+
+code.html .constant {
+  color: var(--light-red);
+}
+
+code.html .attribute {
+  color: var(--light-yellow);
+}
+
+code.html .punctuation {
+  color: var(--cyan);
+}
+
+
+code.zig {
+  color: var(--cyan);
+}
+
+code.zig .punctuation {
+  color: var(--cyan);
+}
+
+code.zig .string {
+  color: var(--dark-yellow);
+}
+
+code.zig .variable,
+code.zig .parameter,
+code.zig .exception,
+code.zig .field {
+  color: var(--light-yellow);
+}
+
+code.zig .keyword.function {
+  color: var(--light-red);
+}
+
+code.zig .bracket {
+  color: var(--cyan);
+}
+
+code.zig .function {
+  color: var(--blue);
+}
+
+code.zig .builtin {
+  color: var(--magenta);
+}
+
+code.zig .number {
+  color: var(--magenta);
+}
+
+code.zig .operator,
+code.zig .qualifier,
+code.zig .keyword,
+code.zig .attribute {
+  color: var(--light-red);
+}
+
+code.ziggy {
+  color: var(--cyan);
+}
+
+code.ziggy .keyword,
+code.ziggy .type {
+  color: var(--light-yellow);
+}
+
+code.ziggy .string {
+  color: var(--dark-yellow);
+}
+
+code.ziggy .numeric.constant {
+  color: var(--magenta);
+}
+
+code.ziggy .function {
+  color: var(--blue);
+}
+
+code.json {
+  color: var(--cyan);
+}
+
+
+code.json .string {
+  color: var(--dark-yellow);
+}
+
+
+
+code.python {
+  color: var(--cyan);
+}
+
+code.python .punctuation {
+  color: var(--cyan);
+}
+
+code.python .string {
+  color: var(--dark-yellow);
+}
+
+code.python .variable,
+code.python .parameter,
+code.python .exception,
+code.python .field {
+  color: var(--light-yellow);
+}
+
+code.python .keyword.function {
+  color: var(--light-red);
+}
+
+code.python .bracket {
+  color: var(--cyan);
+}
+
+code.python .function {
+  color: var(--blue);
+}
+
+code.python .builtin {
+  color: var(--magenta);
+}
+
+code.python .number {
+  color: var(--magenta);
+}
+
+code.python .operator,
+code.python .qualifier,
+code.python .keyword,
+code.python .attribute {
+  color: var(--light-red);
+}
