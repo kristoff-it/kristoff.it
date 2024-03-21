@@ -1,4 +1,4 @@
-<extend template="base.html"/>
+<extend template="base.html" />
 
 <title id="title" var="$page.title"></title>
 
@@ -7,44 +7,44 @@
 </head>
 
 <div id="content" class="foo">
-  <center>
-    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
-    <small><i>Personal Website</i></small>
-    <div style="display:flex; justify-content:center; font-size:small;">
-      <a href="/">About</a>
-       &nbsp; • &nbsp;
-      <a href="https://twitter.com/croloris">Twitter</a>
-       &nbsp; • &nbsp;
-      <a href="https://twitch.tv/kristoff_it">Twitch</a> 
-       &nbsp; • &nbsp;
-      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
-       &nbsp; • &nbsp;
-      <a href="https://github.com/kristoff-it">GitHub</a>
-    </div>
-  </center>
+	<center>
+		<h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+		<small><i>Personal Website</i></small>
+		<div style="display:flex; justify-content:center; font-size:small;">
+			<a href="/">About</a>
+			&nbsp; • &nbsp;
+			<a href="https://twitter.com/croloris">Twitter</a>
+			&nbsp; • &nbsp;
+			<a href="https://twitch.tv/kristoff_it">Twitch</a>
+			&nbsp; • &nbsp;
+			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+			&nbsp; • &nbsp;
+			<a href="https://github.com/kristoff-it">GitHub</a>
+		</div>
+	</center>
 	<h1 var="$page.title"></h1>
-  <p class="post-byline">
-		<span var="$page.date.format('January 02, 2006')"></span>	• 
-		<span var="$page.wordCount().div(220).plus(1)"></span> min read • by 
+	<p class="post-byline">
+		<span var="$page.date.format('January 02, 2006')"></span> •
+		<span var="$page.wordCount().div(220).plus(1)"></span> min read • by
 		<b var="$page.author"></b>
-		<span if="$page.custom.get?('coauthor')"> and 
-			<a href="$page.custom.get('coauthor_link', '')" target="_blank"><b var="$if"></b></a>
+		<span if="$page.custom.get?('coauthor')"> and
+			<a href="$page.custom.get!('coauthor_link')" target="_blank"><b var="$if"></b></a>
 		</span>
-  </p>
-  <div id="post-description" var="$page.description"></div>
-  <div id="post-body" var="$page.content"></div>
-  <hr>
-  <div id="prev-next">
+	</p>
+	<div id="post-description" var="$page.description"></div>
+	<div id="post-body" var="$page.content"></div>
+	<hr>
+	<div id="prev-next">
 		<span if="$page.prevPage()">
-	    <a href="$if.permalink()">← <span var="$if.title"></span></a>
+			<a href="$if.permalink()">← <span var="$if.title"></span></a>
 		</span>
-    <span if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
+		<span if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
 		<span if="$page.nextPage()">
-	    <a href="$if.permalink()"><span var="$if.title"></span> →</a>
+			<a href="$if.permalink()"><span var="$if.title"></span> →</a>
 		</span>
-    <small if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
-    <small>
-      <a href="/">Back to the Homepage</a>
-    </small>
-  </div>
+		<small if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
+		<small>
+			<a href="/">Back to the Homepage</a>
+		</small>
+	</div>
 </div>

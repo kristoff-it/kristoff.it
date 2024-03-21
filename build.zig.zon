@@ -3,8 +3,12 @@
     .version = "0.0.0",
     .dependencies = .{
         .zine = .{
-            .url = "git+https://github.com/kristoff-it/zine#22e197e1c9b863b8477f76f77ac7bf2b67e24b18",
-            .hash = "1220504ed3bf3c2e53c58dd9b7ef14340f84578a10eb51857ce18aff94faa4643766",
+            .url = "git+https://github.com/kristoff-it/zine#ecc72eb042af07f5b4690a35a7ca1dd9c6fd5b61",
+            .hash = "1220610a18236cd32936502bd7e762743e89ef70408638675420e453be41f1e83de4",
+        },
+        .zeit = .{
+            .url = "git+https://github.com/rockorager/zeit#e75ccb24e88cd0196bed5a60e4bf3b5441c8c700",
+            .hash = "122071f325c37101cb8a536f3274337f016369e43b7571a07e99c260a891f2a63199",
         },
     },
     .paths = .{"."},

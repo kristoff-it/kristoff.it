@@ -6,12 +6,12 @@
   <title id="title">
     <super /> | Loris Cro's Blog
   </title>
-  <meta name="description" content="$page.custom.get('description','Loris Cro\'s Blog')">
+  <meta name="description" content="$page.description.len().gt(0).then($page.description, 'Loris Cro\'s Blog')">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@croloris">
   <meta name="twitter:image" content="https://kristoff.it/logo.png">
   <meta name="twitter:author" content="@croloris">
-  <meta name="twitter:description" content="$page.custom.get('description','Loris Cro\'s Blog')">
+  <meta name="twitter:description" content="$page.description.len().gt(0).then($page.description, 'Loris Cro\'s Blog')">
   <meta name="twitter:title" content="$page.title">
   <meta property="og:title" content="$page.title">
   <meta property="og:type" content="website">
