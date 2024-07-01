@@ -1,7 +1,7 @@
 ---
 {
     .title = "Improving Your Zig Language Server Experience",
-    .description = "...by adding just a dozen of lines to your <code>build.zig</code>",
+    .description = "...by adding just a dozen lines to your <code>build.zig</code>",
     .author = "Loris Cro",
     .layout = "post.html",
     .date = @date("2024-07-01T00:00:00"),
