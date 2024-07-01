@@ -6,12 +6,12 @@
   <title id="title">
     Improving Your Zig Language Server Experience | Loris Cro's Blog
   </title>
-  <meta name="description" content="...by adding just a dozen of lines to your <code>build.zig</code>">
+  <meta name="description" content="...by adding just a dozen lines to your <code>build.zig</code>">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@croloris">
   <meta name="twitter:image" content="https://kristoff.it/logo.png">
   <meta name="twitter:author" content="@croloris">
-  <meta name="twitter:description" content="...by adding just a dozen of lines to your <code>build.zig</code>">
+  <meta name="twitter:description" content="...by adding just a dozen lines to your <code>build.zig</code>">
   <meta name="twitter:title" content="Improving Your Zig Language Server Experience">
   <meta property="og:title" content="Improving Your Zig Language Server Experience">
   <meta property="og:type" content="website">
@@ -58,7 +58,7 @@
 		<b >Loris Cro</b>
 		<span ></span>
 	</p>
-	<div id="post-description" >...by adding just a dozen of lines to your <code>build.zig</code></div>
+	<div id="post-description" >...by adding just a dozen lines to your <code>build.zig</code></div>
 	<div id="post-body" ><p>The Zig ecosystem is still very young and a lot of important building blocks have not yet reached their final form.</p><p>One notable example is the current language server situation: ZLS is a brilliant community effort that is capable of keeping up with language changes (they have a few clever ways to automate the process), but that has the flaw that it is not able to resolve complex comptime expressions.</p><p>The result is that ZLS is able to give you parser-level diagnostics (which go from syntax errors up to unused variable errors), but it's not able to show you errors when you try to assign a <code>usize</code> to a <code>f64</code> variable...</p><p>...or does it?</p><h2>Getting save-on-build diagnostics from ZLS</h2><p>ZLS can be configured to run your build script on save and if that results in build errors, ZLS will be able to display those in your editor like any other diagnostic.</p><p>This means that with this system in place you won't need to alt-tab into another terminal tab to see build errors anymore. Here's how to do it.</p><h3>1. Configure ZLS to run a build step on save</h3><p>Run the ZLS executable and have it tell you where the config file is located:</p><pre><code>$ zls --show-config-path
 /home/kristoff/.config/zls.json
 </code></pre><p>Note that on other OSs you might get a radically different answer (eg on macOS the config file is under "Application Support").</p><p>Once you have the path, edit your config file to include the following keys:</p><pre><code class="zig"><span class="error">{</span>
