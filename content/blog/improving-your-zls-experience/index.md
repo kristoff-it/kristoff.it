@@ -95,7 +95,7 @@ This one-line difference will have a big impact on the resulting behavior of the
 
 The result is that you will get diagnostics pretty fast since you won't have to go through the "LLVM Emit Code..." step.
 
-Once you're done with this, restart your editor (or at least ZLS) and enjoy your new spiffy diagnostics.
+Once you're done with this, restart your editor (or at least ZLS), **save your file**, and enjoy your new spiffy diagnostics.
 
 ## It Only Gets Better
 
