@@ -18,7 +18,7 @@ The result is that ZLS is able to give you parser-level diagnostics (which go fr
 ...or does it?
 
 
-## Getting save-on-build diagnostics from ZLS
+## Getting Build-On-Save Diagnostics From ZLS
 
 ZLS can be configured to run your build script on save. If that results in build errors, ZLS will be able to display those in your editor like any other diagnostic.
 
