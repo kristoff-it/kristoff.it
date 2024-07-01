@@ -99,9 +99,9 @@ Once you're done with this, restart your editor (or at least ZLS), **save your f
 
 ## It Only Gets Better
 
-With a handful of changes you can get closer to a complete developer experience but this is not the end.
+With a handful of changes you can get closer to a complete developer experience, but this is not the end.
 
-The Zig project is still busy working on key compiler infrastructure and it will take a bit more time before we'll be able to do better than what ZLS can already do today, but **it's definitely on our roadmap to give developers best in class dev tools, just like Zig is already providing a state of the art compiler toolchain**.
+The Zig project is still busy working on key compiler infrastructure and it will take a bit more time before we'll be able to do better than what ZLS can already do today, but **it's definitely on our roadmap to give developers best in class dev tools, just like Zig is already providing you with a state of the art compiler toolchain**.
 
 The next big item on our roadmap is removing LLVM from our debug build pipeline to **massively** speed up debug builds. After that, incremental compilation will turn those speed ups into instant rebuilds of arbitrarily big projects. To achieve this second goal we plan to have the compiler stay on between compilations in order to keep in memory all the necessary state to re-analyze, re-compile and patch into the final executable only the parts of your project that changed.
 
