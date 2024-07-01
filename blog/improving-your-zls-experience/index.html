@@ -76,7 +76,7 @@
 <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 
 <span class="comment">// Any other code to define dependencies would </span>
-<span class="comment">// probably be here</span>
+<span class="comment">// probably be here.</span>
 
 <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function">installArtifact</span><span class="punctuation bracket">(</span><span class="variable">exe</span><span class="punctuation bracket">)</span><span class="error">;</span>
 
@@ -93,9 +93,8 @@
 <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 
 <span class="comment">// Any other code to define dependencies would </span>
-<span class="comment">// probably be here</span>
+<span class="comment">// probably be here.</span>
 
-<span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function">installArtifact</span><span class="punctuation bracket">(</span><span class="variable">exe</span><span class="punctuation bracket">)</span><span class="error">;</span>
 <span class="type qualifier">const</span> <span class="variable">check</span> = <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function">step</span><span class="punctuation bracket">(</span><span class="string">"check"</span><span class="punctuation delimiter">,</span> <span class="string">"Check if foo compiles"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 <span class="variable">check</span><span class="punctuation delimiter">.</span><span class="function">dependOn</span><span class="punctuation bracket">(</span><span class="operator">&</span><span class="variable">exe_check</span><span class="punctuation delimiter">.</span><span class="field">step</span><span class="punctuation bracket">)</span><span class="error">;</span>
 </code></pre>
