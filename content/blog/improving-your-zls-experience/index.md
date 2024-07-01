@@ -51,58 +51,41 @@ The second setting doesn't have to be necessarily `"check"`, and in fact not def
 
 This part is more deeply tied to your specific project but the gist is the following: whatever you do to define your main executable / module / library, you do it again in a new step named check.
 
-I'll use for this example part of a build script that I wrote for an HTML LSP that I'm working on.
-
+I'll use for this example the executable definiton step you get generated automatically from `zig init`.
 
 ```zig
-// Section where I define the main executable,
-// present just to show you how it relates to
-// the check step definition.
-const super_cli = b.addExecutable(.{
-    .name = "super",
-    .root_source_file = b.path("src/cli.zig"),
+// This is an example executable definition, 
+// no need to copy it.
+const exe = b.addExecutable(.{
+    .name = "foo",
+    .root_source_file = b.path("src/main.zig"),
     .target = target,
     .optimize = optimize,
 });
 
-const folders = b.dependency("known-folders", .{});
-const lsp = b.dependency("zig-lsp-kit", .{});
+// Any other code to define dependencies would 
+// probably be here
 
-super_cli.root_module.addImport("super", super);
-super_cli.root_module.addImport(
-    "known-folders",
-    folders.module("known-folders"),
-);
-super_cli.root_module.addImport("lsp", lsp.module("lsp"));
-
-const run_exe = b.addRunArtifact(super_cli);
-if (b.args) |args| run_exe.addArgs(args);
-const run_exe_step = b.step("run", "Run the Super LSP");
-run_exe_step.dependOn(&run_exe.step);
-
-b.installArtifact(super_cli);
+b.installArtifact(exe);
 
 
 // This is where the interesting part begins.
 // As you can see we are re-defining the same
 // executable but we're binding it to a 
 // dedicated build step.
-const super_cli_check = b.addExecutable(.{
-    .name = "super",
-    .root_source_file = b.path("src/cli.zig"),
+const exe_check = b.addExecutable(.{
+    .name = "foo",
+    .root_source_file = b.path("src/main.zig"),
     .target = target,
     .optimize = optimize,
 });
 
-super_cli_check.root_module.addImport("super", super);
-super_cli_check.root_module.addImport(
-    "known-folders",
-    folders.module("known-folders"),
-);
-super_cli_check.root_module.addImport("lsp", lsp.module("lsp"));
+// Any other code to define dependencies would 
+// probably be here
 
-const check = b.step("check", "Check if Super compiles");
-check.dependOn(&super_cli_check.step);
+b.installArtifact(exe);
+const check = b.step("check", "Check if foo compiles");
+check.dependOn(&exe_check.step);
 ```
 
 The most important part about this second executable definition is
@@ -128,5 +111,3 @@ Once this system is in place, we plan to have the Zig compiler answer all kinds 
 Until we get there, ZLS is filling in a void in a beautiful manner and I'm personally deeply thankful to all the community members who have worked on it over time, starting from the late Alex Naskos.
 
 If you want to help us get faster to a complete developer experience, [consider donating to the Zig Software Foundation](https://ziglang.org/zsf/). Earlier this year Andrew [published our finances](https://ziglang.org/news/2024-financials/) and more than 90% of our income goes to paying developers working on the Zig project, making your donation a genuinely effective way to get us faster to v1.0.
-
-*P.S. Hi Prime :^)*
