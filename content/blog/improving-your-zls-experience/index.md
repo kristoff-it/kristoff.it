@@ -9,23 +9,28 @@
 }
 ---
 
-The Zig ecosystem is still very young and a lot of important building blocks have not yet reached their final form. 
+The Zig ecosystem is still growing and a lot of important building blocks have not yet reached their final form. 
 
-One notable example is the current language server situation: ZLS is a brilliant community effort that is capable of keeping up with language changes (they have a few clever ways to automate the process), but that has the flaw that it is not able to resolve complex comptime expressions.
+One notable example is the current language server situation: [ZLS](https://github.com/zigtools/zls) is a brilliant community effort, capable of keeping up with language changes (they have a few clever ways to automate the process), but that has one big flaw: it is not able to resolve complex comptime expressions.
 
-The result is that ZLS is able to give you parser-level diagnostics (which go from syntax errors up to unused variable errors), but it's not able to show you errors when you try to pass an argument of the wrong type to a function...
+The result is that ZLS is able to give you parser-level diagnostics (which go from syntax errors up to unused variable errors), but it's not able to show you errors when you try to pass an argument of the wrong type to a function or try to assign a `usize` to a `f64`...
 
 ...or does it?
 
 
 ## Getting save-on-build diagnostics from ZLS
 
-ZLS can be configured to run your build script on save and if that results in build errors, ZLS will be able to display those in your editor like any other diagnostic.
+ZLS can be configured to run your build script on save. If that results in build errors, ZLS will be able to display those in your editor like any other diagnostic.
 
 
-This means that with this system in place you won't need to alt-tab into another terminal tab to see build errors anymore. Here's how to do it.
+**With this system in place you won't need to alt-tab into another terminal tab to see build errors anymore.** 
+
+Here's how to do it.
 
 ### 1. Configure ZLS to run a build step on save
+
+<span style="height: 10px;"></span>
+> **WARNING**: note that if you get ZLS through your editor's package manager, you might need to see how you're expected to provide your config options, as that might differ from the normal procedure described below.
 
 Run the ZLS executable and have it tell you where the config file is located:
 
@@ -83,6 +88,9 @@ const exe_check = b.addExecutable(.{
 // Any other code to define dependencies would 
 // probably be here.
 
+
+// These two lines you might want to copy
+// (make sure to rename 'exe_check')
 const check = b.step("check", "Check if foo compiles");
 check.dependOn(&exe_check.step);
 ```
@@ -91,11 +99,11 @@ The most important part about this second executable definition is
 that we ask to build it, **but we never install it**. If you look at
 the final line of the first section, you will see that we call `b.installArtifact` on the original executable, but for the executable bound to the "check" step, we don't.
 
-This one-line difference will have a big impact on the resulting behavior of the build as it will add the `-fno-emit-bin` flag to the compiler invocation, which in other words means that Zig will analyze your code (and report any error) but it won't bother calling into LLVM since you don't plan to install the executable anyway.
+This one-line difference will have a big impact on the resulting behavior of the build as it will add the `-fno-emit-bin` flag to the compiler invocation which, in other words, means that Zig will analyze your code (and report any error) but it won't bother calling into LLVM since you don't plan to install the executable anyway.
 
-The result is that you will get diagnostics pretty fast since you won't have to go through the "LLVM Emit Code..." step.
+The result is that you will get diagnostics pretty fast since you won't have to go through the "LLVM Emit Code..." phase.
 
-Once you're done with this, restart your editor (or at least ZLS), **save your file**, and enjoy your new spiffy diagnostics.
+Once you're done with this, restart your editor (or at least ZLS), **save your file with an error in it**, and enjoy your new spiffy diagnostics.
 
 ## It Only Gets Better
 
