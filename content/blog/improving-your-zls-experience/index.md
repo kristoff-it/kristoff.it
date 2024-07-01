@@ -13,7 +13,7 @@ The Zig ecosystem is still very young and a lot of important building blocks hav
 
 One notable example is the current language server situation: ZLS is a brilliant community effort that is capable of keeping up with language changes (they have a few clever ways to automate the process), but that has the flaw that it is not able to resolve complex comptime expressions.
 
-The result is that ZLS is able to give you parser-level diagnostics (which go from syntax errors up to unused variable errors), but it's not able to show you errors when you try to assign a `usize` to a `f64` variable...
+The result is that ZLS is able to give you parser-level diagnostics (which go from syntax errors up to unused variable errors), but it's not able to show you errors when you try to pass an argument of the wrong type to a function...
 
 ...or does it?
 
