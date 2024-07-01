@@ -64,7 +64,7 @@ const exe = b.addExecutable(.{
 });
 
 // Any other code to define dependencies would 
-// probably be here
+// probably be here.
 
 b.installArtifact(exe);
 
@@ -81,9 +81,8 @@ const exe_check = b.addExecutable(.{
 });
 
 // Any other code to define dependencies would 
-// probably be here
+// probably be here.
 
-b.installArtifact(exe);
 const check = b.step("check", "Check if foo compiles");
 check.dependOn(&exe_check.step);
 ```
