@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head id="head">
-  <meta charset="utf-8" />
-  <title id="title">
-    What is Zig's “Colorblind” Async/Await? | Loris Cro's Blog
-  </title>
-  <meta name="description" content="An introduction to Zig's curious concurrent programming API.">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@croloris">
-  <meta name="twitter:image" content="https://kristoff.it/logo.png">
-  <meta name="twitter:author" content="@croloris">
-  <meta name="twitter:description" content="An introduction to Zig's curious concurrent programming API.">
-  <meta name="twitter:title" content="What is Zig's “Colorblind” Async/Await?">
-  <meta property="og:title" content="What is Zig's “Colorblind” Async/Await?">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://kristoff.it/logo.png">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap"
-    rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="/main.css">
-  <link type="text/css" rel="stylesheet" href="/highlight.css">
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs"
-    data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
-  
-	<link type="text/css" rel="stylesheet" href="/term-highlight.css">
-
-</head>
-
-<body>
-  <div id="content">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      What is Zig's “Colorblind” Async/Await?
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="An introduction to Zig's curious concurrent programming API.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="An introduction to Zig's curious concurrent programming API.">
+    <meta name="twitter:title" content="What is Zig's “Colorblind” Async/Await?">
+    <meta property="og:title" content="What is Zig's “Colorblind” Async/Await?">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css">
+    <link type="text/css" rel="stylesheet" href="/highlight.css">
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     
-	<center>
-		<h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
-		<small><i>Personal Website</i></small>
-		<div style="display:flex; justify-content:center; font-size:small;">
-			<a href="/">About</a>
-			&nbsp; • &nbsp;
-			<a href="https://twitter.com/croloris">Twitter</a>
-			&nbsp; • &nbsp;
-			<a href="https://twitch.tv/kristoff_it">Twitch</a>
-			&nbsp; • &nbsp;
-			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
-			&nbsp; • &nbsp;
-			<a href="https://github.com/kristoff-it">GitHub</a>
-		</div>
-	</center>
-	<h1 >What is Zig's “Colorblind” Async/Await?</h1>
-	<p class="post-byline">
-		<span >June 21, 2020</span> •
-		<span >11</span> min read • by
-		<b >Loris Cro</b>
-		<span ></span>
-	</p>
-	<div id="post-description" >An introduction to Zig's curious concurrent programming API.</div>
-	<div id="post-body" ><p>Zig is a new, general-purpose programming language that is rethinking from the ground up the way languages and related tooling should work. I’ve <a href="/blog/what-is-zig-comptime">already discussed compile-time code execution</a>, and now I’m going to introduce another innovative concept from the language: async/await.</p><p><strong>But wait a minute, isn’t async/await present also in other languages?</strong></p><p>Well yes, but async/await in Zig combines with compile-time execution, allowing functions to implicitly become async and whole libraries to work transparently in both blocking and evented I/O mode in a way that's very much unique to Zig.</p><p>Let’s see what that means.</p><h2>Async/Await notation in Zig</h2><p>While Zig is very innovative, it tries to be a small and simple language. Zig takes a lot of inspiration from the simplicity of C and reserves metaprogramming acrobatics for when you really need them. In general, you should be able to become productive with Zig in a weekend. So, while most Zig features will immediately strike you as pleasant and somewhat familiar, async/await is one example of the familiarity-rule being broken, but for good reason.</p><h2>A bit of context</h2><p>When it comes to making use of evented I/O, you tend to have two options in imperative programming languages: callbacks or async/await.</p><p>The first case has the advantage of not requiring any addition to the language, but the downside is that now everything has to be based on callbacks and nested closures. The second case basically leaves it to the compiler to break down your function into different “stages”, making the whole translation transparent to the user (i.e. to you it still looks like normal, sequential, imperative code) but, unfortunately, it has the side effect of introducing function coloring.</p><h3>Function coloring</h3><p>The idea of function coloring is nicely explained by <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">this blog post</a>, but to sum it up: since you can’t call async functions from non-async code, you end up with a lot of duplicated effort, where you need to reimplement parts of your standard library and all networking-related libraries to account for async/await. One example of this is Python, where the introduction of async/await in Python 3 birthed projects like <a href="https://github.com/aio-libs">aio-libs</a>, whose goal is to reimplement popular networking libraries on top of AsyncIO.</p><h2>Zig’s “colorblind” async/await</h2><p>Let’s walk through how async/await works in Zig by looking at a few examples. To see the following code snippets run, launch Netcat in another terminal in listen mode and, if everything works, you should see "Hello World!" being printed after every run.</p><p>Here's the complete Netcat command:</p><div class="vscode-highlight-wrapper">
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1 >What is Zig's “Colorblind” Async/Await?</h1>
+  <p class="post-byline">
+    <span >June 21, 2020</span>
+    •
+    <span >11</span>
+    min read • by
+    <b >Loris Cro</b>
+    <span ></span>
+  </p>
+  <div id="post-description" >An introduction to Zig's curious concurrent programming API.</div>
+  <div id="post-body" ><p>Zig is a new, general-purpose programming language that is rethinking from the ground up the way languages and related tooling should work. I’ve <a href="/blog/what-is-zig-comptime">already discussed compile-time code execution</a>, and now I’m going to introduce another innovative concept from the language: async/await.</p><p><strong>But wait a minute, isn’t async/await present also in other languages?</strong></p><p>Well yes, but async/await in Zig combines with compile-time execution, allowing functions to implicitly become async and whole libraries to work transparently in both blocking and evented I/O mode in a way that's very much unique to Zig.</p><p>Let’s see what that means.</p><h2>Async/Await notation in Zig</h2><p>While Zig is very innovative, it tries to be a small and simple language. Zig takes a lot of inspiration from the simplicity of C and reserves metaprogramming acrobatics for when you really need them. In general, you should be able to become productive with Zig in a weekend. So, while most Zig features will immediately strike you as pleasant and somewhat familiar, async/await is one example of the familiarity-rule being broken, but for good reason.</p><h2>A bit of context</h2><p>When it comes to making use of evented I/O, you tend to have two options in imperative programming languages: callbacks or async/await.</p><p>The first case has the advantage of not requiring any addition to the language, but the downside is that now everything has to be based on callbacks and nested closures. The second case basically leaves it to the compiler to break down your function into different “stages”, making the whole translation transparent to the user (i.e. to you it still looks like normal, sequential, imperative code) but, unfortunately, it has the side effect of introducing function coloring.</p><h3>Function coloring</h3><p>The idea of function coloring is nicely explained by <a href="https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/">this blog post</a>, but to sum it up: since you can’t call async functions from non-async code, you end up with a lot of duplicated effort, where you need to reimplement parts of your standard library and all networking-related libraries to account for async/await. One example of this is Python, where the introduction of async/await in Python 3 birthed projects like <a href="https://github.com/aio-libs">aio-libs</a>, whose goal is to reimplement popular networking libraries on top of AsyncIO.</p><h2>Zig’s “colorblind” async/await</h2><p>Let’s walk through how async/await works in Zig by looking at a few examples. To see the following code snippets run, launch Netcat in another terminal in listen mode and, if everything works, you should see "Hello World!" being printed after every run.</p><p>Here's the complete Netcat command:</p><div class="vscode-highlight-wrapper">
 <pre class="dark-default-dark vscode-highlight" data-language="shell">
 <code class="vscode-highlight-code vscode-highlight-line"><span class="bold"><span class="f2">➜</span></span> nc -lk 7000                                   
 </code>
@@ -162,22 +160,23 @@
 </div>
 <center><i>"Modeling Data Concurrency with Asynchronous I/O in Zig"</i></center>
 <h2>Understanding the limits</h2><p>While the compiler is very smart and defeating function coloring has many practical benefits, it's not a magic bullet, so let me immediately demystify some ideas about it.</p><h4>Q: Will enabling evented I/O immediately make my program faster?</h4><p>No, to make your program take advantage of evented I/O you need to express concurrency in your code. If you never did that work, enabling evented I/O will not provide any appreciable advantage, but you might experience better performance if one of the libraries you're using has been properly designed for async/await.</p><p>That said if your code gets embedded in a larger project that does make use of async/await, the automated translation to evented I/O will make your code play nice with the surrounding context, to some extent.</p><h4>Q: So all async applications can be made blocking just by flipping a switch?</h4><p>No, there's plenty of applications that need evented I/O to behave correctly. Switching to blocking mode, without introducing any change, might cause them to deadlock. Think for example of a single application that acts both as server and client to itself.</p><p>That said, during compile-time, it's possible to inspect if the overall program is in evented mode or not, and properly designed code might decide to move to a threaded model when in blocking mode, for example.</p><h4>Q: So I don't even have to think about normal functions vs coroutines in my library?</h4><p>No, occasionally you will have to. As an example, if you're allowing your users to pass to your library function pointers at runtime, you will need to make sure to use the right calling convention based on whether the function is async or not. You normally don't have to think about it because the compiler is able to do the work for you at compile-time, but that can't happen for runtime-known values.</p><p>The silver lining is that you have at your disposal all the tools to account for all the possibilities in a simple and clear way. Once you get the details right, the code will be no more complicated than it has to be, and your library will be easy to use.</p><h3>Concurrency and resource allocation</h3><p>While I wrote the introduction with the average developer in mind, you need to be aware that Zig is not a dynamically typed language and, on top of that, it puts in your hands a lot of power (and responsibility) when it comes to resource management. If you know how to do async/await in C#, JavaScript, or Python, for example, you won't be able to immediately know how to do <i>everything</i> in Zig.</p><p>In particular, garbage-collected languages hide from you where the memory is coming from. This makes things much easier for the programmer, but the price for this extra ease is shouldered entirely by the machine. This is nothing new and it's a trade-off very often worth doing but, especially when it comes to async/await, it's  problematic because you lose control of how much memory you're consuming, eventually over-committing and encountering issues when under heavy load (see <a href="https://lucumr.pocoo.org/2020/1/1/async-pressure/">this blog post</a> for more info).</p><p>One of the main points of Zig is to make resource allocation always clear and manageable. When it comes to async/await, this means that all the memory required to run a coroutine is represented by its underlying async frame. Once you have a frame (be it because it's static memory or because the corresponding dynamic allocation succeded), then you know the coroutine will be able to run to completion without problems. In the context of a HTTP server, for example, this means that you will be able to know upfront if you have enough resources to accept a connection or not, without encountering unrecoverable error conditions.</p><h2>A final word on concurrency in Zig</h2><p>Up until now, I've only talked about the language features that implement coroutines. I haven't mentioned all of them but, more importantly, I haven't talked about the event loop. In Zig, the event loop is part of the standard library and the idea is to make it swappable.</p><p>At the moment of writing, there's still a lot of work to do on the event loop, but you can already try everything out today. The current implementation is already multi-threaded, in case you were wondering. Just go to <a href="https://ziglang.org">ziglang.org</a>, download the latest version, and take a look a the docs.</p><h4>...And what about Go?</h4><p>Ah, yes. Go -- alongside a few other languages in fact -- doesn't have function coloring problems. Andrew mentions Go in his part of the aforelinked talk, but I'll give my two cents here.</p><p>If you've read my blog before, you know that I like Go. I think that goroutines are generally preferable to async/await in application-level programming, especially when it comes to server-side applications, which I believe to be Go's main domain.</p><p>I think goroutines are preferable in that context because async/await is a much lower level tool that is easy to misuse, but when it comes to writing code with critical requirements of correctness and efficiency, you need async/await and you need Zig's philosophy that we all should strive to write <strong>robust</strong>, <strong>optimal</strong>, and <strong>reusable</strong> software.</p></div>
-	<hr>
-	<div id="prev-next">
-		<span >
-			<a href="/blog/future-online-meetups/">← <span >The Upcoming Future of Online Meetups</span></a>
-		</span>
-		<span >&nbsp; • &nbsp;</span>
-		<span >
-			<a href="/blog/addio-redis/"><span >Addio Redis, I'm leaving Redis Labs</span> →</a>
-		</span>
-		<small >&nbsp; or &nbsp;</small>
-		<small>
-			<a href="/">Back to the Homepage</a>
-		</small>
-	</div>
-
+  <hr>
+  <div id="prev-next">
+    <span >
+      <a href="/blog/future-online-meetups/">←
+        <span >The Upcoming Future of Online Meetups</span></a>
+    </span>
+    <span >&nbsp; • &nbsp;</span>
+    <span >
+      <a href="/blog/addio-redis/"><span >Addio Redis, I'm leaving Redis Labs</span>
+        →</a>
+    </span>
+    <small >&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
   </div>
-</body>
 
+    </div>
+  </body>
 </html>

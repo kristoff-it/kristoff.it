@@ -1,65 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head id="head">
-  <meta charset="utf-8" />
-  <title id="title">
-    Zig's Curious Multi-Sequence For Loops | Loris Cro's Blog
-  </title>
-  <meta name="description" content="Loris Cro's Blog">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@croloris">
-  <meta name="twitter:image" content="https://kristoff.it/logo.png">
-  <meta name="twitter:author" content="@croloris">
-  <meta name="twitter:description" content="Loris Cro's Blog">
-  <meta name="twitter:title" content="Zig's Curious Multi-Sequence For Loops">
-  <meta property="og:title" content="Zig's Curious Multi-Sequence For Loops">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://kristoff.it/logo.png">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap"
-    rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="/main.css">
-  <link type="text/css" rel="stylesheet" href="/highlight.css">
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs"
-    data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
-  
-	<link type="text/css" rel="stylesheet" href="/term-highlight.css">
-
-</head>
-
-<body>
-  <div id="content">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Zig's Curious Multi-Sequence For Loops
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="Loris Cro's Blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="Loris Cro's Blog">
+    <meta name="twitter:title" content="Zig's Curious Multi-Sequence For Loops">
+    <meta property="og:title" content="Zig's Curious Multi-Sequence For Loops">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css">
+    <link type="text/css" rel="stylesheet" href="/highlight.css">
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     
-	<center>
-		<h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
-		<small><i>Personal Website</i></small>
-		<div style="display:flex; justify-content:center; font-size:small;">
-			<a href="/">About</a>
-			&nbsp; • &nbsp;
-			<a href="https://twitter.com/croloris">Twitter</a>
-			&nbsp; • &nbsp;
-			<a href="https://twitch.tv/kristoff_it">Twitch</a>
-			&nbsp; • &nbsp;
-			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
-			&nbsp; • &nbsp;
-			<a href="https://github.com/kristoff-it">GitHub</a>
-		</div>
-	</center>
-	<h1 >Zig's Curious Multi-Sequence For Loops</h1>
-	<p class="post-byline">
-		<span >February 27, 2023</span> •
-		<span >9</span> min read • by
-		<b >Loris Cro</b>
-		<span ></span>
-	</p>
-	<div id="post-description" ></div>
-	<div id="post-body" ><p>Zig has just gained new for loop syntax that allows you to iterate on multiple slices / arrays at the same time. In this blog post I'm going to explain in detail the rationale behind this choice, while also introducing you to a couple useful patterns that the syntax is meant to encourage.</p><p>If you want to try it out, you will need an unstable build of Zig, which you can get from <a href="https://ziglang.org/download/">the downloads page</a>.</p><h2>Basic syntax</h2><p>The most basic for loop syntax in Zig is still the same as before.</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">elems</span> = <span class="punctuation bracket">[</span><span class="number">4</span><span class="punctuation bracket">]</span><span class="type builtin">usize</span><span class="punctuation bracket">{</span> <span class="number">10</span><span class="punctuation delimiter">,</span> <span class="number">20</span><span class="punctuation delimiter">,</span> <span class="number">30</span><span class="punctuation delimiter">,</span> <span class="number">40</span> <span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1 >Zig's Curious Multi-Sequence For Loops</h1>
+  <p class="post-byline">
+    <span >February 27, 2023</span>
+    •
+    <span >9</span>
+    min read • by
+    <b >Loris Cro</b>
+    <span ></span>
+  </p>
+  <div id="post-description" ></div>
+  <div id="post-body" ><p>Zig has just gained new for loop syntax that allows you to iterate on multiple slices / arrays at the same time. In this blog post I'm going to explain in detail the rationale behind this choice, while also introducing you to a couple useful patterns that the syntax is meant to encourage.</p><p>If you want to try it out, you will need an unstable build of Zig, which you can get from <a href="https://ziglang.org/download/">the downloads page</a>.</p><h2>Basic syntax</h2><p>The most basic for loop syntax in Zig is still the same as before.</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">elems</span> = <span class="punctuation bracket">[</span><span class="number">4</span><span class="punctuation bracket">]</span><span class="type builtin">usize</span><span class="punctuation bracket">{</span> <span class="number">10</span><span class="punctuation delimiter">,</span> <span class="number">20</span><span class="punctuation delimiter">,</span> <span class="number">30</span><span class="punctuation delimiter">,</span> <span class="number">40</span> <span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
 
 <span class="repeat">for</span> <span class="punctuation bracket">(</span><span class="variable">elems</span><span class="punctuation bracket">)</span> |<span class="variable">x</span>|<span class="keyword"></span> <span class="punctuation bracket">{</span>
    <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="function">print</span><span class="punctuation bracket">(</span><span class="string">"{} "</span><span class="punctuation delimiter">,</span> <span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span><span class="variable">x</span><span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="error">;</span>
@@ -168,22 +166,23 @@ _</span> = <span class="variable">my_slice</span><span class="punctuation bracke
 <span class="punctuation bracket">}</span> 
 </code></pre>
 <p>Unfortunately, the Zig compiler would have to insert two hidden assertions with this version of the code: one before the assignment to <code>et</code>, and one before the assignment to <code>hp</code>.</p><p>In the multi-sequence <code>for</code> loop version it's only necessary to test once at the beginning of the loop that the two arrays have equal size, instead of having 2 assertions run every loop iteration. The multi-sequence <code>for</code> loop syntax helps convey intention more clearly to the compiler, which in turn lets it generate more efficient code.</p><p>Of course, with sophisticated-enough static analysis the compiler could prove that <code>monster_count</code> is always equivalent to <code>monster_elem_types.len</code> and <code>monster_hps.len</code>, and thus it could elide the assertions, but static analysis slows compilation times and tends to be a fragile thing, like <a href="https://leveluppp.ghost.io/loop-optimizations-in-various-compilers/">this amazing blog post about loop optimizations in C#</a> shows.</p><p><strong>Multi-sequence <code>for</code> loop syntax doesn't slow down compilation times and guarantees that you get good performance also in debug builds, where advanced optimizations are disabled and compilation times matter the most.</strong></p><h2>Conclusion</h2><p>Zig is already a compelling programming language and toolchain, but there's more design space to explore ahead of us before we can tag v1.0.</p><p>We <a href="https://kristoff.it/blog/zig-self-hosted-now-what/">recently self-hosted the compiler</a> and <a href="https://ziglang.org/news/goodbye-cpp/">optimized our development process</a> in order to make it as smooth as possible to explore new design ideas like multi-sequence <code>for</code> loops.</p><p>Zig describes itself as a programming language for maintaining <strong>robust</strong>, <strong>optimal</strong> and <strong>reusable</strong> code, and multi-sequence for loops are a shining example of how the language tries to strike a compelling balance between clarity, performance and safety.</p><p>Comptime metaprogramming allows us to have <code>std.MultiArrayList</code>, <a href="https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0">a userland implementation of AoS/SoA transformation</a>, which makes it easier to do DOD-style programming, while multi-sequence <code>for</code> loops ensure that we get all the safety of out-of-bounds checks without impacting runtime performance nor compromising on compilation times.</p><p>If you like where we're going, please consider <a href="https://ziglang.org/zsf/">sponsoring the Zig Software Foundation</a>.</p></div>
-	<hr>
-	<div id="prev-next">
-		<span >
-			<a href="/blog/zig-self-hosted-now-what/">← <span >Zig Is Self-Hosted Now, What's Next?</span></a>
-		</span>
-		<span >&nbsp; • &nbsp;</span>
-		<span >
-			<a href="/blog/note-about-zig-books/"><span >A Note About Zig Books for the Zig Community</span> →</a>
-		</span>
-		<small >&nbsp; or &nbsp;</small>
-		<small>
-			<a href="/">Back to the Homepage</a>
-		</small>
-	</div>
-
+  <hr>
+  <div id="prev-next">
+    <span >
+      <a href="/blog/zig-self-hosted-now-what/">←
+        <span >Zig Is Self-Hosted Now, What's Next?</span></a>
+    </span>
+    <span >&nbsp; • &nbsp;</span>
+    <span >
+      <a href="/blog/note-about-zig-books/"><span >A Note About Zig Books for the Zig Community</span>
+        →</a>
+    </span>
+    <small >&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
   </div>
-</body>
 
+    </div>
+  </body>
 </html>
