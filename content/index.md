@@ -4,7 +4,7 @@
     .date = @date("2018-07-06T00:00:00"),
     .description = "",
     .author = "Loris Cro",
-    .layout = "index.html",
+    .layout = "index.shtml",
     .alternatives = [{ 
         .layout = "rss.xml", 
         .output = "index.xml",

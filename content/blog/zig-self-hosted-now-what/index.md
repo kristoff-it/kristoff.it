@@ -3,7 +3,7 @@
     .title = "Zig Is Self-Hosted Now, What's Next?",
     .description = "Why self-host Zig?<br> For great justice, of course\xe2\x80\xa6 and also a few more reasons actually.",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2022-10-25T00:00:00"),
     .draft = false,
 }

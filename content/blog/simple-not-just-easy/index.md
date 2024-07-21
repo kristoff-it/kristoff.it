@@ -3,7 +3,7 @@
     .title = "I Want Simple, Not Just Easy",
     .description = "You've surely read plenty about how simple is good, but what's wrong with easy?",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2019-07-21T00:00:00"),
     .draft = false,
 }

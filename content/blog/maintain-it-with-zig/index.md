@@ -3,7 +3,7 @@
     .title = "Maintain it With Zig",
     .description = "No matter what language you program in or what applications you use: everything you do with a computer today is powered at some level by a piece of C/C++ code.",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2021-09-08T00:00:00"),
     .draft = false,
 }

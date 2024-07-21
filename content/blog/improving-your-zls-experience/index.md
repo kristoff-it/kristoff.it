@@ -3,7 +3,7 @@
     .title = "Improving Your Zig Language Server Experience",
     .description = "...by adding just a few lines to your <code>build.zig</code>",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2024-07-01T00:00:00"),
     .draft = false,
 }

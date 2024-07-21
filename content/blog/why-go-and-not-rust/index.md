@@ -3,7 +3,7 @@
     .title = "Why Go and not Rust?",
     .description = "What's the role of Go in a universe where Rust exists?",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2019-09-10T00:00:00"),
     .draft = false,
 }

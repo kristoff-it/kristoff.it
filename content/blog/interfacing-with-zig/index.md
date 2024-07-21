@@ -3,7 +3,7 @@
     .title = "Interfacing with Zig, a BDFL-run Project",
     .description = "",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2021-12-10T00:00:00"),
     .draft = false,
 }

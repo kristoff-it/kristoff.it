@@ -3,7 +3,7 @@
     .title = "The Good, the Bad and the Ugly Standup",
     .description = "\xe2\x80\x9cIn this world there are two types of standup, my friend: comedy and meetings.<br>You do meetings.\xe2\x80\x9d",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2020-01-26T00:00:00"),
     .draft = false,
 }

@@ -3,7 +3,7 @@
     .title = "A Note About Zig Books for the Zig Community",
     .description = "",
     .author = "Loris Cro",
-    .layout = "post.html",
+    .layout = "post.shtml",
     .date = @date("2023-06-16T00:00:00"),
     .draft = false,
 }
