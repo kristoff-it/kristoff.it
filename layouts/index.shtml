@@ -70,12 +70,12 @@
         Blog
       </h2>
       <div loop="$page.subpages()">
-        <a href="$loop.it.permalink()" class="post-link" var="$loop.it.title"></a>
+        <a href="$loop.it.link()" class="post-link" var="$loop.it.title"></a>
         <span class="post-byline" style="margin-bottom: 1rem;" var="$loop.it.date.format('January 02, 2006')"></span>
       </div>
     </div>
     <div>
-      <small><a href="https://kristoff.it/index.xml" rel="alternate" type="application/rss+xml">RSS feed</a></small>
+      <small><a href="/index.xml" rel="alternate" type="application/rss+xml">RSS feed</a></small>
     </div>
   </div>
 </div>

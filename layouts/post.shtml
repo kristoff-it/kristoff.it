@@ -1,7 +1,11 @@
 <extend template="base.shtml">
 <title id="title" var="$page.title"></title>
 <head id="head">
-  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+  <link
+  type="text/css"
+  rel="stylesheet"
+  href="$site.asset('term-highlight.css').link()"
+>
 </head>
 <div id="content" class="foo">
   <div style="display:flex; flex-direction:column; align-items:center;">
@@ -36,12 +40,12 @@
   <hr>
   <div id="prev-next">
     <span if="$page.prevPage()">
-      <a href="$if.permalink()">←
+      <a href="$if.link()">←
         <span var="$if.title"></span></a>
     </span>
     <span if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
     <span if="$page.nextPage()">
-      <a href="$if.permalink()"><span var="$if.title"></span>
+      <a href="$if.link()"><span var="$if.title"></span>
         →</a>
     </span>
     <small if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>

@@ -15,14 +15,21 @@
     <meta name="twitter:title" content="$page.title">
     <meta property="og:title" content="$page.title">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta
+    property="og:image"
+    content="$site.host_url.addPath($site.asset('logo.png').link())"
+  >
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/main.css">
-    <link type="text/css" rel="stylesheet" href="/highlight.css">
+    <link type="text/css" rel="stylesheet" href="$site.asset('main.css').link()">
+    <link
+    type="text/css"
+    rel="stylesheet"
+    href="$site.asset('highlight.css').link()"
+  >
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     <super>
