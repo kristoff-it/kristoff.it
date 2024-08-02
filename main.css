@@ -72,12 +72,12 @@
    border-radius: 6px;
  }
 
- pre code {
+ pre>code {
    border: none;
    padding: 15px;
    font-family: monospace, monospace;
    font-size: 1em;
-   line-height: 1.75em;
+   line-height: 1.3em !important;
    display: inline-block;
    box-sizing: border-box;
    min-width: 100%;
@@ -90,7 +90,6 @@
    padding: 0;
    background-color: #1E1E1E !important;
    font-size: 0.85em;
-   line-height: 1.75em;
    overflow: auto;
  }
 
@@ -99,7 +98,6 @@
    border: 1px solid #d3d3d3;
    padding: 3px;
    font-size: 1.1em;
-   line-height: 1.75em;
  }
 
  blockquote {
