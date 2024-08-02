@@ -8,5 +8,10 @@ pub fn build(b: *std.Build) !void {
         .layouts_dir_path = "layouts",
         .content_dir_path = "content",
         .assets_dir_path = "assets",
+        .static_assets = &.{
+            "favicon.ico",
+            "CNAME",
+            ".well-known/atproto-did",
+        },
     });
 }

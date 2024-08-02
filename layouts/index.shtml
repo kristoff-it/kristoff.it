@@ -22,7 +22,7 @@
     <h3 style="margin-top:0;"><i>
         Personal Website
       </i><br>
-      <img src="/loris-face.jpg" height=200  class="profile-pic"></h3>
+      <img src="$site.asset('loris-face.jpg').link()" height=200  class="profile-pic"></h3>
     <div>
       <p>
         Hi, I'm VP of Community at the
