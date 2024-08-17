@@ -55,4 +55,6 @@ You can find more info at https://zig.show.
 
 
 ![A photo I took at the last AWS reinvent.](IMG_5653.jpg "Fuck you AWS.")
+```=html
 <center><i>Fuck you AWS</i></center>
+```

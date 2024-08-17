@@ -72,16 +72,15 @@ pub fn main() void {
 
 Compilation of this program fails and produces the following output.
 
-<pre class="dark-default-dark vscode-highlight" data-language="shell">
-<code class="vscode-highlight-code vscode-highlight-line"><span class="bold"><span class="f2">➜</span></span> zig build-exe ieq.zig                                       
-<span class="bold">/Users/loriscro/ieq.zig:8:17: <span class="f1"><span class="bold">error:</span></span> `uppr` must be all uppercase</span>
-                @compileError(&quot;`uppr` must be all uppercase&quot;);
-                <span class="f2"><span class="bold">^</span></span>
-<span class="bold">/Users/loriscro/ieq.zig:24:30: <span class="f6"><span class="bold">note:</span></span> called from here</span>
-    const x = insensitive_eql(&quot;Hello&quot;, &quot;hElLo&quot;);
-                             <span class="f2"><span class="bold">^</span></span>
-</code>
-</pre>
+```
+$ zig build-exe ieq.zig                                       
+/Users/loriscro/ieq.zig:8:17: error: `uppr` must be all uppercase
+                @compileError("`uppr` must be all uppercase");
+                ^
+/Users/loriscro/ieq.zig:24:30: note: called from here
+    const x = insensitive_eql("Hello", "hElLo");
+
+```
 
 #### Compile-time code elision
 

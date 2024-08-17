@@ -22,14 +22,18 @@ As a very funny coincidence, my last day at Redis Labs was also the same day Ant
 
 Redis Labs has always been frenemies with the cloud vendors, and especially AWS. The reason is simple: Redis Labs and all the companies that have formed behind OSS databases have to accept AWS as a partner, but they also want to be the primary beneficiary of the value that *their* respective OSS projects generate, while AWS *begs* to disagree. **This is a battle where neither party is the "good guy" and the discussion that ensues reduces open source to a set of legal constraints for companies to collab-compete around**.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I think neither party is without blame in the case of ES vs AWS. For AWS, OSS only means license terms around which to collab-compete with other companies. For Elastic, OSS means taking over the development, registering trademarks and become the de-facto owner of the project.</p>&mdash; Loris Cro (@croloris) <a href="https://twitter.com/croloris/status/1363121008371249156?ref_src=twsrc%5Etfw">February 20, 2021</a></blockquote> 
+```
 
 More importantly, AWS recently dealt a big blow to its opposition by taking the [license change](https://www.elastic.co/blog/licensing-change) made by Elastic and transforming it into a casus belli to legitimize AWS' own hard fork of Elasticsearch, painting Elastic (and implicitly any company that dares to follow the same path) as a greedy bad actor that forced AWS to “[Step[...] up for a truly open source Elasticsearch](https://aws.amazon.com/blogs/opensource/stepping-up-for-a-truly-open-source-elasticsearch/)”. 
 
 On the other side of the collab-compete barbed fence, with a hard-fork gun pointed at its head, Redis Labs has opted to play nice with the clouds and to fill the void left by Antirez with a [governance committee](https://redis.io/topics/governance) composed of representatives from Redis Labs, Alibaba and AWS. 
 All the people in the committee are long-time contributors to Redis and new decisions are taken collaboratively through proposals on GitHub. This is a great start on paper and yet I'm already extremely disappointed with where they're taking Redis.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">There are reasons why Antirez implemented scripts in Lua, used hashes to refer to them and never considered them part of the data in Redis. That is not to say that he was right on every front, but the complete disregard for the original design by the new committee is a sad joke.</p>&mdash; Loris Cro (@croloris) <a href="https://twitter.com/croloris/status/1375191409427419144?ref_src=twsrc%5Etfw">March 25, 2021</a></blockquote> 
+```
 
 **While the core team itself might be fine**, we can't forget that all those developers have hierarchies above them and **they lack the ultimate power that Antirez had**: copyright ownership and undisputed control over the codebase which allowed him to raise a big, fat middle finger to pressure coming from Redis Labs or any of the clouds. 
 
@@ -46,10 +50,12 @@ The Rust project recently [announced](https://foundation.rust-lang.org/posts/202
 
 One of such challenges was recently mentioned by [Ashley Williams](https://twitter.com/ag_dubs), Interim Executive Director of the Rust Software Foundation, in an interview on the [Context Free YouTube Channel](https://www.youtube.com/c/ContextFree). I warmly recommend you check out both video and channel.
 
+```=html
 <div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h-LoPr5553o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <br>
+```
 
 In the interview Ashley mentions that the Rust software foundation has decided to reserve 5 board seats to "founding member companies" and among the reasons for this choice she lists:
 
@@ -78,7 +84,9 @@ I used to think that working in open source would save me from all this, but the
 
 Now you might think that since I'm disillusioned with open source, I should look into the free software movement, but in my opinion free software is a disaster on too many fronts and its leadership has failed so badly that I don't even want to waste words discussing it past quoting this tweet by Steve Klabnik, with which I wholeheartedly agree.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Really liking some of the takes over been seeing about free software. It’s wild that the FSF has failed in its mission so badly that it’s basically prevented a lot of folks from evening imagining what software freedom could mean. The best stuff I’ve seen engages with this deeply</p>&mdash; steveklabnik (@steveklabnik) <a href="https://twitter.com/steveklabnik/status/1376927079795679234?ref_src=twsrc%5Etfw">March 30, 2021</a></blockquote>
+```
 
 As far as I'm concerned, **neither open source nor free software are able to represent my ideals when it comes to software** and I feel the need to come up with a new way of articulating what is missing from both of these movements.
 
@@ -90,15 +98,19 @@ Another good thing is that **I'm not the only one thinking about these ideas: th
 
 For example I recently interviewed [Abner Coimbre](https://twitter.com/abnercoimbre), ex-NASA engineer and cofounder of the Handmade Network on these same topics.
 
+```=html
 <div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Nutcb6ao0mc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <br>
+```
 
 
 A few days from the moment of writing I will interview [Jonathan Turner](https://twitter.com/jntrnr), who also recently left his cushy big tech job to fly solo, and hopefully I'll soon get a chance to interview [Andreas Kling](https://twitter.com/awesomekling), who in many ways seems to share the same collaborative spirit that has has been a major strength of the Zig project.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Linus Groh (<a href="https://twitter.com/linusgroh?ref_src=twsrc%5Etfw">@linusgroh</a>) has just reached 1000 commits in SerenityOS! 🐧🐞🎉<br><br>To celebrate the occasion, I dug up my very first conversation with Linus, where he told me he was really inspired by the project but was unable to contribute since he didn&#39;t know any C++... <a href="https://t.co/d1erwr5wMQ">pic.twitter.com/d1erwr5wMQ</a></p>&mdash; Andreas Kling (@awesomekling) <a href="https://twitter.com/awesomekling/status/1379127438823817220?ref_src=twsrc%5Etfw">April 5, 2021</a></blockquote>
+```
 
 With this lengthy premise, I'm finally able to answer the brain drain question.
 
@@ -107,7 +119,9 @@ With this lengthy premise, I'm finally able to answer the brain drain question.
 
 A few days ago [Jakub Konka](https://www.jakubkonka.com/) left his job at Microsoft to become our first full-time core contributor.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Got some big news. Today is my last day at Microsoft. Met there some great folks, but during this short tenure also realized that my passion lies elsewhere. So from Thursday, I will be working full-time for the Zig Software Foundation on `zld` MachO linker and <a href="https://twitter.com/ziglang?ref_src=twsrc%5Etfw">@ziglang</a> compiler.</p>&mdash; Jakub Konka (@kubkon) <a href="https://twitter.com/kubkon/status/1377146321136537602?ref_src=twsrc%5Etfw">March 31, 2021</a></blockquote>
+```
 
 Jakub is a long time Rust user, ex-Wasmtime core contributor, and member of the Bytecode Alliance who started by contributing WASI bits to the Zig standard library and ended up reverse engineering the aarch64 MachO executable format in order to write a linker that **made Zig the first C cross compiler ever able to target Apple Silicon from any other supported platform**.
 

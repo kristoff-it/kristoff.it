@@ -28,7 +28,9 @@ As an example, **building the compiler itself used to require 9.6GB of RAM, whil
 
 The memory efficiency gains come in good part also thanks to the use of data-oriented programming techniques that were employed in the design of the self-hosted compiler.
 
+```=html
 <iframe title="vimeo-player" src="https://player.vimeo.com/video/649009599?h=0c3307419e" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+```
 
 <br>In this talk Andrew explains how to use data-oriented design principles in practice, using the Zig compiler as a concrete example of what you can gain.
 
@@ -148,4 +150,6 @@ This work would have never been possible without the support from our sponsors. 
 
 Your patience is about to pay off.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I&#39;m typing up the notes for the upcoming <a href="https://twitter.com/ziglang?ref_src=twsrc%5Etfw">@ziglang</a> release (Nov 1). Sooooooooo much time was sunk into the self-hosted compiler.<br><br>Y&#39;all who joined recently have no idea what&#39;s about to hit you when that development effort is redirected towards other parts of the project.</p>&mdash; Andrew Kelley (@andy_kelley) <a href="https://twitter.com/andy_kelley/status/1582834272796545024?ref_src=twsrc%5Etfw">October 19, 2022</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+```

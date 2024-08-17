@@ -95,7 +95,9 @@ This might seem paradoxical for people that don't know the Zig community but, de
 
 Another important aspect is avoiding what I usually call "watercooler complaints". [I made a video on the topic](https://www.youtube.com/watch?v=9E_rtUgUF58) and more recently Andreas Kling has expressed succinctly the core point in a tweet.
 
+```=html
 <blockquote class="twitter-tweet"><p lang="en" dir="ltr">If you bond with others over how bad things are, you create incentive to maintain badness.<br><br>If you bond over how cool things could be, you create incentive to improve and learn what else is possible. 🤓👍</p>&mdash; Andreas Kling (@awesomekling) <a href="https://twitter.com/awesomekling/status/1456928188454559752?ref_src=twsrc%5Etfw">November 6, 2021</a></blockquote> 
+```
 
 This is not to say that you are expected to be artificially positive when interacting in the Zig community, but there's a big difference between complaining for the sake of complaining, and pointing out things that are not as good as they could be. **A good rule of thumb is that you're allowed to complain about things that you're actively trying to improve.** Not only is this a self-balancing heuristic, but it also has the beneficial effect of prioritizing observations from people that can offer a more nuanced point of view than your average onlooker. 
 

@@ -21,11 +21,13 @@ The setting of Secret Hitler is the pre-WW2 German parliament. Taken from the of
 
 If you've never played Secret Hitler, watch the following 5-minute video to get an idea of the mechanics, which is necessary to better understand the rest of this blog post.
 
+```=html
 <div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/APiugylcAJw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+</div><br>
+```
 
-<br>If you want to see a full game being played, there’s [an entire series](https://www.youtube.com/watch?v=k69PbHoSWm4) by the late TotalBiscuit on YouTube. You can buy a physical copy of the game from the official website (beware of fake copies on Amazon, especially in EU!), or you can buy [Tabletop Simulator](https://store.steampowered.com/app/286160/Tabletop_Simulator/) to play it online with friends. My personal recommendation is to play in 7 or 8 players (preferably 8) total, as I think it's the most interesting configuration.
+If you want to see a full game being played, there’s [an entire series](https://www.youtube.com/watch?v=k69PbHoSWm4) by the late TotalBiscuit on YouTube. You can buy a physical copy of the game from the official website (beware of fake copies on Amazon, especially in EU!), or you can buy [Tabletop Simulator](https://store.steampowered.com/app/286160/Tabletop_Simulator/) to play it online with friends. My personal recommendation is to play in 7 or 8 players (preferably 8) total, as I think it's the most interesting configuration.
 
 ## Playing Liberal
 When playing as a liberal there are three main important things that you realize are fundamental, in increasing order of difficulty.

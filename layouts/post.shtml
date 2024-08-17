@@ -36,7 +36,7 @@
     </span>
   </p>
   <div id="post-description" var="$page.description"></div>
-  <div id="post-body" var="$page.content"></div>
+  <div id="post-body" var="$page.content()"></div>
   <hr>
   <div id="prev-next">
     <span if="$page.prevPage()">

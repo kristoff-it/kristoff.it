@@ -32,12 +32,9 @@ The idea of function coloring is nicely explained by [this blog post](https://jo
 Let’s walk through how async/await works in Zig by looking at a few examples. To see the following code snippets run, launch Netcat in another terminal in listen mode and, if everything works, you should see "Hello World!" being printed after every run.  
 
 Here's the complete Netcat command:
-<div class="vscode-highlight-wrapper">
-<pre class="dark-default-dark vscode-highlight" data-language="shell">
-<code class="vscode-highlight-code vscode-highlight-line"><span class="bold"><span class="f2">➜</span></span> nc -lk 7000                                   
-</code>
-</pre>
-</div>
+```
+nc -lk 7000
+```
 
 ### Basics
 The first example is a simple blocking program that writes to a socket. Nothing surprising there.
@@ -161,11 +158,13 @@ Yes, this program compiles and works as expected. The function is no longer asyn
 ## A concrete example
 A while ago I started working on [OkRedis, a Redis client library written in Zig](https://github.com/kristoff-it/zig-okredis) that tries to offer as many niceties it can to the user without compromising in terms of efficiency. Among other things, it features full support for both blocking and evented I/O in a single codebase. If you want to learn more, take a look at the available documentation on GitHub and watch this talk [Andrew Kelley](https://twitter.com/andrew_kelley) (the creator of Zig) co-authored with me. In it, Andrew explains the basics of async/await in Zig and, in the second part, I demo OkRedis.
 
+```=html
 <div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zeLToGnjIUM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-
 <center><i>"Modeling Data Concurrency with Asynchronous I/O in Zig"</i></center>
+```
+
 
 ## Understanding the limits
 While the compiler is very smart and defeating function coloring has many practical benefits, it's not a magic bullet, so let me immediately demystify some ideas about it.

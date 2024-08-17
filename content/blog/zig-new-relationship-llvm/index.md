@@ -50,9 +50,11 @@ In-place binary patching is based on a granularity of top-level declarations. Ea
 
  If you want to see the self-hosted compiler in action, here’s a 5 minute demo by Andrew:
 
+```=html
 <div class="video-container">
 <iframe src="https://player.vimeo.com/video/491488902" width="560" height="315" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 </div>
+```
 
 ## Designing machine code for incremental compilation
 Efficient in-place binary patching is something that can only be accomplished by tightly coupling the compiler frontend and backend. Part of the reason this feature is so rarely seen in the wild is that it goes against our better sense of abstraction and clean code organization. But we must never forget: abstraction is just a tool to reach a practical outcome, and not always the most appropriate one.
