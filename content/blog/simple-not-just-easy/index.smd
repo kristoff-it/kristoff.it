@@ -69,7 +69,7 @@ Using bloated frameworks will prevent you from understanding the details of what
 
 If you search "word vs latex" in google images, you will find a few pictures similar to the following:
 
-![Comparing Word and Latex. Image by Marko Pinteric.](miktex.png "A graph shows two lines that describe document complexity on the X axis and effort+time consumption for generating a document. The lines show Word winning in the beginning where dodument complexity is low, but then as the complexity increases, the effort+time dimension grows exponentially for word, while it stays much lower for latex.")
+![](miktex.png "A graph shows two lines that describe document complexity on the X axis and effort+time consumption for generating a document. The lines show Word winning in the beginning where dodument complexity is low, but then as the complexity increases, the effort+time dimension grows exponentially for word, while it stays much lower for latex.")
 
 This picture is trying to convey that, while Microsoft Word is easier to use than LaTeX, as document size increases, you will quickly get to a point where it actually becomes easier to use LaTeX, despite the inverse being true initially. Complexity makes things hard and Word fails at containing it, causing difficulty to skyrocket. This is why you can't ignore complexity. **It doesn't matter how easy you try to make things: complexity is an almost *radioactive* source of difficulty**.
 

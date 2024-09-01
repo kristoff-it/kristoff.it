@@ -39,7 +39,7 @@ All the people in the committee are long-time contributors to Redis and new deci
 
 Another thing that might hint at the sad mess everything is turning into, is what's at the top of [redis.io](https://redis.io). It used to be that all commercial content would be relegated to redislabs.com, **but now apparently a "Try Free" button has found its way to the top menu of the open source website**. So now you have to be careful because if you press the wrong (big, red, well positioned) button you might end up signing up for a Redis Enterprise Cloud account instead of getting a copy of Redis. Disgusting.
 
-![Screenshot of redis.io top menu bar](redisio.png "It's not even the same damn product!")
+![It's not even the same damn product!](redisio.png "A screeshot of the topbar of redis.io, showing a red 'try free' button in the top right corner.")
 
 The direction set by Antirez, imperfect as it might have been, was based on having a sustainable approach to development and making Redis a useful, somewhat minimalistic tool for solving coordination problems in a distributed system. **When I joined Redis Labs I used to think that these people were sitting on a golden goose and that they just needed to realize it**. As time went by I came to the bitter realization that nobody in command was interested in doing Redis any justice and that the company, [addicted](https://redislabs.com/press/redis-labs-110-million-series-g-led-by-tiger-global/) to venture capital and utterly incapable of correcting its crippling deficiencies, wanted instead to corrupt the design of the product to compensate. This is the same kind of barren mentality that put a "Try Free" button on the open source website, and that is now indirectly driving the development of Redis.
 
