@@ -1,117 +1,158 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0">
 	<channel>
 		<title>Loris Cro's Personal Website</title>
 		<link>https://kristoff.it/</link>
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Fri, 16 Jun 2023 00:00:00 +0000</lastBuildDate>
-		<atom:link href="https://kristoff.it/index.xml" rel="self" type="application/rss+xml"/>
-		<item >
-			<title >Improving Your Zig Language Server Experience</title>
-			<link >https://kristoff.it/blog/improving-your-zls-experience/</link>
-			<pubDate >Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/improving-your-zls-experience/</guid>
-		</item><item >
-			<title >A Note About Zig Books for the Zig Community</title>
-			<link >https://kristoff.it/blog/note-about-zig-books/</link>
-			<pubDate >Fri, 16 Jun 2023 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/note-about-zig-books/</guid>
-		</item><item >
-			<title >Zig's Curious Multi-Sequence For Loops</title>
-			<link >https://kristoff.it/blog/zig-multi-sequence-for-loops/</link>
-			<pubDate >Mon, 27 Feb 2023 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/zig-multi-sequence-for-loops/</guid>
-		</item><item >
-			<title >Zig Is Self-Hosted Now, What's Next?</title>
-			<link >https://kristoff.it/blog/zig-self-hosted-now-what/</link>
-			<pubDate >Tue, 25 Oct 2022 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/zig-self-hosted-now-what/</guid>
-		</item><item >
-			<title >The Good Parts of Open Source</title>
-			<link >https://kristoff.it/blog/good-open-source/</link>
-			<pubDate >Tue, 09 Aug 2022 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/good-open-source/</guid>
-		</item><item >
-			<title >The First English Review of Wohpe</title>
-			<link >https://kristoff.it/blog/wohpe-first-english-review/</link>
-			<pubDate >Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/wohpe-first-english-review/</guid>
-		</item><item >
-			<title >A Conference About Software You Can Love</title>
-			<link >https://kristoff.it/blog/software-you-can-love/</link>
-			<pubDate >Fri, 27 May 2022 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/software-you-can-love/</guid>
-		</item><item >
-			<title >Interfacing with Zig, a BDFL-run Project</title>
-			<link >https://kristoff.it/blog/interfacing-with-zig/</link>
-			<pubDate >Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/interfacing-with-zig/</guid>
-		</item><item >
-			<title >Maintain it With Zig</title>
-			<link >https://kristoff.it/blog/maintain-it-with-zig/</link>
-			<pubDate >Wed, 08 Sep 2021 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/maintain-it-with-zig/</guid>
-		</item><item >
-			<title >Playing the Open Source Game</title>
-			<link >https://kristoff.it/blog/the-open-source-game/</link>
-			<pubDate >Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/the-open-source-game/</guid>
-		</item><item >
-			<title >The First Zig Website Redesign</title>
-			<link >https://kristoff.it/blog/first-zig-website-redesign/</link>
-			<pubDate >Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/first-zig-website-redesign/</guid>
-		</item><item >
-			<title >You Should Play Secret Hitler</title>
-			<link >https://kristoff.it/blog/you-should-play-secret-hitler/</link>
-			<pubDate >Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/you-should-play-secret-hitler/</guid>
-		</item><item >
-			<title >Zig's New Relationship with LLVM</title>
-			<link >https://kristoff.it/blog/zig-new-relationship-llvm/</link>
-			<pubDate >Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/zig-new-relationship-llvm/</guid>
-		</item><item >
-			<title >Addio Redis, I'm leaving Redis Labs</title>
-			<link >https://kristoff.it/blog/addio-redis/</link>
-			<pubDate >Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/addio-redis/</guid>
-		</item><item >
-			<title >What is Zig's “Colorblind” Async/Await?</title>
-			<link >https://kristoff.it/blog/zig-colorblind-async-await/</link>
-			<pubDate >Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/zig-colorblind-async-await/</guid>
-		</item><item >
-			<title >The Upcoming Future of Online Meetups</title>
-			<link >https://kristoff.it/blog/future-online-meetups/</link>
-			<pubDate >Sat, 13 Jun 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/future-online-meetups/</guid>
-		</item><item >
-			<title >So you're a Remote Worker Now</title>
-			<link >https://kristoff.it/blog/remote-worker-now/</link>
-			<pubDate >Sun, 05 Apr 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/remote-worker-now/</guid>
-		</item><item >
-			<title >The Good, the Bad and the Ugly Standup</title>
-			<link >https://kristoff.it/blog/good-bad-ugly-standup/</link>
-			<pubDate >Sun, 26 Jan 2020 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/good-bad-ugly-standup/</guid>
-		</item><item >
-			<title >Why Go and not Rust?</title>
-			<link >https://kristoff.it/blog/why-go-and-not-rust/</link>
-			<pubDate >Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/why-go-and-not-rust/</guid>
-		</item><item >
-			<title >What is Zig's Comptime?</title>
-			<link >https://kristoff.it/blog/what-is-zig-comptime/</link>
-			<pubDate >Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/what-is-zig-comptime/</guid>
-		</item><item >
-			<title >I Want Simple, Not Just Easy</title>
-			<link >https://kristoff.it/blog/simple-not-just-easy/</link>
-			<pubDate >Sun, 21 Jul 2019 00:00:00 +0000</pubDate>
-			<guid >https://kristoff.it/blog/simple-not-just-easy/</guid>
-		</item>
+		<lastBuildDate>Sun, 01 Sep 2024 17:08:16 +0000</lastBuildDate>
+		
+			<item>
+				<title>Improving Your Zig Language Server Experience</title>
+				<link>https://kristoff.it/blog/improving-your-zls-experience/</link>
+				<pubDate>Mon, 01 Jul 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/improving-your-zls-experience/</guid>
+			</item>
+		
+			<item>
+				<title>A Note About Zig Books for the Zig Community</title>
+				<link>https://kristoff.it/blog/note-about-zig-books/</link>
+				<pubDate>Fri, 16 Jun 2023 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/note-about-zig-books/</guid>
+			</item>
+		
+			<item>
+				<title>Zig&apos;s Curious Multi-Sequence For Loops</title>
+				<link>https://kristoff.it/blog/zig-multi-sequence-for-loops/</link>
+				<pubDate>Mon, 27 Feb 2023 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/zig-multi-sequence-for-loops/</guid>
+			</item>
+		
+			<item>
+				<title>Zig Is Self-Hosted Now, What&apos;s Next?</title>
+				<link>https://kristoff.it/blog/zig-self-hosted-now-what/</link>
+				<pubDate>Tue, 25 Oct 2022 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/zig-self-hosted-now-what/</guid>
+			</item>
+		
+			<item>
+				<title>The Good Parts of Open Source</title>
+				<link>https://kristoff.it/blog/good-open-source/</link>
+				<pubDate>Tue, 09 Aug 2022 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/good-open-source/</guid>
+			</item>
+		
+			<item>
+				<title>The First English Review of Wohpe</title>
+				<link>https://kristoff.it/blog/wohpe-first-english-review/</link>
+				<pubDate>Wed, 03 Aug 2022 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/wohpe-first-english-review/</guid>
+			</item>
+		
+			<item>
+				<title>A Conference About Software You Can Love</title>
+				<link>https://kristoff.it/blog/software-you-can-love/</link>
+				<pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/software-you-can-love/</guid>
+			</item>
+		
+			<item>
+				<title>Interfacing with Zig, a BDFL-run Project</title>
+				<link>https://kristoff.it/blog/interfacing-with-zig/</link>
+				<pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/interfacing-with-zig/</guid>
+			</item>
+		
+			<item>
+				<title>Maintain it With Zig</title>
+				<link>https://kristoff.it/blog/maintain-it-with-zig/</link>
+				<pubDate>Wed, 08 Sep 2021 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/maintain-it-with-zig/</guid>
+			</item>
+		
+			<item>
+				<title>Playing the Open Source Game</title>
+				<link>https://kristoff.it/blog/the-open-source-game/</link>
+				<pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/the-open-source-game/</guid>
+			</item>
+		
+			<item>
+				<title>The First Zig Website Redesign</title>
+				<link>https://kristoff.it/blog/first-zig-website-redesign/</link>
+				<pubDate>Wed, 13 Jan 2021 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/first-zig-website-redesign/</guid>
+			</item>
+		
+			<item>
+				<title>You Should Play Secret Hitler</title>
+				<link>https://kristoff.it/blog/you-should-play-secret-hitler/</link>
+				<pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/you-should-play-secret-hitler/</guid>
+			</item>
+		
+			<item>
+				<title>Zig&apos;s New Relationship with LLVM</title>
+				<link>https://kristoff.it/blog/zig-new-relationship-llvm/</link>
+				<pubDate>Mon, 28 Sep 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/zig-new-relationship-llvm/</guid>
+			</item>
+		
+			<item>
+				<title>Addio Redis, I&apos;m leaving Redis Labs</title>
+				<link>https://kristoff.it/blog/addio-redis/</link>
+				<pubDate>Mon, 06 Jul 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/addio-redis/</guid>
+			</item>
+		
+			<item>
+				<title>What is Zig&apos;s “Colorblind” Async/Await?</title>
+				<link>https://kristoff.it/blog/zig-colorblind-async-await/</link>
+				<pubDate>Sun, 21 Jun 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/zig-colorblind-async-await/</guid>
+			</item>
+		
+			<item>
+				<title>The Upcoming Future of Online Meetups</title>
+				<link>https://kristoff.it/blog/future-online-meetups/</link>
+				<pubDate>Sat, 13 Jun 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/future-online-meetups/</guid>
+			</item>
+		
+			<item>
+				<title>So you&apos;re a Remote Worker Now</title>
+				<link>https://kristoff.it/blog/remote-worker-now/</link>
+				<pubDate>Sun, 05 Apr 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/remote-worker-now/</guid>
+			</item>
+		
+			<item>
+				<title>The Good, the Bad and the Ugly Standup</title>
+				<link>https://kristoff.it/blog/good-bad-ugly-standup/</link>
+				<pubDate>Sun, 26 Jan 2020 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/good-bad-ugly-standup/</guid>
+			</item>
+		
+			<item>
+				<title>Why Go and not Rust?</title>
+				<link>https://kristoff.it/blog/why-go-and-not-rust/</link>
+				<pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/why-go-and-not-rust/</guid>
+			</item>
+		
+			<item>
+				<title>What is Zig&apos;s Comptime?</title>
+				<link>https://kristoff.it/blog/what-is-zig-comptime/</link>
+				<pubDate>Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/what-is-zig-comptime/</guid>
+			</item>
+		
+			<item>
+				<title>I Want Simple, Not Just Easy</title>
+				<link>https://kristoff.it/blog/simple-not-just-easy/</link>
+				<pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/simple-not-just-easy/</guid>
+			</item>
+		
 	</channel>
 </rss>

@@ -3,41 +3,29 @@
   <head id="head">
     <meta charset="utf-8">
     <title id="title">
-      What is Zig's Comptime?
+      What is Zig&apos;s Comptime?
       | Loris Cro's Blog
     </title>
-    <meta name="description" content="Let's take a quick look at what compile-time execution looks like in Zig.">
+    <meta name="description" content="Let&apos;s take a quick look at what compile-time execution looks like in Zig.">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@croloris">
     <meta name="twitter:image" content="https://kristoff.it/logo.png">
     <meta name="twitter:author" content="@croloris">
-    <meta name="twitter:description" content="Let's take a quick look at what compile-time execution looks like in Zig.">
-    <meta name="twitter:title" content="What is Zig's Comptime?">
-    <meta property="og:title" content="What is Zig's Comptime?">
+    <meta name="twitter:description" content="Let&apos;s take a quick look at what compile-time execution looks like in Zig.">
+    <meta name="twitter:title" content="What is Zig&apos;s Comptime?">
+    <meta property="og:title" content="What is Zig&apos;s Comptime?">
     <meta property="og:type" content="website">
-    <meta
-    property="og:image"
-    content="https://kristoff.it/logo.png"
-  >
+    <meta property="og:image" content="https://kristoff.it/logo.png">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="/main.css">
-    <link
-    type="text/css"
-    rel="stylesheet"
-    href="/highlight.css"
-  >
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <link type="text/css" rel="stylesheet" href="/highlight.css">
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     
-  <link
-  type="text/css"
-  rel="stylesheet"
-  href="/term-highlight.css"
->
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
 
   </head>
   <body>
@@ -58,17 +46,17 @@
       <a href="https://github.com/kristoff-it">GitHub</a>
     </div>
   </div>
-  <h1 >What is Zig's Comptime?</h1>
+  <h1>What is Zig&apos;s Comptime?</h1>
   <p class="post-byline">
-    <span >August 05, 2019</span>
+    <span>August 05, 2019</span>
     •
-    <span >11</span>
+    <span>11</span>
     min read • by
-    <b >Loris Cro</b>
-    <span ></span>
+    <b>Loris Cro</b>
+    <span></span>
   </p>
-  <div id="post-description" >Let's take a quick look at what compile-time execution looks like in Zig.</div>
-  <div id="post-body" ><p>If you've only experienced compile-time execution in the form of macros, generics or codegen, be ready to be surprised by what Zig can do.</p><h2>What is Zig</h2><p>Zig is a new general-purpose programming language developed by Andrew Kelley. While still under heavy development, I think the language is already showing great promise. Zig aims to be a better C, similarly to how Rust can be understood as a better C++, generally speaking. Zig has no garbage collection, no built-in event loops, nor other runtime machinery of that level. It's lean just like C, and in fact it can interoperate with C pretty easily. For a complete overview checkout https://ziglang.org.</p><p>Now that you got a general idea about the level of abstraction in which Zig operates, you won't be surprised to know that there is absolutely no support for reflection at runtime; but what you can't do a runtime, you can certainly do at compile-time.</p><h2>Running code at compile-time</h2><p>Let's start with the basics: using the <code>comptime</code> keyword to run arbitrary code at compilation-time.</p><h4>Compile-time function calls</h4><p>The following code uses a function to decide the length of a statically-allocated array.</p><pre><code class="zig"><span class="keyword function">fn</span> <span class="function">multiply</span><span class="punctuation bracket">(</span><span class="parameter">a</span><span class="punctuation delimiter">:</span> <span class="type builtin">i64</span><span class="punctuation delimiter">,</span> <span class="parameter">b</span><span class="punctuation delimiter">:</span> <span class="type builtin">i64</span><span class="punctuation bracket">)</span> <span class="type builtin">i64</span> <span class="punctuation bracket">{</span>
+  <div id="post-description">Let's take a quick look at what compile-time execution looks like in Zig.</div>
+  <div id="post-body"><p>If you've only experienced compile-time execution in the form of macros, generics or codegen, be ready to be surprised by what Zig can do.</p><h2>What is Zig</h2><p>Zig is a new general-purpose programming language developed by Andrew Kelley. While still under heavy development, I think the language is already showing great promise. Zig aims to be a better C, similarly to how Rust can be understood as a better C++, generally speaking. Zig has no garbage collection, no built-in event loops, nor other runtime machinery of that level. It's lean just like C, and in fact it can interoperate with C pretty easily. For a complete overview checkout https://ziglang.org.</p><p>Now that you got a general idea about the level of abstraction in which Zig operates, you won't be surprised to know that there is absolutely no support for reflection at runtime; but what you can't do a runtime, you can certainly do at compile-time.</p><h2>Running code at compile-time</h2><p>Let's start with the basics: using the <code>comptime</code> keyword to run arbitrary code at compilation-time.</p><h4>Compile-time function calls</h4><p>The following code uses a function to decide the length of a statically-allocated array.</p><pre><code class="zig"><span class="keyword function">fn</span> <span class="function">multiply</span><span class="punctuation bracket">(</span><span class="parameter">a</span><span class="punctuation delimiter">:</span> <span class="type builtin">i64</span><span class="punctuation delimiter">,</span> <span class="parameter">b</span><span class="punctuation delimiter">:</span> <span class="type builtin">i64</span><span class="punctuation bracket">)</span> <span class="type builtin">i64</span> <span class="punctuation bracket">{</span>
     <span class="keyword return">return</span> <span class="variable">a</span> <span class="operator">*</span> <span class="variable">b</span><span class="punctuation delimiter">;</span>
 <span class="punctuation bracket">}</span>
 
@@ -83,14 +71,14 @@
     <span class="attribute">comptime</span> <span class="punctuation bracket">{</span>
         <span class="type qualifier">var</span> <span class="variable">i</span> = <span class="number">0</span><span class="punctuation delimiter">;</span>
         <span class="repeat">while</span> <span class="punctuation bracket">(</span><span class="variable">i</span> <span class="operator">&lt;</span> <span class="variable">uppr</span><span class="punctuation delimiter">.</span><span class="field">len</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">:</span> <span class="punctuation bracket">(</span><span class="variable">i</span> <span class="operator">+=</span> <span class="number">1</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-            <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">uppr</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&gt;=</span> <span class="character">'a'</span> <span class="keyword operator">and</span> <span class="variable">uppr</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&lt;=</span> <span class="character">'z'</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-                <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span><span class="string">"`uppr` must be all uppercase"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+            <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">uppr</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&gt;=</span> <span class="character">&apos;a&apos;</span> <span class="keyword operator">and</span> <span class="variable">uppr</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&lt;=</span> <span class="character">&apos;z&apos;</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+                <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span><span class="string">&quot;`uppr` must be all uppercase&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
             <span class="punctuation bracket">}</span>
         <span class="punctuation bracket">}</span>
     <span class="punctuation bracket">}</span>
     <span class="type qualifier">var</span> <span class="variable">i</span> = <span class="number">0</span><span class="punctuation delimiter">;</span>
     <span class="repeat">while</span> <span class="punctuation bracket">(</span><span class="variable">i</span> <span class="operator">&lt;</span> <span class="variable">uppr</span><span class="punctuation delimiter">.</span><span class="field">len</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">:</span> <span class="punctuation bracket">(</span><span class="variable">i</span> <span class="operator">+=</span> <span class="number">1</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-        <span class="type qualifier">const</span> <span class="variable">val</span> = <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">str</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&gt;=</span> <span class="character">'a'</span> <span class="keyword operator">and</span> <span class="variable">str</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&lt;=</span> <span class="character">'z'</span><span class="punctuation bracket">)</span>
+        <span class="type qualifier">const</span> <span class="variable">val</span> = <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">str</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&gt;=</span> <span class="character">&apos;a&apos;</span> <span class="keyword operator">and</span> <span class="variable">str</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">&lt;=</span> <span class="character">&apos;z&apos;</span><span class="punctuation bracket">)</span>
             <span class="variable">str</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span> <span class="operator">-</span> <span class="number">32</span>
         <span class="conditional">else</span>
             <span class="variable">str</span><span class="punctuation bracket">[</span><span class="variable">i</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">;</span>
@@ -100,18 +88,18 @@
 <span class="punctuation bracket">}</span>
 
 <span class="attribute">pub</span> <span class="keyword function">fn</span> <span class="function">main</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span> <span class="type builtin">void</span> <span class="punctuation bracket">{</span>
-    <span class="type qualifier">const</span> <span class="variable">x</span> = <span class="variable">insensitive_eql</span><span class="punctuation bracket">(</span><span class="string">"Hello"</span><span class="punctuation delimiter">,</span> <span class="string">"hElLo"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+    <span class="type qualifier">const</span> <span class="variable">x</span> = <span class="variable">insensitive_eql</span><span class="punctuation bracket">(</span><span class="string">&quot;Hello&quot;</span><span class="punctuation delimiter">,</span> <span class="string">&quot;hElLo&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
 <p>Compilation of this program fails and produces the following output.</p><pre><code>$ zig build-exe ieq.zig                                       
 /Users/loriscro/ieq.zig:8:17: error: `uppr` must be all uppercase
-                @compileError("`uppr` must be all uppercase");
+                @compileError(&quot;`uppr` must be all uppercase&quot;);
                 ^
 /Users/loriscro/ieq.zig:24:30: note: called from here
-    const x = insensitive_eql("Hello", "hElLo");
+    const x = insensitive_eql(&quot;Hello&quot;, &quot;hElLo&quot;);
 
-</code></pre><h4>Compile-time code elision</h4><p>Zig can statically resolve control flow expressions that depend on compile-time known values. For example, you can force loop unrolling on <code>while</code> / <code>for</code> loops and elide branches from <code>if</code> / <code>switch</code> statements. The following program asks the user for a number and then iteratively applies a list of operations to it:</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">builtin</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">"builtin"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
-<span class="type qualifier">const</span> <span class="variable">std</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">"std"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+</code></pre><h4>Compile-time code elision</h4><p>Zig can statically resolve control flow expressions that depend on compile-time known values. For example, you can force loop unrolling on <code>while</code> / <code>for</code> loops and elide branches from <code>if</code> / <code>switch</code> statements. The following program asks the user for a number and then iteratively applies a list of operations to it:</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">builtin</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">&quot;builtin&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="type qualifier">const</span> <span class="variable">std</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">&quot;std&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 <span class="type qualifier">const</span> <span class="variable">fmt</span> = <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">fmt</span><span class="punctuation delimiter">;</span>
 <span class="type qualifier">const</span> <span class="variable">io</span> = <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">io</span><span class="punctuation delimiter">;</span>
 
@@ -123,7 +111,7 @@
 
 <span class="keyword function">fn</span> <span class="function">ask_user</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span> <span class="exception">!</span><span class="type builtin">i64</span> <span class="punctuation bracket">{</span>
     <span class="type qualifier">var</span> <span class="variable">buf</span><span class="punctuation delimiter">:</span> <span class="punctuation bracket">[</span><span class="number">10</span><span class="punctuation bracket">]</span><span class="type builtin">u8</span> = <span class="constant builtin">undefined</span><span class="punctuation delimiter">;</span>
-    <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="function">warn</span><span class="punctuation bracket">(</span><span class="string">"A number please: "</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+    <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="function">warn</span><span class="punctuation bracket">(</span><span class="string">&quot;A number please: &quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
     <span class="type qualifier">const</span> <span class="variable">user_input</span> = <span class="operator">try</span> <span class="variable">io</span><span class="punctuation delimiter">.</span><span class="function">readLineSlice</span><span class="punctuation bracket">(</span><span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation special">..</span><span class="punctuation bracket">]</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
     <span class="keyword return">return</span> <span class="variable">fmt</span><span class="punctuation delimiter">.</span><span class="function">parseInt</span><span class="punctuation bracket">(</span><span class="type builtin">i64</span><span class="punctuation delimiter">,</span> <span class="variable">user_input</span><span class="punctuation delimiter">,</span> <span class="number">10</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 <span class="punctuation bracket">}</span>
@@ -144,7 +132,7 @@
     <span class="type qualifier">const</span> <span class="variable">user_num</span> = <span class="operator">try</span> <span class="variable">ask_user</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
     <span class="type qualifier">const</span> <span class="variable">ops</span> = <span class="punctuation bracket">[</span><span class="number">4</span><span class="punctuation bracket">]</span><span class="variable">Op</span><span class="punctuation bracket">{</span><span class="punctuation delimiter">.</span><span class="variable builtin">Sum</span><span class="punctuation delimiter">,</span> <span class="punctuation delimiter">.</span><span class="variable builtin">Mul</span><span class="punctuation delimiter">,</span> <span class="punctuation delimiter">.</span><span class="variable builtin">Sub</span><span class="punctuation delimiter">,</span> <span class="punctuation delimiter">.</span><span class="variable builtin">Sub</span><span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
     <span class="type qualifier">const</span> <span class="variable">x</span> = <span class="variable">apply_ops</span><span class="punctuation bracket">(</span><span class="variable">ops</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation special">..</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">,</span> <span class="variable">user_num</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
-    <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="function">warn</span><span class="punctuation bracket">(</span><span class="string">"Result: {}\n"</span><span class="punctuation delimiter">,</span> <span class="variable">x</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+    <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="function">warn</span><span class="punctuation bracket">(</span><span class="string">&quot;Result: {}\n&quot;</span><span class="punctuation delimiter">,</span> <span class="variable">x</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
 <p>The interesting part of this code is the <code>for</code> loop. The <code>inline</code> keyword forces loop unrolling, and inside the loop's body there is a <code>switch</code> statement that also gets resolved at compile-time. In short, the invocation of <code>apply_ops</code> in the previous example basically resolves to:</p><pre><code class="zig"><span class="type qualifier">var</span> <span class="variable">acc</span><span class="punctuation delimiter">:</span> <span class="type builtin">i64</span> = <span class="number">0</span><span class="punctuation delimiter">;</span>
@@ -170,20 +158,20 @@ return acc;</span>
 <span class="attribute">pub</span> <span class="keyword function">fn</span> <span class="function">parseInt</span><span class="punctuation bracket">(</span><span class="attribute">comptime</span> <span class="parameter">T</span><span class="punctuation delimiter">:</span> <span class="type builtin">type</span><span class="punctuation delimiter">,</span> <span class="parameter">buf</span><span class="punctuation delimiter">:</span> <span class="punctuation bracket">[</span><span class="punctuation bracket">]</span><span class="type qualifier">const</span> <span class="type builtin">u8</span><span class="punctuation delimiter">,</span> <span class="parameter">radix</span><span class="punctuation delimiter">:</span> <span class="type builtin">u8</span><span class="punctuation bracket">)</span> <span class="exception">!</span><span class="variable">T</span> <span class="punctuation bracket">{</span>
     <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="operator">!</span><span class="variable">T</span><span class="punctuation delimiter">.</span><span class="field">is_signed</span><span class="punctuation bracket">)</span> <span class="keyword return">return</span> <span class="variable">parseUnsigned</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation delimiter">,</span> <span class="variable">buf</span><span class="punctuation delimiter">,</span> <span class="variable">radix</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
     <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">buf</span><span class="punctuation delimiter">.</span><span class="field">len</span> <span class="operator">==</span> <span class="number">0</span><span class="punctuation bracket">)</span> <span class="keyword return">return</span> <span class="variable">T</span><span class="punctuation bracket">(</span><span class="number">0</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
-    <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation bracket">]</span> <span class="operator">==</span> <span class="character">'-'</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+    <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation bracket">]</span> <span class="operator">==</span> <span class="character">&apos;-&apos;</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
         <span class="keyword return">return</span> <span class="variable">math</span><span class="punctuation delimiter">.</span><span class="function">negate</span><span class="punctuation bracket">(</span><span class="operator">try</span> <span class="variable">parseUnsigned</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation delimiter">,</span> <span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">1</span><span class="punctuation special">..</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">,</span> <span class="variable">radix</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
-    <span class="punctuation bracket">}</span> <span class="conditional">else</span> <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation bracket">]</span> <span class="operator">==</span> <span class="character">'+'</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+    <span class="punctuation bracket">}</span> <span class="conditional">else</span> <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation bracket">]</span> <span class="operator">==</span> <span class="character">&apos;+&apos;</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
         <span class="keyword return">return</span> <span class="variable">parseUnsigned</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation delimiter">,</span> <span class="variable">buf</span><span class="punctuation bracket">[</span><span class="number">1</span><span class="punctuation special">..</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">,</span> <span class="variable">radix</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
     <span class="punctuation bracket">}</span> <span class="conditional">else</span> <span class="punctuation bracket">{</span>
         <span class="keyword return">return</span> <span class="variable">parseUnsigned</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation delimiter">,</span> <span class="variable">buf</span><span class="punctuation delimiter">,</span> <span class="variable">radix</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
     <span class="punctuation bracket">}</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
-<h4>Generic structs</h4><p>Before describing how to create generic structs, here's a brief introduction on how structs work in Zig.</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">std</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">"std"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<h4>Generic structs</h4><p>Before describing how to create generic structs, here's a brief introduction on how structs work in Zig.</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">std</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">&quot;std&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
 <span class="type qualifier">const</span> <span class="variable">math</span> = <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">math</span><span class="punctuation delimiter">;</span>
 <span class="type qualifier">const</span> <span class="variable">assert</span> = <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="field">assert</span><span class="punctuation delimiter">;</span>
 
-<span class="comment">// A struct definition doesn't include a name.</span>
+<span class="comment">// A struct definition doesn&apos;t include a name.</span>
 <span class="comment">// Assigning the struct to a variable gives it a name.</span>
 <span class="type qualifier">const</span> <span class="variable">Point</span> = <span class="keyword">struct</span> <span class="punctuation bracket">{</span>
     <span class="field">x</span><span class="punctuation delimiter">:</span> <span class="type builtin">f64</span><span class="punctuation delimiter">,</span>
@@ -234,13 +222,13 @@ return acc;</span>
 <span class="type qualifier">var</span> <span class="variable">my_list</span> = <span class="variable">PointList</span><span class="punctuation bracket">{</span><span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
 
 <span class="comment">// A complete implementation would offer an `append` method.</span>
-<span class="comment">// For now let's add the new node manually.</span>
+<span class="comment">// For now let&apos;s add the new node manually.</span>
 <span class="type qualifier">var</span> <span class="variable">node</span> = <span class="variable">PointList</span><span class="punctuation delimiter">.</span><span class="field">Node</span><span class="punctuation bracket">{</span> <span class="punctuation delimiter">.</span><span class="field">data</span> = <span class="variable">p</span> <span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
 <span class="variable">my_list</span><span class="punctuation delimiter">.</span><span class="field">first</span> = <span class="operator">&</span><span class="variable">node</span><span class="error">;
 my_list</span><span class="punctuation delimiter">.</span><span class="field">last</span> <span class="error">=</span> <span class="operator">&</span><span class="variable">node</span><span class="error">;
 my_list</span><span class="punctuation delimiter">.</span><span class="field">len</span> <span class="error">=</span> <span class="number">1</span><span class="error">;</span>
 </code></pre>
-<p>The Zig standard library contains <a href="https://github.com/ziglang/zig/blob/ddf7942aaa6a41296d9338423dcdfb93b915e4df/std/linked_list.zig">a couple of fleshed out implementations of linked lists</a>.</p><h2>Compile-time reflection</h2><p>Now that we have covered all the basics, we can finally move onto the things that make Zig metaprogramming truly powerful and fun to use.</p><p>We already saw an example of reflection when <code>parseInt</code> was checking <code>T.is_signed</code>, but in this section I want to focus on a more advanced usage of reflection. I'll introduce the concept with a code sample.</p><pre><code class="zig"><span class="keyword function">fn</span> <span class="function">make_couple_of</span><span class="punctuation bracket">(</span><span class="parameter">x</span><span class="punctuation delimiter">:</span> <span class="type builtin">anytype</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">[</span><span class="number">2</span><span class="punctuation bracket">]</span><span class="function builtin">@typeOf</span><span class="punctuation bracket">(</span><span class="variable">x</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+<p>The Zig standard library contains <a href="https://github.com/ziglang/zig/blob/ddf7942aaa6a41296d9338423dcdfb93b915e4df/std/linked_list.zig" target="_blank">a couple of fleshed out implementations of linked lists</a>.</p><h2>Compile-time reflection</h2><p>Now that we have covered all the basics, we can finally move onto the things that make Zig metaprogramming truly powerful and fun to use.</p><p>We already saw an example of reflection when <code>parseInt</code> was checking <code>T.is_signed</code>, but in this section I want to focus on a more advanced usage of reflection. I'll introduce the concept with a code sample.</p><pre><code class="zig"><span class="keyword function">fn</span> <span class="function">make_couple_of</span><span class="punctuation bracket">(</span><span class="parameter">x</span><span class="punctuation delimiter">:</span> <span class="type builtin">anytype</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">[</span><span class="number">2</span><span class="punctuation bracket">]</span><span class="function builtin">@typeOf</span><span class="punctuation bracket">(</span><span class="variable">x</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
     <span class="keyword return">return</span> <span class="punctuation bracket">[</span><span class="number">2</span><span class="punctuation bracket">]</span><span class="function builtin">@typeOf</span><span class="punctuation bracket">(</span><span class="variable">x</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span><span class="variable">x</span><span class="punctuation delimiter">,</span> <span class="variable">x</span><span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
@@ -248,8 +236,8 @@ my_list</span><span class="punctuation delimiter">.</span><span class="field">le
 make_couple_of</span><span class="punctuation bracket">(</span><span class="type builtin">i32</span><span class="punctuation bracket">(</span><span class="number">5</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="error">; // creates [2]i32{5, 5}
 make_couple_of</span><span class="punctuation bracket">(</span><span class="type builtin">u8</span><span class="punctuation bracket">)</span><span class="error">; // creates [2]type{u8, u8}
 make_couple_of</span><span class="punctuation bracket">(</span><span class="type builtin">type</span><span class="punctuation bracket">)</span><span class="error">; // creates [2]type{type, type}
-make_couple_of</span><span class="punctuation bracket">(</span><span class="variable">make_couple_of</span><span class="punctuation bracket">(</span><span class="string">"hi"</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="error">;</span> 
-<span class="comment">// creates [2][2][2]u8{[2][2]u8{"hi","hi"}, [2][2]u8{"hi","hi"}}</span>
+make_couple_of</span><span class="punctuation bracket">(</span><span class="variable">make_couple_of</span><span class="punctuation bracket">(</span><span class="string">&quot;hi&quot;</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="error">;</span> 
+<span class="comment">// creates [2][2][2]u8{[2][2]u8{&quot;hi&quot;,&quot;hi&quot;}, [2][2]u8{&quot;hi&quot;,&quot;hi&quot;}}</span>
 </code></pre>
 <p>Arguments of type <code>anytype</code> are very powerful and allow construction of optimized and yet "dynamic" functions. For the next example I'll lift some more code from the standard library to showcase a more useful use of this functionality.</p><p>The following code is the implementation of <code>math.sqrt</code>, which we used in a previous example to compute the euclidean distance between two points.</p><pre><code class="zig"><span class="comment">// I moved part of the original definition to</span>
 <span class="comment">// a separate function for better readability.</span>
@@ -269,32 +257,32 @@ make_couple_of</span><span class="punctuation bracket">(</span><span class="vari
         <span class="variable">TypeId</span><span class="punctuation delimiter">.</span><span class="field">ComptimeInt</span> =&gt; <span class="attribute">comptime</span> <span class="punctuation bracket">{</span>
             <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">x</span> <span class="operator">&gt;</span> <span class="variable">maxInt</span><span class="punctuation bracket">(</span><span class="type builtin">u128</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
                 <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span>
-                	<span class="string">"sqrt not implemented for "</span> <span class="operator">++</span> 
-                	<span class="string">"comptime_int greater than 128 bits"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+                	<span class="string">&quot;sqrt not implemented for &quot;</span> <span class="operator">++</span> 
+                	<span class="string">&quot;comptime_int greater than 128 bits&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
             <span class="punctuation bracket">}</span>
             <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">x</span> <span class="operator">&lt;</span> <span class="number">0</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
-                <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span><span class="string">"sqrt on negative number"</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+                <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span><span class="string">&quot;sqrt on negative number&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
             <span class="punctuation bracket">}</span>
             <span class="keyword return">return</span> <span class="variable">T</span><span class="punctuation bracket">(</span><span class="variable">sqrt_int</span><span class="punctuation bracket">(</span><span class="type builtin">u128</span><span class="punctuation delimiter">,</span> <span class="variable">x</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
         <span class="punctuation bracket">}</span><span class="punctuation delimiter">,</span>
         <span class="variable">TypeId</span><span class="punctuation delimiter">.</span><span class="field">Int</span> =&gt; <span class="keyword return">return</span> <span class="variable">sqrt_int</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation delimiter">,</span> <span class="variable">x</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
-        <span class="conditional">else</span> =&gt; <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span><span class="string">"not implemented for "</span> <span class="operator">++</span> <span class="function builtin">@typeName</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
+        <span class="conditional">else</span> =&gt; <span class="function builtin">@compileError</span><span class="punctuation bracket">(</span><span class="string">&quot;not implemented for &quot;</span> <span class="operator">++</span> <span class="function builtin">@typeName</span><span class="punctuation bracket">(</span><span class="variable">T</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
     <span class="punctuation bracket">}</span>
 <span class="punctuation bracket">}</span>
 </code></pre>
-<p>The return type of this function is a bit peculiar. If you look at the signature of <code>sqrt</code>, it's calling a function in the place where it should be declaring the return type. This is allowed in Zig. The original code actually inlines an <code>if</code> expression, but I moved it to a separate function for better readability.</p><p>So what is <code>sqrt</code> trying to do with its return type? It's applying a small optimization when we're passing in an integer value. In that case the function declares its return type as an <strong>unsigned</strong> integer with <strong>half the bit size</strong> of the original input. This means that, if we're passing in an <code>i64</code> value, the function will return an <code>u32</code> value. This makes sense given what the square root function does. The rest of the declaration then uses reflection to further specialize and report compile-time errors where appropriate.</p><h2>In conclusion</h2><p>Compile-time execution is great, especially when the language is very expressive. Without good compile-time metaprogramming, one must resort to macros or codegen, or worse, do a lot of useless work at runtime.</p><p>If you want to see one more cool example of what can be done at compile-time in Zig, <a href="https://andrewkelley.me/post/string-matching-comptime-perfect-hashing-zig.html">take a look at this blog post by Andrew himself</a>. In it, he uses some the aforementioned techniques to generate a perfect hashing function for a compile-time known list of strings. The result is that the user can create a switch that matches strings in <code>O(1)</code>. The code is very easy to understand, and he offers some insight on how all the other minor features make user abstractions easy, fun and safe to use.</p></div>
+<p>The return type of this function is a bit peculiar. If you look at the signature of <code>sqrt</code>, it's calling a function in the place where it should be declaring the return type. This is allowed in Zig. The original code actually inlines an <code>if</code> expression, but I moved it to a separate function for better readability.</p><p>So what is <code>sqrt</code> trying to do with its return type? It's applying a small optimization when we're passing in an integer value. In that case the function declares its return type as an <strong>unsigned</strong> integer with <strong>half the bit size</strong> of the original input. This means that, if we're passing in an <code>i64</code> value, the function will return an <code>u32</code> value. This makes sense given what the square root function does. The rest of the declaration then uses reflection to further specialize and report compile-time errors where appropriate.</p><h2>In conclusion</h2><p>Compile-time execution is great, especially when the language is very expressive. Without good compile-time metaprogramming, one must resort to macros or codegen, or worse, do a lot of useless work at runtime.</p><p>If you want to see one more cool example of what can be done at compile-time in Zig, <a href="https://andrewkelley.me/post/string-matching-comptime-perfect-hashing-zig.html" target="_blank">take a look at this blog post by Andrew himself</a>. In it, he uses some the aforementioned techniques to generate a perfect hashing function for a compile-time known list of strings. The result is that the user can create a switch that matches strings in <code>O(1)</code>. The code is very easy to understand, and he offers some insight on how all the other minor features make user abstractions easy, fun and safe to use.</p></div>
   <hr>
   <div id="prev-next">
-    <span >
+    <span>
       <a href="/blog/simple-not-just-easy/">←
-        <span >I Want Simple, Not Just Easy</span></a>
+        <span>I Want Simple, Not Just Easy</span></a>
     </span>
-    <span >&nbsp; • &nbsp;</span>
-    <span >
-      <a href="/blog/why-go-and-not-rust/"><span >Why Go and not Rust?</span>
+    <span>&nbsp; • &nbsp;</span>
+    <span>
+      <a href="/blog/why-go-and-not-rust/"><span>Why Go and not Rust?</span>
         →</a>
     </span>
-    <small >&nbsp; or &nbsp;</small>
+    <small>&nbsp; or &nbsp;</small>
     <small>
       <a href="/">Back to the Homepage</a>
     </small>
