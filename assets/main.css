@@ -241,8 +241,12 @@
    margin-bottom: 0;
  }
 
+ img {
+   max-width: 100%;
+ }
 
- img[title] {
+
+ figure img {
    display: block;
    max-width: 400px;
    width: 100vw;
@@ -250,13 +254,6 @@
    margin-right: auto;
    padding: 0;
 
- }
-
- figure[data-title]:after {
-   display: block;
-   content: attr(data-title);
-   font-style: italic;
-   text-align: center;
  }
 
  figure {
@@ -326,4 +323,15 @@
    background: #1e1e1e;
    color: #f8f8f2;
    line-height: normal;
+ }
+
+
+ figcaption {
+   font-style: italic;
+ }
+
+
+ p>img:only-child {
+   display: block;
+   margin: auto;
  }

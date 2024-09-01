@@ -1,5 +1,5 @@
 <extend template="base.shtml">
-<title id="title" var="$page.title"></title>
+<title id="title" :text="$page.title"></title>
 <head id="head">
   <link
   type="text/css"
@@ -23,32 +23,32 @@
       <a href="https://github.com/kristoff-it">GitHub</a>
     </div>
   </div>
-  <h1 var="$page.title"></h1>
+  <h1 :text="$page.title"></h1>
   <p class="post-byline">
-    <span var="$page.date.format('January 02, 2006')"></span>
+    <span :text="$page.date.format('January 02, 2006')"></span>
     •
-    <span var="$page.wordCount().div(220).plus(1)"></span>
+    <span :text="$page.wordCount().div(220).plus(1)"></span>
     min read • by
-    <b var="$page.author"></b>
-    <span if="$page.custom.get?('coauthor')">
+    <b :text="$page.author"></b>
+    <span :if="$page.custom.get?('coauthor')">
       and
-      <a href="$page.custom.get!('coauthor_link')" target="_blank"><b var="$if"></b></a>
+      <a href="$page.custom.get('coauthor_link')" target="_blank"><b :text="$if"></b></a>
     </span>
   </p>
-  <div id="post-description" var="$page.description"></div>
-  <div id="post-body" var="$page.content()"></div>
+  <div id="post-description" :html="$page.description"></div>
+  <div id="post-body" :html="$page.content()"></div>
   <hr>
   <div id="prev-next">
-    <span if="$page.prevPage()">
+    <span :if="$page.prevPage()">
       <a href="$if.link()">←
-        <span var="$if.title"></span></a>
+        <span :text="$if.title"></span></a>
     </span>
-    <span if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
-    <span if="$page.nextPage()">
-      <a href="$if.link()"><span var="$if.title"></span>
+    <span :if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
+    <span :if="$page.nextPage()">
+      <a href="$if.link()"><span :text="$if.title"></span>
         →</a>
     </span>
-    <small if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
+    <small :if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
     <small>
       <a href="/">Back to the Homepage</a>
     </small>

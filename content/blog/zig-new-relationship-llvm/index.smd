@@ -15,7 +15,7 @@
 
 In the early days, Zig was but a thin frontend in front of LLVM. This was instrumental for getting started quickly and filling in gaps of Andrew’s knowledge as a compiler developer. Now, the training wheels of the bicycle are coming off, and LLVM is transitioning into an optional component.
 
-![](./protty1.png)
+![](./protty1.png "A Ziguana riding a bike that has wheels and gears falling off of it, representing the first few steps of learning to ride a bike.")
 
 The work to replace the current C++ compiler implementation with a new pure Zig version has begun. Moving to a self-hosted implementation is usually considered a step towards maturity, with most benefits being felt by developers of the language itself. As an example, [Go lost](https://www.youtube.com/watch?v=cF1zJYkBW4A) some speed of compilation by switching to the self-hosted compiler but, in exchange, it streamlined the toolchain, removed dependencies, and improved the whole development experience.
 
@@ -32,7 +32,7 @@ Zig sources always get bundled into a single compilation unit, so the caching sy
 Incremental compilation is a form of caching that acts at a higher granularity level than normal “compilation unit”-level caching. The Rust blog has a [great post](https://blog.rust-lang.org/2016/09/08/incremental.html) that explains how it works.
 
 
-![](./rust.png "Taken from the Rust blog post linked above.")
+![Taken from the Rust blog post linked above.](./rust.png "A graph that shows how incremental compilation works in Rust.")
 
 
 In the case of Rust, the compiler builds a dependency graph at the AST level and then saves it to disk alongside the cached intermediate results (object files). When a new compilation is requested, the compiler will be able to easily notice which parts of the AST have changed and thus invalidate all the intermediate results that depend on it.
@@ -76,4 +76,4 @@ The self-hosted backend will ship in Zig 0.7.0 behind a flag, supporting only a 
 
 If you like where Zig is going, there’s no better time [to join the Zig community](https://github.com/ziglang/zig/wiki/Community) than now, and if you want to help speed the development up, please [consider donating to the Zig Software Foundation](https://ziglang.org/zsf/) to allow core developers to spend more time working on Zig.
 
-![](./protty2.png "Thanks to kprotty for the cute doodles!")
+![Thanks to kprotty for the cute doodles!](./protty2.png "A Ziguana doing a one-armed hand stand while holding the wheel of a bike that is also standing on its back wheel, indicating hyperbolically extreme proficiency with the bike.")

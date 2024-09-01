@@ -13,7 +13,7 @@ Up until the publication of this post, if you went to the front page of [https:/
 
 If you have done enough of that kind of programming, you'll immediately see how Zig is tackling relevant problems, but if you don't have such experience, then the front page could very easily look like a never-ending list of things you don't have an opinion about.
 
-![The original homepage](old-zig-website.png "The original homepage featured a pretty big ToC")
+![The original homepage featured a pretty big ToC](old-zig-website.png "A screenshoto of the original Zig homepage, showing a very long table of contents, indicating that the homepage was very dense with content.")
 
 When the Zig project started, its audience was almost exclusively people with a lot of relevant experience, since those would be the only ones able to evaluate the promise and limits of the newborn language.
 
@@ -47,7 +47,7 @@ The second goal of this redesign was to open the door to hosting multiple transl
 
 We're well aware that keeping up with translations to multiple languages can quickly become an effort black hole. For this reason, I've tried to make sure the tooling would help in making the process as smooth as possible (more on that later), and I've also made sure to clarify in the design how translations are community-provided and thus best-effort.
 
-![Link present on all translated pages](translation-link.png "Link present on all translated pages")
+![Link present on all translated pages](translation-link.png "Link present on all translated pages, reads: 'This translation has been contributed by the Zig community'.")
 
 At the moment of publication, the website can only offer [an Italian translation](https://ziglang.org/translations/) written by me. Italian was chosen out of necessity (i.e. it's the only other language I speak), but it served the purpose of making me try out the ergonomics of producing a translation, and it can also act as documentation for others.
 

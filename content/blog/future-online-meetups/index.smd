@@ -13,7 +13,7 @@ As we adventure into the phase where society needs to learn to cohabit with the 
 
 Organizers have had enough time to think it through, and yet we are still seeing many of them host what are basically extracurricular meetings. If you join a conference now, you are likely to see something straight out of The Matrix, where humans are not born, but grown in fields. 
 
-![A nightmare.](nightmare.PNG "Yes, meetups and conferences are also about social interaction, but not like this.")
+![Yes, meetups and conferences are also about social interaction, but not like this.](nightmare.PNG "A grid of partcipants to a group call, each with their webcam on.")
 
 
 ## The third hardest problem in Computer Science
@@ -23,12 +23,14 @@ In IT we think of ourselves as innovators and heroes but in fact, we're just nor
 
 ```=html
 <blockquote class="twitter-tweet" style="color:inherit;"><p lang="en" dir="ltr">The 3rd hardest problem in computer science, right after naming things, cache invalidation, and off by one errors, is recognizing when a problem can&#39;t be solved by technology alone.</p>&mdash; <a href="https://twitter.com/croloris/status/1264391714539741184?ref_src=twsrc%5Etfw">@croloris on Twitter</a> May 24, 2020</blockquote>
-
-More concretely, as much as I am dissatisfied with events run on Zoom & co., the tool is not the problem, and changing it won’t be enough to produce better outcomes. So where do we find a hammer for this specific nail? It turns out that occasionally people working outside of IT can be innovators and heroes too. In our case, this particular hammer was forged in 1964.
-
-<center><b>“The medium is the message.”</b></center><br> 
 ```
 
+More concretely, as much as I am dissatisfied with events run on Zoom & co., the tool is not the problem, and changing it won’t be enough to produce better outcomes. So where do we find a hammer for this specific nail? It turns out that occasionally people working outside of IT can be innovators and heroes too. In our case, this particular hammer was forged in 1964.  
+
+```=html
+<br>
+<div style="text-align:center;"><b>“The medium is the message.”</b></div><br> 
+```
 
 You surely heard that phrase before, alongside many other sayings of dubious value. But this one is genuinely useful. In our context, it means that you won’t be able to successfully replicate the essence of in-person meetups over an online medium because their original structure was never the result of an entirely deliberate choice, but rather a compromise heavily influenced by the intrinsic characteristics of the original communication medium.
 
@@ -53,7 +55,7 @@ The day came, the intro aired, and at that point people understood that I was se
 <iframe src="https://clips.twitch.tv/embed?clip=RamshackleArbitraryBillJKanStyle&autoplay=false&parent=kristoff.it" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
 </div>
 
-<center><i>If you click on the Twitch logo you'll be able to see the comments.</i></center><br>
+<div style="text-align:center;"><i>If you click on the Twitch logo you'll be able to see the comments.</i></div><br>
 ```
 
 A bit of production quality is a nice touch and helps in setting a tone, but that alone is not enough, so let’s talk about how the show is structured.

@@ -1,0 +1,31 @@
+---
+.title = "Beyond Version Selection With The Zig Build System",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-08-01T00:00:00"),
+.draft = true,
+---
+
+
+The Zig build system is also a package manager. 
+
+At it's core, the line between a build system and a package manager is very thin: the Zig build system is capable of running arbitrary commands so one could very easily invoke system `curl` to download a tarball, **or one could even bundle Zig source code that implements a custom downloader that gets first built and then run by the build system iself**:
+
+```zig
+const dl = b.addExecutable(.{
+  .name = "fancy-downloader",
+  .root_source_file = "src/downloader.zig",
+});
+
+const run_dl = b.addRunArtifact(dl);
+run_dl.addArg("https://link-to-tarball.com");
+const tarball_path = run_dl.addOutputFileArg("tarball.tar.gz");
+
+// extract the tarball, ...
+```
+
+Things of course become more complicated once you factor in dependency graphs,
+version selection, etc, which this is why Zig build has a first-class concept of dependencies, meaning that correct usage of the Zig build system looks more like this:
+
+

@@ -90,7 +90,7 @@ Go is not blazing-fast. Go is not super memory-efficient. Go doesn't have the ab
 
 Go is faster than Java / C#, more memory-efficient than Java / C#, and definitely has better concurrency than Java / C#. **Go is simple so that all of this can hold true when confronting the average Go program with the average Java / C# program.** It doesn't matter whether Go is truly faster than C# or Java in an absolute sense. The average Java / C# application will be very different than the best theoretical program, and the amount of foot guns in those languages is huge compared to Go. If you want an example, [take a look at this talk on C# concurrency](https://www.youtube.com/watch?v=J0mcYVxJEl0), it's  incredible in my opinion how the straightforward use of `await` is **never** correct. Imagine how broken must be the average asynchronous C# application. Actually, ASP.NET applications deadlocking for no apparent reason are not uncommon.
 
-![deadlock table](1*JrvDmC-KS7iL2Aexb-lskA.png "Will it deadlock? (click to zoom)")
+[![Will it deadlock? (click to zoom)](1*JrvDmC-KS7iL2Aexb-lskA.png "A table that shows when a C# program might deadlock.")]($link.asset('1*JrvDmC-KS7iL2Aexb-lskA.png'))
 
 This image was taken from [this blog post](https://medium.com/rubrikkgroup/understanding-async-avoiding-deadlocks-e41f8f2c6f5d) that tries to explain the innumerable ways of breaking concurrency in C#.
 

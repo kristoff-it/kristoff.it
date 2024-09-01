@@ -162,7 +162,7 @@ A while ago I started working on [OkRedis, a Redis client library written in Zig
 <div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zeLToGnjIUM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-<center><i>"Modeling Data Concurrency with Asynchronous I/O in Zig"</i></center>
+<div style="text-align:center"><i>"Modeling Data Concurrency with Asynchronous I/O in Zig"</i></div>
 ```
 
 

@@ -11,7 +11,7 @@
 
 C and C++ are kings when it comes to writing efficient software and the C ABI is the lingua franca of software interoperability, allowing C libraries to be used by almost any other language. This ubiquity, coupled with the rise of free and open source software development, has created over the course of the last 40 years a humongous collection of libraries and tools that make up what can be rightfully described as **the critical infrastructure of modern software**.
 
-![XKCD Dependency](dependency.png "You can bet that's a C/C++ project. From xkcd.")
+![You can bet that's a C/C++ project. From xkcd.](dependency.png "XKCD comic where a small open source project represented as a thin stick is holding up a mountain of other software projects (represented as boxes).")
 
 The reason why we can often get away with using languages like Python or JavaScript to drive resource-intensive computations, is because under the hood somebody took years to perfect a C implementation of a key procedure and shared it with the world under a permissive license.
 
