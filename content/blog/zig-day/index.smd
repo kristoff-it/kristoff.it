@@ -1,0 +1,74 @@
+---
+.title = "Zig Day",
+.description = "A suggestion for better Zig meetups.",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-09-04T00:00:00"),
+.draft = false,
+---
+If you're trying to learn Zig in 2024, one key ingredient is still interacting with the Zig community. More docs, blog posts, videos about Zig are getting released over time, but in my opinion direct collaboration is still the most effective way to dispel unknown unknowns, get unblocked when you're stuck, and improve your overall coding style by adopting new patterns as they get discovered by other members of the community.
+
+When it comes to interacting socially, meetups are a staple event for software engineers, but **in this blog post I'd like to present a different event format that I believe is a much more effective at knowledge-sharing, at least for communities with a "Zig vibe"**.
+
+## Open Source Saturday Milan
+
+Over the last year I've attended a few times a recurring event in Milan titled "[Open Source Saturday](https://www.meetup.com/open-source-saturday-milano/)". The format works like this:
+
+1. Meet on Saturday at 9:30AM in a place where there's space to sit with a laptop and chat for most of the day (like an empty office or a co-working space, for example).
+2. Stand in a circle and, one by one, have every attendee introduce themselves. They should also mention what they plan to work on during the day, if they have something in mind.
+3. After introductions are over, every person decides if they want to commit to what they mentioned wanting to work on, or if they prefer to join somebody else, maybe because they found another idea more interesting.
+4. People divide in small groups and everybody works on stuff / chats for the rest of the morning.
+5. Lunch happens in some way that makes logistical sense for where you are (at Open Source Saturday people usually go to a nearby restaurant).
+6. Once lunch is over, people stand in a circle again and give a very short report about how things are going ("Reading more about X as planned", "We expected to work on Y but actually ended up doing Z", etc), just to keep everybody informed of what's going on.
+7. Everybody resumes collaboration in groups till they decide to go home.
+8. Optionally, you can have one last round of progress reports at the end of the day with those who stayed till the end.
+
+At Open Source Saturday people work on whatever they want, with the only restriction that it needs to be something that is released under an Open Source license.
+
+I've personally enjoyed this format tremendously and would encourage all Zig meetup organizers to give it a shot if, you can afford to do so logistically. 
+
+Unlike regular meetups, this event requires access to an office or co-working space for nearly a full weekend day, which I understand isn't always easy to arrange. However, if you manage to pull it off, the experience can be far more enjoyable than a typical meetup — at least, that was my experience.
+
+## Spicing up the format
+
+The Open Source Saturday format is really solid. If you (as an organizer) feel a bit uneasy about the standing-up stuff, maybe because it reminds you of some other daily *ceremony*, resist the temptation of skipping it because it really helps facilitate interactions between attendees that would otherwise not happen reliably.
+
+That said, experimenting with formats can be rewarding if done with proper care. For example you might host a single 20m long talk whenever somebody expresses an interest in presenting something.
+
+As presented, this is a very under-specified idea and finetuning it is your job (and joy) as an organizer. Topic preference, when to schedule the talk during the day, trying to convince some attendees to give a talk are all key things that can make or break this idea, so try to build a critical eye for *designing* event formats.
+
+Maybe the best thing for you to add is not a talk, but something else entirely (or nothing at all).
+
+## What's wrong with regular meetups?
+
+In my experience meetups tend to have this format:
+
+1. Meet at the end of the day (e.g. 6:30PM)
+2. Listen to 1 long talk or 2 shorter ones
+3. (sometimes) eat some finger food offered by the organizers, while chatting briefly before getting kicked out of the office by annoyed & tired hr/operations people
+4. Move to a nearby pub to continue chatting, eating, and drinking
+
+The fact that this format is so popular means that it has a combination of structural properties that make it (1) easy enough for organizers to setup (2) valuable enough for people to go. In other words, its longevity is proof that it's not bad.
+
+That said, for me it's not a time/energy-effective way of getting the kind of interactions that I want.
+
+I want to chat with people, and meetups don't always make that easy: you can't chat during talks, and the pub also doesn't make it easy either (loud music, tight spaces, etc).
+
+I want to show / be shown cool projects made by me / other people, and that requires time to open a laptop somewhere and talk for more than 5mins at a time.
+
+I want to actually collaborate with people and that requires space for at least one additional laptop plus everything mentioned above.
+
+In other words, I'm just not part of the core audience of regular meetups, and if the same applies to you too, then consider organizing a Zig Day.
+
+## In Conclusion
+
+If you've attended any of the [Softare You Can Love](https://softwareyoucan.love) events in Milan, you will certainly remember the day of the conference where no talks were scheduled and we all sat on tables and spent the whole day chatting in front of our laptops. 
+
+![](sycl1.jpg "A photo from SYCL 2022 showing a group of people sitting at a table with their laptops open.")
+
+
+When we started doing this, I didn't know about Open Source Saturday and it didn't immediately occur to me that the same format could be adapted to a recurring meetup format, but seeing Open Source Saturday has been proof that not only it is possible in theory, but also that it can work really well in practice.
+
+If you do end up organizing a Zig Day, let me know how it went :^)
+
+
