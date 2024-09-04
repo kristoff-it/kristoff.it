@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Sun, 01 Sep 2024 17:08:16 +0000</lastBuildDate>
+		<lastBuildDate>Wed, 04 Sep 2024 14:43:11 +0000</lastBuildDate>
+		
+			<item>
+				<title>Zig Day</title>
+				<link>https://kristoff.it/blog/zig-day/</link>
+				<pubDate>Wed, 04 Sep 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/zig-day/</guid>
+			</item>
 		
 			<item>
 				<title>Improving Your Zig Language Server Experience</title>
