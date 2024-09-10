@@ -1,0 +1,123 @@
+---
+.title = "How To Write More Blog Posts",
+.description = "AKA the three laws of mental thermodynamics.",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-09-10T00:00:00"),
+.draft = false,
+---
+You are a software engineer and have the luxury of facing interesting problems. **You would like to tell others about the interesting stuff that you work on**, but once your pen is pointed at blank paper (or your cursor is at offset 0 of an empty file), **you just don't know how to make progress**.
+
+In this post I have some advice for you, but beware: advice for complex problems (writing *is* complex) usually has to be either actionable but narrowly applicable, or widely applicable but very high-level.
+
+I'm going for the second kind, which means that you have good chances that your issues are addressed at some level by this post, but it's going to be up to you to figure out the details of your specific situation. 
+
+# The first law of mental thermodynamics
+
+You won't be able to consistently get writing done unless you *truly* believe it's a valuable investment for your energy.
+
+Some would say "*subconsciously*" instead of "truly", but the point is that **writing is not something that you can *convince* yourself is important any more than you can *convince* yourself that something is not boring** ([Veritasium](https://www.youtube.com/watch?v=LKPwKFigF8U), [Vsauce](https://www.youtube.com/watch?v=Qwd25JV-jnU)).
+
+This is not unique to writing: we all have an internal compass that gives a score to all the activities we could pour our energies into, and you can't just consciously make the compass point in an arbitrary direction.
+
+Given this, then the first question that we need to face is: **why is the act of writing not registering as a truly valuable activity for your internal compass?**
+
+There can be plenty of answers to this question, but chances are that you tried in the past and found that it required too much effort for the amount of value it produced in return.
+
+Since this is a "how to" post, I will immediately jump to the life hack part, and leave to you the task of doing introspective analysis, including figuring out what exactly is *value* in this context.
+
+So here's the life hack: one great way to have something register as valuable for our internal compass is to have others tell us that it is valuable. This is not a universal solution, but it will work *extremely* well for *almost* everybody.
+
+In other words, **write with the explicit goal of popularity**.
+
+Please note that I'm not saying that this is (or should be) the ultimate goal of writing. What I'm saying is that *if* you want to write more *but* have difficulty doing so, *then* writing with the explicit goal of crafting a popular blog post might help.
+
+Having your blog post be commented by your friends, or even featured on Hacker News, Lobsters, and other link aggregators will feel flattering and will definitely send a jolt to your internal compass, recalibrating its internal mechanisms.
+
+Additionally, while writing for popularity might seem a shallow goal, it is perfectly rational to want others to listen to what we have to say. 
+
+Of course one could overfit this particular goal and miss the more important goals hidden behind it, but writing a blog post that is never going to be read by anybody is dangerously close to a tree falling in a forest without anybody to hear it.
+
+# The second law of mental thermodynamics
+
+Ok so we want to write for popularity, **how do we write something popular then?**
+
+In my experience, **the only thing that makes a technical blog post popular is if it teaches something to the reader; nothing else.** But beware that there's a big caveat!
+
+**Creating an informative blog post doesn't mean that it will teach anything to the reader**. It takes energy for people to read something and there's an ocean of things that they could be reading, which means that they too have their own internal compass to contend with.
+
+**So how do you teach developers anything if being informative is not enough?**
+
+Teaching means that your "students" are presently at point `X` in their path towards a better understanding of software engineering, and that you provide them convenient access to information that can get them to `X+1`.
+
+Information for moving from `X-1` to `X` is not going to be valuable to them, as that's stuff they already know. 
+
+Information for moving from `X^2` to `(X^2) + 1` will also not be very valuable because it's too far from where they're standing right now, so your information will be less valuable than anything between `(X, X^2]`.
+
+That said, in reality we don't have a teacher-student relationship, as we're all peers trying to become better at our craft, which means that everybody is at different stages of progress, and also aiming to reach different points at the horizon.
+
+# The third law of mental thermodynamics
+
+A compelling blog post is one that either deliberately or by accident ends up identifying a wide slice of people who would immediately benefit from consuming the content.
+
+Statistically speaking, a compelling blog post then is one that is in tune with the times, and that can bring something new to the table. 
+
+That's not easy, as it first requires embracing the [*zeitgeist*](https://en.wikipedia.org/wiki/Zeitgeist) (the average level of understanding of people in our field, if you don't like German words), and surpassing it second.
+
+If you're a passionate software engineer, it's certainly possible to exceed the average level of understanding in the specific area of software engineering you're most familiar with. However, expertise alone isn't enough.
+
+The more skilled you become in a particular niche, the easier it is to surpass the general knowledge of the field. But at the same time, the audience who can truly benefit from your insights will grow smaller.
+
+Since our goal is to create something popular, you'll need to work harder to find a fresh perspective that can be *truly* valued by a broader audience.
+
+This might require for you to write about stuff that you yourself might find trivial (given your expertise), but **the silver lining is that the more people you push to an X+1 level of understanding, the more advanced your topics can be.**
+
+There's a lot more that can be said on this topic, but if you're a passionate software engineer you will definitely figure it out as you go, and if you're a marketer reading this blog post, sorry, I'm deliberately withholding information from you [;^)](mailto:loris@kristoff.it?subject=paid%20consultation)
+
+# In conclusion
+
+For the sake of completeness, I should point out that it is possible that your internal compass is right, and that writing is not all that important for your life, so don't hold an absolute belief that you *have* to get better at it.
+
+That said, writing can be extremely impactful in modern society and it's much more probable that for some reason or another it has never worked out well for you.
+
+If you're young (let's say teenager up to mid twenties) you should also be aware that your internal compass probably hasn't yet fully figured out where the magnetic poles of your universe are. If you find yourself getting excited about stuff and then bored after awhile, never *finishing* anything, know that it's perfectly normal and as you grow you will most probably gain a more stable internal compass.
+
+To recap my high-level suggestions in a single sentence: **leverage your passion and insight of our craft to move people the next level of understanding and obtain in exchange social proof that your writing is valuable.**
+
+Note that this is a strategy to get you in a position where you can be motivated to write more over time. This is not your end goal, but rather a means to an end (becoming a better writer). What you should do once you get there, is entirely up to you.
+
+**As for more tactical, actionable advice:**
+
+1. Own your content, don't gift it to a random platform.
+2. Don't overthink the presentation layer too much, once your stuff is readable on desktop and mobile, you're good. Content is king.
+3. Comment sections in personal blog sites are either dead or they suck, leave it to link aggregators and other social platforms the role of collecting comments.
+
+My suggestion is to create a static website if you don't have one already and to use a static site generator to publish your content.
+
+I've made Zine, an open source static site generator written in Zig, and my recommendation is to use it in combination with GitHub Pages to get started (you can find instructions on the official website).
+
+**[https://zine-ssg.io](https://zine-ssg.io)**
+
+Aim to write 1000 words per blog post and never go over 1600, at least in the beginning. Once you've published it, make sure to share it in all the appropriate places: discord servers, reddit, linkedin, twitter, mastodon, etc.
+
+Don't forget that your goal is to get eyeballs on your blog post so be deliberate in promoting it (but always in a tasteful manner, of course).
+
+**If you have problems with writing, I wish you good luck in solving them and sincerely hope I will get one day to enjoy something great written by you.**
+
+---
+
+## P.S. 
+
+About social media, especially LinkedIn.
+
+Writing for popularity is a trick that you can play on yourself to great effect but, unfortunately, others can play it on you as well, especially when those *others* is a social media platform with built-in comment, "thumbs up", and re-share functionality.
+
+It might seem a bit arbitrary to complain about social media platforms: we did say that we wanted popularity, and those platforms do help with that, so what's there to complain about?
+
+Well, those platforms create their own bubbles where the *language of the medium* deviates significantly from normality. Xitter (the X is pronounced like in Xiaiomi) for example favors unsubstantiated hot takes because of its microblogging nature.
+
+LinkedIn, for a variety of cursed reasons, is writing hell. The style that people have come to expect from LinkedIn posts is in my opinion nothing short of revolting, and if you have become proficient in it, beware that outside of LinkedIn it's an **immediate** turnoff. 
+
+You decide what you want to prioritize, but I personally see LinkedIn as a particularly bad "local maximum" for writing and I would encourage you to start posting your content on your own blog and to only post a link to LinkedIn. You will lose some positive feedback in the immediate, but you stand to gain much more.
+
+I do publicize my stuff on LinkedIn, [but I pretty much never even open it](https://github.com/kristoff-it/simplex) (nor other social media).
