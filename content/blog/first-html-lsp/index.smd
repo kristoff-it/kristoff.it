@@ -63,7 +63,7 @@ As mentioned in the beginning, **SuperHTML is a CLI tool that can also be used i
 
 That said, LSP integration is probably the main way most users will access its functionality in the future, so it is worth making that experience as streamlined as possible.
 
-Microsoft has been cooking for a while WASI support in VSCode and, with a [gentile nudge](https://github.com/microsoft/vscode-wasm/pull/196) from [Matthew Lugg](https://github.com/mlugg) (Zig core team), they now have a working extension that allows language server authors to bundle a WASM build of their Language Server directly into their VSCode extension.
+Microsoft has been cooking for a while WASI support in VSCode and, with a [gentle nudge](https://github.com/microsoft/vscode-wasm/pull/196) from [Matthew Lugg](https://github.com/mlugg) (Zig core team), they now have a working extension that allows language server authors to bundle a WASM build of their Language Server directly into their VSCode extension.
 
 Matthew Lugg's fix was merged yesterday and as soon as it was released, I published a new version of the SuperHTML extension that doesn't require you to get the CLI tool separately anymore.
 
