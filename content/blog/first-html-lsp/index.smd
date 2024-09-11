@@ -7,7 +7,7 @@
 .draft = false,
 ---
 
-This might sound hard to believe, but I published the first ever Language Server for HTML that reports errors, and then I also gained a second world-first after that.
+This might sound hard to believe, but as far as I know, I published the first ever Language Server for HTML that reports syntax errors, and then I also gained a second world-first after that.
 
 - [VSCode extension](https://marketplace.visualstudio.com/items?itemName=LorisCro.super) ([OpenVSX](https://open-vsx.org/extension/LorisCro/super)) (or search "SuperHTML" in VSCode directly)
 - [Source code](https://github.com/kristoff-it/superhtml) and  prebuilt binaries
