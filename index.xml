@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Tue, 10 Sep 2024 16:54:38 +0000</lastBuildDate>
+		<lastBuildDate>Wed, 11 Sep 2024 15:15:05 +0000</lastBuildDate>
+		
+			<item>
+				<title>The First HTML LSP That Reports Syntax Errors</title>
+				<link>https://kristoff.it/blog/first-html-lsp/</link>
+				<pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/first-html-lsp/</guid>
+			</item>
 		
 			<item>
 				<title>How To Write More Blog Posts</title>
