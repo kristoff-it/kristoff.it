@@ -15,7 +15,7 @@ This might sound hard to believe but, as far as I know, I published the first ev
 
 **Note that, while I will refer to SuperHTML as a Language Server throughout the post, the CLI tool can also be used directly from the command line.**
 
-Additionally, **it should be noted that SuperHTML still has some missing features, caveat emptor.**
+Additionally, **it should be noted that SuperHTML still has some missing features** (see the GitHub repo for more information).
 
 ## The status quo
 Open VSCode and type in a new file some wrong HTML code, like `</span>` (i.e. closing a tag that was never opened). VSCode won't bat an eye.
