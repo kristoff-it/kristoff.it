@@ -24,7 +24,7 @@ Open VSCode and type in a new file some wrong HTML code, like `</span>` (i.e. cl
 
 Do the same with your favorite editor and chances are that you will get the same behavior. Why? It turns out that a lot of other editors ([Neovim](https://github.com/neovim/nvim-lspconfig/blob/97e72e3a3bd3ae2034c2884da1253341409c2076/lua/lspconfig/server_configurations/html.lua#L5), [Helix](https://github.com/helix-editor/helix/blob/237cbe4bca46eed52efed39ed75eb44aaccbdde3/languages.toml#L104), [Zed](https://github.com/zed-industries/zed/blob/13c553c50f38af721cb51d775b898d4fda20ccb0/extensions/html/extension.toml#L9-L11), to name a few) use the same HTML Language Server that VSCode comes with.
 
-Editors that provide you with ***diagnostics*** (the correct term for when a language server reports syntax errors and other squiggly things about your code) for HTML do exist, like JetBrains Webstorm for example, but those don't use a Language Server as in [LSP](https://microsoft.github.io/language-server-protocol/). 
+Editors that provide you with ***diagnostics*** (the correct term for when a language server reports syntax errors and other squiggly things about your code) for HTML do exist, like JetBrains Webstorm for example, but those don't use a Language Server as in [LSP](https://microsoft.github.io/language-server-protocol/), and are proprietary implementations as far as I know. 
 
 Apparently all other editors offloaded to Microsoft the task of writing an HTML Language Server and up until now everybody was fine with what they got.
 
