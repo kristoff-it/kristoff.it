@@ -41,7 +41,7 @@ Let me now tell you about the two best features of the SuperHTML LSP.
 
 The **best feature** of SuperHTML is that [it is](https://github.com/kristoff-it/superhtml/blob/eb9596299e248d128480af9d5eb1ac31b7c4b583/src/html/Tokenizer.zig#L483-L484) based on the official HTML living specification, but it deviates from it when it makes sense to do so.
 
-My favorite example is `<h1>Title<h1>`, which is unfortunately both valid HTML and also an obvious typo.
+My favorite example is `<li>item<li>`, which is unfortunately both valid HTML and also an obvious typo.
 
 It's valid HTML because the spec allows you to omit closing tags sometimes but, in the context of editing HTML by hand, respecting that part of the spec would force the Language Server to hide from you obvious errors like this one.
 
