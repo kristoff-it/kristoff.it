@@ -11,7 +11,7 @@ This might sound hard to believe, but as far as I know, I published the first ev
 
 - [VSCode extension](https://marketplace.visualstudio.com/items?itemName=LorisCro.super) ([OpenVSX](https://open-vsx.org/extension/LorisCro/super)) (or search "SuperHTML" in VSCode directly)
 - [Source code](https://github.com/kristoff-it/superhtml) and  prebuilt binaries
-- [Setup instructions](https://zine-ssg.io/docs/tools/) for other editors.
+- [Setup instructions](https://zine-ssg.io/docs/editors/) for other editors.
 
 **Note that, while I will refer to SuperHTML as a Language Server throughout the post, the CLI tool can also be used directly from the command line.**
 
