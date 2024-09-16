@@ -1,0 +1,8 @@
+---
+.title = "Zine: A Static Site Generator",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-09-05T00:00:00"),
+.draft = false,
+---
