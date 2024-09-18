@@ -54,7 +54,7 @@ SuperMD is a Markdown-like file format for authoring content in a Zine site. The
 
 SuperMD doesn't allow inline HTML nor it supports templating (stuff like [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/)), but in exchange it implements **directives**.
 
-**A SuperMD Directive is expressed as link syntax but can evaluate to a number of different things. **
+**A SuperMD Directive is expressed as link syntax but can evaluate to a number of different things.**
 
 The **link directive** can be used to generate links in a way that is understood (and checked) by Zine:
 
