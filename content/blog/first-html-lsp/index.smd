@@ -57,7 +57,7 @@ See it in action:
 
 []($video.asset('vscode-autoformatting.mp4').autoplay(true).muted(true).loop(true).controls(true))
 
-## The first ever WASM VSCode LSP Extension
+## The first ever WASM WASI VSCode LSP Extension
 
 As mentioned in the beginning, **SuperHTML is a CLI tool that can also be used independently of LSP**.
 
