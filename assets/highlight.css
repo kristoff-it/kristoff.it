@@ -160,3 +160,18 @@ code.python .keyword,
 code.python .attribute {
   color: var(--light-red);
 }
+
+
+
+code.markdown {
+  color: #ccc;
+}
+
+
+code.markdown .text.title {
+  color: var(--light-red);
+}
+
+code.markdown .punctuation {
+  color: var(--light-red);
+}

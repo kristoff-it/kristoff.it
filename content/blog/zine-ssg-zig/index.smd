@@ -1,0 +1,134 @@
+---
+.title = "Zine: A Static Site Generator Written in Zig",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-09-18T00:00:00"),
+.draft = false,
+---
+
+Over the last year I worked on a static site generator written from scratch in Zig. It's called **Zine**, like in *fan***zine** ([wiki](https://en.wikipedia.org/wiki/Zine)) and in this blog post I'll briefly present the reasons why I decided to create my own, and describe what's innovative about it.
+
+If you want to try it out (or just jump straight into the docs) the official website is [https://zine-ssg.io](https://zine-ssg.io).
+
+## Why another SSG?
+
+Over the last few years, I spent a considerable amount of time working on static websites for various projects (such as [the official Zig website](https://ziglang.org)) and initiatives (like [Software You Can Love](https://softwareyoucan.love)).
+
+While my experience won't necessarily match what most developers do with the web, I do think that static websites occupy a valuable niche that the tech world needs to explore more.
+
+Throughout my time building static sites, I’ve used several different SSGs, each of which has shaped my preferences for these tools. Eventually, I found myself wanting features that no existing SSG could offer— and the rest is *commit* history.
+
+**Moreover, with Zine, I hope to inspire the Zig community to craft high-quality websites that promote Zig projects and initiatives.**
+
+## Zine file formats
+
+The most prominent feature of Zine is that every file format it uses has been created from scratch in order to handcraft the content authoring experience. 
+
+### SuperHTML
+
+Zine is in a few ways inspired by [Hugo](https://gohugo.io), but the first thing that I was fully confident I could improve upon was the templating language.
+
+SuperHTML templates are valid HTML and the templating logic is expressed through scripted attributes.
+
+```html
+<ul :loop="$page.tags">
+  <li :text="$loop.it"></li>
+</ul>
+```
+
+The main upside of treating HTML as structured data (as opposed to what `{{ curly braced }}` templating languages do) is that you can very easily catch syntax errors (and also provide autoformatting support).
+
+In [my last blog post](/blog/first-html-lsp/) I talked about how SuperHTML is apparently the first ever HTML language server that reports syntax errors. When the filetype is set to `superhtml`, the language server will enable checks specific to templating logic and report even more errors.
+
+This is what happens if you try to hardcode an `id` inside of a loop, for example.
+
+![](ohno.png)
+
+ SuperHTML can already report a lot of syntax errors, but it's not complete yet. Diagnostic messages need to be improved, and a few checks are still missing, but you can already see that the goal is to catch as many mistakes as possible, as early as possible.
+
+You can read more about SuperHTML in the [official docs](https://zine-ssg.io/docs/superhtml/).
+### SuperMD
+
+SuperMD is a Markdown-like file format for authoring content in a Zine site. The main reason for not using "vanilla" Markdown is that it is my personal opinion that none of the popular dialects tries hard enough to make Markdown a proper content markup format in its own right, and instead they keep using HTML as a crutch whenever Markdown falls short.
+
+SuperMD doesn't allow inline HTML nor it supports templating (stuff like [Hugo Shortcodes](https://gohugo.io/content-management/shortcodes/)), but in exchange it implements **directives**.
+
+**A SuperMD Directive is expressed as link syntax but can evaluate to a number of different things. **
+
+The **link directive** can be used to generate links in a way that is understood (and checked) by Zine:
+
+```markdown
+[foo]($link.sibling('other-post'))
+```
+
+The **image directive** can be used to embed an image in the document, just like vanilla `![]()` syntax does, but with the ability to access various parts of Zine's asset system.
+
+```markdown
+[]($image.buildAsset('generated.png'))
+```
+
+The video directive can do the same for videos, but without the need of inline HTML, as there is no way to express this embed in Markdown otherwise.
+
+```markdown
+[]($video.asset('foo.mp4'))
+```
+
+One last directive worth discussing is `$section`, which allows you to "split" a single content file into multiple chunks that can be rendered independently by SuperHTML. 
+
+This is a key feature that has helped me avoid having to pull a ton of layout concerns into my content files, like I had to do in the past.
+
+***two-columns.smd***
+```markdown
+# [Left Section]($section.id('left'))
+Lorem Ipsum
+
+# [Right Section]($section.id('right'))
+Dolor Something Something
+```
+
+***layout.shtml***
+```html
+<div class="flex-row">
+  <div html="$page.contentSection('left')"></div>
+  <div html="$page.contentSection('right')"></div>
+</div>
+```
+
+Creating sections (and giving `id`s to content through other means) allows you to deep-link to them from other pages.
+
+```markdown
+[specific section]($link.page('two-columns/').ref('left'))
+```
+
+The call to `ref` will add a `#two-column` fragment to the link and of course will result in a build error if the content file doesn't specify any element with that `id` value.
+
+The [official docs](https://zine-ssg.io/docs/supermd/) have the full list of supported directives, their options, and how vanilla Markdown syntax maps to them.
+
+#### Frontmatter
+
+Last but not least, SuperMD files use Ziggy for their frontmatter. See [https://ziggy-lang.io](https://ziggy-lang.io) to learn why I didn't want to settle on YAML, TOML, JSON, etc.
+
+### The asset system
+
+The Zine asset system does two interesting things. 
+
+The first one is that it integrates with the Zig build system, allowing you to reference artifacts that were generated by it.
+
+The second one is that there is no concept of "static" asset directory. Normally, static assets get copied verbatim into the output directory by the SSG unconditionally. Zine doesn't have this concept and instead it performs automatic installation of assets when referenced in a template or a content page.
+
+See the [official docs](https://zine-ssg.io/docs/assets/) for more info.
+
+## In conclusion
+
+Like the official website states right upfront, Zine is still alpha software and using it means participating in its development.
+
+That said, it's already complete enough to support simple up to medium complexity static sites and the authoring experience is in many ways already superior than what you would otherwise get.
+
+**The sites mentioned above, [including the Zig website](https://github.com/ziglang/www.ziglang.org), are all Zine sites** (except the Hugo website, of course).
+
+With Zine I didn't want to mindlessly rewrite a *blazingly fast* copy of something that already exists, but rather **take the opportunity to improve on existing good ideas** (I love Hugo's disciplined approach to content structure, for example) **and innovate whenever I was unsatisfied with the status quo**.
+
+As for speed, Zine is pretty fast. Once the tooling has been built for your machine, it's comparable in speed with Hugo (which is already really good), rebuilds are instant, and the best thing is that I haven't done any performance optimization work yet.
+
+If you were looking for an excuse to pick up writing, go to [https://zine-ssg.io](https://zine-ssg.io) and start *making art with your words*.
