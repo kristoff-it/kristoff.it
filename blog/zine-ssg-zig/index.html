@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Zine: A Static Site Generator Written in Zig
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:title" content="Zine: A Static Site Generator Written in Zig">
+    <meta property="og:title" content="Zine: A Static Site Generator Written in Zig">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css">
+    <link type="text/css" rel="stylesheet" href="/highlight.css">
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
+    
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1>Zine: A Static Site Generator Written in Zig</h1>
+  <p class="post-byline">
+    <span>September 18, 2024</span>
+    •
+    <span>6</span>
+    min read • by
+    <b>Loris Cro</b>
+    <span></span>
+  </p>
+  <div id="post-description"></div>
+  <div id="post-body"><p>Over the last year I worked on a static site generator written from scratch in Zig. It's called <strong>Zine</strong>, like in <em>fan</em><strong>zine</strong> (<a href="https://en.wikipedia.org/wiki/Zine" target="_blank">wiki</a>) and in this blog post I'll briefly present the reasons why I decided to create my own, and describe what's innovative about it.</p><p>If you want to try it out (or just jump straight into the docs) the official website is <a href="https://zine-ssg.io" target="_blank">https://zine-ssg.io</a>.</p><h2>Why another SSG?</h2><p>Over the last few years, I spent a considerable amount of time working on static websites for various projects (such as <a href="https://ziglang.org" target="_blank">the official Zig website</a>) and initiatives (like <a href="https://softwareyoucan.love" target="_blank">Software You Can Love</a>).</p><p>While my experience won't necessarily match what most developers do with the web, I do think that static websites occupy a valuable niche that the tech world needs to explore more.</p><p>Throughout my time building static sites, I’ve used several different SSGs, each of which has shaped my preferences for these tools. Eventually, I found myself wanting features that no existing SSG could offer— and the rest is <em>commit</em> history.</p><p><strong>Moreover, with Zine, I hope to inspire the Zig community to craft high-quality websites that promote Zig projects and initiatives.</strong></p><h2>Zine file formats</h2><p>The most prominent feature of Zine is that every file format it uses has been created from scratch in order to handcraft the content authoring experience.</p><h3>SuperHTML</h3><p>Zine is in a few ways inspired by <a href="https://gohugo.io" target="_blank">Hugo</a>, but the first thing that I was fully confident I could improve upon was the templating language.</p><p>SuperHTML templates are valid HTML and the templating logic is expressed through scripted attributes.</p><pre><code class="html"><span class="punctuation bracket">&lt;</span><span class="tag">ul</span> <span class="attribute">:loop</span>=&quot;<span class="string">$page.tags</span>&quot;<span class="punctuation bracket">&gt;</span>
+  <span class="punctuation bracket">&lt;</span><span class="tag">li</span> <span class="attribute">:text</span>=&quot;<span class="string">$loop.it</span>&quot;<span class="punctuation bracket">&gt;</span><span class="punctuation bracket">&lt;/</span><span class="tag">li</span><span class="punctuation bracket">&gt;</span>
+<span class="punctuation bracket">&lt;/</span><span class="tag">ul</span><span class="punctuation bracket">&gt;</span>
+</code></pre>
+<p>The main upside of treating HTML as structured data (as opposed to what <code>{{ curly braced }}</code> templating languages do) is that you can very easily catch syntax errors (and also provide autoformatting support).</p><p>In <a href="/blog/first-html-lsp/">my last blog post</a> I talked about how SuperHTML is apparently the first ever HTML language server that reports syntax errors. When the filetype is set to <code>superhtml</code>, the language server will enable checks specific to templating logic and report even more errors.</p><p>This is what happens if you try to hardcode an <code>id</code> inside of a loop, for example.</p><p><img src="/blog/zine-ssg-zig/ohno.png" alt=""></p><p>SuperHTML can already report a lot of syntax errors, but it's not complete yet. Diagnostic messages need to be improved, and a few checks are still missing, but you can already see that the goal is to catch as many mistakes as possible, as early as possible.</p><p>You can read more about SuperHTML in the <a href="https://zine-ssg.io/docs/superhtml/" target="_blank">official docs</a>.</p><h3>SuperMD</h3><p>SuperMD is a Markdown-like file format for authoring content in a Zine site. The main reason for not using "vanilla" Markdown is that it is my personal opinion that none of the popular dialects tries hard enough to make Markdown a proper content markup format in its own right, and instead they keep using HTML as a crutch whenever Markdown falls short.</p><p>SuperMD doesn't allow inline HTML nor it supports templating (stuff like <a href="https://gohugo.io/content-management/shortcodes/" target="_blank">Hugo Shortcodes</a>), but in exchange it implements <strong>directives</strong>.</p><p>**A SuperMD Directive is expressed as link syntax but can evaluate to a number of different things. **</p><p>The <strong>link directive</strong> can be used to generate links in a way that is understood (and checked) by Zine:</p><pre><code class="markdown">[foo]($link.sibling(&apos;other-post&apos;))
+</code></pre>
+<p>The <strong>image directive</strong> can be used to embed an image in the document, just like vanilla <code>![]()</code> syntax does, but with the ability to access various parts of Zine's asset system.</p><pre><code class="markdown">[]($image.buildAsset(&apos;generated.png&apos;))
+</code></pre>
+<p>The video directive can do the same for videos, but without the need of inline HTML, as there is no way to express this embed in Markdown otherwise.</p><pre><code class="markdown">[]($video.asset(&apos;foo.mp4&apos;))
+</code></pre>
+<p>One last directive worth discussing is <code>$section</code>, which allows you to "split" a single content file into multiple chunks that can be rendered independently by SuperHTML.</p><p>This is a key feature that has helped me avoid having to pull a ton of layout concerns into my content files, like I had to do in the past.</p><p><em><strong>two-columns.smd</strong></em></p><pre><code class="markdown"><span class="punctuation special">#</span> <span class="text title">[Left Section]($section.id(&apos;left&apos;))</span>
+Lorem Ipsum
+
+<span class="punctuation special">#</span> <span class="text title">[Right Section]($section.id(&apos;right&apos;))</span>
+Dolor Something Something
+</code></pre>
+<p><em><strong>layout.shtml</strong></em></p><pre><code class="html"><span class="punctuation bracket">&lt;</span><span class="tag">div</span> <span class="attribute">class</span>=&quot;<span class="string">flex-row</span>&quot;<span class="punctuation bracket">&gt;</span>
+  <span class="punctuation bracket">&lt;</span><span class="tag">div</span> <span class="attribute">html</span>=&quot;<span class="string">$page.contentSection(&apos;left&apos;)</span>&quot;<span class="punctuation bracket">&gt;</span><span class="punctuation bracket">&lt;/</span><span class="tag">div</span><span class="punctuation bracket">&gt;</span>
+  <span class="punctuation bracket">&lt;</span><span class="tag">div</span> <span class="attribute">html</span>=&quot;<span class="string">$page.contentSection(&apos;right&apos;)</span>&quot;<span class="punctuation bracket">&gt;</span><span class="punctuation bracket">&lt;/</span><span class="tag">div</span><span class="punctuation bracket">&gt;</span>
+<span class="punctuation bracket">&lt;/</span><span class="tag">div</span><span class="punctuation bracket">&gt;</span>
+</code></pre>
+<p>Creating sections (and giving <code>id</code>s to content through other means) allows you to deep-link to them from other pages.</p><pre><code class="markdown">[specific section]($link.page(&apos;two-columns/&apos;).ref(&apos;left&apos;))
+</code></pre>
+<p>The call to <code>ref</code> will add a <code>#two-column</code> fragment to the link and of course will result in a build error if the content file doesn't specify any element with that <code>id</code> value.</p><p>The <a href="https://zine-ssg.io/docs/supermd/" target="_blank">official docs</a> have the full list of supported directives, their options, and how vanilla Markdown syntax maps to them.</p><h4>Frontmatter</h4><p>Last but not least, SuperMD files use Ziggy for their frontmatter. See <a href="https://ziggy-lang.io" target="_blank">https://ziggy-lang.io</a> to learn why I didn't want to settle on YAML, TOML, JSON, etc.</p><h3>The asset system</h3><p>The Zine asset system does two interesting things.</p><p>The first one is that it integrates with the Zig build system, allowing you to reference artifacts that were generated by it.</p><p>The second one is that there is no concept of "static" asset directory. Normally, static assets get copied verbatim into the output directory by the SSG unconditionally. Zine doesn't have this concept and instead it performs automatic installation of assets when referenced in a template or a content page.</p><p>See the <a href="https://zine-ssg.io/docs/assets/" target="_blank">official docs</a> for more info.</p><h2>In conclusion</h2><p>Like the official website states right upfront, Zine is still alpha software and using it means participating in its development.</p><p>That said, it's already complete enough to support simple up to medium complexity static sites and the authoring experience is in many ways already superior than what you would otherwise get.</p><p><strong>The sites mentioned above, <a href="https://github.com/ziglang/www.ziglang.org" target="_blank">including the Zig website</a>, are all Zine sites</strong> (except the Hugo website, of course).</p><p>With Zine I didn't want to mindlessly rewrite a <em>blazingly fast</em> copy of something that already exists, but rather <strong>take the opportunity to improve on existing good ideas</strong> (I love Hugo's disciplined approach to content structure, for example) <strong>and innovate whenever I was unsatisfied with the status quo</strong>.</p><p>As for speed, Zine is pretty fast. Once the tooling has been built for your machine, it's comparable in speed with Hugo (which is already really good), rebuilds are instant, and the best thing is that I haven't done any performance optimization work yet.</p><p>If you were looking for an excuse to pick up writing, go to <a href="https://zine-ssg.io" target="_blank">https://zine-ssg.io</a> and start <em>making art with your words</em>.</p></div>
+  <hr>
+  <div id="prev-next">
+    <span>
+      <a href="/blog/first-html-lsp/">←
+        <span>The First HTML LSP That Reports Syntax Errors</span></a>
+    </span>
+    <span></span>
+    <span></span>
+    <small>&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+    </div>
+  </body>
+</html>

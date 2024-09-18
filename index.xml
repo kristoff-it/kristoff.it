@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Mon, 16 Sep 2024 00:52:58 +0000</lastBuildDate>
+		<lastBuildDate>Wed, 18 Sep 2024 15:33:44 +0000</lastBuildDate>
+		
+			<item>
+				<title>Zine: A Static Site Generator Written in Zig</title>
+				<link>https://kristoff.it/blog/zine-ssg-zig/</link>
+				<pubDate>Wed, 18 Sep 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/zine-ssg-zig/</guid>
+			</item>
 		
 			<item>
 				<title>The First HTML LSP That Reports Syntax Errors</title>
@@ -19,13 +26,6 @@
 				<link>https://kristoff.it/blog/write-more/</link>
 				<pubDate>Tue, 10 Sep 2024 00:00:00 +0000</pubDate>
 				<guid>https://kristoff.it/blog/write-more/</guid>
-			</item>
-		
-			<item>
-				<title>Zine: A Static Site Generator</title>
-				<link>https://kristoff.it/blog/zine/</link>
-				<pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate>
-				<guid>https://kristoff.it/blog/zine/</guid>
 			</item>
 		
 			<item>
