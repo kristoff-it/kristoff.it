@@ -1,0 +1,47 @@
+---
+.title = "The Three Hardest Problems in Software Engineering",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-09-19T00:00:00"),
+.draft = false,
+---
+
+
+You might already be familiar with the two hardest problems in Computer Science, but here I'm talking about *Software Engineering*.
+
+Naming things is still very hard, but what are the three things that you wish the software engineering industry got better at? Or, conversely, what are your top three sources of frustration?
+
+This is my list.
+
+## 1. User-hostile software
+
+Way too much software is botched even before the first line of boilerplate gets flushed to disk. The people running tech companies are always busy chasing the latest trend in order to milk one more financing round off of gullible investors and the end result is software that makes no sense.
+
+In the meantime, as a user, you're suck in the weird limbo of getting fed free services, but forget any form of freedom (your data belongs to the service provider) and be ready for the eventual enshittification.
+
+!["Keep showing the popup, we'll wear them down eventually" -- Manager at Twitter "This is a great idea, take notes" -- Product manager at Microsoft ](twitter.jpg "A photo of a popup in the twitter app that asks to neable notifications. You can't say 'no', only 'not now' to it.")
+
+And if you're a non-tech-savvy user, good luck not getting scammed by horribly user hostile airplane travel websites, or insane apps that want a $10+ monthly subscription for basic functionality (and let's not forget the 30% that the app store takes from the transaction).
+
+And while we're on the subject of websites, [check out this link](https://modem.io/blog/blog-monetization/), and beware: **it's satire**. I worry that without this warning you might not be able to tell.
+
+## 2. Soul-crushingly slow software
+
+Websites are laggy, editors are laggy, everything takes forever to process a click and it takes hundreds of megabytes to do so. Desktop applications also take forever to do anything, sometimes because they're actually web pages in disguise (thanks Electron!), sometimes because they were implemented with religious observance of Object Oriented Programming, covid-like memory allocation policies (minimum 6 cache lines of distance between individual allocations), and a twisted love for destructors.
+
+Good thing that Rust is becoming popular, except that its main focus is make sure that you can keep allocating things one at a time safely, all while running destructors all over the place. And even then, [why not just `Box<Rc<TheThing>>`  to get rid of that annoying borrow checker error](https://thoughtbot.com/blog/how-i-have-fun-with-rust)? ([my comment on this](https://lobste.rs/s/qceu0k/how_i_have_fun_with_rust#c_hip8oc))
+
+The web doesn't have much interest in performance, and everybody likes to lampoon JS frameworks, but in doing so we're not doing justice to the insane soup of shitty infrastructure offerings that the cloud has been peddling for years. 
+
+The cloud should be just a source of compute units, but if that's all that it was, then the various clouds would have to compete on price, and *nobody* wants that. 
+
+So let's make sure to wrap everything in a Docker container inside of a Kubernetes pod and to make every trivial thing a FaaS, nevermind that serverless has dns lag, cold start lag, runtime lag, json rpc serialization lag, and all of this while running on the server equivalent of a clown car, given how overcrowded those machines are.
+
+## 3. Buggy software
+
+Bugs exist and are annoying, but in my experience this is something that I hit way less often than the issues above. It's too often that my freedom as a user is restricted because of an extravagant business model, or that my workflow is worsened because of comically slow software.
+
+Bugs happen, and sometimes they're bad. Sometimes a bug leaks your passwords and personal info. But every single time I've been notified that one of my passwords leaked, I've had 2FA turned on and nothing happened after. Bad out comes can still happen, but our industry has actually improved a lot in the last few years, while the same cannot be said for the previous two points.
+
+I wish our industry focused on these problems proportionally to how much they affect users daily. Instead most discourse I hear about improving the state of software engineering is about hyperfocusing *on a subset* of the last point.
