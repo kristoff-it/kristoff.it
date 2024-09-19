@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Wed, 18 Sep 2024 20:02:28 +0000</lastBuildDate>
+		<lastBuildDate>Thu, 19 Sep 2024 17:43:49 +0000</lastBuildDate>
+		
+			<item>
+				<title>The Three Hardest Problems in Software Engineering</title>
+				<link>https://kristoff.it/blog/three-hardest-problems/</link>
+				<pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/three-hardest-problems/</guid>
+			</item>
 		
 			<item>
 				<title>Zine: A Static Site Generator Written in Zig</title>
