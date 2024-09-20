@@ -101,7 +101,7 @@ Creating sections (and giving `id`s to content through other means) allows you t
 [specific section]($link.page('two-columns/').ref('left'))
 ```
 
-The call to `ref` will add a `#two-column` fragment to the link and of course will result in a build error if the content file doesn't specify any element with that `id` value.
+The call to `ref` will add a `#left` fragment to the link and of course will result in a build error if the content file doesn't specify any element with that `id` value.
 
 The [official docs](https://zine-ssg.io/docs/supermd/) have the full list of supported directives, their options, and how vanilla Markdown syntax maps to them.
 
