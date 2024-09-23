@@ -45,7 +45,7 @@ Just to give you an idea, you need to build for: `arm-linux` (some embedded boar
 
 As the bare minimum, **and this has to happen for every release of your package!** The list is not fixed in stone, and some combinations are going away (like `x86_64-macos`), but the list is overall getting longer, not shorter (e.g. RISCV).
 
-If you look at [some PyPI stats](https://py-code.org/stats), you will see that PyPI is indeed growing exponentially and that most of the occupied space is prebuilt executables (the red part of the pie chart, representing75% of the total space).
+If you look at [some PyPI stats](https://py-code.org/stats), you will see that PyPI is indeed growing exponentially and that most of the occupied space is prebuilt executables (the red part of the pie chart, representing 75% of the total space).
 
 [click to enlarge]($image.asset('exp.png').linked(true))
 []($image.asset('pie.png').linked(true))
