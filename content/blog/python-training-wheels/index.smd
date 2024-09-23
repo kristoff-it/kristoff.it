@@ -86,7 +86,7 @@ To be clear, somebody must still put in the blood and tears required to package 
 
 Containers barely give you the "from any host" part.
 
-A while ago I went on Developer Voices to talk about the Zig build system: 
+A while ago I went on Developer Voices to talk about the Zig build system (I did also talk about Python as a specific example): 
 
 ```=html
 <iframe width="560" height="315" src="https://www.youtube.com/embed/i9nFvSpcCzo?si=4mq1KkNZpuiXl1uT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
