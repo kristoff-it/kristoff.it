@@ -3,7 +3,7 @@
 .description = "Snakes on a bike!",
 .author = "Loris Cro",
 .layout = "post.shtml",
-.date = @date("2024-09-19T00:00:00"),
+.date = @date("2024-09-23T00:00:00"),
 .draft = false,
 ---
 
