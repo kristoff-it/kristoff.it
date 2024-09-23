@@ -248,11 +248,12 @@
 
  figure img {
    display: block;
-   max-width: 400px;
+   max-width: 100%;
    width: 100vw;
    margin-left: auto;
    margin-right: auto;
    padding: 0;
+   margin-bottom: 10px;
 
  }
 
@@ -264,6 +265,7 @@
 
  figcaption {
    text-align: center;
+   font-size: 0.9em;
  }
 
  iframe {
