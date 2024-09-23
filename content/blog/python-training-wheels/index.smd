@@ -128,7 +128,7 @@ Here's one way it could work:
 
 Simon Willison is absolutely right that big ecosystems require strategical thinking. Without a concrete effort by power structures to steer the community towards a promising point on the horizon, all that remains are short term incentives, partial information, and a lot of space for actors with hidden agendas to grease the ~~wheels~~ gears they like the most.
 
-**Python could very well continue relying on the support of the Big Tech industry for a very long time but**, even if we were to set aside the otherwise *extremely real* problems of power dynamics between organizations, **the long-term sustainability of an exponentially growing dataset still remains** and Python is now mature enough to start inspecting and rebuilting the foundations it built its ecosystem upon.
+**Python could very well continue relying on the support of the Big Tech industry for a very long time but**, even if we were to set aside the otherwise *extremely real* problems of power dynamics between organizations, **the long-term sustainability of an exponentially growing dataset still remains** and Python is now mature enough to start inspecting and fixing the foundations its ecosystem is built upon.
 
 At the Zig Software Foundation we look up to the Python Software Foundation as a great example of a fellow 501(c)(3) non-profit organization that was able to grow an incredibly vibrant community, and **we sincerely hope that Python will find a way forward that increases computational efficiency and keeps the ecosystem as independent as possible**, regardless of the technical details of how that outcome is achieved.
 
