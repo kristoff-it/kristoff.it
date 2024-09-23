@@ -15,7 +15,7 @@ When reading Simon Willison’s excellent blog post "[Things I’ve learned serv
 >
 >**(This was a big deal—prior to that agreement there was concern over what would happen if Fastly ever decided to end that sponsorship.)**
 
-Emphasis mine. It would be indeed be hard to survive without that kind of support from a corporation. A user on HN **estimated the yearly cost of this traffict at around 12 million USD/year (according to AWS Cloudfront rates), more than four times the full operating budget of the Python Software Foundation** as of 2024.
+Emphasis mine. It would indeed be hard to survive without that kind of support from a corporation. A user on HN **estimated the yearly cost of this traffic at around 12 million USD/year (according to AWS Cloudfront rates), more than four times the full operating budget of the Python Software Foundation** as of 2024.
 
 We saw the beginnings of this in the Zig project and immediately moved to a [self-hosted solution](https://ziglang.org/news/migrate-to-self-hosting/) but I want to focus on PyPI in this post, so let's try to imagine **a contingency plan for if/when no corporation is going to offer free credits to the Python project anymore.**
 
@@ -118,7 +118,7 @@ Here's one way it could work:
 2. PyPI adds to the package metadata the hash value of each build.
 3. Secondary caches download from PyPI a copy of each build, acting as mirrors.
 4. When a client wants to install a package, it can download the data from a secondary cache, if PyPI decides to delete the original builds.
-5. The client can uses the hash metadata to validate that the downloaded data is what it expects.
+5. The client can use the hash metadata to validate that the downloaded data is what it expects.
 
 **Note how by treating secondary caches *as mirrors*, you don't even need reproducible builds**, which is a nice property, as some C/C++ projects might be particularly resistant to being made fully reproducible, although that's an improvement that could definitely be pursued after an initial solution is in place.
 
