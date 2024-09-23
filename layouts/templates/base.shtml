@@ -24,8 +24,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="$site.asset('main.css').link()">
-    <link type="text/css" rel="stylesheet" href="$site.asset('highlight.css').link()">
+    <link type="text/css" rel="stylesheet" href="$site.asset('main.css').link().suffix('?bust')">
+    <link type="text/css" rel="stylesheet" href="$site.asset('highlight.css').link().suffix('?bust')">
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     <super>
   </head>
