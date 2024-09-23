@@ -25,7 +25,7 @@ Before I begin, I want to make it extremely clear that I'm not involved with the
 
 To answer this question, we need first to get a rough idea of how PyPI works. 
 
-PyPI hosts packages for the Python ecosystem. A Python package can be both source code an prebuilt binaries. The source code is usually Python code, while the binary part is usually prebuilt C/C++ code. 
+PyPI hosts packages for the Python ecosystem. A Python package can contain both source code and prebuilt binaries. The source code is usually Python code, while the binary part is usually prebuilt C/C++ code. 
 
 **One of Python's greatest accomplishments has been democratizing access to C/C++ projects**, but that has the implication that the Python ecosystem has a strong dependency on an ecosystem that it doesn't control. One full of problems and intricacies.
 
