@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Thu, 19 Sep 2024 17:43:49 +0000</lastBuildDate>
+		<lastBuildDate>Mon, 23 Sep 2024 16:35:39 +0000</lastBuildDate>
+		
+			<item>
+				<title>The Python Package Index Should Get Rid Of Its Training Wheels</title>
+				<link>https://kristoff.it/blog/python-training-wheels/</link>
+				<pubDate>Mon, 23 Sep 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/python-training-wheels/</guid>
+			</item>
 		
 			<item>
 				<title>The Three Hardest Problems in Software Engineering</title>
