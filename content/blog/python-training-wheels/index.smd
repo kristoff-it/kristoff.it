@@ -50,7 +50,7 @@ If you look at [some PyPI stats](https://py-code.org/stats), you will see that P
 [click to enlarge]($image.asset('exp.png').linked(true))
 []($image.asset('pie.png').linked(true))
 
-The site even added a funny "Witness this inevitable future" button to extrapolate on the growth curve. But the button is wrong, **this future is all but inevitable, and the only thing Python needs is a clear strategical vision**.
+The site even added a funny "Witness this inevitable future" button to extrapolate on the growth curve. But the button is wrong, **this future is far from inevitable, and the only thing Python needs is a clear strategical vision**.
 
 The main issue with the current situation is that the binary data is both extremely redundant and irreplaceable at the same time. 
 
@@ -65,7 +65,7 @@ While there might be some best practices for Python package authors (probably mo
 Here's finally my contingency plan for PyPI:
 
 1. Leverage progress in the systems programming ecosystem to create repeatable builds.
-2. Turn prebuild binaries from "sources" into cacheable artifacts that can be deleted and reconstructed at will.
+2. Turn prebuilt binaries from "sources" into cacheable artifacts that can be deleted and reconstructed at will.
 3. Institute a way of creating secondary caches that can start shouldering some of the workload.
 
 ### 1. Leverage progress in the systems programming ecosystem
