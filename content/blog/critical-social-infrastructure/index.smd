@@ -1,0 +1,91 @@
+---
+.title = "Critical Social Infrastructure for Zig Communities",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-09-30T00:00:00"),
+.draft = false,
+--- 
+
+In this blog post I want to encourage Zig community members, starting from project authors, to take a more deliberate approach towards building communication channels between our communities scattered across various social platforms.
+
+Andrew Kelley moved a few days ago some of the "instant messaging" portion of the compiler development discussion from Discord to Zulip (you can find a link to it in the list of Zig communities), after the former platform showed him one ad too many (the Zig Discord is still [going strong](https://discord.gg/zig), only the compiler development discussion moved). 
+
+Just before that, Stephen Gutekanst, a prolific member of the Zig community and main author of the [Mach](https://machengine.org) game engine, left Twitter and wrote this in a related [blog post](https://slimsag.com/2024/bye-twitter/):
+
+> The gamedev community and tech twitter used to be _fucking fantastic_, if you curated who you followed on your account (a hard requirement!) **your feed would be full of genuinely interesting tidbits of information - things you could only learn from other gamedevs or people making software**.
+>
+>After the stench/musk wore off, I observed as all of the interesting tech and gamedev people I knew either left X/Twitter to go to (anecdotally):
+>
+>- **Discord** (60% of people)
+>- **Mastodon** (10% of people - I saw many _proclaim_ they would do this, but in practice I find many are not active here)
+>- **No where** - they just left Twitter and stopped sharing short-but-insightful content entirely. When they have more well-formed thoughts, there are blog posts or whatever - **but most interesting thoughts don’t reach that stage and are simply lost to the wind unless you are in direct communication with them**.
+
+(emphasis mine)
+
+I've spoken with some other people and Stephen is not the only one to have had a similar experience.
+
+**For a community of people trying to learn together how to make software you can love, it's critical to be able to share ideas and collaborate**, but the constant ebb and *enshitti*flow of social platforms causes connections to break, and that's a big problem for a community that wanted to be decentralized from the start.
+
+I've had this sentiment already for a while but, as time goes on, it seems more and more obvious that **we need to invest in forms of communication that can stay reliable over time**, where change is a signal that transformation is happening in the community (and thus a new network shape is desirable) and not that the chosen social platform is about to be acquihired / go public / join the AI battle royale.
+
+By the way, this is the same reason why the Zig Software Foundation [started prioritizing Every](https://www.every.org/zig-software-foundation-inc) over [GitHub Sponsors](https://github.com/sponsors/ziglang), as we believe that a fellow 501(c)(3) like Every will prove to be a more reliable tool over time than GitHub, which is apparently [a company "refounded on Copilot" now](https://www.infoworld.com/article/2335377/githubs-all-in-bet-on-ai-may-overlook-git.html).
+
+## Devlogs: a first step towards reliable social infrastructure
+
+**The first step I'm proposing towards building more reliable social infrastructure, is for Zig community projects to start creating a publicly accessible "devlog" microblog.**
+
+As Stephen pointed out in his blog post, there are a lot of small thoughts that might be worth sharing that are not big enough for a full blog post, and those tidbits of information might be an convenient way for you to show others all the insight that goes into your project(s).
+
+Most of us already have a blog, but I bet not that many of us have played with the idea of having a *microblogging* section on our personal websites (or our project's websites).
+
+If you want to see how that could look like, here are a couple of examples:
+
+- [https://ziglang.org/devlog/](https://ziglang.org/devlog/)
+- [https://zine-ssg.io/log/](https://zine-ssg.io/log/)
+
+I think those are two good examples because they show how a devlog can be either more freeform (the ziglang.org example), or more tied to project releases (like Zine's), but even in the second case there are some distinctive differences from a pure changelog:
+
+- the list of entries is curated, giving you the flexibility to highlight what is more interesting for your users / audience
+- it can contain entries (or even just remarks) that you wouldn't want to include in a commit message / changelog, these could be just insight that you stumble upon in the course of working on the project, for example
+- the ability for readers to pull changes via RSS feeds, which is critical for this setup to succeed (more on this later)
+
+It is not a hard requirement for it to be a single page. If it's more convenient for you to have each entry be a separate page (because of that's how your current site thingamajig works, or simply because you prefer it that way), feel free to change things up. 
+
+ Zine has the primitives required to pull it off as a single page ([here's a starting template if you want](https://github.com/kristoff-it/zine-devlog-examples/)), that said, what matters is for devlogs to be a form of *microblogging* so, whatever the setup, it's important that the process is smooth enough for you to be willing to go through it every time you have something small to share.
+
+## Following devlogs
+
+Devlogs have the clear upside that you own your content and that they don't favor ragebait-posting like actual social media platforms do, but on the other hand the absence of an active audience for your devlog means that you are shouting into the void, so to speak.
+
+I would still encourage individuals to use tools like [simplex](https://github.com/kristoff-it/simplex) to broadcast their content on mainstream social media platforms. This will get more eyeballs on your content, but it's probably not the optimal way of reaching other Zig community members.
+
+This is why generating syndication of some kind (RSS, Atom, whatever) is important: it gives an easy way for people interested in your work to get notified when you posted something new. 
+
+For example this is how the Zine devlog looks like in my Discord server.
+
+![](discord.png)
+
+**So my second proposal for building more reliable social infrastructure is to follow the devlogs you like and, if you're a community owner, to consider adding some kind of integration that pulls entries from devlogs you think your community could benefit from**, be it your own stuff or somebody else's.
+
+RSS feeds are not exactly a *winning* technology then it comes to reaching people directly (not a lot of people run around with an RSS reader in their phone), but it is relatively practical for establishing 
+a low-bandwidth communication channel to shared spaces.
+
+## This is just the beginning
+
+If, while reading this post, you thought that doing more microblogging is nowhere near enough to solve the whole problem, I agree, but it's a small incremental step that can be implemented today and that can yield an immediate improvement, even if marginal.
+
+We definitely also need bolder moves, but for now let's try to take it one step at a time, starting from **structuring our communities around the idea that other interesting Zig communities exist out there, and that we should try harder to at least stay informed of what we all are collectively working on.** 
+
+**Conversely, we should also strive to make it easier for others to keep track of what we are doing.** The time for bolder moves will come, but this a strong prerequisite before can we get to those.
+
+While my definition of the three hardest problems in computer science includes "realizing when a problem can't be solved by technology alone" (right after naming things, cache invalidation, and off by one errors), there actually is a hole right now that is perfectly shaped like source code repository.
+
+In the screenshot above where I showed how the Zine devlog integration with my Discord server, you can see that I'm using a random RSS bot service which has occasional issues and wants money to follow more than 5 feeds. 
+
+We clearly need a self-hostable solution, so I'm probably going to work on that next.
+
+
+
+
+
