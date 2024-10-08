@@ -118,6 +118,7 @@
 
  blockquote p {
    margin: 0;
+   margin-bottom: 15px;
  }
 
  @media (prefers-color-scheme:dark) {
