@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/main.css?bust1">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
     <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     
@@ -105,7 +105,7 @@ air nomads
 3 - air nomads
 </code></pre><h2>Other properties of <code>for</code> loops</h2><p>Up until now we saw the new changes to <code>for</code> loops, but if you're new to Zig you might not know all the other things they support, so I'll quickly recap them in this section.</p><h3>Pointer to the element</h3><p>Value captures in Zig should always be understood as immutable copies. To ask for a pointer you can add a <code>*</code> before the capture name.</p><pre><code class="zig"><span class="type qualifier">var</span> <span class="variable">good_digits</span><span class="punctuation delimiter">:</span> <span class="punctuation bracket">[</span><span class="number">3</span><span class="punctuation bracket">]</span><span class="type builtin">usize</span> = <span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span><span class="number">4</span><span class="punctuation delimiter">,</span> <span class="number">2</span><span class="punctuation delimiter">,</span> <span class="number">0</span><span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
 
-<span class="repeat">for</span> <span class="punctuation bracket">(</span><span class="operator">&</span><span class="variable">good_digits</span><span class="punctuation bracket">)</span> |<span class="operator">*</span><span class="variable">d</span>|<span class="keyword"></span> <span class="punctuation bracket">{</span>
+<span class="repeat">for</span> <span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="variable">good_digits</span><span class="punctuation bracket">)</span> |<span class="operator">*</span><span class="variable">d</span>|<span class="keyword"></span> <span class="punctuation bracket">{</span>
    <span class="variable">d</span><span class="operator">.*</span> = <span class="number">6</span><span class="error">;</span>
 <span class="punctuation bracket">}</span>
 
@@ -159,7 +159,7 @@ _</span> = <span class="variable">my_slice</span><span class="punctuation bracke
 
 <span class="repeat">while</span> <span class="punctuation bracket">(</span><span class="variable">idx</span> <span class="operator">&lt;</span> <span class="variable">monster_count</span><span class="punctuation bracket">)</span> <span class="punctuation delimiter">:</span> <span class="punctuation bracket">(</span><span class="variable">idx</span> <span class="operator">+=</span> <span class="number">1</span><span class="punctuation bracket">)</span><span class="keyword"></span> <span class="punctuation bracket">{</span>
    <span class="type qualifier">const</span> <span class="variable">et</span> = <span class="variable">monster_elem_types</span><span class="punctuation bracket">[</span><span class="variable">idx</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">;</span> <span class="comment">// potential oob</span>
-   <span class="type qualifier">const</span> <span class="variable">hp</span> = <span class="operator">&</span><span class="variable">monster_hps</span><span class="punctuation bracket">[</span><span class="variable">idx</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">;</span> <span class="comment">// potential oob</span>
+   <span class="type qualifier">const</span> <span class="variable">hp</span> = <span class="operator">&amp;</span><span class="variable">monster_hps</span><span class="punctuation bracket">[</span><span class="variable">idx</span><span class="punctuation bracket">]</span><span class="punctuation delimiter">;</span> <span class="comment">// potential oob</span>
 
    <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">et</span> <span class="operator">==</span> <span class="punctuation delimiter">.</span><span class="variable builtin">fire</span><span class="punctuation bracket">)</span> <span class="variable">hp</span><span class="operator">.*</span> <span class="error">+|=</span> <span class="number">1</span><span class="error">;</span>
 <span class="punctuation bracket">}</span> 

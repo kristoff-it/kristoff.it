@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="/main.css?bust1">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
     <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
     <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
     
@@ -224,8 +224,8 @@ return acc;</span>
 <span class="comment">// A complete implementation would offer an `append` method.</span>
 <span class="comment">// For now let&apos;s add the new node manually.</span>
 <span class="type qualifier">var</span> <span class="variable">node</span> = <span class="variable">PointList</span><span class="punctuation delimiter">.</span><span class="field">Node</span><span class="punctuation bracket">{</span> <span class="punctuation delimiter">.</span><span class="field">data</span> = <span class="variable">p</span> <span class="punctuation bracket">}</span><span class="punctuation delimiter">;</span>
-<span class="variable">my_list</span><span class="punctuation delimiter">.</span><span class="field">first</span> = <span class="operator">&</span><span class="variable">node</span><span class="error">;
-my_list</span><span class="punctuation delimiter">.</span><span class="field">last</span> <span class="error">=</span> <span class="operator">&</span><span class="variable">node</span><span class="error">;
+<span class="variable">my_list</span><span class="punctuation delimiter">.</span><span class="field">first</span> = <span class="operator">&amp;</span><span class="variable">node</span><span class="error">;
+my_list</span><span class="punctuation delimiter">.</span><span class="field">last</span> <span class="error">=</span> <span class="operator">&amp;</span><span class="variable">node</span><span class="error">;
 my_list</span><span class="punctuation delimiter">.</span><span class="field">len</span> <span class="error">=</span> <span class="number">1</span><span class="error">;</span>
 </code></pre>
 <p>The Zig standard library contains <a href="https://github.com/ziglang/zig/blob/ddf7942aaa6a41296d9338423dcdfb93b915e4df/std/linked_list.zig" target="_blank">a couple of fleshed out implementations of linked lists</a>.</p><h2>Compile-time reflection</h2><p>Now that we have covered all the basics, we can finally move onto the things that make Zig metaprogramming truly powerful and fun to use.</p><p>We already saw an example of reflection when <code>parseInt</code> was checking <code>T.is_signed</code>, but in this section I want to focus on a more advanced usage of reflection. I'll introduce the concept with a code sample.</p><pre><code class="zig"><span class="keyword function">fn</span> <span class="function">make_couple_of</span><span class="punctuation bracket">(</span><span class="parameter">x</span><span class="punctuation delimiter">:</span> <span class="type builtin">anytype</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">[</span><span class="number">2</span><span class="punctuation bracket">]</span><span class="function builtin">@typeOf</span><span class="punctuation bracket">(</span><span class="variable">x</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
