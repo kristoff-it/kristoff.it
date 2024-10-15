@@ -15,7 +15,7 @@ If you've only experienced compile-time execution in the form of macros, generic
 
 Zig is a new general-purpose programming language developed by Andrew Kelley. While still under heavy development, I think the language is already showing great promise. Zig aims to be a better C, similarly to how Rust can be understood as a better C++, generally speaking. Zig has no garbage collection, no built-in event loops, nor other runtime machinery of that level. It's lean just like C, and in fact it can interoperate with C pretty easily. For a complete overview checkout https://ziglang.org. 
 
-Now that you got a general idea about the level of abstraction in which Zig operates, you won't be surprised to know that there is absolutely no support for reflection at runtime; but what you can't do a runtime, you can certainly do at compile-time.
+Now that you got a general idea about the level of abstraction in which Zig operates, you won't be surprised to know that there is absolutely no support for reflection at runtime; but what you can't do at runtime, you can certainly do at compile-time.
 
 ## Running code at compile-time
 
