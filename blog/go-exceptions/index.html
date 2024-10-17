@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Yes, Go Does Have Exceptions
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:title" content="Yes, Go Does Have Exceptions">
+    <meta property="og:title" content="Yes, Go Does Have Exceptions">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
+    <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
+    
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1>Yes, Go Does Have Exceptions</h1>
+  <p class="post-byline">
+    <span>October 17, 2024</span>
+    •
+    <span>2</span>
+    min read • by
+    <b>Loris Cro</b>
+    <span></span>
+  </p>
+  <div id="post-description"></div>
+  <div id="post-body"><p>The Zig official website states in its <a href="https://ziglang.org/learn/overview/" target="_blank">Overview page</a> the following (emphasis mine):</p><style>
+blockquote {
+  font-size: 1em;
+  font-style: normal;
+  
+}
+</style>
+<blockquote><pre><code class="zig"><span class="type qualifier">var</span> <span class="variable">a</span> = <span class="variable">b</span> <span class="operator">+</span> <span class="variable">c</span><span class="punctuation delimiter">.</span><span class="field">d</span><span class="punctuation delimiter">;</span>
+<span class="variable">foo</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span><span class="error">;
+bar();</span>
+</code></pre>
+<p>Examples of hidden control flow:</p><ul><li>D has <code>@property</code> functions, which are methods that you call with what looks like field access, so in the above example, <code>c.d</code> might call a function.</li><li>C++, D, and Rust have operator overloading, so the <code>+</code> operator might call a function.</li><li><strong>C++, D, and Go have throw/catch exceptions</strong>, so <code>foo()</code> might throw an exception, and prevent <code>bar()</code> from being called.</li></ul></blockquote><p><strong>Go does have throw/catch exception, that's what panic/recover is.</strong></p><p>Yes, it's not the default method of handling errors but it does get used as one, and not just by random java-smelling packages nobody uses.</p><p><strong>The Go standard library <a href="https://github.com/golang/go/blob/f95ae3d68989505fcac9ec23cacc03d602ec6739/src/regexp/syntax/parse.go#L892" target="_blank">uses panic/recover as an error mechanism inside the JSON parser implementation</a> for example.</strong></p><p>At GoLab 2022 <strong>I asked a Go core team member if it would make sense to have a "never recover" policy</strong> in one's codebase to avoid a bunch of concurrency-related footguns (e.g. mutexes that fail to unlock because the defer unlock didn't run on a panic), and <strong>their answer was that you must assume that the code that you depend on might try to recover, including stdlib code</strong>. <a href="https://youtu.be/GtsSzbs-xb8?si=Kt8qyCQbJ41FUuZ0&t=2788" target="_blank">Link to the question</a>, but I recommend watching the whole talk.</p><p>We keep getting new issues opened on the official Zig website repository from people that try to correct us, so I will start linking this post whenever I close them.</p><p>But as a more high-level point, the fact that Go users don't realize that their language does have exception is in my opinion a shortcoming of the Go marketing & learning industry.</p><p>I understand that exceptions are out of fashion, but if your language does have exceptions, and if blessed (e.g. stdlib) code uses them, then users shouldn't be convinced that your language doesn't have exceptions.</p></div>
+  <hr>
+  <div id="prev-next">
+    <span>
+      <a href="/blog/static-site-paradox/">←
+        <span>The Static Site Paradox</span></a>
+    </span>
+    <span></span>
+    <span></span>
+    <small>&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+    </div>
+  </body>
+</html>
