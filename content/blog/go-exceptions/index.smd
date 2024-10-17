@@ -40,7 +40,7 @@ Yes, it's not the default method of handling errors but it does get used as one,
 
 At GoLab 2022 **I asked a Go core team member if it would make sense to have a "never recover" policy** in one's codebase to avoid a bunch of concurrency-related footguns (e.g. ~~mutexes that fail to unlock because the defer unlock didn't run during a panic~~ [1] partially initialized state where you wouldn't expect it), and **their answer was that you must assume that the code that you depend on might try to recover, including stdlib code**. [Link to the question](https://youtu.be/GtsSzbs-xb8?si=Kt8qyCQbJ41FUuZ0&t=2788), but I recommend watching the whole talk if you're a Go developer.
 
-Note that this is a problem that might affect you even if you never called recover yourself, as any code that you depend on might do so "on your behalf" (e.g. above a callback defined by you).
+Note that this is a problem that might affect you even if you never called recover yourself, as any code that you depend on might do so "[on your behalf](https://cs.opensource.google/go/go/+/refs/tags/go1.23.2:src/net/http/server.go;l=81-90)" (e.g. above a callback defined by you).
 
 We keep getting new issues opened on the official Zig website repository from people that try to correct us, so I will start linking this post whenever I close them.
 
