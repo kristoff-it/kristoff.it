@@ -45,7 +45,7 @@ Note that this is a problem that might affect you even if you never called recov
 
 We keep getting new issues opened on the official Zig website repository from people that try to correct us, so I will start linking this post whenever I close them.
 
-But as a more high-level point, the fact that Go users don't realize that their language does have exception is in my opinion a shortcoming of the Go marketing & learning industry.
+But as a more high-level point, the fact that Go users don't realize that their language does have exceptions is in my opinion a shortcoming of the Go marketing & learning industry.
 
 I understand that exceptions are out of fashion, but if your language does have exceptions, and if blessed (e.g. stdlib) code uses them, then users shouldn't be convinced that your language doesn't have exceptions.
 
