@@ -32,7 +32,7 @@ blockquote {
 > - **C++, D, and Go have throw/catch exceptions**, so `foo()` might throw an exception, and prevent `bar()` from being called.
 
 
-**Go does have throw/catch exception, that's what panic/recover is.**
+**Go does have throw/catch exceptions, that's what panic/recover is.**
 
 Yes, it's not the default method of handling errors but it does get used as one, and not just by random java-smelling packages nobody uses.
 
