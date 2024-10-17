@@ -36,7 +36,7 @@ blockquote {
 
 Yes, it's not the default method of handling errors but it does get used as one, and not just by random java-smelling packages nobody uses.
 
-**The Go standard library [uses panic/recover as a control flow mechanism inside the JSON parser implementation](https://github.com/golang/go/blob/f95ae3d68989505fcac9ec23cacc03d602ec6739/src/regexp/syntax/parse.go#L892) for example.**
+**The Go standard library [uses panic/recover as a control flow mechanism in parser code](https://github.com/golang/go/blob/f95ae3d68989505fcac9ec23cacc03d602ec6739/src/regexp/syntax/parse.go#L892) for example.**
 
 At GoLab 2022 **I asked a Go core team member if it would make sense to have a "never recover" policy** in one's codebase to avoid a bunch of concurrency-related footguns (e.g. mutexes that fail to unlock because the defer unlock didn't run during a panic), and **their answer was that you must assume that the code that you depend on might try to recover, including stdlib code**. [Link to the question](https://youtu.be/GtsSzbs-xb8?si=Kt8qyCQbJ41FUuZ0&t=2788), but I recommend watching the whole talk if you're a Go developer.
 
