@@ -1,0 +1,55 @@
+---
+.title = "Go Exceptions for the Unconvinced",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-10-17T00:00:00"),
+.draft = false,
+--- 
+In my previous post I argued that Go has exceptions because of panic/recover. Some people understood the message, some others had objections that roughly amounted to "you're just being pedantic, there's no practical consequence to it".
+
+Oh man, if only.
+
+The [talk](https://youtu.be/GtsSzbs-xb8) that I linked in the other post goes over this point with exemplary clarity but, since I'm bothering to write a follow up post, I will just go through the example directly in here.
+
+Imagine that you have this Go code:
+
+```go
+foo.mutex.lock()
+defer foo.mutex.unlock()
+
+foo.a = doA() // <-- panic!
+foo.b = doB() // <-- never runs, foo.b remains stale
+```
+
+This code has one big issue: if `doA` panics, `foo.b` remains unset, leaving `foo` in a corrupted state.
+
+If Go didn't have `recover`, or if `foo` is very short lived, all would be good, but if some code above the stack recovers from the panic and keeps `foo` around, then you now have corrupted state in your application.
+
+Just to bring up one practical example, the Go HTTP server recovers from panics in a handler, so doing something like the code above, where `foo` is some kind of local cache that you write to, is indeed wrong.
+
+**I don't remember if Go web frameworks also recover from panics inside of middlewares but, if they do, you might want to review what it is that you do in your middlewares :^)**
+
+How do you fix that code? By rewriting it in the same way you would write Java code, where you need to be defensive against exceptions popping up at any time. Something like this, for example:
+
+```go
+foo.mutex.lock()
+defer foo.mutex.unlock()
+
+var a = doA()
+var b = doB()
+
+// Commit!
+foo.a = a
+foo.b = b
+```
+
+The original talk suggested a more general-purpose abstraction that models the whole thing more explicitly as a transaction.
+
+So whenever you see a function call in Go, beware that it might panic and that somebody might have installed a panic handler above your code, potentially causing long-lived variables to get into corrupted states.
+
+In hindsight, my last blog post wrongly assumed that people would end up connecting the dots easily (and I also didn't want to plagiarize the talk's example), but there you go, now the example is as clear as I can make it.
+
+To be honest, I was also surprised to learn that Go runs defers as it unwinds the stack. Can't say I love the design decision because it's not a full solution, and it actually feeds the line of thinking that you don't need to program defensively against ~~exceptions~~ panics.
+
+
