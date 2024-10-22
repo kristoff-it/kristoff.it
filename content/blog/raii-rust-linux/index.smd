@@ -54,7 +54,7 @@ Here's another relevant quote from Lina (from that same thread):
 
 >There is something truly magical about seeing my GPU driver cleaning up dozens of nested GPU and host objects when the GPU job completes. Always exactly then, never too early, never too late, never leaking anything. That's all thanks to RAII and automatic Drop calls.
 
-Oh no, this is how you get you get [software that take forever to close for no reason](https://youtu.be/5_oqWE9otaE?si=RH3UMmJvz2YD-SDk&t=3224)!
+Oh no, this is how you get [software that take forever to close for no reason](https://youtu.be/5_oqWE9otaE?si=RH3UMmJvz2YD-SDk&t=3224)!
 
 More generally, RAII is a feature that exists in tension with the approach of operating on items in batches, which is an essential technique when writing performance-oriented software.
 
