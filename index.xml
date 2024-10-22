@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Tue, 22 Oct 2024 13:58:37 +0000</lastBuildDate>
+		<lastBuildDate>Tue, 22 Oct 2024 19:29:32 +0000</lastBuildDate>
+		
+			<item>
+				<title>RAII and the Rust/Linux Drama</title>
+				<link>https://kristoff.it/blog/raii-rust-linux/</link>
+				<pubDate>Tue, 22 Oct 2024 01:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/raii-rust-linux/</guid>
+			</item>
 		
 			<item>
 				<title>Go Exceptions for the Unconvinced</title>
