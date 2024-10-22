@@ -50,6 +50,6 @@ I understand that exceptions are out of fashion, but if your language does have 
 
 
 ## Still unconvinced?
-See a practical example [in the follow up post](go-exceptions-unconvinced/).
+See a practical example [in the follow up post](/blog/go-exceptions-unconvinced/).
 
 *[1] correction wrt the striked out part: I misremembered [this talk section](https://youtu.be/GtsSzbs-xb8?si=QRvLqjyL7gDavnHw&t=2005) slightly, defers do run during a panic but other stuff could be left in a corrupted state. The speaker does mention the possibility of mutex corruption in the Q&A section, and how Rust does better, but they don't go into further detail.*
