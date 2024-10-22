@@ -90,4 +90,4 @@ The fact that Rust developers who are interfacing with the Linux project seem co
 
 Similarly, Linux is not "too poor" to afford RAII and [it actually chose to keep out the style of programming that both Rust and C++ seem to love](https://harmful.cat-v.org/software/c++/linus). 
 
-As stated in the beginning, as external observers we can't know the full picture of what's going on in the Linux project, but I personally hope that the Linux kernel never adopts any RAII, as I already have too waste way too much time for other **slow and memory leaky** software to load.
+As stated in the beginning, as external observers we can't know the full picture of what's going on in the Linux project, but I personally hope that the Linux kernel never adopts any RAII, as I already have to waste way too much time for other slow software to load.
