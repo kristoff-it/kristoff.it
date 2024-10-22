@@ -1,0 +1,93 @@
+---
+.title = "RAII and the Rust/Linux Drama",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-10-22T01:00:00"),
+.draft = false,
+--- 
+A while ago some Rust / Linux drama hit the news because of tension between people who are pushing for more Rust in the kernel, and those who seem to be opposed to the idea.
+
+[Reading the opinions of those involved, and looking at the "evidence"](https://lobste.rs/s/46pt2l/retiring_from_rust_for_linux_project), you can see that people are feeling strong emotions and so it becomes less clear to what extent this is a technical disagreement, a political one, or just personal tension between the individuals involved.
+
+I would argue that there is no way for an external observer to really know in full detail which is the case, but operating in the absence of perfect information is an integral part of the human experience, so we need to form some kind of opinion anyway (as long as we don't forget that we can't know the full picture).
+
+One line of thinking that I've seen pushed forward from the Rust side of the argument, is that they are just doing uncontroversially good technical work, and that the amount of pushback they're experiencing is unwarranted.
+
+This is for example what Asahi Lina has to say on the matter: 
+
+> [...]
+>A subset of C kernel developers just seem determined to make the lives of the Rust maintainers as difficult as possible. They don't see Rust as having value and would rather it just goes away.
+> 
+> When I tried to upstream the DRM abstractions last year, that all was blocked on basic support for the concept of a "Device" in Rust. Even just a stub wrapper for struct device would be enough.
+> 
+> That simple concept only recently finally got merged, over one year later.
+> 
+> When I wrote the DRM scheduler abstractions, I ran into many memory safety issues caused by bad design of the underlying C code. The lifetime requirements were undocumented and boiled down to "design your driver like amdgpu to make it work, or else".
+> 
+> My driver is not like amdgpu, it fundamentally can't work the same way. When I tried to upstream minor fixes to the C code to make the behavior more robust and the lifetime requirements sensible, the maintainer blocked it and said I should just do "what other drivers do".
+> 
+> Even when I pointed out that other C drivers also triggered the same bugs because the API is just bad and unintuitive and there are many secret hidden lifetime requirements, he wouldn't budge.
+
+Full quote: https://vt.social/@lina/113045455229442533
+
+More recently Lina has also shared her opinion on Zig. I'll put here some highlights but I would recommend reading it in full.
+
+> I learned that Zig does not have: 
+> - Destructors 
+> - Macros 
+> - Lifetimes 
+> - Operator overloading 
+> Those are major reasons why I chose Rust for the drm/asahi driver... It sounds like Zig is trying to be "modern C"... but the whole point of R4L is to not get stuck with C
+
+>Destructors/RAII are fundamental to how the driver tracks and cleans up firmware structures safely and reliably when needed.
+
+>Rust's amazing macros are how I deal with the firmware versioning differences while keeping the driver maintainable.
+
+>Operator overloading is the one I could live without... but it still would have been very annoying to have to use functions to do all the complex GPU power management calculations that I built on top of a simple soft float implementation (no real floats in the kernel!).
+
+Full thread:  https://xcancel.com/LinaAsahi/status/1846996717524152742
+
+While I understand having differing opinions about features and ways of structuring code, I'm not suprised if there's tension between Rust and C developers in the kernel, since the Linux project has already expressed in the past a preference for avoiding those constructs (and the style of development they are designed to support) by banning C++ from the codebase.
+
+Here's another relevant quote from Lina (from that same thread):
+
+>There is something truly magical about seeing my GPU driver cleaning up dozens of nested GPU and host objects when the GPU job completes. Always exactly then, never too early, never too late, never leaking anything. That's all thanks to RAII and automatic Drop calls.
+
+Oh no, this is how you get you get [software that take forever to close for no reason](https://youtu.be/5_oqWE9otaE?si=RH3UMmJvz2YD-SDk&t=3224)!
+
+More generally, RAII is a feature that exists in tension with the approach of operating on items in batches, which is an essential technique when writing performance-oriented software.
+
+And it doesn't end here: operating in batches by using memory arenas, for example, is also a way to reduce memory ownership complexity, since you are turning orchestration of N lifetimes into 1.
+
+But don't just take my word for it.
+
+### [Casey Muratori | Smart-Pointers, RAII, ZII? Becoming an N+2 programmer](https://www.youtube.com/watch?v=xt1KNDmOYqA)
+
+In this video Casey Muratori describes how going from thinking about individual allocations to thinking in batches is a natural form of progression for a programmer. 
+
+The first 10 minutes of the video contain the main argument and everything that he says about smart pointers equally applies to Rust lifetimes.
+
+### [CppCon 2014: Mike Acton "Data-Oriented Design and C++"](https://www.youtube.com/watch?v=rX0ItVEVjHc)
+
+Extremely popular talk on the advantages of looking at problems as data transformation pipelines, where Mike Acton shows how common approaches in C++ (RAII being one of them) are antithetical to the goal of creating performant code.
+
+Andrew Kelley also [gave a related talk](https://www.youtube.com/watch?v=IroPQ150F6c) at Handmade Seattle and more recently Matthew Lugg [gave another](https://www.youtube.com/watch?v=KOZcJwGdQok) at Software You Can Love.
+
+### [Modern Systems Programming: Rust and Zig - Aleksey Kladov](https://www.youtube.com/watch?v=4aLy6qjhHeo)
+
+The speaker, also known as [Matklad](https://matklad.github.io) is the author of rust-analyzer and has had the opportunity to use Zig to write production software for more than a year. In this talk he shares his perspective on what it means to do "systems programming". 
+
+This talk is not directly addressing the tradeoffs of RAII, but it's a refreshing perspective on systems programming.
+
+## In conclusion
+
+I've recently started porting the build scripts of some C/C++ projects to Zig for [All Your Codebase](https://github.com/allyourcodebase/) (will write more on that soon), and I've seen some of the crazy workarounds that C codebases use to make things work in a weird soup of build systems and compilers.
+
+New languages, including Rust, have a lot to offer over C, but not every shiny new feature is a net positive, especially when the feature is actually not new at all, and has been already rejected in the past by the Linux kernel, like in the case of RAII and other features shared by both Rust and C++.
+
+The fact that Rust developers who are interfacing with the Linux project seem completely unaware of the downsides of RAII, reminds me of when [the US ambassador to Denmark thought that their collaborators biked to work because they were too poor to own a car](https://x.com/carlahsands/status/1535091239246340104?t=9VzCLhum2I01yWxLdmAOxA).
+
+Similarly, Linux is not "too poor" to afford RAII and [it actually chose to keep out the style of programming that both Rust and C++ seem to love](https://harmful.cat-v.org/software/c++/linus). 
+
+As stated in the beginning, as external observers we can't know the full picture of what's going on in the Linux project, but I personally hope that the Linux kernel never adopts any RAII, as I already have too waste way too much time for other **slow and memory leaky** software to load.
