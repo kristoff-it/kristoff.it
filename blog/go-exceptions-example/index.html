@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Go Exceptions for the Unconvinced
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:title" content="Go Exceptions for the Unconvinced">
+    <meta property="og:title" content="Go Exceptions for the Unconvinced">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
+    <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
+    
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1>Go Exceptions for the Unconvinced</h1>
+  <p class="post-byline">
+    <span>October 17, 2024</span>
+    •
+    <span>2</span>
+    min read • by
+    <b>Loris Cro</b>
+    <span></span>
+  </p>
+  <div id="post-description"></div>
+  <div id="post-body"><p>In my previous post I argued that Go has exceptions because of panic/recover. Some people understood the message, some others had objections that roughly amounted to “you’re just being pedantic, there’s no practical consequence to it”.</p><p>Oh man, if only.</p><p>The <a href="https://youtu.be/GtsSzbs-xb8" target="_blank">talk</a> that I linked in the other post goes over this point with exemplary clarity but, since I’m bothering to write a follow up post, I will just go through the example directly in here.</p><p>Imagine that you have this Go code:</p><pre><code class="go"><span class="variable">foo</span>.<span class="property">mutex</span>.<span class="function method">lock</span>()
+<span class="keyword">defer</span> <span class="variable">foo</span>.<span class="property">mutex</span>.<span class="function method">unlock</span>()
+
+<span class="variable">foo</span>.<span class="property">a</span> <span class="operator">=</span> <span class="function">doA</span>() <span class="comment">// &lt;-- panic!</span>
+<span class="variable">foo</span>.<span class="property">b</span> <span class="operator">=</span> <span class="function">doB</span>() <span class="comment">// &lt;-- never runs, foo.b remains stale</span>
+</code></pre>
+<p>This code has one big issue: if <code>doA</code> panics, <code>foo.b</code> remains unset, leaving <code>foo</code> in a corrupted state.</p><p>If Go didn’t have <code>recover</code>, or if <code>foo</code> is very short lived, all would be good, but if some code above the stack recovers from the panic and keeps <code>foo</code> around, then you now have corrupted state in your application.</p><p>Just to bring up one practical example, the Go HTTP server recovers from panics in a handler, so doing something like the code above, where <code>foo</code> is some kind of local cache that you write to, is indeed wrong.</p><p><strong>I don’t remember if Go web frameworks also recover from panics inside of middlewares but, if they do, you might want to review what it is that you do in your middlewares :^)</strong></p><p>How do you fix that code? By rewriting it in the same way you would write Java code, where you need to be defensive against exceptions popping up at any time. Something like this, for example:</p><pre><code class="go"><span class="variable">foo</span>.<span class="property">mutex</span>.<span class="function method">lock</span>()
+<span class="keyword">defer</span> <span class="variable">foo</span>.<span class="property">mutex</span>.<span class="function method">unlock</span>()
+
+<span class="keyword">var</span> <span class="variable">a</span> <span class="operator">=</span> <span class="function">doA</span>()
+<span class="keyword">var</span> <span class="variable">b</span> <span class="operator">=</span> <span class="function">doB</span>()
+
+<span class="comment">// Commit!</span>
+<span class="variable">foo</span>.<span class="property">a</span> <span class="operator">=</span> <span class="variable">a</span>
+<span class="variable">foo</span>.<span class="property">b</span> <span class="operator">=</span> <span class="variable">b</span>
+</code></pre>
+<p>The original talk suggested a more general-purpose abstraction that models the whole thing more explicitly as a transaction.</p><p>So whenever you see a function call in Go, beware that it might panic and that somebody might have installed a panic handler above your code, potentially causing long-lived variables to get into corrupted states.</p><p>In hindsight, my last blog post wrongly assumed that people would end up connecting the dots easily (and I also didn’t want to plagiarize the talk’s example), but there you go, now the example is as clear as I can make it.</p><p>To be honest, I was also surprised to learn that Go runs defers as it unwinds the stack. Can’t say I love the design decision because it’s not a full solution, and it actually feeds the line of thinking that you don’t need to program defensively against <del>exceptions</del> panics.</p></div>
+  <hr>
+  <div id="prev-next">
+    <span>
+      <a href="/blog/go-exceptions/">←
+        <span>Yes, Go Does Have Exceptions</span></a>
+    </span>
+    <span></span>
+    <span></span>
+    <small>&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+    </div>
+  </body>
+</html>
