@@ -8,6 +8,7 @@
     .draft = false,
 }
 ---
+**EDIT (Nov 2024): [See the new ZLS settings](https://zigtools.org/zls/guides/build-on-save/)**
 
 The Zig ecosystem is still growing and a lot of important building blocks have not yet reached their final form. 
 
