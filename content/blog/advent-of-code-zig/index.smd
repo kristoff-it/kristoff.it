@@ -1,5 +1,5 @@
 ---
-.title = "Avent of Code in Zig",
+.title = "Advent of Code in Zig",
 .description = "",
 .author = "Loris Cro",
 .layout = "post.shtml",
