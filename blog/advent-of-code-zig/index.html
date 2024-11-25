@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Avent of Code in Zig
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:title" content="Avent of Code in Zig">
+    <meta property="og:title" content="Avent of Code in Zig">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
+    <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
+    
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1>Avent of Code in Zig</h1>
+  <p class="post-byline">
+    <span>November 25, 2024</span>
+    •
+    <span>7</span>
+    min read • by
+    <b>Loris Cro</b>
+    <span></span>
+  </p>
+  <div id="post-description"></div>
+  <div id="post-body"><p><a href="https://adventofcode.com" target="_blank">Advent of Code</a> (AoC) is coming and many people will use it as an opportunity to try out Zig.</p><p>In this post I will give you some hints on how to get a smooth experience when dealing with the most common tasks required to solve each exercise.</p><p>At the end of the blog post I will also give you some more high-level advice about getting started with Zig, and the limits of using AoC to learn Zig.</p><h2>Dev tooling setup</h2><p>Get yourself a copy of <strong>the latest tagged version of Zig</strong> (0.13.0 at the moment of writing) to avoid getting affected by breaking changes.</p><p>You can download Zig from the <a href="https://ziglang.org" target="_blank">official website</a>, or get it from your system’s package manager (including choco/winget on Windows and brew on macOS).</p><p>Then you need to get some Zig support in your editor. If your editor supports LSP (Language Server Protocol), <a href="https://github.com/zigtools/zls" target="_blank">get ZLS</a>.</p><p>Last but not least, enable running <code>zig fmt</code> on save (unless you really don’t like the practice).</p><h2>Reference material</h2><p>While working on your exercises you will want to keep around an open copy of the language reference, and one of the standard library reference.</p><p><a href="https://ziglang.org/learn/" target="_blank">Both are linked in the learning section of the official Zig website</a>. Make sure to open the version that corresponds to your version of Zig.</p><p>If you’re a brave enough soul, reading the source code directly is also a good way of getting familiar with the stdlib. <a href="https://github.com/ziglang/zig/wiki/How-to-read-the-standard-library-source-code" target="_blank">Here’s a guide</a> on how to do that.</p><h2>Creating and running the script</h2><p>A basic <code>solution.zig</code> file:</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">std</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">&quot;std&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="attribute">pub</span> <span class="keyword function">fn</span> <span class="function">main</span> <span class="punctuation bracket">(</span><span class="punctuation bracket">)</span> <span class="exception">!</span><span class="type builtin">void</span> <span class="punctuation bracket">{</span>
+   <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">debug</span><span class="punctuation delimiter">.</span><span class="function">print</span><span class="punctuation bracket">(</span><span class="string">&quot;hello advent of code\n&quot;</span><span class="punctuation delimiter">,</span> <span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span><span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="punctuation bracket">}</span>
+</code></pre>
+<p>It can be quickly run like this:</p><pre><code>$ zig run solution.zig
+</code></pre><p>This will compile the program and run it.</p><p>If you want to create an executable (to benchmark or debug it):</p><pre><code>$ zig build-exe solution.zig
+$ ./solution
+</code></pre><p>Note that this invocation will create a debug executable. If you want an optimized release (e.g. for benchmarking purposes), add the <code>-OReleaseFast</code> flag.</p><p>Sometimes AoC requires you to implement some algorithm that is complex enough that you might want to write one or two unit tests for it:</p><pre><code class="zig"><span class="keyword function">fn</span> <span class="function">myComplexAlgo</span><span class="punctuation bracket">(</span><span class="parameter">num</span><span class="punctuation delimiter">:</span> <span class="type builtin">u32</span><span class="punctuation bracket">)</span> <span class="exception">!</span><span class="type builtin">u32</span> <span class="punctuation bracket">{</span>
+   <span class="conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">num</span> <span class="operator">==</span> <span class="number">69</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">{</span>
+     <span class="keyword return">return</span> <span class="keyword">error</span><span class="punctuation delimiter">.</span><span class="variable builtin">FunnyNumber</span><span class="punctuation delimiter">;</span>
+   <span class="punctuation bracket">}</span>
+
+   <span class="keyword return">return</span> <span class="variable">num</span> <span class="operator">*</span> <span class="number">2</span><span class="punctuation delimiter">;</span> 
+<span class="punctuation bracket">}</span>
+
+<span class="keyword">test</span> <span class="string">&quot;normal behavior&quot;</span> <span class="punctuation bracket">{</span>
+   <span class="operator">try</span> <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">testing</span><span class="punctuation delimiter">.</span><span class="function">expect</span><span class="punctuation bracket">(</span><span class="operator">try</span> <span class="variable">myComplexAlgo</span><span class="punctuation bracket">(</span><span class="number">2</span><span class="punctuation bracket">)</span> <span class="operator">==</span> <span class="number">4</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="punctuation bracket">}</span>
+
+<span class="keyword">test</span> <span class="string">&quot;funny number detection&quot;</span> <span class="punctuation bracket">{</span>
+   <span class="operator">try</span> <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">testing</span><span class="punctuation delimiter">.</span><span class="function">expectError</span><span class="punctuation bracket">(</span>
+      <span class="keyword">error</span><span class="punctuation delimiter">.</span><span class="variable builtin">FunnyNumber</span><span class="punctuation delimiter">,</span> 
+      <span class="variable">myComplexAlgo</span><span class="punctuation bracket">(</span><span class="number">69</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">,</span>
+   <span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="punctuation bracket">}</span>
+</code></pre>
+<p>Tests can be run like this:</p><pre><code>$ zig test solution.zig
+All 2 tests passed.
+</code></pre><h2>Importing the data</h2><p>Every exercise starts with some input text that must be loaded by the program. The normal path would be to open the file at program startup and read it all into heap-allocated memory, but given that the size of this data is relatively small, we can simply <em>embed</em> the data into the program at compile time, like so:</p><pre><code class="zig"><span class="type qualifier">const</span> <span class="variable">std</span> = <span class="function builtin">@import</span><span class="punctuation bracket">(</span><span class="string">&quot;std&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="type qualifier">const</span> <span class="variable">input</span> = <span class="function builtin">@embedFile</span><span class="punctuation bracket">(</span><span class="string">&quot;path/to/input.txt&quot;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="attribute">pub</span> <span class="keyword function">fn</span> <span class="function">main</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span> <span class="exception">!</span><span class="type builtin">void</span> <span class="punctuation bracket">{</span>
+   <span class="repeat">for</span> <span class="punctuation bracket">(</span><span class="variable">input</span><span class="punctuation bracket">)</span> |<span class="variable">byte</span>| <span class="punctuation bracket">{</span>
+      <span class="comment">//...</span>
+   <span class="punctuation bracket">}</span>
+<span class="punctuation bracket">}</span>
+</code></pre>
+<h2>Parsing the data</h2><p>After loading the input text the next step is to parse it. Simple exercises will just require you to split it by line, more complex exercises will require more work.</p><p>Zig has two main primitives for parsing that will help you immensely.</p><h3>Tokenize</h3><p><code>std.mem.tokenizeScalar</code> can be used to tokenize the input. It can be used to cut the text on newlines, spaces, or other delimiters.</p><pre><code class="zig"><span class="type qualifier">var</span> <span class="variable">it</span> = <span class="variable">std</span><span class="punctuation delimiter">.</span><span class="field">mem</span><span class="punctuation delimiter">.</span><span class="function">tokenizeScalar</span><span class="punctuation bracket">(</span><span class="type builtin">u8</span><span class="punctuation delimiter">,</span> <span class="variable">input</span><span class="punctuation delimiter">,</span> <span class="character">&apos;\n&apos;</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="repeat">while</span> <span class="punctuation bracket">(</span><span class="variable">it</span><span class="punctuation delimiter">.</span><span class="function">next</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">|token|</span><span class="keyword"></span> <span class="punctuation bracket">{</span>
+   <span class="comment">// ...</span>
+<span class="punctuation bracket">}</span>
+</code></pre>
+<p>Note that it returns an iterator which holds information about the progress, so it needs to be <code>var</code>. If you make by mistake a <code>const</code> iterator, Zig will complain that one of its member functions is unable to obtain a mutable pointer to it.</p><p>There are a couple more variants: one is <code>std.mem.tokenizeAny</code> which will accept as the last argument not a single byte as needle (notice that in our previous invocation of <code>tokenizeScalar</code> we passed a char literal as the last argument), but a string instead.</p><p>That’s because <code>tokenizeAny</code> will split on <em>any</em> of the provided bytes.</p><p>The last variant is <code>tokenizeSequence</code> which will also accept a string as last argument, but will use the full byte sequence as the delimiter between tokens.</p><h2>Split</h2><p>Every tokenize function mentioned above has a split counterpart:</p><ul><li><code>std.mem.splitScalar</code></li><li><code>std.mem.splitAny</code></li><li><code>std.mem.splitSequence</code></li></ul><p>The only difference is that split can return empty strings, while tokenize won’t.</p><p>For example, given the input <code>apple,,orange</code>:</p><ul><li>tokenize will return <code>&quot;apple&quot;</code>, <code>&quot;orange&quot;</code></li><li>split will return <code>&quot;apple&quot;</code>, <code>&quot;&quot;</code>, <code>&quot;orange&quot;</code></li></ul><p>Depending on the kind of parsing you’re doing, one might be preferable over the other. If you’re in doubt, start with tokenize.</p><h2>Window</h2><p>Occasionally you might need a sliding window kind of parsing, for this you can use <code>std.mem.window</code>, which is explained more in detail <a href="https://zig.news/pyrolistical/new-way-to-split-and-iterate-over-strings-2akh" target="_blank">in this blog post</a>.</p><h2>Data manipulation</h2><p>This is where we start to get into the weeds of using Zig as a language in its full glory, which is not something that can be succinctly explained in its entirety.</p><p>I will leave here a handful of things that might be useful for you to know, but it won’t be an exhaustive list.</p><ul><li>To compare strings use <code>std.mem.eql()</code>, and more in general, taking a peek at what’s available in the <code>mem</code> namespace is a good idea for AoC.</li><li>To parse a number use <code>std.fmt.parseInt()</code>. The <code>fmt</code> namespace is also very useful for AoC, so explore it a bit.</li><li>When doing bit fiddling (some exercises require you to), you can use custom-width integers like <code>u1</code>, <code>u2</code>, <code>u27</code>, etc. Take also a look at <code>std.BitStack</code> and <code>std.DynamicBitSet</code></li><li>When creating hash maps:<ul><li>If keys are numbers, use <code>std.AutoHashMap(usize, V)</code></li><li>If keys are strings, use <code>std.StringHashMap(V)</code></li></ul></li><li>If you need to create a set (say, of strings), often times <code>std.StringHashMap(void)</code> will do. To insert a KV pair in this map you will still need to specify the value, which can be done like this: <code>try map.put(&quot;foo&quot;, {});</code> (note the curlies without leading dot, that’s a literal that evaluates to the void value).</li><li>You will often be able to solve an exercise by iterating over all input tokens without needing to store them in a data structure, but sometimes it will turn out to be necessary. In such cases <code>std.ArrayList</code> is Zig stdlib’s growable array type.</li></ul><h2>More examples and asking for help</h2><p>You can take a look at solutions to older AoCs written in Zig to get an idea of how to get things done.</p><p>For example <a href="https://www.youtube.com/watch?v=Dm4FCk0gq5c&list=PL5AY2Vv6EsfTz2AXKqqJ-fSNBr1fKJ6S6" target="_blank">this playlist</a> contains recordings of my solutions to the first 6 days of AoC 2022, but you can find a lot more examples if you search a little.</p><p>Lastly, make sure to <a href="https://github.com/ziglang/zig/wiki/Community" target="_blank">join a Zig community</a> to get help if you get stuck.</p><h2>A final word of caution</h2><p>Up until now I provided suggestions for those who want to use AoC as an excuse to try out Zig, but I don’t believe AoC is the best way to learn Zig.</p><p>While AoC is lots of fun, it’s not a way to practice <em>software engineering</em>. Every AoC exercise asks you to find a solution to a question and while, yes, you will need to write a program to solve that question, your program is going to be a throwaway script that only needs to be run once (once correct).</p><p>Zig shines when your software needs to be robust, optimal and maintainable, and none of these things really matter for AoC.</p><p>For example the input you will be given in AoC will never contain errors, while properly detecting and reporting errors in the input is a key aspect of software engineering instead.</p><p>Similarly, Zig will force you to think about the memory layout of your application in a context where you don’t really want (nor have) to care.</p><p>So beware that, while you will definitely be able to solve AoC with Zig and some of Zig’s features will even help you make swifter progress than in other languages, it ultimately is optimized for <em>software egineering</em>, which is not what you will be doing during AoC.</p><p>If you only use AoC as you metric to evaluate Zig, you won’t see the contexts in which Zig shines, which is why my final suggestion is to find a more concrete project to write in Zig. One where error handling, system integration, and resource acquisition play a key role.</p><p>That’s when you will really see why Zig is a gamechanger.</p></div>
+  <hr>
+  <div id="prev-next">
+    <span>
+      <a href="/blog/raii-rust-linux/">←
+        <span>RAII and the Rust/Linux Drama</span></a>
+    </span>
+    <span></span>
+    <span></span>
+    <small>&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+    </div>
+  </body>
+</html>

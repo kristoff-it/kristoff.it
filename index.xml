@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Mon, 18 Nov 2024 18:20:12 +0000</lastBuildDate>
+		<lastBuildDate>Mon, 25 Nov 2024 16:05:38 +0000</lastBuildDate>
+		
+			<item>
+				<title>Avent of Code in Zig</title>
+				<link>https://kristoff.it/blog/advent-of-code-zig/</link>
+				<pubDate>Mon, 25 Nov 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/advent-of-code-zig/</guid>
+			</item>
 		
 			<item>
 				<title>RAII and the Rust/Linux Drama</title>
