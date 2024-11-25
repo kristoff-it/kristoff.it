@@ -1,0 +1,188 @@
+---
+.title = "Avent of Code in Zig",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-11-25T00:00:00"),
+.draft = false,
+--- 
+
+[Advent of Code](https://adventofcode.com) (AoC) is coming and many people will use it as an opportunity to try out Zig. 
+
+In this post I will give you some hints on how to get a smooth experience when dealing with the most common tasks required to solve each exercise.
+
+At the end of the blog post I will also give you some more high-level advice about getting started with Zig, and the limits of using AoC to learn Zig.
+
+## Dev tooling setup
+
+Get yourself a copy of **the latest tagged version of Zig** (0.13.0 at the moment of writing) to avoid getting affected by breaking changes.
+
+You can download Zig from the [official website](https://ziglang.org), or get it from your system's package manager (including choco/winget on Windows and brew on macOS).
+
+Then you need to get some Zig support in your editor. If your editor supports LSP (Language Server Protocol), [get ZLS](https://github.com/zigtools/zls).
+
+Last but not least, enable running `zig fmt` on save (unless you really don't like the practice).
+
+## Reference material
+
+While working on your exercises you will want to keep around an open copy of the language reference, and one of the standard library reference.
+
+[Both are linked in the learning section of the official Zig website](https://ziglang.org/learn/). Make sure to open the version that corresponds to your version of Zig.
+
+If you're a brave enough soul, reading the source code directly is also a good way of getting familiar with the stdlib. [Here's a guide](https://github.com/ziglang/zig/wiki/How-to-read-the-standard-library-source-code) on how to do that.
+
+## Creating and running the script
+
+A basic `solution.zig` file:
+
+```zig
+const std = @import("std");
+
+pub fn main () !void {
+   std.debug.print("hello advent of code\n", .{});
+}
+```
+
+It can be quickly run like this:
+```
+$ zig run solution.zig
+```
+
+This will compile the program and run it.
+
+If you want to create an executable (to benchmark or debug it):
+```
+$ zig build-exe solution.zig
+$ ./solution
+```
+
+Note that this invocation will create a debug executable. If you want an optimized release (e.g. for benchmarking purposes), add the `-OReleaseFast` flag.
+
+
+Sometimes AoC requires you to implement some algorithm that is complex enough that you might want to write one or two unit tests for it:
+
+```zig
+fn myComplexAlgo(num: u32) !u32 {
+   if (num == 69) {
+     return error.FunnyNumber;
+   }
+
+   return num * 2; 
+}
+
+test "normal behavior" {
+   try std.testing.expect(try myComplexAlgo(2) == 4);
+}
+
+test "funny number detection" {
+   try std.testing.expectError(
+      error.FunnyNumber, 
+      myComplexAlgo(69),
+   );
+}
+```
+
+Tests can be run like this: 
+```
+$ zig test solution.zig
+All 2 tests passed.
+```
+## Importing the data
+
+Every exercise starts with some input text that must be loaded by the program. The normal path would be to open the file at program startup and read it all into heap-allocated memory, but given that the size of this data is relatively small, we can simply *embed* the data into the program at compile time, like so:
+
+```zig
+const std = @import("std");
+const input = @embedFile("path/to/input.txt");
+
+pub fn main() !void {
+   for (input) |byte| {
+      //...
+   }
+}
+```
+
+## Parsing the data
+
+After loading the input text the next step is to parse it. Simple exercises will just require you to split it by line, more complex exercises will require more work. 
+
+Zig has two main primitives for parsing that will help you immensely.
+
+### Tokenize
+
+`std.mem.tokenizeScalar` can be used to tokenize the input. It can be used to cut the text on newlines, spaces, or other delimiters.
+
+```zig
+var it = std.mem.tokenizeScalar(u8, input, '\n');
+while (it.next()) |token| {
+   // ...
+}
+```
+
+Note that it returns an iterator which holds information about the progress, so it needs to be `var`. If you make by mistake a `const` iterator, Zig will complain that one of its member functions is unable to obtain a mutable pointer to it.
+
+There are a couple more variants: one is `std.mem.tokenizeAny` which will accept as the last argument not a single byte as needle (notice that in our previous invocation of `tokenizeScalar` we passed a char literal as the last argument), but a string instead.
+
+That's because `tokenizeAny` will split on *any* of the provided bytes.
+
+The last variant is `tokenizeSequence` which will also accept a string as last argument, but will use the full byte sequence as the delimiter between tokens.
+
+## Split
+
+Every tokenize function mentioned above has a split counterpart:
+- `std.mem.splitScalar`
+- `std.mem.splitAny`
+- `std.mem.splitSequence`
+
+The only difference is that split can return empty strings, while tokenize won't.
+
+For example, given the input `apple,,orange`:
+- tokenize will return `"apple"`, `"orange"`
+- split will return `"apple"`, `""`, `"orange"`
+
+Depending on the kind of parsing you're doing, one might be preferable over the other. If you're in doubt, start with tokenize.
+
+## Window
+
+Occasionally you might need a sliding window kind of parsing, for this you can use `std.mem.window`, which is explained more in detail [in this blog post](https://zig.news/pyrolistical/new-way-to-split-and-iterate-over-strings-2akh).
+
+## Data manipulation
+
+This is where we start to get into the weeds of using Zig as a language in its full glory, which is not something that can be succinctly explained in its entirety. 
+
+I will leave here a handful of things that might be useful for you to know, but it won't be an exhaustive list.
+
+- To compare strings use `std.mem.eql()`, and more in general, taking a peek at what's available in the `mem` namespace is a good idea for AoC.
+- To parse a number use `std.fmt.parseInt()`. The `fmt` namespace is also very useful for AoC, so explore it a bit.
+- When doing bit fiddling (some exercises require you to), you can use custom-width integers like `u1`, `u2`, `u27`, etc. Take also a look at `std.BitStack` and `std.DynamicBitSet`
+- When creating hash maps: 
+	- If keys are numbers, use `std.AutoHashMap(usize, V)`
+	- If keys are strings, use `std.StringHashMap(V)`
+- If you need to create a set (say, of strings), often times `std.StringHashMap(void)` will do. To insert a KV pair in this map you will still need to specify the value, which can be done like this: `try map.put("foo", {});` (note the curlies without leading dot, that's a literal that evaluates to the void value).
+- You will often be able to solve an exercise by iterating over all input tokens without needing to store them in a data structure, but sometimes it will turn out to be necessary. In such cases `std.ArrayList` is Zig stdlib's growable array type. 
+
+## More examples and asking for help
+
+You can take a look at solutions to older AoCs written in Zig to get an idea of how to get things done.
+
+For example [this playlist](https://www.youtube.com/watch?v=Dm4FCk0gq5c&list=PL5AY2Vv6EsfTz2AXKqqJ-fSNBr1fKJ6S6) contains recordings of my solutions to the first 6 days of AoC 2022, but you can find a lot more examples if you search a little.
+
+Lastly, make sure to [join a Zig community](https://github.com/ziglang/zig/wiki/Community) to get help if you get stuck.
+
+## A final word of caution
+
+Up until now I provided suggestions for those who want to use AoC as an excuse to try out Zig, but I don't believe AoC is the best way to learn Zig.
+
+While AoC is lots of fun, it's not a way to practice *software engineering*. Every AoC exercise asks you to find a solution to a question and while, yes, you will need to write a program to solve that question, your program is going to be a throwaway script that only needs to be run once (once correct).
+
+Zig shines when your software needs to be robust, optimal and maintainable, and none of these things really matter for AoC.
+
+For example the input you will be given in AoC will never contain errors, while properly detecting and reporting errors in the input is a key aspect of software engineering instead.
+
+Similarly, Zig will force you to think about the memory layout of your application in a context where you don't really want (nor have) to care.
+
+So beware that, while you will definitely be able to solve AoC with Zig and some of Zig's features will even help you make swifter progress than in other languages, it ultimately is optimized for *software egineering*, which is not what you will be doing during AoC.
+
+If you only use AoC as you metric to evaluate Zig, you won't see the contexts in which Zig shines, which is why my final suggestion is to find a more concrete project to write in Zig. One where error handling, system integration, and resource acquisition play a key role.
+
+That's when you will really see why Zig is a gamechanger.
