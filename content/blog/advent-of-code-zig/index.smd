@@ -11,7 +11,7 @@
 
 In this post I will give you some hints on how to get a smooth experience when dealing with the most common tasks required to solve each exercise.
 
-At the end of the blog post I will also give you some more high-level advice about getting started with Zig, and the limits of using AoC to learn Zig.
+At the end of the blog post I will also talk about the limits of using AoC to learn Zig.
 
 ## Dev tooling setup
 
@@ -121,7 +121,7 @@ while (it.next()) |token| {
 
 Note that it returns an iterator which holds information about the progress, so it needs to be `var`. If you make by mistake a `const` iterator, Zig will complain that one of its member functions is unable to obtain a mutable pointer to it.
 
-There are a couple more variants: one is `std.mem.tokenizeAny` which will accept as the last argument not a single byte as needle (notice that in our previous invocation of `tokenizeScalar` we passed a char literal as the last argument), but a string instead.
+There are a couple more variants: one is `std.mem.tokenizeAny` which will accept as the last argument not a single byte (notice that in our previous invocation of `tokenizeScalar` we passed a char literal as the last argument), but a string instead.
 
 That's because `tokenizeAny` will split on *any* of the provided bytes.
 
