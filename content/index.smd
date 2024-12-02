@@ -5,6 +5,7 @@
 .author = "Loris Cro",
 .layout = "index.shtml",
 .alternatives = [{ 
+    .name = "rss",
     .layout = "rss.xml", 
     .output = "index.xml",
 }],
