@@ -1,0 +1,62 @@
+---
+.title = "All Your Codebase",
+.description = "...are belong to us (from <a href=\"https://www.youtube.com/watch?v=qItugh-fFgg\">zero wing</a>)",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2024-12-10T00:00:00"),
+.draft = false,
+--- 
+
+
+A while ago I created https://github.com/allyourcodebase (AYC for short), a GitHub Organization that collects `build.zig` files for C/C++ projects. Those build scripts replace the project's original build system(s), allowing you to just run `zig build` to get the project to build successfully.
+
+One example is the game VVVVVV, whose source code was [made available](https://github.com/TerryCavanagh/VVVVVV/blob/master/LICENSE.md) some time ago by the creator. Contributor [Johnny Marler](https://github.com/marler8997) created a `build.zig` for it and now you can build and run the game on macOS, Linux[^1], or Windows like so: 
+
+```
+git clone https://github.com/allyourcodebase/VVVVVV
+cd VVVVVV
+zig build run --release=fast
+```
+
+[]($image.asset("vvvvvv.png"))
+
+If you [look at the repo](https://github.com/allyourcodebase/VVVVVV), you will see that it only contains 2 build files: `build.zig` and `build.zig.zon`. The first file implements the meat of the build process, while the second is a data file (think `package.json`) that lists the project's dependencies. 
+
+That's thanks to the fact that the Zig build system is also a package manager that can download dependencies and wire everything together as needed. The package manager is still in its early days at the moment of writing (e.g. it doesn't implement version resolution), but it's more than complete enough to build complex real-world projects.
+
+Just to give you an idea, a Zig package dependency can expose to consumers:
+
+- Zig modules (that you can `@import()` in Zig code)
+- Executables (either installed in the output directory or used in a build step)
+- Static and dynamic libraries (`.a`, `.so/.dylib/.dll`)
+- Files (e.g. header files, C source code, but also arbitrary assets)
+
+When you add as a dependency a repository (or compressed archive) that doesn't implement a `build.zig`, then you will be able only to get files from it, which is how the AYC VVVVVV package is able to depend on an upstream repo that has no knowledge of Zig.
+
+## Goals
+
+AYC has two main goals:
+
+- Provide users of the Zig compiler toolchain convenient access to C/C++ projects.
+- Show to C/C++ project maintainers how it would look like to replace their build system(s) with Zig and offer them a quick way to get started (they can just upstream the 2 required files).
+
+That said, like all things in a growing ecosystem, the work is not being done methodically (despite the org's name), but it's rather the result of a collective of people scratching their own itch.
+
+This means that unless somebody needed something implemented (bet it as a project or a particular optional setting of a build), chances are that it's missing, so don't expect every package to be a fully faithful port of the original build pipeline.
+
+## Joining the organization
+
+Currently to join the organization you need to ping me and the price of admission is one C/C++ repository that you are able to immediately transfer to the AYC organization.
+
+If you're unsure how to get in contact, open a thread in [the Discussions tab](https://github.com/orgs/allyourcodebase/discussions) mentioning that you want to join and including a link to a repository that is ready to be ported. 
+
+Make also sure to read the [AYC README](https://github.com/allyourcodebase/), as there are some rules about licensing and other minor details.
+
+## On community... 
+
+There's one last reason why I created AYC: to avoid getting in a situation where a C/C++ project maintainer is getting badgered by some users about adding a `build.zig` file, when the maintainer doesn't want to.
+
+As the Zig project grows, it becomes impossible to have full control over everything that happens in the wild, but by being mindful and deliberate in designing what we *can* control, we can help shape a better ecosystem for everybody, be it Zig users or not.
+
+
+[^1]: On NixOS I needed to enter a shell with `pulseaudio xorg.libXext xorg.libX11 libGL`

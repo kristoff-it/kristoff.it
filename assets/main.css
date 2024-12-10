@@ -121,6 +121,17 @@
    margin-bottom: 15px;
  }
 
+ #footnotes p {
+   display: inline;
+   margin-right: 5px;
+
+ }
+
+ #footnotes,
+ #footnotes code {
+   font-size: 0.8rem;
+ }
+
  @media (prefers-color-scheme:dark) {
    code {
      color: white;

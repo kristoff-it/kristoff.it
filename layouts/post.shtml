@@ -2,10 +2,10 @@
 <title id="title" :text="$page.title"></title>
 <head id="head">
   <link
-  type="text/css"
-  rel="stylesheet"
-  href="$site.asset('term-highlight.css').link()"
->
+    type="text/css"
+    rel="stylesheet"
+    href="$site.asset('term-highlight.css').link()"
+  >
 </head>
 <div id="content" class="foo">
   <div style="display:flex; flex-direction:column; align-items:center;">
@@ -37,6 +37,16 @@
   </p>
   <div id="post-description" :html="$page.description"></div>
   <div id="post-body" :html="$page.content()"></div>
+  <div id="footnotes" :if="$page.footnotes?()">
+    <ol :loop="$if">
+      <li id="$loop.it.def_id">
+        <ctx :html="$loop.it.html()"></ctx>
+        <ctx :loop="$loop.it.ref_ids">
+          <a href="$loop.it.prefix('#')" :html="$loop.idx"></a>
+        </ctx>
+      </li>
+    </ol>
+  </div>
   <hr>
   <div id="prev-next">
     <span :if="$page.prevPage()">
