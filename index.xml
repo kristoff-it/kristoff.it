@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Mon, 02 Dec 2024 16:34:33 +0000</lastBuildDate>
+		<lastBuildDate>Tue, 10 Dec 2024 19:00:35 +0000</lastBuildDate>
+		
+			<item>
+				<title>All Your Codebase</title>
+				<link>https://kristoff.it/blog/all-your-codebase/</link>
+				<pubDate>Tue, 10 Dec 2024 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/all-your-codebase/</guid>
+			</item>
 		
 			<item>
 				<title>Advent of Code in Zig</title>
