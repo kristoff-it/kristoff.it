@@ -5,7 +5,14 @@
 		<description>Recent content on Loris Cro's Personal Website</description>
 		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
 		<language>en-us</language>
-		<lastBuildDate>Tue, 10 Dec 2024 19:00:35 +0000</lastBuildDate>
+		<lastBuildDate>Sun, 09 Feb 2025 17:36:45 +0000</lastBuildDate>
+		
+			<item>
+				<title>Dead Simple Snapshot Testing In Zig</title>
+				<link>https://kristoff.it/blog/dead-simple-snapshot-testing/</link>
+				<pubDate>Sun, 09 Feb 2025 00:00:00 +0000</pubDate>
+				<guid>https://kristoff.it/blog/dead-simple-snapshot-testing/</guid>
+			</item>
 		
 			<item>
 				<title>All Your Codebase</title>

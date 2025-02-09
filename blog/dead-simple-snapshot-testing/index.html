@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="utf-8">
+    <title id="title">
+      Dead Simple Snapshot Testing In Zig
+      | Loris Cro's Blog
+    </title>
+    <meta name="description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@croloris">
+    <meta name="twitter:image" content="https://kristoff.it/logo.png">
+    <meta name="twitter:author" content="@croloris">
+    <meta name="twitter:description" content="Loris Cro&apos;s Blog">
+    <meta name="twitter:title" content="Dead Simple Snapshot Testing In Zig">
+    <meta property="og:title" content="Dead Simple Snapshot Testing In Zig">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://kristoff.it/logo.png">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="/main.css?bust2">
+    <link type="text/css" rel="stylesheet" href="/highlight.css?bust">
+    <script defer type="text/javascript" src="https://api.pirsch.io/pirsch.js" id="pirschjs" data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"></script>
+    
+  <link type="text/css" rel="stylesheet" href="/term-highlight.css">
+
+  </head>
+  <body>
+    <div id="content">
+      
+  <div style="display:flex; flex-direction:column; align-items:center;">
+    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+    <small><i>Personal Website</i></small>
+    <div style="display:flex; justify-content:center; font-size:small;">
+      <a href="/">About</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitter.com/croloris">Twitter</a>
+      	&nbsp; • &nbsp;
+      <a href="https://twitch.tv/kristoff_it">Twitch</a>
+      	&nbsp; • &nbsp;
+      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+      	&nbsp; • &nbsp;
+      <a href="https://github.com/kristoff-it">GitHub</a>
+    </div>
+  </div>
+  <h1>Dead Simple Snapshot Testing In Zig</h1>
+  <p class="post-byline">
+    <span>February 09, 2025</span>
+    •
+    <span>5</span>
+    min read • by
+    <b>Loris Cro</b>
+    <span></span>
+  </p>
+  <div id="post-description"></div>
+  <div id="post-body"><p>I’ve recently added snapshot testing support to <a href="https://zine-ssg.io" target="_blank">Zine</a>, my static site generator, and I’ll share here how to get a similar setup going for your projects.</p><p>Snapshot testing is based on two principles:</p><ol><li>The assertion part of your tests is expressed as a string comparison against a known good value.</li><li>You use your tests to generate (and update) known good values.</li></ol><p>In snapshot testing, “known good values” are called <em>snapshots</em> or <em>golden files</em>.</p><p>When your tests are expressed as Zig <code>test {}</code> definitions, you can use a library to update the snapshot by directly modifying the Zig source code that contains your tests. This is what TigerBeetle presented in “<a href="https://tigerbeetle.com/blog/2024-05-14-snapshot-testing-for-the-masses/" target="_blank">Snapshot Testing For The Masses</a>” (see also <a href="https://ziggit.dev/t/oh-snap-easy-snapshot-testing-for-zig/5263" target="_blank">Oh Snap!</a>).</p><p>In my case, Zine is a static site generator and, as such, it has <strong>files as the natural unit of input/output</strong>, meaning that my tests look more like integration tests orchestrated by the build system, rather than unit tests written in Zig files. To be clear, I do have unit tests for <a href="https://github.com/kristoff-it/superhtml" target="_blank">my parsers</a>, but for the static site generator <em>as a whole</em>, integration tests are the way to go.</p><p>Here’s how my setup looks like:</p><p>Under <code>tests/</code> I have a collection of Zine websites and their corresponding snapshot. Here’s an example directory structure containing a single test website:</p><pre><code>tests
+└── simple-website
+    ├── snapshot
+    │   ├── index.html
+    │   └── sections
+    │       └── index.html
+    └── src
+        ├── assets
+        ├── build.zig
+        ├── build.zig.zon
+        ├── content
+        │   ├── index.smd
+        │   └── sections.smd
+        └── layouts
+            ├── index.shtml
+            └── sections.shtml
+</code></pre><p>Running  <code>zig build test</code> will loop over all websites under <code>tests/</code> and build each one, placing each output in the corresponding <code>snapshot/</code> directory.</p><p>Since all files are committed to source control (including, <em>crucially</em>, the snapshots), when the output of a website changes, we can see exactly what changed by running <code>git diff</code>. In the code that I will show in a moment, we’ll have the Zig build system do that automatically for us.</p><p>An empty diff is a success, while any change is considered a test failure. This is because at this point it’s unclear if the changes shown in the diff are intended or not. Once the programmer has confirmed that all changes are indeed intended, they can commit the new snapshots. Once that’s done, re-running <code>zig build test</code> will now produce an empty diff and thus succeed.</p><p>Here’s a <code>build.zig</code> snippet to implement what I just described:</p><pre><code class="zig"><span class="keyword">const</span> <span class="variable">test_step</span> <span class="operator">=</span> <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function call">step</span><span class="punctuation bracket">(</span>
+    <span class="string">&quot;test&quot;</span><span class="punctuation delimiter">,</span>
+    <span class="string">&quot;runs snapshot tests under tests/&quot;</span><span class="punctuation delimiter">,</span>
+<span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="comment">// Git diff will need to be run after all websites are</span>
+<span class="comment">// done building. See usage of `dependOn` to communicate</span>
+<span class="comment">// dependecy relationships to the build system.</span>
+<span class="keyword">const</span> <span class="variable">diff</span> <span class="operator">=</span> <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function call">addSystemCommand</span><span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span>
+    <span class="string">&quot;git&quot;</span><span class="punctuation delimiter">,</span>
+    <span class="string">&quot;diff&quot;</span><span class="punctuation delimiter">,</span>
+    <span class="string">&quot;--cached&quot;</span><span class="punctuation delimiter">,</span> <span class="comment">// see git_add comment</span>
+    <span class="string">&quot;--exit-code&quot;</span><span class="punctuation delimiter">,</span>
+<span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="variable">diff</span><span class="punctuation delimiter">.</span><span class="function call">addDirectoryArg</span><span class="punctuation bracket">(</span><span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function call">path</span><span class="punctuation bracket">(</span><span class="string">&quot;tests/&quot;</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+test_step<span class="punctuation delimiter">.</span><span class="function call">dependOn</span><span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="variable">diff</span><span class="punctuation delimiter">.</span><span class="variable member">step</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="comment">// We need to stage all of tests/ in order for untracked</span>
+<span class="comment">// files to show up in the diff. It&apos;s also not a bad</span>
+<span class="comment">// automatism since it avoids the problem of forgetting</span>
+<span class="comment">// to stage new snapshot files.</span>
+<span class="keyword">const</span> <span class="variable">git_add</span> <span class="operator">=</span> <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function call">addSystemCommand</span><span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span>
+    <span class="string">&quot;git&quot;</span><span class="punctuation delimiter">,</span>
+    <span class="string">&quot;add&quot;</span><span class="punctuation delimiter">,</span>
+    <span class="string">&quot;tests/&quot;</span><span class="punctuation delimiter">,</span>
+<span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="variable">diff</span><span class="punctuation delimiter">.</span><span class="variable member">step</span><span class="punctuation delimiter">.</span><span class="function call">dependOn</span><span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="variable">git_add</span><span class="punctuation delimiter">.</span><span class="variable member">step</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="keyword">const</span> <span class="variable">build_dir</span> <span class="operator">=</span> <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="variable member">build_root</span><span class="punctuation delimiter">.</span><span class="variable member">handle</span><span class="punctuation delimiter">;</span>
+<span class="keyword">const</span> <span class="variable">tests_dir</span> <span class="operator">=</span> <span class="keyword exception">try</span> <span class="variable">build_root</span><span class="punctuation delimiter">.</span><span class="function call">openDir</span><span class="punctuation bracket">(</span><span class="string">&quot;tests/&quot;</span><span class="punctuation delimiter">,</span> <span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span>
+    <span class="punctuation delimiter">.</span><span class="variable member">iterate</span> <span class="operator">=</span> <span class="variable">true</span><span class="punctuation delimiter">,</span>
+<span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+<span class="keyword">var</span> <span class="variable">it</span> <span class="operator">=</span> <span class="variable">tests_dir</span><span class="punctuation delimiter">.</span><span class="function call">iterateAssumeFirstIteration</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="keyword repeat">while</span> <span class="punctuation bracket">(</span><span class="keyword exception">try</span> <span class="variable">it</span><span class="punctuation delimiter">.</span><span class="function call">next</span><span class="punctuation bracket">(</span><span class="punctuation bracket">)</span><span class="punctuation bracket">)</span> <span class="punctuation bracket">|</span><span class="variable">entry</span><span class="punctuation bracket">|</span> <span class="punctuation bracket">{</span>
+    <span class="keyword conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">entry</span><span class="punctuation delimiter">.</span><span class="variable member">kind</span> <span class="operator">!=</span> <span class="punctuation delimiter">.</span><span class="constant">directory</span><span class="punctuation bracket">)</span> <span class="keyword repeat">continue</span><span class="punctuation delimiter">;</span>
+    <span class="keyword conditional">if</span> <span class="punctuation bracket">(</span><span class="variable">entry</span><span class="punctuation delimiter">.</span><span class="variable member">name</span><span class="punctuation bracket">[</span><span class="number">0</span><span class="punctuation bracket">]</span> <span class="operator">==</span> <span class="character">&apos;.&apos;</span><span class="punctuation bracket">)</span> <span class="keyword repeat">continue</span><span class="punctuation delimiter">;</span>
+
+    <span class="comment">// Normally you would not want to run `zig build` as a</span>
+    <span class="comment">// subprocess, but in my case Zine is a collection of</span>
+    <span class="comment">// tools orchestrated by the Zig build system so it&apos;s</span>
+    <span class="comment">// a bit of a weird corner case. Normally you would</span>
+    <span class="comment">// want to use `b.runArtifact` to invoke your program.</span>
+    <span class="keyword">const</span> <span class="variable">build_site</span> <span class="operator">=</span> <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="function call">addSystemCommand</span><span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="punctuation delimiter">.</span><span class="punctuation bracket">{</span>
+        <span class="variable">b</span><span class="punctuation delimiter">.</span><span class="variable member">graph</span><span class="punctuation delimiter">.</span><span class="variable member">zig_exe</span><span class="punctuation delimiter">,</span>
+        <span class="string">&quot;build&quot;</span><span class="punctuation delimiter">,</span>
+        <span class="string">&quot;-Ddebug&quot;</span><span class="punctuation delimiter">,</span>
+        <span class="string">&quot;-p&quot;</span><span class="punctuation delimiter">,</span>
+        <span class="string">&quot;../snapshot&quot;</span><span class="punctuation delimiter">,</span>
+    <span class="punctuation bracket">}</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+
+    <span class="variable">git_add</span><span class="punctuation delimiter">.</span><span class="variable member">step</span><span class="punctuation delimiter">.</span><span class="function call">dependOn</span><span class="punctuation bracket">(</span><span class="operator">&amp;</span><span class="variable">build_site</span><span class="punctuation delimiter">.</span><span class="variable member">step</span><span class="punctuation bracket">)</span><span class="punctuation delimiter">;</span>
+<span class="punctuation bracket">}</span><span class="operator"></span>
+</code></pre>
+<p>This is what the workflow looks like when I make a change to Zine that modifies how websites are rendered:</p><pre><code class="diff">$ zig build test
+
+<span class="variable builtin">diff --git a/tests/simple/snapshot/index.html b/tests/simple/snapshot/index.html</span>
+index <span class="constant">6f1f4ec</span>..<span class="constant">8139918</span> 100644
+<span class="keyword">--- a/tests/simple/snapshot/index.html</span>
+<span class="string">+++ b/tests/simple/snapshot/index.html</span>
+<span class="attribute">@@ -6,6 +6,6 @@</span>
+   &lt;/head&gt;
+   &lt;body&gt;
+     &lt;h1&gt;Homepage&lt;/h1&gt;
+<span class="keyword">-    &lt;div&gt;&lt;p&gt;Hello &lt;strong&gt;World&lt;/strong&gt;&lt;/p&gt;&lt;/div&gt;</span>
+<span class="string">+    &lt;div&gt;&lt;p&gt;Hello &lt;b&gt;World&lt;/b&gt;&lt;/div&gt;</span>
+   &lt;/body&gt;
+ &lt;/html&gt;
+test
+└─ run git failure
+error: the following command exited with error code 1:
+git diff --cached --exit-code /Users/kristoff/zine/tests
+Build Summary: 2/4 steps succeeded; 1 failed
+test transitive failure
+└─ run git failure
+</code></pre>
+<p>At this point I can decide to undo my change or to commit the new snapshot file to make the test succeed.</p><p>What I like about this setup is that it really only depends on the <code>git</code> executable. No libraries, no extra tools.</p><p>If you too have a project that can work well with test files, this setup is probably the simplest possible way to get a snapshot testing workflow up and running.</p></div>
+  <div id="footnotes"></div>
+  <hr>
+  <div id="prev-next">
+    <span>
+      <a href="/blog/all-your-codebase/">←
+        <span>All Your Codebase</span></a>
+    </span>
+    <span></span>
+    <span></span>
+    <small>&nbsp; or &nbsp;</small>
+    <small>
+      <a href="/">Back to the Homepage</a>
+    </small>
+  </div>
+
+    </div>
+  </body>
+</html>
