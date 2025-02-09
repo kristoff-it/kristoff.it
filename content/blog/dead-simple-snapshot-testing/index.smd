@@ -1,0 +1,146 @@
+---
+.title = "Dead Simple Snapshot Testing In Zig",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2025-02-09T00:00:00"),
+.draft = false,
+---
+I've recently added snapshot testing support to [Zine](https://zine-ssg.io), my static site generator, and I'll share here how to get a similar setup going for your projects.
+
+Snapshot testing is based on two principles: 
+
+1. The assertion part of your tests is expressed as a string comparison against a known good value.
+2. You use your tests to generate (and update) known good values.
+
+
+In snapshot testing, "known good values" are called *snapshots* or *golden files*.
+
+When your tests are expressed as Zig `test {}` definitions, you can use a library to update the snapshot by directly modifying the Zig source code that contains your tests. This is what TigerBeetle presented in "[Snapshot Testing For The Masses](https://tigerbeetle.com/blog/2024-05-14-snapshot-testing-for-the-masses/)" (see also [Oh Snap!](https://ziggit.dev/t/oh-snap-easy-snapshot-testing-for-zig/5263)).   
+
+In my case, Zine is a static site generator and, as such, it has **files as the natural unit of input/output**, meaning that my tests look more like integration tests orchestrated by the build system, rather than unit tests written in Zig files. To be clear, I do have unit tests for [my parsers](https://github.com/kristoff-it/superhtml), but for the static site generator *as a whole*, integration tests are the way to go.
+
+Here's how my setup looks like:
+
+Under `tests/` I have a collection of Zine websites and their corresponding snapshot. Here's an example directory structure containing a single test website:
+
+```
+tests
+└── simple-website
+    ├── snapshot
+    │   ├── index.html
+    │   └── sections
+    │       └── index.html
+    └── src
+        ├── assets
+        ├── build.zig
+        ├── build.zig.zon
+        ├── content
+        │   ├── index.smd
+        │   └── sections.smd
+        └── layouts
+            ├── index.shtml
+            └── sections.shtml
+```
+
+Running  `zig build test` will loop over all websites under `tests/` and build each one, placing each output in the corresponding `snapshot/` directory.
+
+Since all files are committed to source control (including, *crucially*, the snapshots), when the output of a website changes, we can see exactly what changed by running `git diff`. In the code that I will show in a moment, we'll have the Zig build system do that automatically for us.
+
+An empty diff is a success, while any change is considered a test failure. This is because at this point it's unclear if the changes shown in the diff are intended or not. Once the programmer has confirmed that all changes are indeed intended, they can commit the new snapshots. Once that's done, re-running `zig build test` will now produce an empty diff and thus succeed.
+
+Here's a `build.zig` snippet to implement what I just described:
+
+```zig
+const test_step = b.step(
+    "test",
+    "runs snapshot tests under tests/",
+);
+
+// Git diff will need to be run after all websites are
+// done building. See usage of `dependOn` to communicate
+// dependecy relationships to the build system.
+const diff = b.addSystemCommand(&.{
+    "git",
+    "diff",
+    "--cached", // see git_add comment
+    "--exit-code",
+});
+
+diff.addDirectoryArg(b.path("tests/"));
+
+test_step.dependOn(&diff.step);
+
+// We need to stage all of tests/ in order for untracked
+// files to show up in the diff. It's also not a bad
+// automatism since it avoids the problem of forgetting
+// to stage new snapshot files.
+const git_add = b.addSystemCommand(&.{
+    "git",
+    "add",
+    "tests/",
+});
+
+diff.step.dependOn(&git_add.step);
+
+const build_dir = b.build_root.handle;
+const tests_dir = try build_root.openDir("tests/", .{
+    .iterate = true,
+});
+
+var it = tests_dir.iterateAssumeFirstIteration();
+while (try it.next()) |entry| {
+    if (entry.kind != .directory) continue;
+    if (entry.name[0] == '.') continue;
+
+    // Normally you would not want to run `zig build` as a
+    // subprocess, but in my case Zine is a collection of
+    // tools orchestrated by the Zig build system so it's
+    // a bit of a weird corner case. Normally you would
+    // want to use `b.runArtifact` to invoke your program.
+    const build_site = b.addSystemCommand(&.{
+        b.graph.zig_exe,
+        "build",
+        "-Ddebug",
+        "-p",
+        "../snapshot",
+    });
+
+    git_add.step.dependOn(&build_site.step);
+}
+```
+
+This is what the workflow looks like when I make a change to Zine that modifies how websites are rendered:
+
+```diff
+$ zig build test
+
+diff --git a/tests/simple/snapshot/index.html b/tests/simple/snapshot/index.html
+index 6f1f4ec..8139918 100644
+--- a/tests/simple/snapshot/index.html
++++ b/tests/simple/snapshot/index.html
+@@ -6,6 +6,6 @@
+   </head>
+   <body>
+     <h1>Homepage</h1>
+-    <div><p>Hello <strong>World</strong></p></div>
++    <div><p>Hello <b>World</b></div>
+   </body>
+ </html>
+test
+└─ run git failure
+error: the following command exited with error code 1:
+git diff --cached --exit-code /Users/kristoff/zine/tests
+Build Summary: 2/4 steps succeeded; 1 failed
+test transitive failure
+└─ run git failure
+```
+
+At this point I can decide to undo my change or to commit the new snapshot file to make the test succeed.
+
+What I like about this setup is that it really only depends on the `git` executable. No libraries, no extra tools.
+
+If you too have a project that can work well with test files, this setup is probably the simplest possible way to get a snapshot testing workflow up and running.
+
+
+

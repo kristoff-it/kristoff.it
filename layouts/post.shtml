@@ -49,12 +49,12 @@
   </div>
   <hr>
   <div id="prev-next">
-    <span :if="$page.prevPage()">
+    <span :if="$page.prevPage?()">
       <a href="$if.link()">←
         <span :text="$if.title"></span></a>
     </span>
     <span :if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
-    <span :if="$page.nextPage()">
+    <span :if="$page.nextPage?()">
       <a href="$if.link()"><span :text="$if.title"></span>
         →</a>
     </span>

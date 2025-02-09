@@ -175,3 +175,20 @@ code.markdown .text.title {
 code.markdown .punctuation {
   color: var(--light-red);
 }
+
+
+code.diff .keyword {
+  color: var(--light-red);
+}
+
+code.diff .string {
+  color: var(--cyan);
+}
+
+code.diff .builtin {
+  color: var(--blue);
+}
+
+code.diff .attribute {
+  color: var(--dark-yellow);
+}
