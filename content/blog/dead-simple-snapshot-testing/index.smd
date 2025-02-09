@@ -10,7 +10,7 @@ I've recently added snapshot testing support to [Zine](https://zine-ssg.io), my 
 
 Snapshot testing is based on two principles: 
 
-1. The assertion part of your tests is expressed as a string comparison against a known good value.
+1. The assertion part of your tests is expressed as a comparison against a known good value.
 2. You use your tests to generate (and update) known good values.
 
 
