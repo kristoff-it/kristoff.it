@@ -11,14 +11,17 @@ I've recently added snapshot testing support to [Zine](https://zine-ssg.io), my 
 Snapshot testing is based on two principles: 
 
 1. The assertion part of your tests is expressed as a comparison against a known good value.
-2. You use your tests to generate (and update) known good values.
+2. You use your tests to generate (and update) known good values automatically.
 
 
 In snapshot testing, "known good values" are called *snapshots* or *golden files*.
 
+
+The key insight is point number two: generating snapshots automatically means that you don't have to do that work manually. This allows you to have a comprehensive test suite that requires very little effort to update, compared to having to do all the work by hand, which is the null hypotesis when writing test code.
+
 When your tests are expressed as Zig `test {}` definitions, you can use a library to update the snapshot by directly modifying the Zig source code that contains your tests. This is what TigerBeetle presented in "[Snapshot Testing For The Masses](https://tigerbeetle.com/blog/2024-05-14-snapshot-testing-for-the-masses/)" (see also [Oh Snap!](https://ziggit.dev/t/oh-snap-easy-snapshot-testing-for-zig/5263)).   
 
-In my case, Zine is a static site generator and, as such, it has **files as the natural unit of input/output**, meaning that my tests look more like integration tests orchestrated by the build system, rather than unit tests written in Zig files. To be clear, I do have unit tests for [my parsers](https://github.com/kristoff-it/superhtml), but for the static site generator *as a whole*, integration tests are the way to go.
+In my case, Zine is a static site generator and, as such, it has **files as the natural unit of input/output**, meaning that my tests look more like integration tests orchestrated by the build system, rather than unit tests written in Zig files. To be clear, I do have unit tests for [my parsers](https://github.com/kristoff-it/superhtml) (for which a snapshot testing framework might be appropriate), but for the static site generator *as a whole*, integration tests are the way to go.
 
 Here's how my setup looks like:
 
