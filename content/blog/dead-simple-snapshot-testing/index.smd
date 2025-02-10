@@ -126,8 +126,8 @@ index 6f1f4ec..8139918 100644
    </head>
    <body>
      <h1>Homepage</h1>
--    <div><p>Hello <strong>World</strong></p></div>
-+    <div><p>Hello <b>World</b></div>
+-    <div><p>Hello <b>World</b></p></div>
++    <div><p>Hello <strong>World</strong></div>
    </body>
  </html>
 test
