@@ -84,7 +84,7 @@ const git_add = b.addSystemCommand(&.{
 diff.step.dependOn(&git_add.step);
 
 const build_dir = b.build_root.handle;
-const tests_dir = try build_root.openDir("tests/", .{
+const tests_dir = try build_dir.openDir("tests/", .{
     .iterate = true,
 });
 
