@@ -141,8 +141,9 @@ test transitive failure
 
 At this point I can decide to undo my change or to commit the new snapshot file to make the test succeed.
 
-What I like about this setup is that it really only depends on the `git` executable. No libraries, no extra tools.
+One last key concept to understand is the effectiveness of snapshot testing is **directly** proportional to how easy it is to audit a diff. If a code change ends up changing random bits of incomprehensible byte sequences, then you have gained nothing from this practice. Design your snapshots and your diffing tools accordingly. 
 
+What I like about this setup is that it really only depends on the `git` executable. No libraries, no extra tools.
 If you too have a project that can work well with test files, this setup is probably the simplest possible way to get a snapshot testing workflow up and running.
 
 
