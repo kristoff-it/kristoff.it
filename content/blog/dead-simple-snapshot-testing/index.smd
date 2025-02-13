@@ -21,7 +21,7 @@ The key insight is point number two: generating snapshots automatically means th
 
 When your tests are expressed as Zig `test {}` definitions, you can use a library to update the snapshot by directly modifying the Zig source code that contains your tests. This is what TigerBeetle presented in "[Snapshot Testing For The Masses](https://tigerbeetle.com/blog/2024-05-14-snapshot-testing-for-the-masses/)" (see also [Oh Snap!](https://ziggit.dev/t/oh-snap-easy-snapshot-testing-for-zig/5263)).   
 
-In my case, Zine is a static site generator and, as such, it has **files as the natural unit of input/output**, meaning that my tests look more like integration tests orchestrated by the build system, rather than unit tests written in Zig files. To be clear, I do have unit tests for [my parsers](https://github.com/kristoff-it/superhtml) (for which a snapshot testing framework might be appropriate), but for the static site generator *as a whole*, integration tests are the way to go.
+In my case Zine is a static site generator and, as such, it has **files as the natural unit of input/output**, meaning that my tests look more like integration tests orchestrated by the build system, rather than unit tests written in Zig files. To be clear, I do have unit tests for [my parsers](https://github.com/kristoff-it/superhtml) (for which a snapshot testing framework might be appropriate), but for the static site generator *as a whole*, integration tests are the way to go.
 
 Here's how my setup looks like:
 
@@ -141,7 +141,7 @@ test transitive failure
 
 At this point I can decide to undo my change or to commit the new snapshot file to make the test succeed.
 
-One last key concept to understand is the effectiveness of snapshot testing is **directly** proportional to how easy it is to audit a diff. If a code change ends up changing random bits of incomprehensible byte sequences, then you have gained nothing from this practice. Design your snapshots and your diffing tools accordingly. 
+One last key concept to understand is that the effectiveness of snapshot testing is **directly** proportional to how easy it is to audit a diff. If a code change ends up changing random bits of incomprehensible byte sequences, then you have gained nothing from this practice. Design your snapshots and your diffing tools accordingly. 
 
 What I like about this setup is that it really only depends on the `git` executable. No libraries, no extra tools.
 If you too have a project that can work well with test files, this setup is probably the simplest possible way to get a snapshot testing workflow up and running.
