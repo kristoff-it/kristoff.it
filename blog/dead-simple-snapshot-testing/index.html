@@ -151,7 +151,7 @@ Build Summary: 2/4 steps succeeded; 1 failed
 test transitive failure
 └─ run git failure
 </code></pre>
-<p>At this point I can decide to undo my change or to commit the new snapshot file to make the test succeed.</p><p>One last key concept to understand is that the effectiveness of snapshot testing is <strong>directly</strong> proportional to how easy it is to audit a diff. If a code change ends up changing random bits of incomprehensible byte sequences, then you have gained nothing from this practice. Design your snapshots and your diffing tools accordingly.</p><p>What I like about this setup is that it really only depends on the <code>git</code> executable. No libraries, no extra tools. If you too have a project that can work well with test files, this setup is probably the simplest possible way to get a snapshot testing workflow up and running.</p></div>
+<p>At this point I can decide to undo my change or to commit the new snapshot file to make the test succeed.</p><p>One last key concept to understand is that the effectiveness of snapshot testing is <strong>directly</strong> proportional to how easy it is to audit a diff. If a code change ends up changing random bits of incomprehensible byte sequences, then you have gained nothing from this practice. Design your snapshots and your diffing tools accordingly.</p><p>What I like about this setup is that it really only depends on the <code>git</code> executable. No libraries, no extra tools.</p><p>If you too have a project that can work well with test files, this setup is probably the simplest possible way to get a snapshot testing workflow up and running.</p></div>
   <div id="footnotes"></div>
   <hr>
   <div id="prev-next">
