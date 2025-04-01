@@ -3,7 +3,7 @@
 		<title>Loris Cro's Personal Website</title>
 		<link>https://kristoff.it/</link>
 		<description>Recent content on Loris Cro's Personal Website</description>
-		<generator>Zine -- https://github.com/kristoff-it/zine</generator>
+		<generator>Zine -- https://zine-ssg.io</generator>
 		<language>en-us</language>
 		<lastBuildDate :text="$build.generated.formatHTTP()"></lastBuildDate>
 		<ctx :loop="$page.subpages()">
