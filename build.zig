@@ -13,6 +13,7 @@ pub fn build(b: *std.Build) !void {
             "CNAME",
             ".well-known/atproto-did",
         },
+        // .image_size_attributes = true,
         .debug = true,
     });
 }

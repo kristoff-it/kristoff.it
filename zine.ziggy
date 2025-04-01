@@ -1,0 +1,12 @@
+Site {
+    .title = "Loris Cro's Personal Website",
+    .host_url = "https://kristoff.it",
+    .content_dir_path = "content",
+    .layouts_dir_path = "layouts",
+    .assets_dir_path = "assets",
+    .static_assets = [
+        "CNAME",
+        "favicon.ico",
+        ".well-known/atproto-did",
+    ],
+}
