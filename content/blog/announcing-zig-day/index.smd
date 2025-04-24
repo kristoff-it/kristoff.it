@@ -1,0 +1,59 @@
+---
+.title = "Announcing zig.day",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2025-04-23T00:00:00"),
+.draft = false,
+---
+
+In "[Zig Day: A suggestion for better Zig meetups](blog/zig-day/)" I talked about a full-day collaborative programming event format that resembles the "social hacking day" at [Software You Can Love](https://softwareyoucan.love), for those who have been to one.
+
+Now that we're about to have the first Zig Day happen here in Milan (more on this later), I've created https://zig.day to host future Zig Days from all over the world on a static website created with [Zine](https://zine-ssg.io) where I (ab)use templates to offer syndication not only via RSS, but also via iCalendar.
+
+If you're into static site tech, you might enjoy blog post.
+
+
+## Collaborating with organizers
+I'm the owner of zig.day, but each Zig Day "chapter" (just Zig Day from now on) is organized and owned by somebody else. I want organizers to be able to modify events they schedule for their own Zig Day, but not to be able to modify the website arbitrarily, or to clobber eachother's changes.
+
+If you immediately thought of a django backend using the admin panel as a quick and dirty CMS interface, or worse some ungodly web of FaaS running amok in the cloud, think again.
+
+All you need is a CODEOWNERS file and fiddling with some GitHub settings:
+```
+* @kristoff-it
+
+# Zig Day Organizers
+/content/europe/milano/ @inge4pres
+/content/usa/portland/ @andrewrk @MasonRemaley   
+```
+
+If you enable branch protection on GitHub, forcing collaborators to go through PRs to merge changes into the main branch, and you require code owner approval before merging a PR, then you will have a system where organizers can merge changes to their event in full autonomy, without needing any backend or you to be awake to merge their PRs.
+
+
+## iCalendar
+
+If you read RFC5545 (and related RFCs), you will learn that both individual calendar events and full blown calendars (that you can subscribe to) are just text files that you can template statically.
+
+It's kinda like RSS, with worse syntax, but with the upside that the protocol supports updating events you have already published.
+In my case I use a SuperHTML template to generate one of these bad boys for each Zig Day. Whenever an organizer creates a new event, it automatically gets added to both the RSS feed and the event calendar specific to their Zig Day.
+
+[Here's the source](https://github.com/kristoff-it/zig.day/blob/main/layouts/calendar.shtml), fair warning: it's not pretty. One day I might create SuperCalendar and make it nice :^)
+
+
+## Email notifications
+Thanks to [Buttondown](https://buttondown.email) (ping me if you want a referral code), I can send out emails to subscribers automatically based on the event RSS feed of each Zig Day.
+
+This means that an organizer only has to create an event to then get RSS, iCalendar and even email notifications "for free", and that they can do so independently using a system that is overall pretty straight forward (except for the iCal templates, those suck, but I'm the only one that has to care).
+
+
+## First ever Zig Day
+
+The first ever Zig Day will be held in Milan a couple of weeks from now. If you happen to be in the area, consider joining us. Here's the event page: https://zig.day/europe/milano/
+
+If you're a bit too far away, maybe you could be interested in:
+
+- https://zig.day/usa/portland/ (Andrew Kelley, Mason Remaley)
+- https://zig.day/canada/vancouver/ (Matt Knight)
+
+And if that doesn't work for you either, then [consider starting your own local Zig Day](https://zig.day/organizer/).
