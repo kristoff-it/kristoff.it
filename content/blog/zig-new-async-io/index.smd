@@ -190,7 +190,7 @@ But this new approach pushes color blindness even further: previously the **sour
 
 The new `Io` interface is non-generic and uses a vtable for dispatching function calls to a concrete implementation. This has the upside of reducing code bloat, but virtual calls do have a performance penalty at runtime. In release builds the optimizer can de-virtualize function calls but it's not guaranteed.
 
-A side effect of proposal [#23367](https://github.com/ziglang/zig/issues/23367), which is needed for determining upper bound stack size, is guaranteed de-virtualization when there is only one `Io` implementation (also in debug builds!).
+A side effect of proposal [#23367](https://github.com/ziglang/zig/issues/23367), which is needed for determining upper bound stack size, is guaranteed de-virtualization when there is only one `Io` implementation being used (also in debug builds!).
 
 In the less common case when a program instantiates more than one `Io` implementation, virtual calls done through the `Io` interface will not be de-virtualized, as that would imply doubling the amount of machine code generated, creating massive code bloat.
 
