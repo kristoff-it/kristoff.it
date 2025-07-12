@@ -126,7 +126,7 @@ fn saveData(io: Io, data: []const u8) !void {
 
    // We could decide to cancel the current task
    // and everything would be realeased correctly.
-   if (true) return error.Canceled;
+   // if (true) return error.Canceled;
 
    try a_future.await(io);
    try b_future.await(io);
