@@ -204,7 +204,11 @@ The new `Writer` interface features two new primitives for expressing specific o
 The first one is inspired by POSIX `sendfile` (and equivalents):
 
 ```zig
-sendFile: *const fn (w: *Writer, file_reader: *File.Reader, limit: Limit)
+sendFile: *const fn (
+   w: *Writer,
+   file_reader: *File.Reader,
+   limit: Limit,
+)
 ```
 
 Operating systems have various syscalls for sending data from a file descriptor directly to another. The key insight here is that the data transfer happens in kernel space, without needing to copy bytes into your program's memory, and then copy them again into the final file descriptor. 
@@ -214,7 +218,11 @@ Being able to express this operation at the `Writer` interface level will allow 
 The second one is the ability to perform vectorized writes plus support for splatting:
 
 ```zig
-drain: *const fn (w: *Writer, data: []const []const u8, splat: usize)
+drain: *const fn (
+   w: *Writer,
+   data: []const []const u8,
+   splat: usize,
+)
 ```
 
 Vectorized writes allow you to send in a single call multiple segments of data to be written. This operation can be expressed as a single POSIX `writev` syscall (or equivalents on other platforms).
@@ -263,7 +271,9 @@ A correct implementation needs to correctly distinguish between what needs to ha
 
 ```zig
 const server_socket = try openServerSocket(io);
-var server = try io.asyncConcurrent(startAccepting, .{io, server_socket});
+var server = try io.asyncConcurrent(startAccepting, .{
+   io, server_socket,
+});
 defer server.cancel(io) catch {};
 var client = io.async(startClient, .{io});
 defer client.cancel(io) catch {};
