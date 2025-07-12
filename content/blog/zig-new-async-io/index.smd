@@ -115,8 +115,6 @@ That said, this unfortunate use of `try` is kinda our fault because we didn't go
 const std = @import("std");
 const Io = std.Io;
 
-const std = @import("std");
-const Io = std.Io;
 fn saveData(io: Io, data: []const u8) !void {
    var a_future = io.async(saveFile, .{io, data, "saveA.txt"});
    defer a_future.cancel(io) catch {};
