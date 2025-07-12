@@ -279,4 +279,4 @@ var client = io.async(startClient, .{io});
 defer client.cancel(io) catch {};
 ```
 
-Lastly, `io.asyncConcurrent` cannot be implemented with single-threaded blocking I/O, therefore calling this function when using such implementation would panic due to a programmer error.
+Lastly, `io.asyncConcurrent` cannot be implemented with single-threaded blocking I/O, therefore calling this function when using such implementation would panic due to a programming error.
