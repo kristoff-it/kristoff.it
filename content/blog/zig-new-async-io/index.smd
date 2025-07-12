@@ -1,0 +1,272 @@
+---
+.title = "Zig's New Async I/O",
+.description = "Asynchronicity is not concurrency.",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2025-07-13T00:00:00"),
+.draft = false,
+---
+In the [Zig Roadmap 2026](https://www.youtube.com/watch?v=x3hOiOcbgeA) stream Andrew announced a new way of doing I/O, let's see what are the goals of this upcoming design and how that relates to the revival of async / await in Zig.
+## The new I/O Interface
+
+The most notable change to Zig is the introduction of a new interface in charge of all I/O operations. Most importantly, the `Io` interface is now expected to be provided by the caller, just like we already do with `Allocator`.  
+
+Old Zig:
+```zig
+const std = @import("std");
+
+fn saveData(data: []const u8) !void {
+    const file = try std.fs.cwd().createFile("save.txt", .{});
+    defer file.close();
+
+    try file.writeAll(data);
+
+    const out = std.io.getStdOut();
+    try out.writeAll("save complete");
+}
+```
+
+New Zig:
+```zig
+const std = @import("std");
+const Io = std.Io;
+
+fn saveData(io: Io, data: []const u8) !void {
+    const file = try Io.Dir.cwd().createFile(io, "save.txt", .{});
+    defer file.close(io);
+
+    try file.writeAll(io, data);
+
+    const out: Io.File = .stdout();
+    try out.writeAll(io, "save complete");
+}
+```
+
+The main implication of this change is that now the author of a program is able to decide the concrete I/O implementation and inject it also into code coming from dependencies.
+
+The `Io` interface is also in charge of concurrency operations as those can intertwine with I/O, especially in the case of event loops. If a piece of code properly expresses *concurrency* of operations, then the `Io` implementation will have the opportunity of introducing *parallelism*.
+
+To show this concept using a code example, let's imagine that to save our data we now need to write to two different files. 
+
+This is an implementation that does not express concurrency and thus will not be able to leverage any potential parallelism offered by the `Io` implementation:
+
+```zig
+const std = @import("std");
+const Io = std.Io;
+
+fn saveData(io: Io, data: []const u8) !void {
+    try saveFile(io, data, "saveA.txt");
+    try saveFile(io, data, "saveB.txt");
+
+    const out: Io.File = .stdout();
+    try out.writeAll(io, "save complete");
+}
+
+fn saveFile(io: Io, data: []const u8, name: []const u8) !void {
+    const file = try Io.Dir.cwd().createFile(io, name, .{});
+    defer file.close(io);
+    try file.writeAll(io, data);
+}
+```
+
+Although this implementation does not express concurrency, simply by operating on the Io interface, it already participates properly in an event loop with respect to blocking/non-blocking, should that be the chosen Io implementation of the application.
+
+This version instead properly encodes that there is no required order when writing to the two files:
+
+```zig
+const std = @import("std");
+const Io = std.Io;
+
+fn saveData(io: Io, data: []const u8) !void {
+   var a_future = io.async(saveFile, .{io, data, "saveA.txt"});
+   var b_future = io.async(saveFile, .{io, data, "saveB.txt"});
+
+   const a_result = a_future.await(io);
+   const b_result = b_future.await(io);
+
+   try a_result;
+   try b_result;
+
+   const out: Io.File = .stdout();
+   try out.writeAll(io, "save complete");
+}
+
+fn saveFile(io: Io, data: []const u8, name: []const u8) !void {
+   const file = try Io.Dir.cwd().createFile(io, name, .{});
+   defer file.close(io);
+   try file.writeAll(io, data);
+}
+```
+
+Most notably, this second version will not only work better when run over an evented I/O implementation, but it will still be correct when used with blocking I/O because `io.async` will immediately call `saveFile`, and `Future.await` will become a no-op.
+
+Another interesting detail of this second code example is that we had to use `await` and `try` separately, instead of being able to do everything at once, like so:
+
+```zig
+try a_future.await(io); // error here -> early return
+try b_future.await(io);
+```
+
+The reason why we can't immediately use `try` is because if `try a_future.await(io)` were to trip, we would fail to await `b_future`. Futures are resources that need to be released so failing to await one is a programming error.
+
+That said, this unfortunate use of `try` is kinda our fault because we didn't go the full length. Let's see what happens when we introduce support for cancellation:
+
+```zig
+const std = @import("std");
+const Io = std.Io;
+
+const std = @import("std");
+const Io = std.Io;
+fn saveData(io: Io, data: []const u8) !void {
+   var a_future = io.async(saveFile, .{io, data, "saveA.txt"});
+   defer a_future.cancel(io) catch {};
+
+   var b_future = io.async(saveFile, .{io, data, "saveB.txt"});
+   defer b_future.cancel(io) catch {};
+
+   // We could decide to cancel the current task
+   // and everything would be realeased correctly.
+   if (true) return error.Canceled;
+
+   try a_future.await(io);
+   try b_future.await(io);
+
+   const out: Io.File = .stdout();
+   try out.writeAll(io, "save complete");
+}
+
+fn saveFile(io: Io, data: []const u8, name: []const u8) !void {
+   const file = try Io.Dir.cwd().createFile(io, name, .{});
+   defer file.close(io);
+   try file.writeAll(io, data);
+}
+```
+
+The API of `Future.cancel()` is identical to `Future.await()` aside from additionally requesting cancellation from the `Io` implementation. Both functions are idempotent. Canceling an already completed `Future` is the same as awaiting it, meaning any unwanted resources must be immediately deallocated. Incomplete canceled I/O operations return `error.Canceled`.
+
+With this last code example we were able to implement support for cancellation without introducing nesting or any more complexity than necessary, and we regained the ability to use `try` where it intuitively makes sense.
+
+Let's take a look now at how different `Io` implementations can perform async I/O.
+## Stdlib I/O Implementations
+
+Given that `Io` is an interface (in the runtime polymorphism sense of the word), you will be able to create your own or use ones implemented in a third party package, but the Zig standard library will offer a set of implementations for solving common use cases. 
+
+The most basic implementation of `Io` is one that maps to blocking I/O operations. This implementation will be present in the stdlib and is designed to generate machine code equivalent to using C (i.e. no extra machinery introduced in the executable, see later how that relates to virtual function calls). 
+
+What's more interesting are all the implementations that include an event loop. Let's take a look at what they will be, according to current plans.
+
+### Thread pool
+
+This implementation uses blocking I/O syscalls but multiplexes them over a pool of OS threads to introduce parallelism. This can be a nice stepping stone away from Single Threaded Blocking, but beware - it is tricky to manage the blocking operations optimally, particularly if any of them are networking clients!
+
+### Green Threads 
+
+This implementation uses `io_uring` on Linux and similar APIs on other OSs for performing I/O combined with a thread pool. The key difference is that in this implementation OS threads will juggle multiple async tasks in the form of green threads.
+
+This implementation requires having the ability to perform stack swapping on the target platform, meaning that it will not support WASM, for example.
+
+The first prototype of this implementation supports x86_64 Linux. Support for other platforms will be added later. There are more interesting details about this implementation but I leave them to a future blog post.
+### Stackless Coroutines 
+ 
+ This implementation won't be available immediately like the previous ones because it depends on [reintroducing](https://github.com/ziglang/zig/issues/23446) a special function calling convention and rewriting function bodies into state machines that don't require an explicit stack to run.
+
+This execution model is compatible with WASM and other platforms where stack swapping is not available or desireable. 
+
+## Design Goals
+
+When async I/O was first attempted in Zig, `async` and `await` were deeply tied to language-level support for stackless coroutines. This new direction decouples the two main concurrency primitives from the execution model. This, alongside other design choices, has a big impact in terms of code reusability and optimality.
+### Code reusability
+
+One of the main goals of Zig is to enable code reusability, which is always a touchy subject when it comes to async I/O. 
+
+The famous "[What Color is Your Function?](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/)" blog post by Bob Nystrom explains very well the issues that come from the virality of async functions. In other languages it's common to see a blocking and an async variant of the same thing (e.g. a database client), each maintained by different authors.
+
+Zig has solved this problem since the beginning, as I previously explained in "[What is Zig's Colorblind Async / Await](https://kristoff.it/blog/zig-colorblind-async-await/)". Thanks to Zig's clever (and unorthodox) usage of `async` and `await`, a single library can work optimally in both synchronous and asynchronous mode, achieving the goal of code reusability, a property preserved with this new iteration of async I/O.
+
+But this new approach pushes color blindness even further: previously the **source** code would be free from the virality of `async`/ `await`, but at **runtime** the program was still forced to use stackless coroutines, which have a viral calling convention. Now `io.async` and `Future.await` can be used with a variety of execution models, from blocking to stackless coroutines, fully freeing you from any form of virality.
+
+**With this last improvement Zig has completely defeated function coloring.**
+### Optimality
+
+The new `Io` interface is non-generic and uses a vtable for dispatching function calls to a concrete implementation. This has the upside of reducing code bloat, but virtual calls do have a performance penalty at runtime. In release builds the optimizer can de-virtualize function calls but it's not guaranteed.
+
+A side effect of proposal [#23367](https://github.com/ziglang/zig/issues/23367), which is needed for determining upper bound stack size, is guaranteed de-virtualization when there is only one `Io` implementation (also in debug builds!).
+
+In the less common case when a program instantiates more than one `Io` implementation, virtual calls done through the `Io` interface will not be de-virtualized, as that would imply doubling the amount of machine code generated, creating massive code bloat.
+
+One question that needed to be answered when designing the `Io` interface was where to perform buffering. In the old implementation buffering was offered by a concrete implementation of reader/writer. In the new version buffering is embedded in the `Reader` and `Writer`  interfaces instead. 
+
+Buffering at the interface level means that even when no de-virtualization can happen, you will have to go through a virtual call only to flush the buffer, ensuring optimal behavior even in such case.
+#### Semantic I/O operations
+
+The new `Writer` interface features two new primitives for expressing specific operations in an optimized manner.
+
+The first one is inspired by POSIX `sendfile` (and equivalents):
+
+```zig
+sendFile: *const fn (w: *Writer, file_reader: *File.Reader, limit: Limit)
+```
+
+Operating systems have various syscalls for sending data from a file descriptor directly to another. The key insight here is that the data transfer happens in kernel space, without needing to copy bytes into your program's memory, and then copy them again into the final file descriptor. 
+
+Being able to express this operation at the `Writer` interface level will allow you to create chains of writers where, for example, sending a file over HTTP will still allow you to leverage `sendfile`.
+
+The second one is the ability to perform vectorized writes plus support for splatting:
+
+```zig
+drain: *const fn (w: *Writer, data: []const []const u8, splat: usize)
+```
+
+Vectorized writes allow you to send in a single call multiple segments of data to be written. This operation can be expressed as a single POSIX `writev` syscall (or equivalents on other platforms).
+
+The `splat` parameter defines how many times the last element of `data` should be repeated. This can be useful for decompression streams for example, where sequences of zeros can be expressed as a single zero, repeated `splat` times. This makes communication across a chain of `Reader`s more efficient, leaving to the final `Writer` (the sink) the duty to turn a splat operation into concrete bytes.
+## Roadmap
+
+A small subset of these changes will be present in Zig 0.15.0 but you will have to wait until the subsequent release cycle before the rest of it makes into a tagged release, as a big part of the Zig standard library needs to be rewritten (and redesigned!) to make use of these new capabilities. Things like TLS encryption, HTTP server and client, etc.
+
+**If you find Zig to be a promising project, please consider supporting us with a small recurring donation.** The Zig Software Foundation can be independent and focus on doing what's best for the language thanks to the donations it receives. At the moment of writing we have active contributors that could use more billing hours to help us make more progress faster.
+
+You can support us on [Every.org](https://www.every.org/zig-software-foundation-inc/) (no account needed), [GitHub Sponsors](https://github.com/sponsors/ziglang), and [other platforms](https://ziglang.org/zsf/). **If your employer offers donation matching, please consider supporting us that way.**
+
+---
+
+## FAQ
+
+### Zig is a low level programming language, why does it care about async?
+
+Zig describes itself as a *general purpose* language for maintaining **robust**, **optimal** and **reusable** software. Making sure that you can exploit non-blocking syscalls in order to maximize CPU usage is part of the main goals of the language. As an individual user you don't need special support in the language to be able to use APIs like io_uring or kqueue, but having a standardized way of doing so ensures that any third party code you use will also play nice with your I/O strategy, thus achieving better code reusability.
+
+### Are Zig package authors now forced to use async everywhere in their code to be good citizens of the ecosystem?
+
+No, if you write normal sequential code, it will still be able to play nice with the overall I/O strategy chosen by your users. Additionally, many I/O libraries don't have the necessity to express any concurrency across their own operations because most of the time those still need to be scheduled sequentially (e.g. database clients). 
+
+That said there are other aspects of the new I/O system that might be worth making sure to integrate in your code, like support for `Writer.sendFile`, for example.
+
+### So I can plug in any execution model and everything will work correctly every single time?
+
+Yes, unless the code contains a programming error.
+
+Imagine that you made a program that spins up a listening socket (the server component), and then at the same time it also wants to open a connection to it (the client component):
+
+```zig
+var server = io.async(startServer, .{io});
+var client = io.async(startClient, .{io}); 
+```
+
+In a blocking I/O execution context the program will block on `socket.accept()` inside of `startServer`  and will never get to start executing `startClient`.
+
+That said **it should be noted that this is a programming error**. `io.async` expresses *asynchronicity* (the possibility for operations to happen out of order and still be correct) and it does not request *concurrency*, which in this case is necessary for the code to work correctly.
+
+Astute readers might have noticed that the code snippet above hides another bug: the server and the client in reality cannot be started concurrently! The client connection can only be opened successfully if the server has already started listening, which is not guaranteed by the code above.   
+
+A correct implementation needs to correctly distinguish between what needs to happen sequentially, what can be executed out of order, and what needs to execute concurrently:
+
+```zig
+const server_socket = try openServerSocket(io);
+var server = try io.asyncConcurrent(startAccepting, .{io, server_socket});
+defer server.cancel(io) catch {};
+var client = io.async(startClient, .{io});
+defer client.cancel(io) catch {};
+```
+
+Lastly, `io.asyncConcurrent` cannot be implemented with single-threaded blocking I/O, therefore calling this function when using such implementation would panic due to a programmer error.
