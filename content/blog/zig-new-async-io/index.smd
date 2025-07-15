@@ -268,11 +268,18 @@ Astute readers might have noticed that the code snippet above hides another bug:
 A correct implementation needs to correctly distinguish between what needs to happen sequentially, what can be executed out of order, and what needs to execute concurrently:
 
 ```zig
+// Create server socket and listen
 const server_socket = try openServerSocket(io);
+
+// Start accepting connections
 var server = try io.asyncConcurrent(startAccepting, .{
    io, server_socket,
 });
 defer server.cancel(io) catch {};
+
+// Connect to the server. Note that this must happen
+// *after* we call listen on the server socket, but can
+// happen before we start accepting connections.
 var client = io.async(startClient, .{io});
 defer client.cancel(io) catch {};
 ```
