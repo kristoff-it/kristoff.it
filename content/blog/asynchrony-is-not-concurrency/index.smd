@@ -212,7 +212,7 @@ const fiber = Fiber.allocate(event_loop) catch {
 };
 ```
 
-Just to drive the point home one last time: this is a legitimate thing to do because asynchrony does not imply concurrency. `io.asyncConcurrent` does guarantee concurrency instead that's why it has to be a failable function.
+Just to drive the point home one last time: this is a legitimate thing to do because asynchrony does not imply concurrency. `io.asyncConcurrent` does guarantee concurrency instead, and that's why it has to be a failable function.
 
 Before we jump to the last section about conclusions, I'd like to point out that the code snippets above are all realistic but, to remove clutter, I have omitted error handling and the code that awaits futures returned from async calls. Read [my other blog post](/blog/zig-new-async-io/) to see complete code snippets, although that is not necessary to understand this post.
 
