@@ -1,6 +1,6 @@
 ---
 .title = "Asynchrony is not Concurrency",
-.description = "Yes I know about that one talk from Rob Pyke.",
+.description = "Yes I know about that one talk from Rob Pike.",
 .author = "Loris Cro",
 .layout = "post.shtml",
 .date = @date("2025-07-18T00:00:00"),
