@@ -286,4 +286,4 @@ defer client.cancel(io) catch {};
 
 Lastly, `io.asyncConcurrent` cannot be implemented with single-threaded blocking I/O, therefore calling this function when using such implementation would panic due to a programming error.
 
-Edit: See also the follow up post "[Asynchrony is not Concurrency](/blog/asynchrony-is-not-concurrency/)". Also I originally used 'asynchronicity' but later on opted for the shorter form 'asynchrony' as apparently, according to William Webster, American english only has the short form.
+Edit: See also the follow up post "[Asynchrony is not Concurrency](/blog/asynchrony-is-not-concurrency/)". Also I originally used 'asynchronicity' but later on opted for the shorter form 'asynchrony' as apparently, according to Merriam Webster, American english only has the short form.
