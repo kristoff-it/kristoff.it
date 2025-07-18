@@ -1,6 +1,6 @@
 ---
 .title = "Zig's New Async I/O",
-.description = "Asynchronicity is not concurrency.",
+.description = "Asyncrhony is not concurrency.",
 .author = "Loris Cro",
 .layout = "post.shtml",
 .date = @date("2025-07-13T00:00:00"),
@@ -261,7 +261,7 @@ var client = io.async(startClient, .{io});
 
 In a blocking I/O execution context the program will block on `socket.accept()` inside of `startServer`  and will never get to start executing `startClient`.
 
-That said **it should be noted that this is a programming error**. `io.async` expresses *asynchronicity* (the possibility for operations to happen out of order and still be correct) and it does not request *concurrency*, which in this case is necessary for the code to work correctly.
+That said **it should be noted that this is a programming error**. `io.async` expresses *asyncrhony* (the possibility for operations to happen out of order and still be correct) and it does not request *concurrency*, which in this case is necessary for the code to work correctly.
 
 Astute readers might have noticed that the code snippet above hides another bug: the server and the client in reality cannot be started concurrently! The client connection can only be opened successfully if the server has already started listening, which is not guaranteed by the code above.   
 
@@ -285,3 +285,5 @@ defer client.cancel(io) catch {};
 ```
 
 Lastly, `io.asyncConcurrent` cannot be implemented with single-threaded blocking I/O, therefore calling this function when using such implementation would panic due to a programming error.
+
+Edit: See also the follow up post "[Asynchrony is not Concurrency](/blog/asynchrony-is-not-concurrency/)". Also I originally used 'asynchronicity' but later on opted for the shorter form 'asynchrony' as apparently, according to William Webster, American english only has the short form.
