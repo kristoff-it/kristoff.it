@@ -91,8 +91,8 @@ io.async(saveFileB, .{io});
 When run in single-threaded blocking mode, the code above will be equivalent to this:
 
 ```zig
-try saveFileA(io);
-try saveFileB(io);
+saveFileA(io);
+saveFileB(io);
 ```
 
 It's easy to imagine how this can be done, all `io.async` has to do is run the given function immediately (instead of spawning a new thread for it, or doing any other form of task switching).
