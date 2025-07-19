@@ -38,7 +38,7 @@ Let's take a look now at another example: say that you need to create a TCP serv
 
 ```zig
 io.async(Server.accept, .{server, io});
-io.async(Cient.connect, .{client, io});
+io.async(Client.connect, .{client, io});
 ```
 
 Like before, the order doesn't matter: the client could begin a connection before the server starts accepting (the OS will buffer the client request in the meantime), or the server could start accepting first and wait for a bit before seeing an incoming connection.
@@ -179,7 +179,7 @@ Now let's take a look again at the client-server example:
 
 ```zig
 io.async(Server.accept, .{server, io});
-io.async(Cient.connect, .{client, io});
+io.async(Client.connect, .{client, io});
 ```
 
 As mentioned earlier, this situation is different than the `saveData` one. Here `Server.accept` and `Client.connect` require concurrency because blocking on `Server.accept` will prevent `Client.connect` from ever executing.
@@ -190,7 +190,7 @@ This is how you will solve it in Zig:
 
 ```zig
 try io.asyncConcurrent(Server.accept, .{server, io});
-io.async(Cient.connect, .{client, io});
+io.async(Client.connect, .{client, io});
 ```
 
 `asyncConcurrent` guarantees that `Server.accept` will run concurrently with the rest of the code.  This documents in the code that concurrency is required for correctness, which will also let the program error out when attempting to run it over a non-concurrent `Io` implementation. But that's not all! 
