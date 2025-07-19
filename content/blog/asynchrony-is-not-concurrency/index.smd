@@ -37,6 +37,7 @@ But, most importantly, **it's perfectly legitimate to do all the work to save on
 Let's take a look now at another example: say that you need to create a TCP server and connect to it *from within the same program*.
 
 ```zig
+// assume that server.listen has already been called
 io.async(Server.accept, .{server, io});
 io.async(Client.connect, .{client, io});
 ```
@@ -178,6 +179,7 @@ For convenience, here's a copy of the definitions I've introduced in the beginni
 Now let's take a look again at the client-server example:
 
 ```zig
+// assume that server.listen has already been called
 io.async(Server.accept, .{server, io});
 io.async(Client.connect, .{client, io});
 ```
