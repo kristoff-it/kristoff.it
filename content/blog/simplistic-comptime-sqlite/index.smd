@@ -149,7 +149,7 @@ a query tries to refer to a non-existing table, or to a non-existing column with
 the column has a type that disagrees with your usage of `r.int`, for example.
 
 One library that does parse SQL more seriously is [vrishmann/zig-sqlite](https://github.com/vrischmann/zig-sqlite/),
-but in my case I opted for the comptime-free [karlseguin/zqlite.zig](https://github.com/karlseguin/zqlite.zig)
+but in my case I opted for the mostly comptime-free [karlseguin/zqlite.zig](https://github.com/karlseguin/zqlite.zig)
 because I'm using Zig's 'nightly' builds, and it's annoying when complicated comptime code breaks in
 a dependency. By using a thinner wrapper, _all non-trivial breakages are belong to me_.
 
