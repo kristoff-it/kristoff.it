@@ -1,0 +1,226 @@
+---
+.title = "Simplistic Comptime Column Safety in SQLite Queries",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2025-12-20T00:00:00"),
+.draft = false,
+---
+
+I'm working on a project that uses SQLite for persistence and I'm using a Zig library that offers a
+fairly thin wrapper on top of the SQLite C API.
+
+In this blog post I'll show you how I added some comptime safety to my queries in a hilariously low
+number of lines of code, but it should be noted that the approach I'm about to show you is tailored
+to my specific needs.
+
+I'll talk about more general (and solid) solutions later on.
+
+## The problem statement
+
+Let's look at a concrete example: a query that loads the most recent chat messages from the database.
+
+```zig
+var rows = db.rows(
+    "SELECT id, origin, channel, author, body FROM messages",
+    .{},
+) catch db.fatal(@src());
+defer rows.deinit();
+
+while (rows.next()) |r| {
+    const msg: Message = .{
+        .id = r.int(0),
+        .origin = r.int(1),
+        .channel = r.int(2),
+        .author = r.int(3),
+        .text = gpa.dupe(u8, r.text()) catch oom(),
+    };
+    try state.latest_messages.pushFront(gpa, msg);
+    log.debug("loaded chat message: {f}", .{msg});
+}
+```
+
+If you've ever worked with SQLite in C, the above should look familiar.
+
+In particular, it's common to use indices to refer to the columns of each row, but that's unfortunately
+very easy to mess up, both when writing the code the first time, and even more when changing the query.
+
+Ideally I would like to be able to write this code:
+
+```zig
+while (rows.next()) |r| {
+    const msg: Message = .{
+        .id = r.int(.id),
+        .origin = r.int(.origin),
+        .channel = r.int(.channel),
+        .author = r.int(.author),
+        .text = r.text(gpa, .body) catch oom(),
+    };
+    try state.latest_messages.pushFront(gpa, msg);
+    log.debug("loaded chat message: {f}", .{msg});
+}
+```
+
+And to get a compile error such as this one when I get a column name wrong:
+
+```
+// r.int(.whoops)
+error: column 'whoops' not found in query
+```
+
+It should be noted that I don't want a full ORM though, and for example I don't want all mappings from
+the database to my types to be a 1:1 necessarily. Case in point, even in this example the column `body`
+maps to the struct field `text`.
+
+Let's add some comptime code to be able to refer to columns by name, without having to pay any runtime
+cost.
+
+## The simplistic solution
+
+The first part of this solution is to create a generic type that will encapsulate comptime analysis of
+the query:
+
+```zig
+/// Note how this is type is generic over a comptime string,
+/// not a type parameter.
+pub fn Rows(comptime query: []const u8) type {
+    const col_names = blk: {
+        var columns: []const struct { []const u8, u8 } = &.{};
+
+        var it = std.mem.tokenizeAny(u8, query, " ,=\n");
+        if (!std.mem.eql(u8, it.next() orelse "", "SELECT")) {
+            @compileError("query must start with SELECT");
+        }
+
+        var idx: u32 = 0;
+        while (it.next()) |tok| : (idx += 1) {
+            if (std.mem.eql(u8, tok, "*")) {
+                @compileError("never do SELECT *, always write column names explicitly");
+            }
+            if (std.mem.eql(u8, tok, "FROM")) break;
+            columns = columns ++ .{.{ tok, idx }};
+        } else @compileError("query missing uppecase 'FROM' keyword");
+
+        break :blk .{col_names};
+    };
+
+    const col_map: std.StaticStringMap(u8) = .initComptime(columns);
+
+    // ...
+}
+```
+
+In this code you can see how we extract column names from the query and build a comptime hash map.
+
+Astute readers might have noticed that we're not really parsing SQL syntax correctly, which is why
+I'm defining this solution 'simplistic': it's not correct for the general case, but it's good enough
+for the current needs of my project, also because the failure modes (e.g. trying to parse a query
+that makes use of SQL functions) will produce obvious compile errors, and not surprising behavior
+at runtime.
+
+The second half of this solution is to just do the mapping at comptime when calling 'getter' functions
+such as `r.int`:
+
+```zig
+pub fn int(r: Row, comptime col: @EnumLiteral()) i64 {
+    const idx = comptime col_map.get(@tagName(col)) orelse {
+        @compileError("column '" ++ @tagName(col) ++ "' not found in query");
+    };
+    return r.row.int(idx);
+ }
+```
+
+That's really it. About 20 lines and my itch is scratched.
+
+## Other problems and solutions
+
+Of course this is not where the story ends, column safety is nice but a few more things can still go wrong:
+
+- Errors in the SQL query (syntax or semantic)
+- Type mismatch between a row value and our expectations (e.g. `r.int` on a `text` column)
+- Schema mismatch between a table and the query
+- Mistakes relative to bind variables (e.g. passing arguments in the wrong order)
+
+The majority of these problems could be tackled by getting more serious about SQL parsing and / or by
+querying a live copy of the database during the build process.
+
+For example if you can observe the SQL queries that make up the database schema, you can then know if
+a query tries to refer to a non-existing table, or to a non-existing column within a table, or even if
+the column has a type that disagrees with your usage of `r.int`, for example.
+
+One library that does parse SQL more seriously is [vrishmann/zig-sqlite](https://github.com/vrischmann/zig-sqlite/),
+but in my case I opted for the comptime-free [karlseguin/zqlite.zig](https://github.com/karlseguin/zqlite.zig)
+because I'm using Zig's 'nightly' builds, and it's annoying when complicated comptime code breaks in
+a dependency. By using a thinner wrapper, _all non-trivial breakages are belong to me_.
+
+Another approach worth exploring would be to do SQL processing not at comptime, but as a build step.
+One issue I had with zig-sqlite in the past was sometimes not being entirely sure about how a given
+feature worked, and having to put some effort into deciphering the metaprogramming.
+
+A build step would be able to generate straight-forward code that you can even 'goto definition' into.
+A notable mention for this approach is Giacomo Cavalieri's [squirrel](https://github.com/giacomocavalieri/squirrel)
+for Gleam ([talk with a demo](https://www.youtube.com/watch?v=XEJxk5VUSTs)), although AFAIK squirrel
+prefers talking to the database at build time rather than parse SQL.
+
+## Another problem
+
+There's another problem that could be interesting trying to solve: avoid selecting columns that end up not
+being used.
+
+There are a few comptime-heavy ways of implementing something like that, from approaches that would
+fall under the umbrella of "session types", to [this one](https://ziggit.dev/t/how-to-enforce-function-call-ordering/13359)
+recently shared by Johnny Marler.
+
+Personally I believe that in this case the above would be too much complexity for the level of danger
+and likelyhood of this problem, but it's actually very simple to have a runtime check that only runs in debug builds:
+
+````zig
+pub const Row = struct {
+    row: zqlite.Row,
+    col_set: if (builtin.mode == .Debug)
+        std.StaticBitSet(columns.len)
+    else
+        void = if (builtin.mode == .Debug) .initEmpty() else {},
+
+    pub fn deinit(r: Row) void {
+        r.row.deinit();
+        if (builtin.mode == .Debug) {
+            if (r.col_set.count() != columns.len) {
+                @panic("unused columns!");
+                // TODO: display column names by iterating the set
+            }
+        }
+    }
+
+    // This function is public so users can do this:
+    // ```
+    // if (runtime_condition) r.int(.column) else r.markUsed(.column);
+    // ```
+    pub fn markUsed(r: *Row, col: @EnumLiteral()) void {
+        if (builtin.mode != .debug) return;
+        const idx = comptime col_map.get(@tagName(col)) orelse {
+            @compileError("column '" ++ @tagName(col) ++ "' not found in query");
+        };
+
+        r.col_set.set(idx);
+    }
+
+    pub fn int(r: *Row, comptime col: @EnumLiteral()) i64 {
+        const idx = comptime col_map.get(@tagName(col)) orelse {
+            @compileError("column '" ++ @tagName(col) ++ "' not found in query");
+        };
+        r.trackColumn(col);
+        return r.row.int(idx);
+    }
+
+    // ...
+}
+````
+
+That being said, I ended up not implementing this check in my project because zqlite doesn't want
+you to call deinit on an individual row created by calling `conn.rows`, and I'm not concerned about
+this problem enough to justify adding ad-hoc lines in my code.
+
+And that's ultimately maybe the most interesting point in this blog post: complexity and abstraction
+**always** have a cost, and a simpler simplistic solution can be better than a complex complete solution,
+if you have a crystal clear understanding of your needs to make the judgment call.
