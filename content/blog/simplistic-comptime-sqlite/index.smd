@@ -223,4 +223,4 @@ this problem enough to justify adding ad-hoc lines in my code.
 
 And that's ultimately maybe the most interesting point in this blog post: complexity and abstraction
 **always** have a cost, and a simpler simplistic solution can be better than a complex complete solution,
-if you have a crystal clear understanding of your needs to make the judgment call.
+if you have a crystal clear understanding of your needs in order to make the judgment call.
