@@ -85,7 +85,7 @@ the query:
 /// not a type parameter.
 pub fn Rows(comptime query: []const u8) type {
     const col_names = blk: {
-        var columns: []const struct { []const u8, u8 } = &.{};
+        var columns: []const struct { []const u8, u32 } = &.{};
 
         var it = std.mem.tokenizeAny(u8, query, " ,=\n");
         if (!std.mem.eql(u8, it.next() orelse "", "SELECT")) {
@@ -197,7 +197,7 @@ pub const Row = struct {
     // if (runtime_condition) r.int(.column) else r.markUsed(.column);
     // ```
     pub fn markUsed(r: *Row, col: @EnumLiteral()) void {
-        if (builtin.mode != .debug) return;
+        if (builtin.mode != .Debug) return;
         const idx = comptime col_map.get(@tagName(col)) orelse {
             @compileError("column '" ++ @tagName(col) ++ "' not found in query");
         };
