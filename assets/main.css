@@ -182,7 +182,7 @@
 
    pre>code {
      overflow: auto;
-     padding: 0.5em;
+     padding: 0.5rem;
      background: #f8f8f8;
      color: black;
      line-height: normal;
@@ -191,7 +191,7 @@
 
    .code {
      font-family: monospace;
-     font-size: 0.8em;
+     font-size: 0.8rem;
    }
 
 
