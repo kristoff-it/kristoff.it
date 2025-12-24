@@ -76,8 +76,8 @@
    border: none;
    padding: 15px;
    font-family: monospace, monospace;
-   font-size: 1em;
-   line-height: 1.3em !important;
+   font-size: 1rem;
+   line-height: 1.3rem !important;
    display: inline-block;
    box-sizing: border-box;
    min-width: 100%;
@@ -91,7 +91,7 @@
    margin: 0;
    padding: 0;
    background-color: #1E1E1E !important;
-   font-size: 0.85em;
+   font-size: 0.85rem;
    overflow: auto;
  }
 
@@ -99,7 +99,7 @@
    border-radius: 4px;
    border: 1px solid #d3d3d3;
    padding: 3px;
-   font-size: 1.1em;
+   font-size: 1.1rem;
  }
 
  blockquote {
@@ -280,7 +280,7 @@
 
  figcaption {
    text-align: center;
-   font-size: 0.9em;
+   font-size: 0.9rem;
  }
 
  iframe {
