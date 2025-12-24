@@ -76,8 +76,8 @@
    border: none;
    padding: 15px;
    font-family: monospace, monospace;
-   font-size: 1rem;
-   line-height: 1.3rem !important;
+   font-size: 0.8rem;
+   line-height: 1rem !important;
    display: inline-block;
    box-sizing: border-box;
    min-width: 100%;
@@ -176,7 +176,6 @@
 
    pre,
    code {
-     font-size: 12pt;
      direction: ltr;
    }
 
