@@ -71,7 +71,7 @@ Because of our lack of understanding:
 
 We have created language ecosystems where library authors must duplicate effort (e.g. [redis-py](https://github.com/redis/redis-py) vs [asyncio-redis](https://github.com/jonathanslenders/asyncio-redis)) or [worse](https://nullderef.com/blog/rust-async-sync/).
 
-We have created a [worse](https://bitbashing.io/async-rust.html) [experience](https://charlesleifer.com/blog/asyncio/) for library users where async code is viral and where a even a single dependency with async code demands that users give up their ability to write normal, synchronous code.
+We have created a [worse](https://bitbashing.io/async-rust.html) [experience](https://charlesleifer.com/blog/asyncio/) for library users where async code is viral and where even a single dependency with async code demands that users give up their ability to write normal, synchronous code.
 
 And to mitigate all these problems, we have created unholy escape hatches that cause suboptimal behavior at best and [deadlocks](https://www.youtube.com/watch?v=J0mcYVxJEl0) at worst.
 
