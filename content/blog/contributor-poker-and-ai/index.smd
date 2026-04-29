@@ -41,10 +41,10 @@ In successful open source projects you eventually reach a point where you
 start getting more PRs than what you're capable of processing. Given what I
 mentioned so far, it would make sense to stop accepting imperfect PRs in
 order to maximize ROI from your work, but that's not what we do in the Zig
-project: **we try our best to help new contributors to get their work in,
-even if they need some help getting there**. We don't do this just because
-it's the "right" thing to do, but also **because it's the smart thing to
-do**.
+project. Instead, **we try our best to help new contributors to get their
+work in, even if they need some help getting there**. We don't do this just
+because it's the "right" thing to do, but also **because it's the smart
+thing to do**.
 
 Contributing to an open source project is an [iterated
 game](https://en.wikipedia.org/wiki/Repeated_game) and the majority of the
@@ -118,15 +118,13 @@ Software Foundation to provide them with a language and toolchain that
 strives to be as good as we can make it.**
 
 Unfortunately the reality of LLM-based contributions has been mostly
-negative for us.
-
-From an increase in background noise due to worthless drive-by PRs full of
-hallucinations (that wouldn't even compile, let alone pass CI), to insane
-10 thousand line long first time PRs. In-between we also received plenty of
-PRs that looked fine on the surface, some of which explicitly claimed to
-not have made use of LLMs, but where follow-up discussions immediately made
-it clear that the author was sneakily consulting an LLM and regurgitating
-its mistake-filled replies to us.
+negative for us, from an increase in background noise due to worthless
+drive-by PRs full of hallucinations (that wouldn't even compile, let alone
+pass CI), to insane 10 thousand line long first time PRs. In-between we
+also received plenty of PRs that looked fine on the surface, some of which
+explicitly claimed to not have made use of LLMs, but where follow-up
+discussions immediately made it clear that the author was sneakily
+consulting an LLM and regurgitating its mistake-filled replies to us.
 
 To be clear, the point here is not to say that we believe that this is all
 that AI is. We don't. This is clearly a misuse of the tool, but it is also
