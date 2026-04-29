@@ -1,6 +1,6 @@
 ---
 .title = "Contributor Poker and Zig's AI Ban",
-.description = "You should always change door when playing Monty Hall",
+.description = "You should always change doors when playing Monty Hall",
 .author = "Loris Cro",
 .layout = "post.shtml",
 .date = @date("2026-04-29T00:00:00"),
