@@ -23,7 +23,7 @@ If you've never played Secret Hitler, watch the following 5-minute video to get 
 
 ```=html
 <div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/APiugylcAJw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/APiugylcAJw" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div><br>
 ```
 

@@ -29,7 +29,7 @@ As an example, **building the compiler itself used to require 9.6GB of RAM, whil
 The memory efficiency gains come in good part also thanks to the use of data-oriented programming techniques that were employed in the design of the self-hosted compiler.
 
 ```=html
-<iframe title="vimeo-player" src="https://player.vimeo.com/video/649009599?h=0c3307419e" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/649009599?h=0c3307419e" width="640" height="360" allowfullscreen></iframe>
 ```
 
 <br>In this talk Andrew explains how to use data-oriented design principles in practice, using the Zig compiler as a concrete example of what you can gain.

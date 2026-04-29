@@ -52,7 +52,7 @@ One of such challenges was recently mentioned by [Ashley Williams](https://twitt
 
 ```=html
 <div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h-LoPr5553o" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/h-LoPr5553o" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <br>
 ```
@@ -100,7 +100,7 @@ For example I recently interviewed [Abner Coimbre](https://twitter.com/abnercoim
 
 ```=html
 <div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Nutcb6ao0mc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Nutcb6ao0mc" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 <br>
 ```

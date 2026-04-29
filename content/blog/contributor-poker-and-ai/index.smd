@@ -1,0 +1,161 @@
+---
+.title = "Contributor Poker and Zig's AI Ban",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2026-04-29T00:00:00"),
+.draft = false,
+---
+
+During my tenure at the Zig Software Foundation I'm having the opportunity
+to learn many interesting things about software. The one I want to share
+today is a key piece of understanding for any open source project big
+enough to attract contributors.
+
+Open source development comes with a nuanced set of pros and cons, and it's
+up to you to leverage the good that comes from it in order to compensate
+for having to deal with the bad, of which there's plenty.
+
+First and foremost, open source is incompatible with many business models
+and it's based on the idea that you have to give away something of value
+for free. Of course in exchange for giving stuff out for free, you also get
+stuff for free, mostly in the form of code contributions.
+
+Unfortunately not only do **those contributions** (let's call them
+[PRs](https://en.wikipedia.org/wiki/Distributed_version_control#Pull_requests)
+from now on) not pay the bills, they themselves **are often a source of
+extra labor and friction.** In fact it's pretty common that it would take a
+maintainer less effort to implement a given change directly, rather than
+work with a PR author to get their code to a mergeable state.
+
+Based on what I mentioned so far, open source development seems a pretty
+shitty deal, and yet **I firmly believe it has the potential to produce
+higher quality products and for significantly cheaper than most alternative
+development models**; you just have to get good at [the open source
+game](/blog/the-open-source-game/). I've already written on the subject in
+general, but today I'll focus on one specific aspect: contributor poker.
+
+## Contributor poker
+
+In successful open source projects you eventually reach a point where you
+start getting more PRs than what you're capable of processing. Given what I
+mentioned so far, it would make sense to stop accepting imperfect PRs in
+order to maximize ROI from your work, but that's not what we do in the Zig
+project: **we try our best to help new contributors to get their work in,
+even if they need some help getting there**. We don't do this just because
+it's the "right" thing to do, but also **because it's the smart thing to
+do**.
+
+Contributing to an open source project is an [iterated
+game](https://en.wikipedia.org/wiki/Repeated_game) and the majority of the
+value that a contributor can bring to a project lies in the later
+iterations. In other words, you initially invest some energy (i.e. place a
+bet) to onboard a new contributor, and you hope that later on that
+relationship starts paying you back as the contributor becomes more trusted
+and prolific.
+
+The reason I call it “contributor poker” is because, just like people
+say about the actual card game, “you play the person, not the cards”.
+In contributor poker, you bet on the contributor, not on the contents of
+their first PR.
+
+Having an explicit understanding of this dynamic has netted the Zig project
+a huge amount of value over time. Building a compiler toolchain from the
+ground up is a huge scope that would have been impossible to cover without
+significant help from contributors.
+
+[Thanks to contributors like Ryan
+Liptak](https://www.ryanliptak.com/blog/every-rc-exe-bug-quirk-probably/)
+Zig users can now enjoy the luxury of setting the executable icon (and
+more) on Windows because Zig can compile Windows resource script (`.rc`)
+files.
+
+Another notable example are the contributions from [Frank
+Denis](https://github.com/jedisct1). I wouldn't even know where to begin to
+give a monetary value to the work he has done in `std.crypto`.
+
+## Growing pains
+
+In the early days of Zig it was possible to invest on every new
+contributor, but now the project has grown to the point where **the amount
+of incoming PRs far outnumbers the amount of energy core contributors have
+at their disposal** to play contributor poker.
+
+In practice this means that there have been instances of good PRs that have
+gone un-reviewed for extended periods of time, potentially causing valuable
+contributors to lose interest in contributing to Zig.
+
+This is something we have mentioned in our [yearly financial
+reports](https://ziglang.org/news/2025-financials/), and more importantly
+it's an issue we're actively aware of, and that we hope to solve (or at
+least mitigate) in the future.
+
+Unfortunately, not only is this an inherently hard problem to tackle, but
+AI has made things worse.
+
+## Banning AI contributions
+
+There has been a lot of speculation about why the Zig project bans AI
+contributions, but now that you understand the importance of contributor
+poker, it's easy to see why we do it.
+
+To be able to provide impactful work a contributor needs to be familiar
+with the codebase and the problem space, and they need to be trusted by the
+core team to have thought through all the changes introduced by their PRs
+in order to strive for an optimal approach, rather than just submitting a
+random solution that happens to pass CI.
+
+Additionally, as part of the process of becoming more trusted, contributors
+are expected to be responsible for the code they submit for a while more
+after their code is merged. Nobody is perfect and sometimes issues are
+discovered after the fact. Follow up discussions to decide how to
+course-correct are another example of the value of having an iterated
+relationship with engineers that have built significant insight on a given
+problem space.
+
+**This is important because users of Zig have in turn bet on the Zig
+Software Foundation to provide them with a language and toolchain that
+strives to be as good as we can make it.**
+
+Unfortunately the reality of LLM-based contributions has been mostly
+negative for us.
+
+From an increase in background noise due to worthless drive-by PRs full of
+hallucinations (that wouldn't even compile, let alone pass CI), to insane
+10 thousand line long first time PRs. In-between we also received plenty of
+PRs that looked fine on the surface, some of which explicitly claimed to
+not have made use of LLMs, but where follow-up discussions immediately made
+it clear that the author was sneakily consulting an LLM and regurgitating
+its mistake-filled replies to us.
+
+To be clear, the point here is not to say that we believe that this is all
+that AI is. We don't. This is clearly a misuse of the tool, but it is also
+what the overwhelming majority of LLM-based contributions looked like for
+our project.
+
+So while one could in theory be a valid contributor that makes use of LLMs,
+**from the perspective of contributor poker it's simply irrational for us
+to bet on LLM users while there's a huge pool of other contributors that
+don't present this risk factor**.
+
+The people who remarked on how it's impossible to know if a contribution
+comes from an LLM or not have completely missed the point of this policy
+and are clearly unaware of contributor poker.
+
+**For us the ability to provide contributors with an engaging ecosystem
+where they can improve their systems thinking and interact with other
+competent, trusted and prolific engineers is a critical aspect of our
+business model.**
+
+As I've mentioned before, Zig is able to punch well above its ~~weight~~
+funding class because we put huge effort in thinking about technical,
+social and business management issues that surround the project.
+
+Contributor poker is a key part of our strategy and it's in the project's
+best interest to push back against anything that hinders our ability to
+play the game effectively. That being said, we are aware that there are
+still many unresolved issues and we plan to adjust our policy as we gain
+more insight.
+
+If you want to help us succeed, [consider a small monthly donation to the
+Zig Software Foundation](https://ziglang.org/zsf/).
