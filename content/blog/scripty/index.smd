@@ -81,7 +81,7 @@ the Zig compiler do all the heavy lifting.
 I plan to get to all of these things (roughly in this same order, so docs
 first, compiler last), in the not-too-far future, but I am currently
 putting more effort into [another somewhat ambitious
-project](https://codeberg.com/awebo-chat/awebo) so it might take a bit before
+project](https://codeberg.org/awebo-chat/awebo) so it might take a bit before
 I circle back to Scripty.
 
 ## Scripty flavors
