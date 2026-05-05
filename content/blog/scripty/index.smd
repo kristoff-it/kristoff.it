@@ -1,0 +1,134 @@
+---
+.title = "Scripty",
+.description = "The perfect scripting sidekick! (or so I like to think)",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2026-05-05T00:00:00"),
+.draft = false,
+---
+
+[Scripty](https://github.com/kristoff-it/scripty) is an extremely simple
+(and deliberately limited) scripting language meant to be embedded in
+strings or other similar constructs, usually in a host document format (but
+not only).
+
+It looks like this: `$site.page('blog').subpages().first().title`.
+
+However, whether your evaluation context is made up of 'sites', 'pages'
+and 'titles', rather than 'tables', 'bank accounts', 'musical notes', 'apple pies' or
+anything else, that's entirely up to you.
+
+Scripty allows you to provide an evaluation context that defines primitive
+and aggregate types, and also which methods can be called on them.
+
+Lastly, Scripty has no for loops, if statements or variable assignment. A
+Scripty program is just a single expression, so one way of thinking about it
+is as a framework for building simple query languages.
+
+I've been using Scripty for a while now as part of
+[Zine](https://zine-ssg.io), my static site generator, but until now I
+never really spent effort trying to make it usable for other people.
+
+So recently I set out to provide an example implementation, and in the
+process I've implemented a few simplifications that I thought about in the
+past but that I never bothered actually implementing.
+
+Setting up a Scripty VM requires being familiar with Zig, but it's
+otherwise pretty easy, see https://github.com/kristoff-it/scripty.
+
+## VM implementation
+
+The Scripty VM is a stack-based interpreter. A parser produces nodes that
+get analyzed and pushed onto the stack, and on function call application
+(when a `)` token is seen), some values are popped off the stack, the
+function call is performed, and the resulting value is pushed back on the
+stack.
+
+I would describe this implementation as mostly naive, although I do get a
+bit clever with MultiArrayList (struct of arrays), but overall this is good
+enough for Zine as it's still one of the fastest static site generators
+that I know of (this blog builds in less than 20ms on a Mac Mini M2 Pro and
+evaluation of Scripty expressions is a minuscule fraction of that time).
+
+I've also given this implementation a good amount of fuzzing with AFL,
+although this code is now gone, to be replaced by a native Zig fuzzer
+implementation.
+
+## Future work
+
+I'm purposefully keeping Scripty very simple in order to support static
+analysis and compilation in the future.
+
+In Zine I already have a system to generate reference docs for SuperMD
+documents and SuperHTML templates
+([SuperMD](https://zine-ssg.io/docs/supermd/scripty/),
+[SuperHTML](https://zine-ssg.io/docs/superhtml/scripty/)), but it's a
+bespoke system that is not directly driven by the Scripty implementation
+(although it's not too hard to make it yourself, it's just a matter of
+adding extra definitions to your Scripty evaluation context definition
+and then using Zig comptime reflection to generate the docs).
+
+On the subject of static analysis it would also be nice to have a way
+for the SuperHTML language server to provide autocomplete suggestions
+for Scripty expressions, something that is currently not available.
+
+Lastly, being able to compile Scripty expressions to native code would be a
+stepping stone towards being able to compile SuperHTML templates (and of
+course any other host language that other people might end up using Scripty
+with). My plan in this regard is to use Zig as the target and then let
+the Zig compiler do all the heavy lifting.
+
+I plan to get to all of these things (roughly in this same order, so docs
+first, compiler last), in the not-too-far future, but I am currently
+putting more effort into [another somewhat ambitious
+project](https://codeberg.com/awebo-chat/awebo) so it might take a bit before
+I circle back to Scripty.
+
+## Scripty flavors
+
+One reason why I believe that Scripty is of some value despite its
+extreme simplicity, is how you can still use it to produce very
+different user experiences.
+
+The example of Scripty expression that I showed at the beginning
+is inspired by SuperHTML, where Scripty expressions are placed in
+HTML attributes and used to generate HTML code accordingly.
+
+```
+$site.homepage.subpages().first().link()
+```
+
+In this example we navigate from what is presumably a `Site` struct, into
+an instance of a page, and so on.
+
+In SuperMD Scripty is used in a completely different way.
+Without getting too deep into the weeds of how SuperMD works, take a look
+at this example usage:
+
+```
+$video.asset('video.mp4').autoplay(true).muted(false)
+```
+
+In SuperMD Scripty is used as a "builder"/"fluent" interface in order to
+define embeds. In this example we are defining a video embed and then
+setting some of its properties. Every function call sets a property on
+the original embed definition and then returns the mutated value so that
+the subsequent function call can do the same, and so forth.
+
+## In Conclusion
+
+When I originally set out to implement Scripty it was as part of my effort
+to create a new HTML templating language (which then became SuperHTML). I
+had reached a breaking point with Hugo's templating language and decided to
+free myself from having to use curly-braced templating languages (which are
+essentially macros, and **I hate macros**).
+
+The realization I had in the process is that all these templating languages
+(and not only) have essentially two languages in them: one to build expressions,
+and one to interoperate with the outer document.
+
+So I decided to make them truly separate languages, and the result is a
+tiny language that can both be very easy to get used to (it's essentially
+just field navigation and function calls, no monkey business), but that can
+also be tailored to each specific use case by designing the evaluation context
+accordingly.
