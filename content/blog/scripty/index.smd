@@ -21,7 +21,7 @@ anything else, that's entirely up to you.
 Scripty allows you to provide an evaluation context that defines primitive
 and aggregate types, and also which methods can be called on them.
 
-Lastly, Scripty has no for loops, if statements or variable assignment. A
+Lastly, Scripty has no `for` loops, `if` statements or variable assignment. A
 Scripty program is just a single expression, so one way of thinking about it
 is as a framework for building simple query languages.
 
