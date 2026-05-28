@@ -37,12 +37,12 @@ who love thoughtful software engineering, don't waste an opportunity to
 talk about data structures, algorithms, and approaches to problems that
 you've never seen before.**
 
-Additionally, I would also recommend limiting LLM usage during Zig Days. If
-you have a question, first see if there's somebody in the room who can help
-you with it. Similarly, do the coding by hand. Don't waste all the learning
-opportunities that you're getting on an agent that will learn nothing at
-best, and that will become more effective at doing Amodei's bidding at
-worst.
+**Additionally, I would also recommend limiting LLM usage during Zig
+Days.** If you have a question, first see if there's somebody in the room
+who can help you with it. Similarly, do the coding by hand. Don't waste all
+the learning opportunities that you're getting on an agent that will learn
+nothing at best, and that will become more effective at doing Amodei's
+bidding at worst.
 
 When you had a question at work in the past, you would be encouraged to ask
 your colleagues, while now these human interactions are being replaced by
@@ -60,18 +60,17 @@ shovels](https://www.youtube.com/shorts/bkcGggJJFjM) is right after all,
 and the best career move is to become proficient at ~~burning more tokens~~
 orchestrating agents, but I would still recommend not putting all your eggs
 in one basket just yet because maybe -- just maybe -- there will still be
-some value in knowing how systems work, either to differentiate yourself
-from other developers career-wise, or at the very least as a defense
-against LLM hallucinations.
+some value in knowing how systems work, both to differentiate yourself
+from other developers career-wise, and as part of effective LLM steering.
 
 And even if you have full confidence that the future of commercial software
-is strictly agentic coding, **Zig Days are still for people who enjoy the
+is strictly hands-off agentic coding, **Zig Days are still for people who enjoy the
 act of programming, even if that were to become just a hobby.**
 
 ## For Zig Day organizers
 
-If you're a Zig Day organizer, my recommendation is to deliberately address
-this phenomenon at the start of the day. If you leave it completely
+**If you're a Zig Day organizer, my recommendation is to deliberately address
+this phenomenon at the start of the day.** If you leave it completely
 unchecked, you risk having your Zig Day be inadvertently stripped of what
 makes it unique and worth getting up for on a weekend morning.
 
