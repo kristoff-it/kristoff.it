@@ -249,7 +249,7 @@ optimized safely as well.
 
 The reason you're reading this post, is because we know that we could write
 a wrong assert and it's not guaranteed that tests would catch it, which is
-not just a hypotetical. There are plenty of projects that have asserts that
+not just a hypothetical. There are plenty of projects that have asserts that
 pass tests, but that trip in prod, I can think of a hyped one that recently
 left the Zig ecosystem, for example.
 
