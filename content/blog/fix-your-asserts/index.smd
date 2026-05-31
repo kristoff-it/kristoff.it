@@ -352,7 +352,7 @@ makes developers subonciously too scared to turn asserts back on and face
 the consequences of their actions.
 
 The reality is that there's no way around it: **you must fix your damn asserts**
-and strive for program correctnes, not just for a subset of it.
+and strive for program correctness, not just for a subset of it.
 
 [^1]:
     It should be noted that, while it would be possible to disable your own
