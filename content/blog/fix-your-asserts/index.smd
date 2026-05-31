@@ -126,7 +126,7 @@ branch of the `switch` statement was essentially elided from the final
 executable.
 
 Here's [another godbolt link](https://zig.godbolt.org/z/7sMjofYsK) where
-you can see how an assert is able to influence the subsequent `switch`
+you can see how an assert interacts with the subsequent `switch`
 statement in both ReleaseSafe and ReleaseFast (note how in ReleaseFast the
 function skips all comparisons and just returns `true`).
 
