@@ -324,7 +324,7 @@ since today it's mainly used to build personal blogs. I also like seeing it
 run an order of magnitude faster than Hugo, so I publish ReleaseFast
 builds.
 
-The second one is Awebo, a pre-alpha stage, self-hostable Discord
+The second one is [Awebo](https://codeberg.org/awebo-chat/awebo/), a pre-alpha stage, self-hostable Discord
 alternative. In this case I already know that it's software that will deal
 with personal information and that is meant to be exposed to the internet.
 When the time comes, I'll publish ReleaseSafe builds, but even then I will
