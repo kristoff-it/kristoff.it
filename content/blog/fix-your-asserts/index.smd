@@ -50,7 +50,7 @@ Asserts in Zig are based on `unreachable`, a language feature that marks
 invalid code paths.
 
 ```zig
-const Op = enum { a, b , c };
+const Op = enum { a, b, c };
 
 fn execute(orig_op: Op) void {
   var op = orig_op;
@@ -227,7 +227,7 @@ deviating from the spec, and it can easily be enough to make the program
 perform operations that it was never intended to do.
 
 And that's not just a technicality: SQL injection is a concrete and
-widespread example of weird-machine-grade misbehavior that doesn't require IB.
+widespread example of weird-machine-grade misbehavior that doesn't require UIB.
 
 If the cost of program misbehavior is so high that you don't want to risk
 it, then you should keep the asserts on, and if performance is so important
