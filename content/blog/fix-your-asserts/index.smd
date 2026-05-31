@@ -329,7 +329,7 @@ alternative. In this case I already know that it's software that will deal
 with personal information and that is meant to be exposed to the internet.
 When the time comes, I'll publish ReleaseSafe builds, but even then I will
 still build some critical dependencies in ReleaseFast (FFmpeg, Xiph Opus,
-SQLite) because in their case the performance increase is strictly
+SQLite, etc) because in their case the performance increase is strictly
 preferable over further minimizing risk of program misbehavior.
 
 To name two more interesting examples, [TigerBeetle](https://tigerbeetle.com) (financial database)
