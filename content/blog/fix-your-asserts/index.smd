@@ -207,7 +207,7 @@ As [matklad reminded
 me](https://ziggit.dev/t/bun-is-being-ported-from-zig-to-rust/15330/129?u=kristoff)
 in a recent discussion on the topic, there might be situations where you
 might have a legitimate engineering reason to want to avoid crashes, but as
-far as general software goes, that's a pretty bad defauls choice in my opinion.
+far as general software goes, that's a pretty bad default choice in my opinion.
 
 Disabling asserts means that when one of those presumed-impossible
 conditions actually happens, the program keeps running instead of crashing.
