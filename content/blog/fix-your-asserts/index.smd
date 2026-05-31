@@ -3,7 +3,7 @@
 .description = "Fear is the killer of the mind ...and the codebase as well.",
 .author = "Loris Cro",
 .layout = "post.shtml",
-.date = @date("2026-06-31T00:00:00"),
+.date = @date("2026-05-31T00:00:00"),
 .draft = false,
 ---
 
