@@ -226,6 +226,9 @@ into one. Falsifying an assertion at runtime is by definition
 deviating from the spec, and it can easily be enough to make the program
 perform operations that it was never intended to do.
 
+And that's not just a technicality: SQL injection is a concrete and
+widespread example of serious program misbehavior that doesn't require IB.
+
 If the cost of program misbehavior is so high that you don't want to risk
 it, then you should keep the asserts on, and if performance is so important
 that you're willing to risk misbehavior, then you're just leaving
