@@ -354,6 +354,32 @@ the consequences of their actions.
 The reality is that there's no way around it: **you must fix your damn asserts**
 and strive for program correctness, not just for a subset of it.
 
+---
+
+**EDIT(2026-06-01):** after discussing this blog post a bit, it was pointed
+out to me that I could have given more space to other variants of keeping
+asserts on in prod. For simplicity I'm just pasting here a quote from a
+message I wrote as part of that discussion. You will be missing a bit of
+the context, but the important stuff is all there.
+
+> You add assertions for a variety of reasons but regardless they have an inherent axiomatic nature for the compiler (ie if they're not trivially redundant, they are facts that the compiler cannot derive on its own), and so that fact can be exploited in a variety of ways:
+>
+> - better debuggability,
+> - extra checks at runtime to lower the chance of program misbehavior,
+> - extra facts that the compiler can use for optimization,
+>
+> For the second case, Zig chooses crashing as the default mechanism, but if you really want you can fuck around with the panic handlers and implement something similar to a recoverable panic like in rust/go (a simpler version, and maybe that's for the better, the go one in particular has gnarly footguns), but Zig aims at 'perfect software' so it's not what you get out of the box.
+>
+> I have never in my life written an assertion with the explicit intent of obtaining a performance increase, and if I ever will, it will be a different process that involves measuring. My expectation is that, when building in ReleaseFast, the compiler will try best-effort to make use of the extra axioms I'm providing, as it already does with language-level asserts (oob, overflow, etc).
+>
+> And the thing is that you can get all of these things out of asserts at the same time by switching build mode (and curating your asserts a little when necessary, like reserving expensive asserts for debug mode).
+>
+> Another variant of the second case is to have the assert print a log line instead of crashing the program, which makes sense when crashing is worse than continuing, panic recovery is complex and more prone to errors, and a human will have access to those logs and is eventually going to get a chance to fix falsifiable asserts. This is another thing that Zig doesn't give you out of the box, but this one is especially trivial to implement.
+>
+> Given all of this, turning off asserts in release builds to me seems the dumbest thing one could do, second only to deleting asserts from the codebase or straight up never writing them.
+>
+> Turning asserts into log messages sounds a lot like disabling them, but it's not the same thing, since full on disabling means that nothing will ever be able to notify you that the program deviated from the spec.
+
 [^1]:
     It should be noted that, while it would be possible to disable your own
     asserts, Zig as a language will always implicitly add a lot of asserts to
