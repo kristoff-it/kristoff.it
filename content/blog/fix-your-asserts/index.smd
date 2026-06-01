@@ -348,7 +348,7 @@ corruption**, despite Ghostty being distributed in ReleaseFast.
 When it comes to the genral practice of "disabling asserts in prod", I bet
 that there are a lot of projects out there where wrong asserts fester and
 multiply in the codebase, which in turn both increases UIB paranoia and
-makes developers subonciously too scared to turn asserts back on and face
+makes developers subconciously too scared to turn asserts back on and face
 the consequences of their actions.
 
 The reality is that there's no way around it: **you must fix your damn asserts**
