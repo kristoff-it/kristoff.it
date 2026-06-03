@@ -21,7 +21,7 @@ you didn't [design for correctness](https://tigerstyle.dev/) and have no
 process that will eventually lead you to [fixing all
 bugs](blog/fix-your-asserts).
 
-It doesn't matter if your software is a [beautiful maze of
+It doesn't matter if your software is a [beautiful canopy of
 abstractions](https://www.youtube.com/watch?v=wo84LFzx5nI), if it runs like
 shit and nobody is able to maintain it, let alone add new features.
 
