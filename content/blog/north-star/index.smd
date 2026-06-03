@@ -7,7 +7,7 @@
 .draft = false,
 ---
 
-When I make sofware, this is my sorted list of priorities:
+When I make software, this is my sorted list of priorities:
 
 1. **Software should be useful to the end user** and strive to become [software you can love](https://softwareyoucan.love).
 2. **Software should be correct**, as malfunctioning software detracts from the utility users can derive from it.
