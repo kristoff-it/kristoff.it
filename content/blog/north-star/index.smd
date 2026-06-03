@@ -1,0 +1,37 @@
+---
+.title = "My Software North Star",
+.description = "",
+.author = "Loris Cro",
+.layout = "post.shtml",
+.date = @date("2026-06-03T00:00:00"),
+.draft = false,
+---
+
+When I make sofware, this is my sorted list of priorities:
+
+1. **Software should be useful to the end user** and strive to become [software you can love](https://softwareyoucan.love).
+2. **Software should be correct**, as malfunctioning software detracts from the utility users can derive from it.
+3. **Software should be maintainable and efficient**, in order to avoid wasting human and computational resources when trying to get more utility out of it.
+
+It doesn't matter if your blockchain has no bugs, if it's a rugpull[^1].
+
+It doesn't matter if your language is
+[memory-safe](https://joshlf.com/posts/memory-safety-life-and-death/) if
+you didn't [design for correctness](https://tigerstyle.dev/) and have no
+process that will eventually lead you to [fixing all
+bugs](blog/fix-your-asserts).
+
+It doesn't matter if your software is a [beautiful maze of
+abstractions](https://www.youtube.com/watch?v=wo84LFzx5nI), if it runs like
+shit and nobody is able to maintain it, let alone add new features.
+
+_Sometimes I run out of steam, sometimes I go down the wrong path,
+and some other times I deliberately take detours, but nobody can trick me
+into mistaking lesser stars for my true destination: I do care about my own
+developer experience, but only in the exact measure that it helps me
+deliver more software you can love._
+
+The ultimate goal is to maximize utility for the end user; everything else
+exists in service of it, and that's my north star for making software.
+
+[^1]: Or you're otherwise working on user-hostile software.
