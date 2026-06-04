@@ -13,7 +13,8 @@ When I make software, this is my sorted list of priorities:
 2. **Software should be correct**, as malfunctioning software detracts from the utility users can derive from it.
 3. **Software should be maintainable and efficient**, in order to avoid wasting human and computational resources when trying to get more utility out of it.
 
-It doesn't matter if your project has no bugs, if it's a rugpull. [^1]
+It doesn't matter if your project has no bugs, if it's a rugpull
+or you're otherwise working on user-hostile software.
 
 It doesn't matter that the language you use is
 [memory-safe](https://joshlf.com/posts/memory-safety-life-and-death/), if
@@ -33,5 +34,3 @@ deliver more software you can love that I and others can enjoy._
 
 The ultimate goal is to maximize utility for the end user; everything else
 exists in service of it, and that's my north star for making software.
-
-[^1]: Or you're otherwise working on user-hostile software.
