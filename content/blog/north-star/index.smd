@@ -22,8 +22,8 @@ process that will eventually lead you to [fixing all
 bugs](blog/fix-your-asserts).
 
 It doesn't matter if your software is a [beautiful canopy of
-abstractions](https://www.youtube.com/watch?v=wo84LFzx5nI), if it runs like
-shit or nobody is able to maintain it, let alone add new features.
+abstractions](https://www.youtube.com/watch?v=wo84LFzx5nI), if it's unbearably slow
+or nobody is able to maintain it, let alone add new features.
 
 _Sometimes I run out of steam, sometimes I go down the wrong path,
 and some other times I deliberately take detours, but nobody can trick me
