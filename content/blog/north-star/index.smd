@@ -13,7 +13,7 @@ When I make software, this is my sorted list of priorities:
 2. **Software should be correct**, as malfunctioning software detracts from the utility users can derive from it.
 3. **Software should be maintainable and efficient**, in order to avoid wasting human and computational resources when trying to get more utility out of it.
 
-It doesn't matter if your project has no bugs if it's a rugpull,
+It doesn't matter that your project has no bugs if it's a rugpull,
 or you're otherwise working on user-hostile software.
 
 It doesn't matter that the language you use is
@@ -22,7 +22,7 @@ you didn't [design for correctness](https://tigerstyle.dev/) or have no
 process that will eventually lead you to [fixing all
 bugs](blog/fix-your-asserts).
 
-It doesn't matter if your software is a [beautiful canopy of
+It doesn't matter that your software is a [beautiful canopy of
 abstractions](https://www.youtube.com/watch?v=wo84LFzx5nI), if it's unbearably slow
 or nobody is able to maintain it, let alone add new features.
 
