@@ -15,7 +15,7 @@ When I make software, this is my sorted list of priorities:
 
 It doesn't matter if your blockchain has no bugs, if it's a rugpull[^1].
 
-It doesn't matter if your language is
+It doesn't matter if the language you use is
 [memory-safe](https://joshlf.com/posts/memory-safety-life-and-death/) if
 you didn't [design for correctness](https://tigerstyle.dev/) and have no
 process that will eventually lead you to [fixing all
