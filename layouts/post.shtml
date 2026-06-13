@@ -1,66 +1,76 @@
 <extend template="base.shtml">
 <title id="title" :text="$page.title"></title>
 <head id="head">
-  <link
-    type="text/css"
-    rel="stylesheet"
-    href="$site.asset('term-highlight.css').link()"
-  >
+	<link type="text/css"
+	      rel="stylesheet"
+	      href="$site.asset('term-highlight.css').link()"
+	>
 </head>
 <div id="content" class="foo">
-  <div style="display:flex; flex-direction:column; align-items:center;">
-    <h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
-    <small><i>Personal Website</i></small>
-    <div style="display:flex; justify-content:center; font-size:small;">
-      <a href="/">About</a>
-      	&nbsp; • &nbsp;
-      <a href="https://twitter.com/croloris">Twitter</a>
-      	&nbsp; • &nbsp;
-      <a href="https://twitch.tv/kristoff_it">Twitch</a>
-      	&nbsp; • &nbsp;
-      <a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
-      	&nbsp; • &nbsp;
-      <a href="https://github.com/kristoff-it">GitHub</a>
-    </div>
-  </div>
-  <h1 :text="$page.title"></h1>
-  <p class="post-byline">
-    <span :text="$page.date.format('January 02, 2006')"></span>
-    •
-    <span :text="$page.wordCount().div(220).plus(1)"></span>
-    min read • by
-    <b :text="$page.author"></b>
-    <span :if="$page.custom.get?('coauthor')">
-      and
-      <a href="$page.custom.get('coauthor_link')" target="_blank"><b :text="$if"></b></a>
-    </span>
-  </p>
-  <div id="post-description" :html="$page.description"></div>
-  <div id="post-body" :html="$page.content()"></div>
-  <div id="footnotes" :if="$page.footnotes?()">
-    <ol :loop="$if">
-      <li id="$loop.it.def_id">
-        <ctx :html="$loop.it.html()"></ctx>
-        <ctx :loop="$loop.it.ref_ids">
-          <a href="$loop.it.prefix('#')" :html="$loop.idx"></a>
-        </ctx>
-      </li>
-    </ol>
-  </div>
-  <hr>
-  <div id="prev-next">
-    <span :if="$page.prevPage?()">
-      <a href="$if.link()">←
-        <span :text="$if.title"></span></a>
-    </span>
-    <span :if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
-    <span :if="$page.nextPage?()">
-      <a href="$if.link()"><span :text="$if.title"></span>
-        →</a>
-    </span>
-    <small :if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
-    <small>
-      <a href="/">Back to the Homepage</a>
-    </small>
-  </div>
+	<div style="display:flex; flex-direction:column; align-items:center;">
+		<h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+		<small><i>Personal Website</i></small>
+		<div style="display:flex; justify-content:center; font-size:small;">
+			<a href="/">About</a>
+			&nbsp; • &nbsp;
+			<a href="https://twitter.com/croloris">Twitter</a>
+			&nbsp; • &nbsp;
+			<a href="https://twitch.tv/kristoff_it">Twitch</a>
+			&nbsp; • &nbsp;
+			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+			&nbsp; • &nbsp;
+			<a href="https://github.com/kristoff-it">GitHub</a>
+		</div>
+	</div>
+	<h1 :text="$page.title"></h1>
+	<p class="post-byline">
+		<span :text="$page.date.format('January 02, 2006')"></span>
+		•
+		<span :text="$page.wordCount().div(220).plus(1)"></span>
+		min read • by
+		<b :text="$page.author"></b>
+		<span :if="$page.custom.get?('coauthor')">
+			and
+			<a href="$page.custom.get('coauthor_link')" target="_blank"><b :text="$if"></b></a>
+		</span>
+	</p>
+	<div id="post-description" :html="$page.description"></div>
+	<div id="post-body" :html="$page.content()"></div>
+	<div id="footnotes" :if="$page.footnotes?()">
+		<ol :loop="$if">
+			<li id="$loop.it.def_id">
+				<ctx :html="$loop.it.html()"></ctx>
+				<ctx :loop="$loop.it.ref_ids">
+					<a href="$loop.it.prefix('#')" :html="$loop.idx"></a>
+				</ctx>
+			</li>
+		</ol>
+	</div>
+	<hr>
+	<div id="prev-next">
+		<span :if="$page.prevPage?()">
+			<a href="$if.link()">←
+				<span :text="$if.title"></span></a>
+		</span>
+		<span :if="$page.hasPrev().and($page.hasNext())">&nbsp; • &nbsp;</span>
+		<span :if="$page.nextPage?()">
+			<a href="$if.link()"><span :text="$if.title"></span>
+			→</a>
+		</span>
+		<small :if="$page.hasPrev().or($page.hasNext())">&nbsp; or &nbsp;</small>
+		<small>
+			<a href="/">Back to the Homepage</a>
+		</small>
+	</div>
+
+	<link rel="stylesheet" href="$site.asset('town/town.css').link()">
+	<div id="townsquare-root"></div>
+	<script type="module">
+		import { mountTownSquare } from "/town/town.mjs";
+
+		mountTownSquare(document.getElementById("townsquare-root"), {
+			serverOrigin: "https://townsquare.cauenapier.com",
+			siteKey: "site_Wc05EmFtdLUfvn00"
+		});
+	</script>
 </div>
