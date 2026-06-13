@@ -13,8 +13,6 @@
 		<div style="display:flex; justify-content:center; font-size:small;">
 			<a href="/">About</a>
 			&nbsp; • &nbsp;
-			<a href="https://twitter.com/croloris">Twitter</a>
-			&nbsp; • &nbsp;
 			<a href="https://twitch.tv/kristoff_it">Twitch</a>
 			&nbsp; • &nbsp;
 			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
@@ -73,4 +71,7 @@
 			siteKey: "site_Wc05EmFtdLUfvn00"
 		});
 	</script>
+	<div style="font-size:small;width:100%;text-align:center;">
+		<i><a href="https://discord.com/invite/B73sGxF">Join my Discord server</a> to keep chatting.</i>
+	</div>
 </div>

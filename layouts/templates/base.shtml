@@ -28,12 +28,6 @@
 		>
 		<link type="text/css" rel="stylesheet" href="$site.asset('main.css').link().suffix('?bust2')">
 		<link type="text/css" rel="stylesheet" href="$site.asset('highlight.css').link().suffix('?bust')">
-		<script defer
-		        type="text/javascript"
-		        src="https://api.pirsch.io/pirsch.js"
-		        id="pirschjs"
-		        data-code="CnorXJVVDmhCee3FBtXSQISdHIUmqp3o"
-		></script>
 		<super>
 	</head>
 	<body>
