@@ -43,7 +43,10 @@
 			<li id="$loop.it.def_id">
 				<ctx :html="$loop.it.html()"></ctx>
 				<ctx :loop="$loop.it.ref_ids">
-					<a href="$loop.it.prefix('#')" :html="$loop.idx"></a>
+					<a href="$loop.it.prefix('#')">
+						<ctx :if="$loop.first">↩</ctx>
+						<ctx :if="$loop.first.not()" :html="$loop.idx"></ctx>
+					</a>
 				</ctx>
 			</li>
 		</ol>
