@@ -1,0 +1,40 @@
+<extend template="base.shtml">
+<title id="title">Home</title>
+<head id="head"></head>
+<div id="content">
+	<style>
+		h1, h2, h3 {
+			text-align: center;
+		}
+	</style>
+	<div style="display:flex; flex-direction:column; align-items:center;">
+		<h1 id="header"><a class="reset-a" href="/">Loris Cro</a></h1>
+		<small><i>Personal Website</i></small>
+		<div style="display:flex; justify-content:center; font-size:small;">
+			<a href="/">About</a>
+			&nbsp; • &nbsp;
+			<a href="/blog/">Blog</a>
+			&nbsp; • &nbsp;
+			<a href="https://twitch.tv/kristoff_it">Twitch</a>
+			&nbsp; • &nbsp;
+			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
+			&nbsp; • &nbsp;
+			<a href="https://github.com/kristoff-it">GitHub</a>
+		</div>
+	</div>
+	<div>
+		<div>
+			<h2 style="margin-bottom: 1.75rem;">
+				All Blog Posts
+
+				<a href="/index.xml" rel="alternate" type="application/rss+xml">
+					<img src="$site.asset('rss.svg').link()" width=20>
+				</a>
+			</h2>
+			<div :loop="$site.page('blog').subpages()">
+				<a href="$loop.it.link()" class="post-link" :text="$loop.it.title"></a>
+				<span class="post-byline" style="margin-bottom: 1rem;" :text="$loop.it.date.format('January 02, 2006')"></span>
+			</div>
+		</div>
+	</div>
+</div>

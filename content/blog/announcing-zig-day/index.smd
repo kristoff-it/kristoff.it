@@ -7,7 +7,7 @@
 .draft = false,
 ---
 
-In "[Zig Day: A suggestion for better Zig meetups](blog/zig-day/)" I talked about a full-day collaborative programming event format that resembles the "social hacking day" at [Software You Can Love](https://softwareyoucan.love), for those who have been to one.
+In "[Zig Day: A suggestion for better Zig meetups](zig-day)" I talked about a full-day collaborative programming event format that resembles the "social hacking day" at [Software You Can Love](https://softwareyoucan.love), for those who have been to one.
 
 Now that we're about to have the first Zig Day happen here in Milan (more on this later), I've created https://zig.day to host future Zig Days from all over the world on a static website created with [Zine](https://zine-ssg.io) where I (ab)use templates to offer syndication not only via RSS, but also via iCalendar.
 

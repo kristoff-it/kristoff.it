@@ -20,7 +20,7 @@ It doesn't matter that the language you use is
 [memory-safe](https://joshlf.com/posts/memory-safety-life-and-death/), if
 you didn't [design for correctness](https://tigerstyle.dev/) or have no
 process that will eventually lead you to [fixing all
-bugs](blog/fix-your-asserts).
+bugs](fix-your-asserts).
 
 It doesn't matter that your software is a [beautiful canopy of
 abstractions](https://www.youtube.com/watch?v=wo84LFzx5nI), if it's unbearably slow
