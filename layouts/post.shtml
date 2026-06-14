@@ -20,6 +20,8 @@
 			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
 			&nbsp; • &nbsp;
 			<a href="https://github.com/kristoff-it">GitHub</a>
+			&nbsp;/&nbsp;
+			<a href="https://codeberg.org/kristoff">Codeberg</a>
 		</div>
 	</div>
 	<h1 :text="$page.title"></h1>
