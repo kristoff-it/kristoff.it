@@ -19,6 +19,22 @@
 		dt {
 			margin-top: 10px;
 		}
+		
+		.links {
+			display:flex;
+			justify-content:center;
+			font-size:small
+		}
+		
+		@media screen and (max-width:500px) {
+			.links {
+				flex-direction: column;
+			}
+			.links>.sep {
+				display:none;
+			}
+			
+		}
 	</style>
 	<div>
 		<h1 style="margin-bottom:0;">
@@ -27,18 +43,20 @@
 		<h3 style="margin-top:0;"><i>
 			Personal Website
 		</i><br>
-		<div style="display:flex; justify-content:center; font-size:small;">
+		<div class="links">
 			<a href="/">About</a>
-			&nbsp; • &nbsp;
+			<span class="sep">&nbsp; • &nbsp;</span>
 			<a href="/blog/">Blog</a>
-			&nbsp; • &nbsp;
+			<span class="sep">&nbsp; • &nbsp;</span>
 			<a href="https://twitch.tv/kristoff_it">Twitch</a>
-			&nbsp; • &nbsp;
+			<span class="sep">&nbsp; • &nbsp;</span>
 			<a href="https://youtube.com/c/ZigSHOWTIME/">YouTube</a>
-			&nbsp; • &nbsp;
-			<a href="https://github.com/kristoff-it">GitHub</a>
-			&nbsp;/&nbsp;
-			<a href="https://codeberg.org/kristoff">Codeberg</a>
+			<span class="sep">&nbsp; • &nbsp;</span>
+			<span>
+				<a href="https://github.com/kristoff-it">GitHub</a>
+				&nbsp;/&nbsp;
+				<a href="https://codeberg.org/kristoff">Codeberg</a>
+			</span>
 		</div>
 		<img src="$site.asset('loris-face.jpg').link()"
 		     class="profile-pic"

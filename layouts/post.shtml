@@ -68,16 +68,91 @@
 		</small>
 	</div>
 
-	<link rel="stylesheet" href="$site.asset('town/town.css').link()">
+	<link rel="preconnect" href="https://townsquare.cauenapier.com" crossorigin>
+	<link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css">
+	<style>
+		#townsquare-root#townsquare-root {
+			--scene: #e4e2dd;
+			--page: #efede9;
+			--surface: #fdf8f4;
+			--ink: #2a2926;
+			--you: #c8641f;
+			--tree-trunk: color-mix(in oklab, var(--text) 58%, var(--muted) 42%);
+			--tree-canopy: color-mix(in oklab, var(--text) 58%, var(--muted) 42%);
+			--other: #26241f;
+			--ground: rgba(42, 41, 38, 0.16);
+			--scene-edge: color-mix(in oklab, var(--scene) 88%, var(--page) 12%);
+			--you-deep: var(--you);
+			--text: var(--ink);
+			--muted: var(--ink);
+		}
+		#townsquare-root#townsquare-root[data-townsquare-theme="dark"] {
+			--scene: #242521;
+			--page: #181917;
+			--surface: #24231f;
+			--ink: #f2eee6;
+			--you: #df8a43;
+			--tree-trunk: color-mix(in oklab, var(--text) 58%, var(--muted) 42%);
+			--tree-canopy: color-mix(in oklab, var(--text) 58%, var(--muted) 42%);
+			--other: #ddd7cc;
+			--ground: rgba(242, 238, 230, 0.18);
+			--scene-edge: color-mix(in oklab, var(--scene) 88%, var(--page) 12%);
+			--you-deep: var(--you);
+			--text: var(--ink);
+			--muted: var(--ink);
+		}
+		@media (prefers-color-scheme: dark) {
+			#townsquare-root#townsquare-root[data-townsquare-theme="auto"] {
+				--scene: #242521;
+				--page: #181917;
+				--surface: #24231f;
+				--ink: #f2eee6;
+				--you: #df8a43;
+				--tree-trunk: color-mix(in oklab, var(--text) 58%, var(--muted) 42%);
+				--tree-canopy: color-mix(in oklab, var(--text) 58%, var(--muted) 42%);
+				--other: #ddd7cc;
+				--ground: rgba(242, 238, 230, 0.18);
+				--scene-edge: color-mix(in oklab, var(--scene) 88%, var(--page) 12%);
+				--you-deep: var(--you);
+				--text: var(--ink);
+				--muted: var(--ink);
+			}
+		}
+		#townsquare-root#townsquare-root .townsquare__stage {
+			background: linear-gradient(
+			180deg,
+			var(--scene) 0%,
+			var(--scene) 72%,
+			var(--scene-edge) 72%,
+			var(--page) 72.4%,
+			var(--page) 100%
+			);
+		}
+		#townsquare-root#townsquare-root .townsquare__ground {
+			background: var(--ground);
+		}
+	</style>
 	<div id="townsquare-root"></div>
-	<script type="module">
-		import { mountTownSquare } from "/town/town.mjs";
+	<script type="module" async>
+		import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";
 
-		mountTownSquare(document.getElementById("townsquare-root"), {
-			serverOrigin: "https://townsquare.cauenapier.com",
-			siteKey: "site_Wc05EmFtdLUfvn00"
-		});
+		let triggered = false;
+		const observer = new IntersectionObserver((entries) => {
+			if (!triggered && entries[0].isIntersecting) {
+				triggered = true;
+				console.log('activating townsquare!');
+				observer.disconnect();
+
+				mountTownSquare(document.getElementById("townsquare-root"), {
+					serverOrigin: "https://townsquare.cauenapier.com",
+					siteKey: "site_Wc05EmFtdLUfvn00",
+					theme: "host"
+				});
+		}
+	});
+observer.observe(document.getElementById('townsquare-root'));
 	</script>
+
 	<div style="font-size:small;width:100%;text-align:center;">
 		<i><a href="https://discord.com/invite/B73sGxF">Join my Discord server</a> to keep chatting.</i>
 	</div>
