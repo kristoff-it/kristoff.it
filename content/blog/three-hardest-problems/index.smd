@@ -1,9 +1,7 @@
 ---
 .title = "The Three Hardest Problems in Software Engineering",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2024-09-19T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-09-19T00:00:00"),
 .draft = false,
 ---
 

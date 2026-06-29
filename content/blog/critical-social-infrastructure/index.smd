@@ -1,10 +1,7 @@
 ---
 .title = "Critical Social Infrastructure for Zig Communities",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2024-09-30T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-09-30T00:00:00"),
-.draft = false,
 --- 
 
 In this blog post I want to encourage Zig community members, starting from project authors, to take a more deliberate approach towards building communication channels between our communities scattered across various social platforms.

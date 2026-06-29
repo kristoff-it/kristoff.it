@@ -1,12 +1,8 @@
 ---
-{
-    .title = "So you're a Remote Worker Now",
-    .description = "Make the most of the global remote-working experiment.",
-    .author = "Loris Cro",
-    .layout = "post.shtml",
-    .date = @date("2020-04-05T00:00:00"),
-    .draft = false,
-}
+.title = "So you're a Remote Worker Now",
+.description = "Make the most of the global remote-working experiment.",
+.date = .date("2020-04-05T00:00:00"),
+.layout = "post.shtml",
 ---
 
 A virus goes pandemic and now you’re not allowed to go to the office anymore. Welcome to the remote worker’s club. I’ve been a member for nearly 1.5 years, and it’s been one of the best work experiences of my life. No commute, the comfort of your home, cooking your own meals; what’s not to like? Well, for some, a lot. I’ve had a fantastic experience but it’s a peculiar equilibrium and you might have already discovered that it’s not really working out for you.
@@ -58,7 +54,7 @@ Think about the differences between theater and TV. Until yesterday we all drove
 
 Could you imagine if all live TV shows were structured like theater operas? We all would find it a weird, less effective way of doing TV, and yet I’m sure that your business is trying right now to maintain the same exact processes it had before, just with Zoom added to the mix. 
 
-If you want to hear successful people explain more in detail how a good remote-first workplace looks like, check out this podcast episode titled “[The New Future of Work](https://samharris.org/podcasts/194-new-future-work/)”, where Sam Harris interviews Matt Mullenweg from Automattic. I found it pretty much on point.
+If you want to hear successful people explain more in detail how a good remote-first workplace looks like, check out this podcast e.datede titled “[The New Future of Work](https://samharris.org/podcasts/194-new-future-work/)”, where Sam Harris interviews Matt Mullenweg from Automattic. I found it pretty much on point.
 
 Personally, I can’t complain. My company is globally-distributed and as I said, it’s been a good 1.5 years. I’m a Developer Advocate, which means (among other things) that I travel to conferences and try to speak about topics related to what my employer sells. As you can imagine the travel is not happening anymore and that whole industry had to shift everything to an online format. The results are… not great. Granted, there hasn’t been enough time to do much else and I’m sure things will get better, but for now events are airing theatrical operas, basically.
 

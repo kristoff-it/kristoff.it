@@ -30,7 +30,7 @@
 		•
 		<span :text="$page.wordCount().div(220).plus(1)"></span>
 		min read • by
-		<b :text="$page.author"></b>
+		<b>Loris Cro</b>
 		<span :if="$page.custom.get?('coauthor')">
 			and
 			<a href="$page.custom.get('coauthor_link')" target="_blank"><b :text="$if"></b></a>

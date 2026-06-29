@@ -1,10 +1,7 @@
 ---
 .title = "About LLMs at Zig Days",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2026-05-28T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2026-05-28T00:00:00"),
-.draft = false,
 ---
 
 Zig Days are full-day collaborative programming events that usually take

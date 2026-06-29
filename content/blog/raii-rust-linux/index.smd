@@ -1,10 +1,7 @@
 ---
 .title = "RAII and the Rust/Linux Drama",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2024-10-22T01:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-10-22T01:00:00"),
-.draft = false,
 --- 
 A while ago some Rust / Linux drama hit the news because of tension between people who are pushing for more Rust in the kernel, and those who seem to be opposed to the idea.
 
