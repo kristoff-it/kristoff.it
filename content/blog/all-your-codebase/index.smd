@@ -1,10 +1,8 @@
 ---
 .title = "All Your Codebase",
 .description = "...are belong to us (from <a href=\"https://www.youtube.com/watch?v=qItugh-fFgg\">zero wing</a>)",
-.author = "Loris Cro",
+.date = .date("2024-12-10T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-12-10T00:00:00"),
-.draft = false,
 --- 
 
 

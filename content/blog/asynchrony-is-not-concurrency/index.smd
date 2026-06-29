@@ -1,10 +1,8 @@
 ---
 .title = "Asynchrony is not Concurrency",
 .description = "Yes I know about that one talk from Rob Pike.",
-.author = "Loris Cro",
+.date = .date("2025-07-18T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2025-07-18T00:00:00"),
-.draft = false,
 ---
 
 The title of this blog post is not something you hear people say often, if ever. What you do hear people say is "concurrency is not parallelism", but that's not as useful, in my opinion. 
@@ -226,7 +224,7 @@ Secondly, *I* hope to have given *you* hope that we can climb out of the current
 
 Lastly, I hope to have given you an intuition for how async I/O is going to work in Zig.
 
-If you want to have a sneak peek of the upcoming Zig async I/O  redesign, **Monday 21st of July 2025 at 7pm CEST I will be [live on Twitch](https://twitch.tv/kristoff_it) ([more timezones and info here](https://zig.show/episodes/42/)) with Andrew to read the thread pool implementation, the green threads implementation, and to write myself a non-concurrent implementation of `Io`** in order to test live if everything that I talked about in this post is actually true.
+If you want to have a sneak peek of the upcoming Zig async I/O  redesign, **Monday 21st of July 2025 at 7pm CEST I will be [live on Twitch](https://twitch.tv/kristoff_it) ([more timezones and info here](https://zig.show/e.datedes/42/)) with Andrew to read the thread pool implementation, the green threads implementation, and to write myself a non-concurrent implementation of `Io`** in order to test live if everything that I talked about in this post is actually true.
 
 Spoilers: I already tried and it all works. Welcome to the `Future` we've been all awaiting.
 

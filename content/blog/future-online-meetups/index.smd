@@ -1,12 +1,7 @@
 ---
-{
-  .title = "The Upcoming Future of Online Meetups",
-  .description = "",
-  .author = "Loris Cro",
-  .layout = "post.shtml",
-  .date = @date("2020-06-13T00:00:00"),
-  .draft = false,
-}
+.title = "The Upcoming Future of Online Meetups",
+.date = .date("2020-06-13T00:00:00"),
+.layout = "post.shtml",
 ---
 
 As we adventure into the phase where society needs to learn to cohabit with the virus, the tech industry comes to the full realization that in-person conferences and meetups are not going to resume anytime soon. Good, but not good enough, especially when it comes to online events.
@@ -62,9 +57,9 @@ A bit of production quality is a nice touch and helps in setting a tone, but tha
 
 ### The show format
 
-The show is titled “Zig SHOWTIME”, which is in part a wordplay on a keyword unique to the language: `comptime`. It airs on my Twitch channel and I’m the host. An episode features two speakers, each of whom presents a session that lasts between 10 and 30 minutes, followed by a short Q&A. The show is meant to be less than 2 hours long and there’s a 10 minutes break in the middle, between the first and second session.
+The show is titled “Zig SHOWTIME”, which is in part a wordplay on a keyword unique to the language: `comptime`. It airs on my Twitch channel and I’m the host. An e.datede features two speakers, each of whom presents a session that lasts between 10 and 30 minutes, followed by a short Q&A. The show is meant to be less than 2 hours long and there’s a 10 minutes break in the middle, between the first and second session.
 
-Zig SHOWTIME doesn’t always air at the same time. I have a call for speakers open and, depending on the respective availability of the speakers, the show will be scheduled on a different day, or at a different time. That probably sounds obvious, but you’d be surprised by how many events are still trying to be California-centric for absolutely no good reason. The expectation for Zig SHOWTIME is that some episodes will be easy for you to watch live and some will not -- regardless of where you live -- but in all cases, you will be able to [find all recordings on YouTube](https://www.youtube.com/channel/UC2EQzAewrC10KCDFSS4j-zA).
+Zig SHOWTIME doesn’t always air at the same time. I have a call for speakers open and, depending on the respective availability of the speakers, the show will be scheduled on a different day, or at a different time. That probably sounds obvious, but you’d be surprised by how many events are still trying to be California-centric for absolutely no good reason. The expectation for Zig SHOWTIME is that some e.datedes will be easy for you to watch live and some will not -- regardless of where you live -- but in all cases, you will be able to [find all recordings on YouTube](https://www.youtube.com/channel/UC2EQzAewrC10KCDFSS4j-zA).
 
 The speakers and I interact with the community in the Q&A part of each talk. Viewers ask questions to the speaker by sending a chat message directed at me, and I’ll read it out loud to the speaker. This is where things become a little bit interesting with the Zig community in particular, because Twitch chat is not the only way to ask questions and interact with other viewers.
 
@@ -74,7 +69,7 @@ The speakers and I interact with the community in the Q&A part of each talk. Vie
 
 During Zig SHOWTIME some people feel the most comfortable participating in Twitch chat, while some others prefer the more reserved environment of their community of choice. During the Q&A I look in all places for messages directed at me so that people can stay where they feel comfortable.
 
-Another fortunate property of this system is that when the view base will grow (the first episode had around 100 concurrent viewers), Twitch chat will inevitably devolve into a stream of collective consciousness, and at that point, the various communities will play a key role.
+Another fortunate property of this system is that when the view base will grow (the first e.datede had around 100 concurrent viewers), Twitch chat will inevitably devolve into a stream of collective consciousness, and at that point, the various communities will play a key role.
 
 The beauty of this model is not only that it can scale alongside the stream, but also that it makes good use of the work done by the different community administrators and builds upon the relationships that people have created over time in each place. Zig SHOWTIME would be a much worse show if it had Twitch chat as the only way for viewers to interact, and it wouldn’t be as good if it required people to join a new Discord/Slack/IRC channel.
 
@@ -82,6 +77,6 @@ The beauty of this model is not only that it can scale alongside the stream, but
 
 I’m planning to make many improvements to the show, starting from polishing scene transitions, to tweaking the format itself, but right now the imperative is to grow the show. The biggest thing I’ve done in that regard is to aim for a weekly schedule. Normally meetups don’t happen this frequently, but that’s just another difference between the two mediums, as a weekly cadence works great for both Twitch and especially YouTube.
 
-If you’re curious to see where this whole idea will go, [here you can watch the first episode](https://youtu.be/Unq712gqu2U), while all other links (including a call for speakers) are available at https://zig.show.
+If you’re curious to see where this whole idea will go, [here you can watch the first e.datede](https://youtu.be/Unq712gqu2U), while all other links (including a call for speakers) are available at https://zig.show.
 
 See you at showtime!

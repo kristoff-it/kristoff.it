@@ -1,10 +1,8 @@
 ---
 .title = "The First HTML LSP That Reports Syntax Errors",
 .description = "The story of how I gained two world-firsts, somehow.",
-.author = "Loris Cro",
+.date = .date("2024-09-11T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-09-11T00:00:00"),
-.draft = false,
 ---
 
 This might sound hard to believe but, as far as I know, I published the first ever Language Server for HTML that reports syntax errors, and then I also gained a second world-first after that.

@@ -1,16 +1,13 @@
 ---
 .title = "Dead Simple Snapshot Testing In Zig",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2025-02-09T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2025-02-09T00:00:00"),
-.draft = false,
 ---
 I've recently added snapshot testing support to [Zine](https://zine-ssg.io), my static site generator, and I'll share here how to get a similar setup going for your projects.
 
 Snapshot testing is based on two principles: 
 
-1. The assertion part of your tests is expressed as a comparison against a known good value.
+1. The assertion part of your tests is expressed as a compa.daten against a known good value.
 2. You use your tests to generate (and update) known good values automatically.
 
 

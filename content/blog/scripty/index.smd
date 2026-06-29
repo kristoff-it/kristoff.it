@@ -1,10 +1,8 @@
 ---
 .title = "Scripty",
 .description = "The perfect scripting sidekick! (or so I like to think)",
-.author = "Loris Cro",
+.date = .date("2026-05-05T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2026-05-05T00:00:00"),
-.draft = false,
 ---
 
 [Scripty](https://github.com/kristoff-it/scripty) is an extremely simple
