@@ -1,15 +1,14 @@
 ---
 .title = "The Python Package Index Should Get Rid Of Its Training Wheels",
 .description = "Snakes on a bike!",
-.author = "Loris Cro",
+.date = .date("2024-09-23T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-09-23T00:00:00"),
 .draft = false,
 ---
 
 As somebody directly involved with an upcoming programming language, I'm often in discussions about how to model things in the ecosystem like, say, the package manager, and how those decisions impact the project in the long term.
 
-When reading Simon Willison’s excellent blog post "[Things I’ve learned serving on the board of the Python Software Foundation](https://simonwillison.net/2024/Sep/18/board-of-the-python-software-foundation/)" (which I recommend reading it before continuing), the part about PyPI (Python Package Index) stood out:
+When reading Simon Wil.daten’s excellent blog post "[Things I’ve learned serving on the board of the Python Software Foundation](https://simonwil.daten.net/2024/Sep/18/board-of-the-python-software-foundation/)" (which I recommend reading it before continuing), the part about PyPI (Python Package Index) stood out:
 
 > PyPI’s numbers are staggering. Today there are 570,000 projects consisting of 12,035,133 files, serving 1.9 billion downloads a day (that number from [PyPI Stats](https://pypistats.org/packages/__all__)). Bandwidth for these downloads is donated by [Fastly](https://www.fastly.com/), a PSF Visionary Sponsor who recently signed [a five year agreement](https://fosstodon.org/@ThePSF/112456715341751673) to continue this service.
 >
@@ -126,7 +125,7 @@ Here's one way it could work:
 
 ## In conclusion
 
-Simon Willison is absolutely right that big ecosystems require strategical thinking. Without a concrete effort by power structures to steer the community towards a promising point on the horizon, all that remains are short term incentives, partial information, and a lot of space for actors with hidden agendas to grease the ~~wheels~~ gears they like the most.
+Simon Wil.daten is absolutely right that big ecosystems require strategical thinking. Without a concrete effort by power structures to steer the community towards a promising point on the horizon, all that remains are short term incentives, partial information, and a lot of space for actors with hidden agendas to grease the ~~wheels~~ gears they like the most.
 
 **Python could very well continue relying on the support of the Big Tech industry for a very long time but**, even if we were to set aside the otherwise _extremely real_ problems of power dynamics between organizations, **the long-term sustainability of an exponentially growing dataset still remains** and Python is now mature enough to start inspecting and fixing the foundations its ecosystem is built upon.
 

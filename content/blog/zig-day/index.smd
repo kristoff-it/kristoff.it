@@ -1,10 +1,8 @@
 ---
 .title = "Zig Day",
 .description = "A suggestion for better Zig meetups.",
-.author = "Loris Cro",
+.date = .date("2024-09-04T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-09-04T00:00:00"),
-.draft = false,
 ---
 If you're trying to learn Zig in 2024, one key ingredient is still interacting with the Zig community. More docs, blog posts, videos about Zig are getting released over time, but in my opinion direct collaboration is still the most effective way to dispel unknown unknowns, get unblocked when you're stuck, and improve your overall coding style by adopting new patterns as they get discovered by other members of the community.
 

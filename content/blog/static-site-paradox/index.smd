@@ -1,10 +1,7 @@
 ---
 .title = "The Static Site Paradox",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2024-10-08T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-10-08T00:00:00"),
-.draft = false,
 --- 
 In front of you are two personal websites, each used as a blog and to display basic contact info of the owner:
 

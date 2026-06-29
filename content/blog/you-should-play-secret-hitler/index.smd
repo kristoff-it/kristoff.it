@@ -1,12 +1,8 @@
 ---
-{
-    .title = "You Should Play Secret Hitler",
-    .description = "Let's talk about Secret Hitler, now that everyone is playing Among Us and Among U.S.",
-    .author = "Loris Cro",
-    .layout = "post.shtml",
-    .date = @date("2020-10-22T00:00:00"),
-    .draft = false,
-}
+.title = "You Should Play Secret Hitler",
+.description = "Let's talk about Secret Hitler, now that everyone is playing Among Us and Among U.S.",
+.date = .date("2020-10-22T00:00:00"),
+.layout = "post.shtml",
 ---
 
 In games like D&D, you start by creating a character for yourself. The character has a background, a set of skills and a personality of their own. Ideally, you should try to play characters with a different disposition than yours, and part of the enjoyment is acting like them, to the point of even occasionally making disastrous choices knowingly, because that’s what the character would do.
@@ -51,7 +47,7 @@ Occasionally you will be put in a position to know with full certainty that anot
 For fascists, the game plays out in a very different way than liberals. Depending on your fascist role, and what winning condition is the closest, your playstyle will have to be different, but let's talk about high-level points like we did for liberals in the previous section.
 
 ### Exploit asymmetry 
-The starting point in your fascist career is to lie. Draw 2 red and 1 liberal card and claim you drew 3 reds right after discarding the blue one. This is where asymmetry works entirely in your favor and you can even take it further. When you're Chancellor, if the situation requires you to expose yourself a little, discard a liberal card that your President gave you and claim you received two reds. The president will know that you're lying and will argue against you, but the other players will not know which to believe without further evidence. The same applies to the "show party membership card" power. This in isolation will "burn" both you and the liberal player, but you can make up for it with the next points.
+The starting point in your fascist career is to lie. Draw 2 red and 1 liberal card and claim you drew 3 reds right after discarding the blue one. This is where asymmetry works entirely in your favor and you can even take it further. When you're Chancellor, if the situation requires you to expose yourself a little, discard a liberal card that your President gave you and claim you received two reds. The president will know that you're lying and will argue against you, but the other players will not know which to believe without further evidence. The same applies to the "show party membership card" power. This in.datelation will "burn" both you and the liberal player, but you can make up for it with the next points.
 
 ### Make friends
 In the previous point, the lying didn't help you gain any favor (or outright made an enemy of your President), but fascists should also make sure to use information asymmetry to make friends. Find a liberal that can be key to victory and make friends with them by playing honestly when paired with them, agreeing on their discussion points, and by showing them that you're a competent player by analyzing the game well. Of course, it's easier for you to be good at analyzing the game since you have access to more information than the average liberal. In this case, the idea is to make positive use of the information you have at your disposal to gain social capital so that you can subsequently spend it to sneak in an extra red card, or to get Hitler elected at the right moment.

@@ -1,10 +1,8 @@
 ---
 .title = "Contributor Poker and Zig's AI Ban",
 .description = "You should always change doors when playing Monty Hall",
-.author = "Loris Cro",
+.date = .date("2026-04-29T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2026-04-29T00:00:00"),
-.draft = false,
 ---
 
 During my tenure at the Zig Software Foundation I'm having the opportunity

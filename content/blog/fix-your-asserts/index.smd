@@ -1,10 +1,8 @@
 ---
 .title = "You Must Fix Your Asserts",
 .description = "Fear is the killer of the mind ...and the codebase as well.",
-.author = "Loris Cro",
+.date = .date("2026-05-31T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2026-05-31T00:00:00"),
-.draft = false,
 ---
 
 A user on a discussion platform wrote:
@@ -128,7 +126,7 @@ executable.
 Here's [another godbolt link](https://zig.godbolt.org/z/7sMjofYsK) where
 you can see how an assert interacts with the subsequent `switch`
 statement in both ReleaseSafe and ReleaseFast (note how in ReleaseFast the
-function skips all comparisons and just returns `true`).
+function skips all compa.datens and just returns `true`).
 
 This is the kind of stuff that videogames and other real-time media
 applications rely on massively.
@@ -342,8 +340,8 @@ Also interestingly, the only two relatively serious Ghostty CVEs published
 so far are about arbitrary command execution achieved **without memory
 corruption**, despite Ghostty being distributed in ReleaseFast.
 
-- https://github.com/ghostty-org/ghostty/security/advisories/GHSA-4jxv-xgrp-5m3r
-- https://github.com/ghostty-org/ghostty/security/advisories/GHSA-5hcq-3j4q-4v6p
+- https://github.com/ghostty-org/ghostty/security/ad.dateries/GHSA-4jxv-xgrp-5m3r
+- https://github.com/ghostty-org/ghostty/security/ad.dateries/GHSA-5hcq-3j4q-4v6p
 
 When it comes to the genral practice of "disabling asserts in prod", I bet
 that there are a lot of projects out there where wrong asserts fester and

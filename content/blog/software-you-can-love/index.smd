@@ -1,12 +1,7 @@
 ---
-{
-    .title = "A Conference About Software You Can Love",
-    .description = "",
-    .author = "Loris Cro",
-    .layout = "post.shtml",
-    .date = @date("2022-05-27T00:00:00"),
-    .draft = false,
-}
+.title = "A Conference About Software You Can Love",
+.date = .date("2022-05-27T00:00:00"),
+.layout = "post.shtml",
 ---
 
 This October I'm going to host "Software You Can Love" (SYCL, pronounced "cycle"), an in-person conference about the art of creating software for humans. If that sounds interesting already, you can find information about the location and ticket prices [on the official website](https://sycl.it).

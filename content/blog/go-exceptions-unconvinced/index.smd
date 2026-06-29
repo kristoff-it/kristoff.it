@@ -1,10 +1,7 @@
 ---
 .title = "Go Exceptions for the Unconvinced",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2024-10-22T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-10-22T00:00:00"),
-.draft = false,
 --- 
 In my previous post I argued that Go has exceptions because of panic/recover. Some people understood the message, some others had objections that roughly amounted to "you're just being pedantic, there's no practical consequence to it".
 

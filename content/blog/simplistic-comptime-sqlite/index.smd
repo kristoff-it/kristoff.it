@@ -1,10 +1,7 @@
 ---
 .title = "Simplistic Comptime Column Safety in SQLite Queries",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2025-12-20T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2025-12-20T00:00:00"),
-.draft = false,
 ---
 
 I'm working on a project that uses SQLite for persistence and I'm using a Zig library that offers a

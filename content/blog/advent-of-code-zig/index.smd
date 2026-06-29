@@ -1,10 +1,7 @@
 ---
 .title = "Advent of Code in Zig",
-.description = "",
-.author = "Loris Cro",
+.date = .date("2024-11-25T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2024-11-25T00:00:00"),
-.draft = false,
 --- 
 
 [Advent of Code](https://adventofcode.com) (AoC) is coming and many people will use it as an opportunity to try out Zig. 

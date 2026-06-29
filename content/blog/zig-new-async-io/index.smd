@@ -1,10 +1,8 @@
 ---
 .title = "Zig's New Async I/O",
 .description = "Asynchrony is not concurrency.",
-.author = "Loris Cro",
+.date = .date("2025-07-13T00:00:00"),
 .layout = "post.shtml",
-.date = @date("2025-07-13T00:00:00"),
-.draft = false,
 ---
 In the [Zig Roadmap 2026](https://www.youtube.com/watch?v=x3hOiOcbgeA) stream Andrew announced a new way of doing I/O, let's see what are the goals of this upcoming design and how that relates to the revival of async / await in Zig.
 ## The new I/O Interface
