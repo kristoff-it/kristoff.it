@@ -1,4 +1,4 @@
-.zine_version = "0.12.0",
+.zine_version = "0.12.0-dev.2+ed60fec",
 .site = .simple(.{
     .title = "Loris Cro's Personal Website",
     .host_url = "https://kristoff.it",
