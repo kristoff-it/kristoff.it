@@ -12,7 +12,7 @@ This is already a huge amount of good work that has been done and I'm happy to h
 
 The importance of this last point cannot be overstated because, of all the various playing fields, this is the one where players enact meticulously planned adversarial strategies that can undo any kind of good work if you're not attentive enough. In the post where I [announced joining](https://kristoff.it/blog/addio-redis/) the Zig Software Foundation I mentioned the importance of acknowledging how **growing a successful project is not an entirely peaceful process**, and now I want to talk about how recent experiences have further developed my understanding of the open source game, and how that relates to the future of Zig.
 
-## The end of Redis
+# The end of Redis
 
 As a very funny coincidence, my last day at Redis Labs was also the same day Antirez resigned from the open source project and handed over both the official repository on GitHub and the main website ([redis.io](https://redis.io)) to the company. 
 
@@ -41,7 +41,7 @@ The direction set by Antirez, imperfect as it might have been, was based on havi
 
 To be fair to some of my ex-colleagues, some people were genuinely good at their job and really tried their best to find harmony between the open source project and the company. Unfortunately their talent got completely wasted because every high level detail of the whole story made that impossibly hard, from the company structure, to its financial strategy, up to external forces like toxic (and effective) marketing and sales tactics from AWS and other players.
 
-## The Rust Software Foundation
+# The Rust Software Foundation
 The Rust project recently [announced](https://foundation.rust-lang.org/posts/2021-02-08-hello-world/) the creation of a dedicated non-profit organization. I'm very happy for this development because Rust is in many ways like an older cousin that has a lot of things figured out, while we are just getting started (although the Zig Software Foundation predates Rust's by almost a year). Starting from this premise, I always keep an ear out for new developments to better understand how and when the challenges Rust is facing today are going to show up in our project tomorrow.
 
 One of such challenges was recently mentioned by [Ashley Williams](https://twitter.com/ag_dubs), Interim Executive Director of the Rust Software Foundation, in an interview on the [Context Free YouTube Channel](https://www.youtube.com/c/ContextFree). I warmly recommend you check out both video and channel.
@@ -63,7 +63,7 @@ The Zig Software Foundation might be in a bit of a pickle though! How are we goi
 
 Obviously we can't compete with big tech companies when it comes to salary. Since we're a small organization, we can offer a flat hierarchy and a lot of flexibility, but so can startups, and the salary problem remains. So what can we offer that they can't?
 
-## Working in big tech
+# Working in big tech
 
 While I'm sure there must be some thoroughly enjoyable, albeit rare, jobs that you can get in big tech, my impression is that the vast majority falls into two categories:
 
@@ -110,7 +110,7 @@ A few days from the moment of writing I will interview [Jonathan Turner](https:/
 
 With this lengthy premise, I'm finally able to answer the brain drain question.
 
-## Software you can love
+# Software you can love
 **Big tech has been increasingly unable to create software you can love**, and that's the ability you gain by refusing to work for the silicon valley. It's not for everyone and I can understand if somebody prefers the security of a stable job in a company too big to fail, where they can just go home after work, forget about software, and live a very comfortable life but **big tech jobs are not the absolute best choice for those who really love software craftsmanship** and, as it turns out, some of these people have taken a liking to Zig.
 
 A few days ago [Jakub Konka](https://www.jakubkonka.com/) left his job at Microsoft to become our first full-time core contributor.

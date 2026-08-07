@@ -31,7 +31,7 @@ Just to give you an idea, a Zig package dependency can expose to consumers:
 
 When you add as a dependency a repository (or compressed archive) that doesn't implement a `build.zig`, then you will be able only to get files from it, which is how the AYC VVVVVV package is able to depend on an upstream repo that has no knowledge of Zig.
 
-## Goals
+# Goals
 
 AYC has two main goals:
 
@@ -42,7 +42,7 @@ That said, like all things in a growing ecosystem, the work is not being done me
 
 This means that unless somebody needed something implemented (be it as a project or a particular optional setting of a build), chances are that it's missing, so don't expect every package to be a fully faithful port of the original build pipeline.
 
-## Joining the organization
+# Joining the organization
 
 Currently to join the organization you need to ping me and the price of admission is one C/C++ repository that you are able to immediately transfer to the AYC organization.
 
@@ -50,7 +50,7 @@ If you're unsure how to get in contact, open a thread in [the Discussions tab](h
 
 Make also sure to read the [AYC README](https://github.com/allyourcodebase/), as there are some rules about licensing and other minor details.
 
-## On community... 
+# On community... 
 
 There's one last reason why I created AYC: to avoid getting in a situation where a C/C++ project maintainer is getting badgered by some users about adding a `build.zig` file, when the maintainer doesn't want to.
 

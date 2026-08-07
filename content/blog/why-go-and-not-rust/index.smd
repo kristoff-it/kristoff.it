@@ -26,7 +26,7 @@ If you're a Go developer you might feel a bit cheated. In contrast, Python devel
 
 What about Go? 
 
-## Go is very good for writing services
+# Go is very good for writing services
 
 Go was created at Google to solve Google problems, which mostly involves dealing with networked services. Go's concurrency model is a good fit for server-side applications that must primarily handle multiple independent requests, rather than participate in complex result-passing schemes. This is one reason why you're given `go` and not `await`.
 
@@ -34,7 +34,7 @@ Go has great support for HTTP and related protocols and it doesn't take long to 
 
 On top of that, it has great tooling to diagnose concurrency and performance problems, and cross-compilation makes deploying on whichever platform a breeze.
 
-## Go is unapologetically simple
+# Go is unapologetically simple
 
 Go takes great pride in offering a limited set of features built-in the language. This makes Go easy to learn and, even more importantly, it ensures that Go projects remain understandable even when growing in size.  The creators of Go like to call it a "boring" language. While we could debate whether the language could use one or two extra things, the idea of forcing people to "do more with less" has proven to be very successful.
 
@@ -44,7 +44,7 @@ Go also doesn't want any "fingerprints" in the code, so it enforces a single, un
 
 In truth, none of these things alone is particularly  impressive, but they do describe the mindset that Go wants to impose. Many don't like it but, in my opinion, it's a killer feature for some types of development, like enterprise software.
 
-## Go is great for enterprise software
+# Go is great for enterprise software
 
 As I already mentioned, Go was created to solve Google problems, and Google problems are definitely enterprise-scale problems. Whether this was the direct aim of the creators or just the natural result of using it at a Big Corp, Go is indubitably an amazing breath of fresh air in enterprise software development.
 
@@ -52,7 +52,7 @@ If you have experience in writing enterprise software and tried Go, you probably
 
 Enterprise development is a very weird beast compared to other kinds of development. If you've never done it, you might ask yourself "What the hell is even enterprise software?" I did that kind of development as a consultant for a bit, so here's my take on the subject.
 
-#### Enterprise software development is about scale
+## Enterprise software development is about scale
 
 Not in terms of total number of users, or amount of data. Often that's the case too, but the defining characteristics are scale of **scope** and **process**. 
 
@@ -68,7 +68,7 @@ Because of the environment resulting from this general premise, a few well-known
 2. **Software projects quickly become huge and complex for all the wrong reasons.** Big projects take time to build and people (or whole teams) will come and go in the meantime. Constant refactoring is never an option so each will leave behind a lot of code written with very varying levels of quality. Multiple teams working in parallel will produce redundant code. The domain shifts over time, inevitably invalidating older assumptions and consequently causing abstractions to leak. The more sophisticated an abstraction is, the higher the risk that it will become a problem when business comes back with a serious change request.
 3. **The toolchain is very often lousy and/or dated.** This is pretty much the inevitable result of all that I described so far. Huge amounts of old code tie you down to a specific toolset, junior developers will learn the status-quo at best, and the people on top (managers and stakeholders) are extremely often not prepared for making technological decisions based on first-hand experience, the general nature of the endeavor makes them risk-averse, causing them to mainly mimic what other successful players in their space do or, more precisely, what analysts *claim* other successful players do.
 
-#### Go is about suppressing complexity at scale
+## Go is about suppressing complexity at scale
 
 Go makes teams more successful, partially by giving them more than what they would get with other ecosystems, and partially by taking tools away from them, to prevent common pitfalls.
 
@@ -86,11 +86,11 @@ Go is not blazing-fast. Go is not super memory-efficient. Go doesn't have the ab
 
 Go is faster than Java / C#, more memory-efficient than Java / C#, and definitely has better concurrency than Java / C#. **Go is simple so that all of this can hold true when confronting the average Go program with the average Java / C# program.** It doesn't matter whether Go is truly faster than C# or Java in an absolute sense. The average Java / C# application will be very different than the best theoretical program, and the amount of foot guns in those languages is huge compared to Go. If you want an example, [take a look at this talk on C# concurrency](https://www.youtube.com/watch?v=J0mcYVxJEl0), it's  incredible in my opinion how the straightforward use of `await` is **never** correct. Imagine how broken must be the average asynchronous C# application. Actually, ASP.NET applications deadlocking for no apparent reason are not uncommon.
 
-[![Will it deadlock? (click to zoom)](table.png "A table that shows when a C# program might deadlock.")]($link.asset('1*JrvDmC-KS7iL2Aexb-lskA.png'))
+[![Will it deadlock? (click to zoom)](table.png "A table that shows when a C# program might deadlock.")]($link.asset('table.png'))
 
 This image was taken from [this blog post](https://medium.com/rubrikkgroup/understanding-async-avoiding-deadlocks-e41f8f2c6f5d) that tries to explain the innumerable ways of breaking concurrency in C#.
 
-## In conclusion
+# In conclusion
 
 Go is a *better* Java / C#, while Rust is not. The clarity that Go can bring to enterprise software development is without a doubt much more valuable than removing garbage collection at the cost of worsening the overall productivity.
 

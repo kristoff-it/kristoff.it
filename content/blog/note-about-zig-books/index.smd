@@ -26,7 +26,7 @@ A publisher (like any other business partner) will take something from you in ex
 
 A publisher will take away from you some creative freedom and a percentage of the profits from book sales in exchange for helping you through the process of **writing**, **printing** and **distributing** the book.
 
-## Writing 
+# Writing 
 
 The publisher will assign a person to you who will ping you regularly about your progress and who will eagerly await new chapters from you. Once you give them a new chapter, they will route it to an editor who will fix your grammar mistakes and generally improve your prose.
 
@@ -38,7 +38,7 @@ As far as I'm aware you editor will not have power over you when it comes to cho
 
 My book for example is aimed at people who already have programming experience and, since I always find incredibly boring having to skip over a bunch useless introductions to obvious concepts, I'm making the artistic choice in my book of jumping directly into the meat, which is something publishers would probably not like much.
 
-## Printing
+# Printing
 
 Publishers will help you with the printing process, but they will also have rules about things like the cover art.
 
@@ -50,7 +50,7 @@ If you go this route you will have to design your own book cover (or pay an arti
 
 Personally, I plan to commission the book cover art to [Joy Machs](https://www.artstation.com/joymachs) who has already created a lot of awesome illustrations for the Zig community and who I had the pleasure of meeting in person in Cape Town at Systems Distributed.
 
-## Distributing
+# Distributing
 
 Publishers have a distribution network that they can leverage to get your book in front of more eyeballs. One iconic example is how big conferences will have a book shop section where you will find programming manuals about new technologies. 
 
@@ -62,7 +62,7 @@ The people who are interested in Zig already exist in the form of the Zig commun
 
 A Zig programming manual is a simple answer to a concrete need: there are people who are already trying to learn Zig (and systems programming) who could use some help. This is one of those cases where if you ~~build~~ write it, they will come... or almost: you still will need to let people know that your book exists, but it's not all that hard and if your content is good, word of mouth will do the rest of the work for you, just like it did for [Ziglings](https://github.com/ratfactor/ziglings ) and [Zig Learn](https://ziglearn.org/), for example.
 
-## Conclusion
+# Conclusion
 
 Depending on where you are in life, it might feel very flattering to receive a ping from a big book publisher, but giving too much weight to the brand can lead you to make choices you might regret. 
 

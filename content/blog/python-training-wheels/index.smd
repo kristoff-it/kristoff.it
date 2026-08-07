@@ -8,7 +8,7 @@
 
 As somebody directly involved with an upcoming programming language, I'm often in discussions about how to model things in the ecosystem like, say, the package manager, and how those decisions impact the project in the long term.
 
-When reading Simon Wil.daten’s excellent blog post "[Things I’ve learned serving on the board of the Python Software Foundation](https://simonwil.daten.net/2024/Sep/18/board-of-the-python-software-foundation/)" (which I recommend reading it before continuing), the part about PyPI (Python Package Index) stood out:
+When reading Simon Willison’s excellent blog post "[Things I’ve learned serving on the board of the Python Software Foundation](https://simonwilwillison.net/2024/Sep/18/board-of-the-python-software-foundation/)" (which I recommend reading it before continuing), the part about PyPI (Python Package Index) stood out:
 
 > PyPI’s numbers are staggering. Today there are 570,000 projects consisting of 12,035,133 files, serving 1.9 billion downloads a day (that number from [PyPI Stats](https://pypistats.org/packages/__all__)). Bandwidth for these downloads is donated by [Fastly](https://www.fastly.com/), a PSF Visionary Sponsor who recently signed [a five year agreement](https://fosstodon.org/@ThePSF/112456715341751673) to continue this service.
 >
@@ -20,7 +20,7 @@ We saw the beginnings of this in the Zig project and immediately moved to a [sel
 
 Before I begin, I want to make it extremely clear that I'm not involved with the PSF, nor PyPI, and that I'm talking as an external person with only partial knowledge of the facts. I'm the dark knight nobody asked for.
 
-## What if PyPI had to pay its own bills?
+# What if PyPI had to pay its own bills?
 
 To answer this question, we need first to get a rough idea of how PyPI works.
 
@@ -59,7 +59,7 @@ While there might be some best practices for Python package authors (probably mo
 
 **It made total sense in the past for the Python ecosystem to be hands-off when it comes to building C/C++ code, but it's now time to take the _training wheels_ off instead.**
 
-## Taking the training wheels off
+# Taking the training wheels off
 
 Here's finally my contingency plan for PyPI:
 
@@ -67,7 +67,7 @@ Here's finally my contingency plan for PyPI:
 2. Turn prebuilt binaries from "sources" into cacheable artifacts that can be deleted and reconstructed at will.
 3. Institute a way of creating secondary caches that can start shouldering some of the workload.
 
-### 1. Leverage progress in the systems programming ecosystem
+## 1. Leverage progress in the systems programming ecosystem
 
 When Python came into existence, repeatable builds (i.e. not yet _reproducible_, but at least correctly functioning on more than one machine) were a pipe dream. **Building C/C++ projects reliably has been an intractable problem for a long time, but that's not true anymore**.
 
@@ -91,7 +91,7 @@ A while ago I went on Developer Voices to talk about the Zig build system (I did
 <iframe width="560" height="315" src="https://www.youtube.com/embed/i9nFvSpcCzo?si=4mq1KkNZpuiXl1uT" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 ```
 
-### 2. Make prebuilt executables optional
+## 2. Make prebuilt executables optional
 
 Once the Python ecosystem can trivially rebuild binaries for any target, then **PyPI will gain the ability to delete (and recreate) wheels at will**.
 
@@ -103,7 +103,7 @@ That said, not every project should get rid of prebuilt binaries. Building LLVM 
 
 PyPI will have the option to cache big and/or hugely popular packages if it needs to, which brings me to the final step of this whole plan.
 
-### 3. Institute secondary caches
+## 3. Institute secondary caches
 
 Looking at [some more](https://py-code.org/stats) PyPI stats, it seems that space usage across different projects follows a pareto distribution, **having Tensorflow lead the charge by singlehandedly accounting for 17% of the total data**.
 
@@ -123,9 +123,9 @@ Here's one way it could work:
 
 **Of all measures, this is the one that would make the biggest difference in terms of bandwidth consumption**. It also has the beautiful property that it redirects costs in perfect proportion to how many resources a project consumes, and that it leaves to PyPI the latitude to choose a case-by-case policy that creates the best structure of incentives.
 
-## In conclusion
+# In conclusion
 
-Simon Wil.daten is absolutely right that big ecosystems require strategical thinking. Without a concrete effort by power structures to steer the community towards a promising point on the horizon, all that remains are short term incentives, partial information, and a lot of space for actors with hidden agendas to grease the ~~wheels~~ gears they like the most.
+Simon Willison is absolutely right that big ecosystems require strategical thinking. Without a concrete effort by power structures to steer the community towards a promising point on the horizon, all that remains are short term incentives, partial information, and a lot of space for actors with hidden agendas to grease the ~~wheels~~ gears they like the most.
 
 **Python could very well continue relying on the support of the Big Tech industry for a very long time but**, even if we were to set aside the otherwise _extremely real_ problems of power dynamics between organizations, **the long-term sustainability of an exponentially growing dataset still remains** and Python is now mature enough to start inspecting and fixing the foundations its ecosystem is built upon.
 

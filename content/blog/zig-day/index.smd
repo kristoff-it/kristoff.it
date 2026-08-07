@@ -8,7 +8,7 @@ If you're trying to learn Zig in 2024, one key ingredient is still interacting w
 
 When it comes to interacting socially, meetups are a staple event for software engineers, but **in this blog post I'd like to present a different event format that I believe is a much more effective at knowledge-sharing, at least for communities with a "Zig vibe"**.
 
-## Open Source Saturday Milan
+# Open Source Saturday Milan
 
 Over the last year I've attended a few times a recurring event in Milan titled "[Open Source Saturday](https://www.meetup.com/open-source-saturday-milano/)". The format works like this:
 
@@ -27,7 +27,7 @@ I've personally enjoyed this format tremendously and would encourage all Zig mee
 
 Unlike regular meetups, this event requires access to an office or co-working space for nearly a full weekend day, which I understand isn't always easy to arrange. However, if you manage to pull it off, the experience can be far more enjoyable than a typical meetup — at least, that was my experience.
 
-## Spicing up the format
+# Spicing up the format
 
 The Open Source Saturday format is really solid. If you (as an organizer) feel a bit uneasy about the standing-up stuff, maybe because it reminds you of some other daily *ceremony*, resist the temptation of skipping it because it really helps facilitate interactions between attendees that would otherwise not happen reliably.
 
@@ -37,7 +37,7 @@ As presented, this is a very under-specified idea and finetuning it is your job 
 
 Maybe the best thing for you to add is not a talk, but something else entirely (or nothing at all).
 
-## What's wrong with regular meetups?
+# What's wrong with regular meetups?
 
 In my experience meetups tend to have this format:
 
@@ -58,7 +58,7 @@ I want to actually collaborate with people and that requires space for at least 
 
 In other words, I'm just not part of the core audience of regular meetups, and if the same applies to you too, then consider organizing a Zig Day.
 
-## In Conclusion
+# In Conclusion
 
 If you've attended any of the [Software You Can Love](https://softwareyoucan.love) events in Milan, you will certainly remember the day of the conference where no talks were scheduled and we all sat on tables and spent the whole day chatting in front of our laptops. 
 

@@ -17,7 +17,7 @@ The work to replace the current C++ compiler implementation with a new pure Zig 
 
 The move to a self-hosted compiler for Zig has similar advantages for the core contributors, but it also **makes LLVM an optional dependency**, **increases compilation speed** (instead of losing it), and adds an amazing feature for debug builds of your code: **incremental compilation with in-place binary patching**, [another](/blog/what-is-zig-comptime/) [unique](/blog/zig-colorblind-async-await/) Zig feature.
 
-## Speeding up compilation
+# Speeding up compilation
 
 Most languages offer some form of caching to speed up compilation, starting from C’s compilation units, up to modules, packages, and other comparable boundaries in more modern languages.
 
@@ -25,7 +25,7 @@ Zig also implements a caching system that comes particularly handy when building
 
 Zig sources always get bundled into a single compilation unit, so the caching system in its current form doesn’t provide any speedup when editing and recompiling a pure Zig project. The upside is that, not only compiling Zig code is very fast, but also that incremental compilation will provide smart caching for Zig code, more than making up for what we can’t get from simple caching.
 
-## Incremental compilation
+# Incremental compilation
 
 Incremental compilation is a form of caching that acts at a higher granularity level than normal “compilation unit”-level caching. The Rust blog has a [great post](https://blog.rust-lang.org/2016/09/08/incremental.html) that explains how it works.
 
@@ -35,7 +35,7 @@ In the case of Rust, the compiler builds a dependency graph at the AST level and
 
 One important detail about this graph is the fact that the right-most box is always invalidated. In other words, the final executable is always re-linked from scratch starting from a mix of old and newly generated object files. It’s clear that this has to be the case, since the final executable depends on everything else and so any meaningful change to the code will invalidate it, but this is where the Zig self-hosted compiler brings a new ingenious idea to the table.
 
-## In-Place Binary Patching
+# In-Place Binary Patching
 
 As of Zig version 0.6.0, regardless of the type of release (debug, release-safe, release-fast), there is always a final step delegated to **LLVM, which takes at least 70% of the total compilation time** including when compiling a debug build, where optimizations aren’t even enabled.
 
@@ -53,7 +53,7 @@ If you want to see the self-hosted compiler in action, here’s a 5 minute demo 
 </div>
 ```
 
-## Designing machine code for incremental compilation
+# Designing machine code for incremental compilation
 
 Efficient in-place binary patching is something that can only be accomplished by tightly coupling the compiler frontend and backend. Part of the reason this feature is so rarely seen in the wild is that it goes against our better sense of abstraction and clean code organization. But we must never forget: abstraction is just a tool to reach a practical outcome, and not always the most appropriate one.
 
@@ -67,7 +67,7 @@ This problem must be solved repeatedly for each kind of linking backend - ELF, D
 
 Be on the lookout for a more technical post on [Andrew’s blog](https://andrewkelley.me), where he’ll dive into some of these fascinating details -- **including how this design gets us 90% of the way to hot code swapping!**
 
-## When is it going to be ready?
+# When is it going to be ready?
 
 The self-hosted backend is [still a work in progress](https://github.com/ziglang/zig/projects/2), but all the functionalities presented in this post have been designed and prototyped to the point where it’s just a matter of doing the methodical part of the work.
 

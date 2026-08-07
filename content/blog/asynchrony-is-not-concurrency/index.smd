@@ -17,7 +17,7 @@ What if I told you we're missing a term to describe another aspect of concurrent
 
 Well, I spoiled it in the title: the missing term is 'asynchrony', but why?
 
-## Two files
+# Two files
 
 Say that you have to save two files and order does not matter:
 
@@ -30,7 +30,7 @@ A could be saved before B, or B could be saved before A, and all would be fine. 
 
 But, most importantly, **it's perfectly legitimate to do all the work to save one file first and, only once that's done, to begin saving the second file**. Maybe that would not be the most efficient thing to do, but the code would still be correct.
 
-## Two sockets
+# Two sockets
 
 Let's take a look now at another example: say that you need to create a TCP server and connect to it *from within the same program*.
 
@@ -46,7 +46,7 @@ Unlike before, **it is mandatory that the execution of both tasks overlap**.
 
 In the file example it was fine to do all the work for A first and all the work for B last, but not in this second case, because the server needs to be active **while** the client tries to connect.
 
-## Asynchrony, Concurrency, Parallelism
+# Asynchrony, Concurrency, Parallelism
 
 In common lingo, we would describe both the code snippets presented above as "concurrent" and stop there, but that will lose us some nuance, so here's my proposed definitions for these terms:
 
@@ -59,7 +59,7 @@ In common lingo, we would describe both the code snippets presented above as "co
 
 With these definitions in hand, here's a better description of the two code snippets from before: both scripts express asynchrony, but the second one **requires** concurrency.
 
-## Why even bother?
+# Why even bother?
 
 Ok, cool, we now can be more precise when describing code snippets, so what did we gain? 
 
@@ -74,7 +74,7 @@ We have created a [worse](https://bitbashing.io/async-rust.html) [experience](ht
 And to mitigate all these problems, we have created unholy escape hatches that cause suboptimal behavior at best and [deadlocks](https://www.youtube.com/watch?v=J0mcYVxJEl0) at worst.
 
 Let's switch back to answering the question in the positive.
-## In Zig Asynchrony is not Concurrency
+# In Zig Asynchrony is not Concurrency
 
 I already wrote a blog post on [Zig's new async I/O](/blog/zig-new-async-io/) story, but I only dedicated a short section at the end on this aspect, which led me to expand on it in this post. 
 
@@ -164,7 +164,7 @@ In this case the two different calls to `saveData` can be scheduled concurrently
 If this result feels surprising to you, it's probably because you're used to async being tied to stackless coroutines, which normally causes the usage of `async` and `await` keywords to propagate virally throughout the code. But, as an example, Go doesn't have this same problem: most code is synchronous and yet Go does run goroutines concurrently (because all I/O is evented and because Go can task switch).
 
 We're finally ready to look at one final example to complete our understanding!
-## Concurrency as a requirement
+# Concurrency as a requirement
 
 For convenience, here's a copy of the definitions I've introduced in the beginning:
 
@@ -216,7 +216,7 @@ Just to drive the point home one last time: this is a legitimate thing to do bec
 
 Before we jump to the last section about conclusions, I'd like to point out that the code snippets above are all realistic but, to remove clutter, I have omitted error handling and the code that awaits futures returned from async calls. Read [my other blog post](/blog/zig-new-async-io/) to see complete code snippets, although that is not necessary to understand this post.
 
-## Conclusions
+# Conclusions
 
 First and foremost, I hope to have convinced you that asynchrony is not concurrency.
 
@@ -224,7 +224,7 @@ Secondly, *I* hope to have given *you* hope that we can climb out of the current
 
 Lastly, I hope to have given you an intuition for how async I/O is going to work in Zig.
 
-If you want to have a sneak peek of the upcoming Zig async I/O  redesign, **Monday 21st of July 2025 at 7pm CEST I will be [live on Twitch](https://twitch.tv/kristoff_it) ([more timezones and info here](https://zig.show/e.datedes/42/)) with Andrew to read the thread pool implementation, the green threads implementation, and to write myself a non-concurrent implementation of `Io`** in order to test live if everything that I talked about in this post is actually true.
+If you want to have a sneak peek of the upcoming Zig async I/O  redesign, **Monday 21st of July 2025 at 7pm CEST I will be [live on Twitch](https://twitch.tv/kristoff_it) ([more timezones and info here](https://zig.show/episodes/42/)) with Andrew to read the thread pool implementation, the green threads implementation, and to write myself a non-concurrent implementation of `Io`** in order to test live if everything that I talked about in this post is actually true.
 
 Spoilers: I already tried and it all works. Welcome to the `Future` we've been all awaiting.
 

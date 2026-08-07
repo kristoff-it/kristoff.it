@@ -1,4 +1,8 @@
-.zine_version = "0.12.0-dev.2+ed60fec",
+.zine_version = "0.13.0",
+.supermd = .{
+    .headings_h2 = true,
+    .auto_target_blank = true,
+},
 .site = .simple(.{
     .title = "Loris Cro's Personal Website",
     .host_url = "https://kristoff.it",

@@ -59,25 +59,27 @@ And it doesn't end here: operating in batches by using memory arenas, for exampl
 
 But don't just take my word for it.
 
-### [Casey Muratori | Smart-Pointers, RAII, ZII? Becoming an N+2 programmer](https://www.youtube.com/watch?v=xt1KNDmOYqA)
+# References
+
+## [Casey Muratori | Smart-Pointers, RAII, ZII? Becoming an N+2 programmer](https://www.youtube.com/watch?v=xt1KNDmOYqA)
 
 In this video Casey Muratori describes how going from thinking about individual allocations to thinking in batches is a natural form of progression for a programmer. 
 
 The first 10 minutes of the video contain the main argument and everything that he says about smart pointers equally applies to Rust lifetimes.
 
-### [CppCon 2014: Mike Acton "Data-Oriented Design and C++"](https://www.youtube.com/watch?v=rX0ItVEVjHc)
+## [CppCon 2014: Mike Acton "Data-Oriented Design and C++"](https://www.youtube.com/watch?v=rX0ItVEVjHc)
 
 Extremely popular talk on the advantages of looking at problems as data transformation pipelines, where Mike Acton shows how common approaches in C++ (RAII being one of them) are antithetical to the goal of creating performant code.
 
 Andrew Kelley also [gave a related talk](https://www.youtube.com/watch?v=IroPQ150F6c) at Handmade Seattle and more recently Matthew Lugg [gave another](https://www.youtube.com/watch?v=KOZcJwGdQok) at Software You Can Love.
 
-### [Modern Systems Programming: Rust and Zig - Aleksey Kladov](https://www.youtube.com/watch?v=4aLy6qjhHeo)
+## [Modern Systems Programming: Rust and Zig - Aleksey Kladov](https://www.youtube.com/watch?v=4aLy6qjhHeo)
 
 The speaker, also known as [Matklad](https://matklad.github.io) is the author of rust-analyzer and has had the opportunity to use Zig to write production software for more than a year. In this talk he shares his perspective on what it means to do "systems programming". 
 
 This talk is not directly addressing the tradeoffs of RAII, but it's a refreshing perspective on systems programming.
 
-## In conclusion
+# In conclusion
 
 I've recently started porting the build scripts of some C/C++ projects to Zig for [All Your Codebase](https://github.com/allyourcodebase/) (will write more on that soon), and I've seen some of the crazy workarounds that C codebases use to make things work in a weird soup of build systems and compilers.
 

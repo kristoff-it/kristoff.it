@@ -16,7 +16,7 @@ build of Zig, which you can get from
 [the downloads page](https://ziglang.org/download/).
 
 
-## Basic syntax
+# Basic syntax
 
 The most basic for loop syntax in Zig is still the 
 same as before.
@@ -41,7 +41,7 @@ in Zig and in the case of `for` loops is how
 you can, well, _capture_ the iteration value 
 and give it a name.
 
-### Ranges
+## Ranges
 
 The new syntax also supports ranges, which are 
 a new construct in Zig.
@@ -89,7 +89,7 @@ This prints:
 10 11 12 13 14
 ```
 
-## Multi-sequence syntax
+# Multi-sequence syntax
 
 The new multi-sequence syntax allows you to loop over 
 two or more arrays or slices at the same time:
@@ -118,7 +118,7 @@ Passing arrays of different length is safety-checked
 UB (i.e. you will get a panic in safe release modes).
 
 
-## Ranges as indexes
+# Ranges as indexes
 
 To iterate over a sequence and also keep track of the 
 element's index, you can add a range to the list of 
@@ -146,14 +146,14 @@ This prints:
 ```
 
 
-## Other properties of `for` loops
+# Other properties of `for` loops
 
 Up until now we saw the new changes to `for` loops, 
 but if you're new to Zig you might not know all the 
 other things they support, so I'll quickly recap 
 them in this section.
 
-### Pointer to the element
+## Pointer to the element
 
 Value captures in Zig should always be understood as
  immutable copies. To ask for a pointer you can add 
@@ -175,7 +175,7 @@ for (&good_digits) |*d| {
 //     	^
 ```
 
-### Labels, `break` and `continue`
+## Labels, `break` and `continue`
 
 You can give labels to loops, which helps breaking 
 and continuing iteration at the right level.
@@ -194,7 +194,7 @@ outer: for (vowels) |v| {
 }
 ```
 
-### `else` for `for` loops
+## `else` for `for` loops
 
 In Zig you can give an `else` branch to a `for` loop. 
 The `else` branch triggers when the loop ends naturally, 
@@ -218,7 +218,7 @@ const match: ?usize = for (text, 0..) |x, idx| {
 } else null;
 ```
 
-### Inlined `for` loops
+## Inlined `for` loops
 
 It's possible to operate on heterogeneous sequences 
 of values with `for` loops when doing comptime 
@@ -226,7 +226,7 @@ metaprogramming. You can learn more in
 [this old blog post](https://kristoff.it/blog/what-is-zig-comptime/) 
 of mine.
 
-## Multi-sequence `for` loops and data oriented design (DOD)
+# Multi-sequence `for` loops and data oriented design (DOD)
 
 Say that you have a game where each monster has an 
 element type, a counter for hit points, and a unique 
@@ -301,7 +301,7 @@ The Zig standard library has `MultiArrayList`, a data
 structure that helps make DOD style programming even 
 more ergonomic. [Here you can read more about it](https://zig.news/kristoff/struct-of-arrays-soa-in-zig-easy-in-userland-40m0).
 
-## Hoisting safety checks
+# Hoisting safety checks
 
 In low-level programming languages, accessing an array 
 item corresponds to adding an offset to a pointer value 
@@ -365,7 +365,7 @@ optimizations are disabled and compilation times
 matter the most.**
 
 
-## Conclusion
+# Conclusion
 
 Zig is already a compelling programming language and 
 toolchain, but there's more design space to explore 

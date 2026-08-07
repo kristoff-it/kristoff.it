@@ -12,7 +12,7 @@ I also want to point out that I'm writing this in part for the benefit of the
 to mention impacted the community directly.
 
 
-## Our Machinery, but not yours
+# Our Machinery, but not yours
 
 Our Machinery is (was?) a small company that developed The Machinery, a game engine and IDE. It was similar to Godot in some ways, but more minimalistic and extendable, and thus closer to the Handmade ethos. In a relatively short time it had become a very popular choice for many indie game makers, also thanks to the fact that The Machinery was free for studios that had yet to make big money.
 
@@ -23,7 +23,7 @@ Ryan Fleury (former Head Admin of the Handmade Network) [has written](https://ww
 This is all reasonable and a recurring theme in the Handmade community, but I was surprised to see that Open Source wasn't really mentioned much in those exchanges, when in fact Open Source exists primarily to de-risk software written by someone else (alongside supporting shitty PR maneuvers by big tech players, but that's a story for another day).
 
 
-## Our Open Source machinery
+# Our Open Source machinery
 
 When you download Open Source code you're not only given the source, but also a license that allows you to use, modify and redistribute the code that you just received. There are many Open Source licenses and each has its own minor differences, but the core point remains the same: Open Source software is yours, for real.
 
@@ -32,19 +32,19 @@ This is obviously not a guarantee that the maintainers of the project will work 
 And it doesn't end here!
 
 
-## No need for prayers, when the deal can't be altered
+# No need for prayers, when the deal can't be altered
 
 While a single copyright owner could at some point decide to stop issuing Open Source licenses, real Open Source projects with many contributors in practice find that very difficult. Whenever a contributor submits a GitHub Pull Request, they retain copyright of their code and implicitly grant the project the same license that the project is distributed with. So if you send a PR to a MIT project, you retain copyright of your work and grant the project an MIT license to use your work.
 
 **This means that Open Source projects with many contributors are not only more likely to survive over time, but also less likely to ever change license**, partially because of social norms, and partially because relicensing often requires asking each contributor for permission to do so.
 
 
-## Read more
+# Read more
 
 In this blog post I've been fast and loose in describing what you get from Open Source licenses. While I believe my recap to be precise enough to be practically useful, there are more things to keep in mind, like Contributor License Agreements, which can be used as a shitty way to force license changes, and that are surprisingly common in corporate-sponsored Open Source, [the latest example being the Carbon Programming Language](https://github.com/carbon-language/carbon-lang/blob/7147ea0144add7d1716e2c4da62aea7368db3f1f/CONTRIBUTING.md). Know that [you don't want to sign a CLA](https://drewdevault.com/2018/10/05/Dont-sign-a-CLA.html).
 
 
-## Conclusion
+# Conclusion
 
 While self-reliance is an effective way to never be disappointed by somebody else's behavior, a fully autarchic programmer is limited in what they can achieve. As disappointing as human beings often are, collaboration is a catalyst for much greater achievements, especially when competent professionals learn to work together.
 

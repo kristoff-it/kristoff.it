@@ -33,7 +33,7 @@ development models**; you just have to get good at [the open source
 game](/blog/the-open-source-game/). I've already written on the subject in
 general, but today I'll focus on one specific aspect: contributor poker.
 
-## Contributor poker
+# Contributor poker
 
 In successful open source projects you eventually reach a point where you
 start getting more PRs than what you're capable of processing. Given what I
@@ -72,7 +72,7 @@ Another notable example are the contributions from [Frank
 Denis](https://github.com/jedisct1). I wouldn't even know where to begin to
 give a monetary value to the work he has done in `std.crypto`.
 
-## Growing pains
+# Growing pains
 
 In the early days of Zig it was possible to invest on every new
 contributor, but now the project has grown to the point where **the amount
@@ -91,7 +91,7 @@ least mitigate) in the future.
 Unfortunately, not only is this an inherently hard problem to tackle, but
 AI has made things worse.
 
-## Banning AI contributions
+# Banning AI contributions
 
 There has been a lot of speculation about why the Zig project bans AI
 contributions, but now that you understand the importance of contributor

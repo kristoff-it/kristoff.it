@@ -8,7 +8,7 @@ Over the last year I worked on a static site generator written from scratch in Z
 
 If you want to try it out (or just jump straight into the docs) the official website is [https://zine-ssg.io](https://zine-ssg.io).
 
-## Why another SSG?
+# Why another SSG?
 
 Over the last few years, I spent a considerable amount of time working on static websites for various projects (such as [the official Zig website](https://ziglang.org)) and initiatives (like [Software You Can Love](https://softwareyoucan.love)).
 
@@ -18,11 +18,11 @@ Throughout my time building static sites, I’ve used several different SSGs, ea
 
 **Moreover, with Zine, I hope to inspire the Zig community to craft high-quality websites that promote Zig projects and initiatives.**
 
-## Zine file formats
+# Zine file formats
 
 The most prominent feature of Zine is that every file format it uses has been created from scratch in order to handcraft the content authoring experience. 
 
-### SuperHTML
+## SuperHTML
 
 Zine is in a few ways inspired by [Hugo](https://gohugo.io), but the first thing that I was fully confident I could improve upon was the templating language.
 
@@ -45,7 +45,7 @@ This is what happens if you try to hardcode an `id` inside of a loop, for exampl
  SuperHTML can already report a lot of syntax errors, but it's not complete yet. Diagnostic messages need to be improved, and a few checks are still missing, but you can already see that the goal is to catch as many mistakes as possible, as early as possible.
 
 You can read more about SuperHTML in the [official docs](https://zine-ssg.io/docs/superhtml/).
-### SuperMD
+## SuperMD
 
 SuperMD is a Markdown-like file format for authoring content in a Zine site. The main reason for not using "vanilla" Markdown is that it is my personal opinion that none of the popular dialects tries hard enough to make Markdown a proper content markup format in its own right, and instead they keep using HTML as a crutch whenever Markdown falls short.
 
@@ -77,10 +77,10 @@ This is a key feature that has helped me avoid having to pull a ton of layout co
 
 ***two-columns.smd***
 ```markdown
-# [Left Section]($section.id('left'))
+ [Left Section]($section.id('left'))
 Lorem Ipsum
 
-# [Right Section]($section.id('right'))
+ [Right Section]($section.id('right'))
 Dolor Something Something
 ```
 
@@ -102,11 +102,11 @@ The call to `ref` will add a `#left` fragment to the link and of course will res
 
 The [official docs](https://zine-ssg.io/docs/supermd/) have the full list of supported directives, their options, and how vanilla Markdown syntax maps to them.
 
-#### Frontmatter
+### Frontmatter
 
 Last but not least, SuperMD files use Ziggy for their frontmatter. See [https://ziggy-lang.io](https://ziggy-lang.io) to learn why I didn't want to settle on YAML, TOML, JSON, etc.
 
-### The asset system
+## The asset system
 
 The Zine asset system does two interesting things. 
 
@@ -116,7 +116,7 @@ The second one is that there is no concept of "static" asset directory. Normally
 
 See the [official docs](https://zine-ssg.io/docs/assets/) for more info.
 
-## In conclusion
+# In conclusion
 
 Like the official website states right upfront, Zine is still alpha software and using it means participating in its development.
 

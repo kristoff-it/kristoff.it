@@ -15,7 +15,7 @@ The result is that ZLS is able to give you parser-level diagnostics (which go fr
 ...or does it?
 
 
-## Getting Build-On-Save Diagnostics From ZLS
+# Getting Build-On-Save Diagnostics From ZLS
 
 ZLS can be configured to run your build script on save. If that results in build errors, ZLS will be able to display those in your editor like any other diagnostic.
 
@@ -24,7 +24,7 @@ ZLS can be configured to run your build script on save. If that results in build
 
 Here's how to do it.
 
-### 1. Configure ZLS to run a build step on save
+## 1. Configure ZLS to run a build step on save
 
 <span style="height: 10px;"></span>
 > **WARNING**: note that if you get ZLS through your editor's package manager, you might need to see how you're expected to provide your config options, as that might differ from the normal procedure described below.
@@ -49,7 +49,7 @@ Once you have the path, edit your config file to include the following keys:
 The second setting doesn't have to be necessarily `"check"`, and in fact not defining it will default to running the `install` step of your build script, but we'll see in a moment why it's convenient to have a dedicated step for this.
 
 
-### 2. Add a check step to your build.zig
+## 2. Add a check step to your build.zig
 
 This part is more deeply tied to your specific project but the gist is the following: whatever you do to define your main executable / module / library, you do it again in a new step named check.
 
@@ -102,7 +102,7 @@ The result is that you will get diagnostics pretty fast since you won't have to 
 
 Once you're done with this, restart your editor (or at least ZLS), **save your file with an error in it**, and enjoy your new spiffy diagnostics.
 
-## It Only Gets Better
+# It Only Gets Better
 
 With a handful of changes you can get closer to a complete developer experience, but this is not the end.
 

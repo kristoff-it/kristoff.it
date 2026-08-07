@@ -14,7 +14,7 @@ to be an irredeemably bad practice**. Let's start with some context first,
 since this discussion started because of how `std.debug.assert` works in
 Zig.
 
-## Asserts in general
+# Asserts in general
 
 An assert is a line of code that introduces a new fact to the program, such
 as "this argument can never be null", or "this integer can never be even",
@@ -42,7 +42,7 @@ tests, especially if you fuzz your code.
 **An assert is worth a thousand unit tests** (and orders of magnitude more
 than that if you fuzz), but that's a story for a follow-up post.
 
-## Asserts in Zig
+# Asserts in Zig
 
 Asserts in Zig are based on `unreachable`, a language feature that marks
 invalid code paths.
@@ -88,7 +88,7 @@ pub fn assert(ok: bool) void {
 }
 ```
 
-### Build modes
+## Build modes
 
 Zig has multiple build modes:
 
@@ -126,7 +126,7 @@ executable.
 Here's [another godbolt link](https://zig.godbolt.org/z/7sMjofYsK) where
 you can see how an assert interacts with the subsequent `switch`
 statement in both ReleaseSafe and ReleaseFast (note how in ReleaseFast the
-function skips all compa.datens and just returns `true`).
+function skips all comparisons and just returns `true`).
 
 This is the kind of stuff that videogames and other real-time media
 applications rely on massively.
@@ -136,7 +136,7 @@ compilers have the ability to propagate `unreachable` information,
 resulting in non-local optimizations that you might not be able to easily
 anticipate as a programmer.
 
-### Zig asserts are not macros
+## Zig asserts are not macros
 
 When approaching Zig, one thing that surprises C/C++ developers especially,
 is the fact that `std.debug.assert` is not a macro (and FYI Zig doesn't
@@ -186,7 +186,7 @@ This is a good opportunity to get rid of some macro-induced PTSD and
 embrace simplicity, especially because in Zig you don't normally disable
 asserts, which brings me to the main point of this post.
 
-## Disabling asserts in prod
+# Disabling asserts in prod
 
 To recap, there are three things you can do with asserts:
 
@@ -236,7 +236,7 @@ are.
 But there's an even bigger reason why methodically disabling all asserts in
 prod is counterproductive.
 
-## Gaslighting yourself
+# Gaslighting yourself
 
 To recap, the crux of the issue here is about the possibility of asserts
 being wrong, and the consequences of that. If we could guarantee that all
@@ -300,7 +300,7 @@ because you disabled asserts in prod**.
 unreasonably hard to do so when the code has asserts that effectively
 gaslight you**.
 
-## In conclusion
+# In conclusion
 
 Depending on the context, different programs will have different
 priorities, and for some it's the legitimately correct choice to prefer
@@ -340,8 +340,8 @@ Also interestingly, the only two relatively serious Ghostty CVEs published
 so far are about arbitrary command execution achieved **without memory
 corruption**, despite Ghostty being distributed in ReleaseFast.
 
-- https://github.com/ghostty-org/ghostty/security/ad.dateries/GHSA-4jxv-xgrp-5m3r
-- https://github.com/ghostty-org/ghostty/security/ad.dateries/GHSA-5hcq-3j4q-4v6p
+- https://github.com/ghostty-org/ghostty/security/advisories/GHSA-4jxv-xgrp-5m3r
+- https://github.com/ghostty-org/ghostty/security/advisories/GHSA-5hcq-3j4q-4v6p
 
 When it comes to the genral practice of "disabling asserts in prod", I bet
 that there are a lot of projects out there where wrong asserts fester and

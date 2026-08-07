@@ -14,7 +14,7 @@ In the beginning, I worked in academia mostly by doing data science for research
 Then I joined a software consultancy firm.
 
 
-## The Bad
+# The Bad
 
 In my first standup we were about 20 people in total. We would gather in a conference room and wait for the engineering manager to start the meeting. Once we started, one after another we would say what we did the day before, what we planned to do on the present day, and if we had encountered any blocker. I'm sure you know this prayer already.
 
@@ -26,7 +26,7 @@ The worst was when the engineering manager was on leave. We would still hold the
 
 The meeting was short, we did it while literally standing up, the three ceremonial questions were answered, and yet it was a complete waste of time for all but one person in the room. This was an unequivocally bad standup.
 
-## The Ugly
+# The Ugly
 
 Fast-forward a couple of months and a new big project starts, causing the original standup to be broken into two: one for the big project, and one for everyone else. I was assigned to the big project, so I was also moved to the new meeting.
 
@@ -44,7 +44,7 @@ This standup too had the "on leave" problem. Without the PM we would often go do
 
 There wasn't anything glaringly terrible with this meeting, but it wasn't that good either: it was an ugly standup.
 
-## The Good
+# The Good
 
 Let's skip forward a few months more and now the project is getting even bigger. From one team we went to two, then three, and now were about to add a fourth team.
 
@@ -64,7 +64,7 @@ This way of communicating made us tackle complex tasks first, coordinate wheneve
 
 I experienced this standup format both in-person (in Italy) and remotely (from Singapore), and it was always good.
 
-## Once upon a time in software development
+# Once upon a time in software development
 
 It's interesting to me how all these changes happened within the same company department over a relatively short timespan. By reading this article you would think that everything got progressively better, but the reality was much messier than what the previous chapters would suggest. 
 

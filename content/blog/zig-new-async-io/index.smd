@@ -5,7 +5,7 @@
 .layout = "post.shtml",
 ---
 In the [Zig Roadmap 2026](https://www.youtube.com/watch?v=x3hOiOcbgeA) stream Andrew announced a new way of doing I/O, let's see what are the goals of this upcoming design and how that relates to the revival of async / await in Zig.
-## The new I/O Interface
+# The new I/O Interface
 
 The most notable change to Zig is the introduction of a new interface in charge of all I/O operations. Most importantly, the `Io` interface is now expected to be provided by the caller, just like we already do with `Allocator`.  
 
@@ -143,7 +143,7 @@ The API of `Future.cancel()` is identical to `Future.await()` aside from additio
 With this last code example we were able to implement support for cancellation without introducing nesting or any more complexity than necessary, and we regained the ability to use `try` where it intuitively makes sense.
 
 Let's take a look now at how different `Io` implementations can perform async I/O.
-## Stdlib I/O Implementations
+# Stdlib I/O Implementations
 
 Given that `Io` is an interface (in the runtime polymorphism sense of the word), you will be able to create your own or use ones implemented in a third party package, but the Zig standard library will offer a set of implementations for solving common use cases. 
 
@@ -151,27 +151,27 @@ The most basic implementation of `Io` is one that maps to blocking I/O operation
 
 What's more interesting are all the implementations that include an event loop. Let's take a look at what they will be, according to current plans.
 
-### Thread pool
+## Thread pool
 
 This implementation uses blocking I/O syscalls but multiplexes them over a pool of OS threads to introduce parallelism. This can be a nice stepping stone away from Single Threaded Blocking, but beware - it is tricky to manage the blocking operations optimally, particularly if any of them are networking clients!
 
-### Green Threads 
+## Green Threads 
 
 This implementation uses `io_uring` on Linux and similar APIs on other OSs for performing I/O combined with a thread pool. The key difference is that in this implementation OS threads will juggle multiple async tasks in the form of green threads.
 
 This implementation requires having the ability to perform stack swapping on the target platform, meaning that it will not support WASM, for example.
 
 The first prototype of this implementation supports x86_64 Linux. Support for other platforms will be added later. There are more interesting details about this implementation but I leave them to a future blog post.
-### Stackless Coroutines 
+## Stackless Coroutines 
  
  This implementation won't be available immediately like the previous ones because it depends on [reintroducing](https://github.com/ziglang/zig/issues/23446) a special function calling convention and rewriting function bodies into state machines that don't require an explicit stack to run.
 
 This execution model is compatible with WASM and other platforms where stack swapping is not available or desireable. 
 
-## Design Goals
+# Design Goals
 
 When async I/O was first attempted in Zig, `async` and `await` were deeply tied to language-level support for stackless coroutines. This new direction decouples the two main concurrency primitives from the execution model. This, alongside other design choices, has a big impact in terms of code reusability and optimality.
-### Code reusability
+## Code reusability
 
 One of the main goals of Zig is to enable code reusability, which is always a touchy subject when it comes to async I/O. 
 
@@ -182,7 +182,7 @@ Zig has solved this problem since the beginning, as I previously explained in "[
 But this new approach pushes color blindness even further: previously the **source** code would be free from the virality of `async`/ `await`, but at **runtime** the program was still forced to use stackless coroutines, which have a viral calling convention. Now `io.async` and `Future.await` can be used with a variety of execution models, from blocking to stackless coroutines, fully freeing you from any form of virality.
 
 **With this last improvement Zig has completely defeated function coloring.**
-### Optimality
+## Optimality
 
 The new `Io` interface is non-generic and uses a vtable for dispatching function calls to a concrete implementation. This has the upside of reducing code bloat, but virtual calls do have a performance penalty at runtime. In release builds the optimizer can de-virtualize function calls but it's not guaranteed.
 
@@ -193,7 +193,7 @@ In the less common case when a program instantiates more than one `Io` implement
 One question that needed to be answered when designing the `Io` interface was where to perform buffering. In the old implementation buffering was offered by a concrete implementation of reader/writer. In the new version buffering is embedded in the `Reader` and `Writer`  interfaces instead. 
 
 Buffering at the interface level means that even when no de-virtualization can happen, you will have to go through a virtual call only to flush the buffer, ensuring optimal behavior even in such case.
-#### Semantic I/O operations
+### Semantic I/O operations
 
 The new `Writer` interface features two new primitives for expressing specific operations in an optimized manner.
 
@@ -224,7 +224,7 @@ drain: *const fn (
 Vectorized writes allow you to send in a single call multiple segments of data to be written. This operation can be expressed as a single POSIX `writev` syscall (or equivalents on other platforms).
 
 The `splat` parameter defines how many times the last element of `data` should be repeated. This can be useful for decompression streams for example, where sequences of zeros can be expressed as a single zero, repeated `splat` times. This makes communication across a chain of `Reader`s more efficient, leaving to the final `Writer` (the sink) the duty to turn a splat operation into concrete bytes.
-## Roadmap
+# Roadmap
 
 A small subset of these changes will be present in Zig 0.15.0 but you will have to wait until the subsequent release cycle before the rest of it makes into a tagged release, as a big part of the Zig standard library needs to be rewritten (and redesigned!) to make use of these new capabilities. Things like TLS encryption, HTTP server and client, etc.
 
@@ -234,19 +234,19 @@ You can support us on [Every.org](https://www.every.org/zig-software-foundation-
 
 ---
 
-## FAQ
+# FAQ
 
-### Zig is a low level programming language, why does it care about async?
+## Zig is a low level programming language, why does it care about async?
 
 Zig describes itself as a *general purpose* language for maintaining **robust**, **optimal** and **reusable** software. Making sure that you can exploit non-blocking syscalls in order to maximize CPU usage is part of the main goals of the language. As an individual user you don't need special support in the language to be able to use APIs like io_uring or kqueue, but having a standardized way of doing so ensures that any third party code you use will also play nice with your I/O strategy, thus achieving better code reusability.
 
-### Are Zig package authors now forced to use async everywhere in their code to be good citizens of the ecosystem?
+## Are Zig package authors now forced to use async everywhere in their code to be good citizens of the ecosystem?
 
 No, if you write normal sequential code, it will still be able to play nice with the overall I/O strategy chosen by your users. Additionally, many I/O libraries don't have the necessity to express any concurrency across their own operations because most of the time those still need to be scheduled sequentially (e.g. database clients). 
 
 That said there are other aspects of the new I/O system that might be worth making sure to integrate in your code, like support for `Writer.sendFile`, for example.
 
-### So I can plug in any execution model and everything will work correctly every single time?
+## So I can plug in any execution model and everything will work correctly every single time?
 
 Yes, unless the code contains a programming error.
 

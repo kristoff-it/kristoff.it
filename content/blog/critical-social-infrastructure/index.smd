@@ -28,7 +28,7 @@ I've had this sentiment already for a while but, as time goes on, it seems more 
 
 By the way, this is the same reason why the Zig Software Foundation [started prioritizing Every](https://www.every.org/zig-software-foundation-inc) over [GitHub Sponsors](https://github.com/sponsors/ziglang), as we believe that a fellow 501(c)(3) like Every will prove to be a more reliable tool over time than GitHub, which is apparently [a company "refounded on Copilot" now](https://www.infoworld.com/article/2335377/githubs-all-in-bet-on-ai-may-overlook-git.html).
 
-## Devlogs: a first step towards reliable social infrastructure
+# Devlogs: a first step towards reliable social infrastructure
 
 **The first step I'm proposing towards building more reliable social infrastructure, is for Zig community projects to start creating a publicly accessible "devlog" microblog.**
 
@@ -51,7 +51,7 @@ It is not a hard requirement for it to be a single page. If it's more convenient
 
  Zine has the primitives required to pull it off as a single page ([here's a starting template if you want](https://github.com/kristoff-it/zine-devlog-examples/)), that said, what matters is for devlogs to be a form of *microblogging* so, whatever the setup, it's important that the process is smooth enough for you to be willing to go through it every time you have something small to share.
 
-## Following devlogs
+# Following devlogs
 
 Devlogs have the clear upside that you own your content and that they don't favor ragebait-posting like actual social media platforms do, but on the other hand the absence of an active audience for your devlog means that you are shouting into the void, so to speak.
 
@@ -68,7 +68,7 @@ For example this is how the Zine devlog looks like in my Discord server.
 RSS feeds are not exactly a *winning* technology then it comes to reaching people directly (not a lot of people run around with an RSS reader in their phone), but it is relatively practical for establishing 
 a low-bandwidth communication channel to shared spaces.
 
-## This is just the beginning
+# This is just the beginning
 
 If, while reading this post, you thought that doing more microblogging is nowhere near enough to solve the whole problem, I agree, but it's a small incremental step that can be implemented today and that can yield an immediate improvement, even if marginal.
 

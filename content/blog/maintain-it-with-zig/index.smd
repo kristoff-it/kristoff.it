@@ -14,7 +14,7 @@ The reason why we can often get away with using languages like Python or JavaScr
 All this infrastructure has provided immeasurable value to the software industry but it's not all sunshine and rainbows. **Over the years these projects have accumulated technical debt of all kinds and maintenance has been lacking**, partially because the C/C++ ecosystem isn't exactly inviting for new programmers, and partially because FOSS development sustainability is all but a solved problem.
 
 
-## The economics of real change
+# The economics of real change
 
 Learning how to contribute to a popular FOSS C/C++ project is not easy for a new developer. You have to learn at least one of the two languages ([which already takes quite some time and effort](https://dustri.org/b/my-favourite-c-footgun.html)) and how the surrounding ecosystem works. Even building a project is non-trivial if you're not already familiar with Make, CMake, Ninja, Autotools, etc; and that's just the entry point to systems programming.
 
@@ -25,7 +25,7 @@ Compare this to learning, say, JavaScript. While far from perfect, JS is easier 
 Instead of just complaining, we should think of ways to induce the change we want to see in our industry, and that starts by acknowledging that **people today really need to go out of their way to learn systems programming and, in doing so, they have to deal with a lot of bad accidents of history**. Until we improve this situation, I don't think we can expect anything else to change.
 
 
-### Rewrite it in Rust
+## Rewrite it in Rust
 
 The RIIR mantra has been floating around for a while by now. It has been repeated [with full conviction](https://robert.ocallahan.org/2016/02/rewrite-everything-in-rust.html) by some, and [used to mock Rust by others](https://youtu.be/X7ny7Qrsbd8?t=5391). I'm not a fan of the mocking, but at the same time **I'm not convinced either that RIIR (or RIIZ for that matter) is the solution to our problems**.
 
@@ -36,7 +36,7 @@ On top of that, **the FOSS community will never converge to a single language**,
 Instead of running away from the C/C++ ecosystem, **we must find a way of moving forward that doesn't start by throwing in the trash everything that we have built in the last 40 years**. C and C++ are still being moved forward by their respective committees, but progress has been really slow and very little of it has been made on the DX front. **To trigger real change we need to act independently but in harmony with the C/C++ ecosystem, which is why Zig is not only a language, but also a toolchain that can compile C/C++ code**.
 
 
-## Improving the C/C++ ecosystem
+# Improving the C/C++ ecosystem
 
 While LLVM is now [transitioning into an optional dependency](https://kristoff.it/blog/zig-new-relationship-llvm/) in the Zig compiler, it will still be part of the 40mb archive you get when you download Zig as it's very useful to deal with C/C++ code. Zig bundles a few different libcs to make cross-compilation work out of the box and exposes `zig cc` and `zig c++`, two commands that allow the use of Zig as in-place replacement for Clang. If you want to learn more, Andrew [wrote a full blog post comparing Zig to vanilla Clang](https://andrewkelley.me/post/zig-cc-powerful-drop-in-replacement-gcc-clang.html).
 
@@ -45,7 +45,7 @@ One thing that LLVM can't do, is link MachO executables for Apple Silicon (the n
 We hope for ZLD to eventually replace lld entirely, making Zig even more independent from LLVM and helping us pursue the ultimate goal of **enabling cross-compilation from any target for any target**.
 
 
-### Build systems
+## Build systems
 
 If you are already using Zig to compile your C/C++ project, you can also get rid of your dependency on a build system by using `zig build` instead. Too many projects have a soup of undecipherable build config files that accumulate over the years because of various reasons. 
 
@@ -61,7 +61,7 @@ If your build process depends on other tools, don't worry, Zig also exposes:
 * `zig lib`
 
 
-### A concrete example: Redis
+## A concrete example: Redis
 
 If you want to see the Zig toolchain in action, take a look at this blog post series where we use Redis as an example of a C/C++ project that can be maintained with Zig. We start by using Zig as a drop-in replacement for the compiler, then make cross-compilation work first by battling the existing build scripts, and then by simply creating our own `build.zig` and getting rid of all build dependencies. 
 
@@ -75,7 +75,7 @@ If you want to see the Zig toolchain in action, take a look at this blog post se
 In the last post we even go one step further and **add a Zig compilation unit** (which even supports cross-language LTO) to implement a new command in Redis as an exercise. This is the point where adding Zig code to Redis made sense to me and, even then, the goal was adding new functionality. If you were to prefer Rust, for example, at this point you would be able to easily integrate the Zig toolchain (as a C/C++ compiler) into your Rust build process and fully enjoy Rust's cross-compilation capabilities, even while integrating with C/C++ code.
 
 
-## Conclusion
+# Conclusion
 
 When it comes to Open Source software, making things more fun and worth learning can be even more important than providing an economic incentive, but systems programming has been so stagnant that having to deal with it has become cripplingly demotivating. **Today we might not realize it, but this is the one true _"worst mistake in computer science"_ because systems programming is exhilarating at its core**: from gaining the ability to make the computer do things that would be impossible otherwise, to being able to ask impactful design questions that high level languages hide from you, like "where does the memory come from?" 
 

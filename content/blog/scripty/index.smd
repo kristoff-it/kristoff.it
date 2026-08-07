@@ -34,7 +34,7 @@ past but that I never bothered actually implementing.
 Setting up a Scripty VM requires being familiar with Zig, but it's
 otherwise pretty easy, see https://github.com/kristoff-it/scripty.
 
-## VM implementation
+# VM implementation
 
 The Scripty VM is a stack-based interpreter. A parser produces nodes that
 get analyzed and pushed onto the stack, and on function call application
@@ -52,7 +52,7 @@ I've also given this implementation a good amount of fuzzing with AFL,
 although this code is now gone, to be replaced by a native Zig fuzzer
 implementation.
 
-## Future work
+# Future work
 
 I'm purposefully keeping Scripty very simple in order to support static
 analysis and compilation in the future.
@@ -82,7 +82,7 @@ putting more effort into [another somewhat ambitious
 project](https://codeberg.org/awebo-chat/awebo) so it might take a bit before
 I circle back to Scripty.
 
-## Scripty flavors
+# Scripty flavors
 
 One reason why I believe that Scripty is of some value despite its
 extreme simplicity, is how you can still use it to produce very
@@ -113,7 +113,7 @@ setting some of its properties. Every function call sets a property on
 the original embed definition and then returns the mutated value so that
 the subsequent function call can do the same, and so forth.
 
-## In Conclusion
+# In Conclusion
 
 When I originally set out to implement Scripty it was as part of my effort
 to create a new HTML templating language (which then became SuperHTML). I

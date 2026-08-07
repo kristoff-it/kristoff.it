@@ -12,7 +12,7 @@ Naming things is still very hard, but what are the three things that you wish th
 
 This is my list.
 
-## 1. User-hostile software
+# 1. User-hostile software
 
 Way too much software is botched even before the first line of boilerplate gets flushed to disk. The people running tech companies are always busy chasing the latest trend in order to milk one more financing round off of gullible investors and the end result is software that makes no sense.
 
@@ -24,7 +24,7 @@ And if you're a non-tech-savvy user, good luck not getting scammed by horribly u
 
 And while we're on the subject of websites, [check out this link](https://modem.io/blog/blog-monetization/), and beware: **it's satire**. I worry that without this warning you might not be able to tell.
 
-## 2. Soul-crushingly slow software
+# 2. Soul-crushingly slow software
 
 Websites are laggy, editors are laggy, everything takes forever to process a click and it takes hundreds of megabytes to do so. Desktop applications also take forever to do anything, sometimes because they're actually web pages in disguise (thanks Electron!), sometimes because they were implemented with religious observance of Object Oriented Programming, covid-like memory allocation policies (minimum 6 cache lines of distance between individual allocations), and a twisted love for destructors.
 
@@ -36,7 +36,7 @@ The cloud should be just a source of compute units, but if that's all that it wa
 
 So let's make sure to wrap everything in a Docker container inside of a Kubernetes pod and to make every trivial thing a FaaS, nevermind that serverless has dns lag, cold start lag, runtime lag, json rpc serialization lag, and all of this while running on the server equivalent of a clown car, given how overcrowded those machines are.
 
-## 3. Buggy software
+# 3. Buggy software
 
 Bugs exist and are annoying, but in my experience this is something that I hit way less often than the issues above. It's too often that my freedom as a user is restricted because of an extravagant business model, or that my workflow is worsened because of comically slow software.
 

@@ -13,7 +13,7 @@ to my specific needs.
 
 I'll talk about more general (and solid) solutions later on.
 
-## The problem statement
+# The problem statement
 
 Let's look at a concrete example: a query that loads the most recent chat messages from the database.
 
@@ -72,7 +72,7 @@ maps to the struct field `text`.
 Let's add some comptime code to be able to refer to columns by name, without having to pay any runtime
 cost.
 
-## The simplistic solution
+# The simplistic solution
 
 The first part of this solution is to create a generic type that will encapsulate comptime analysis of
 the query:
@@ -129,7 +129,7 @@ pub fn int(r: Row, comptime col: @EnumLiteral()) i64 {
 
 That's really it. About 20 lines and my itch is scratched.
 
-## Other problems and solutions
+# Other problems and solutions
 
 Of course this is not where the story ends, column safety is nice but a few more things can still go wrong:
 
@@ -159,7 +159,7 @@ A notable mention for this approach is Giacomo Cavalieri's [squirrel](https://gi
 for Gleam ([talk with a demo](https://www.youtube.com/watch?v=XEJxk5VUSTs)), although AFAIK squirrel
 prefers talking to the database at build time rather than parse SQL.
 
-## Another problem
+# Another problem
 
 There's another problem that could be interesting trying to solve: avoid selecting columns that end up not
 being used.

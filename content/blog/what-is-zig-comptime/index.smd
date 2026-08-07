@@ -7,17 +7,17 @@
 
 If you've only experienced compile-time execution in the form of macros, generics or codegen, be ready to be surprised by what Zig can do.
 
-## What is Zig
+# What is Zig
 
 Zig is a new general-purpose programming language developed by Andrew Kelley. While still under heavy development, I think the language is already showing great promise. Zig aims to be a better C, similarly to how Rust can be understood as a better C++, generally speaking. Zig has no garbage collection, no built-in event loops, nor other runtime machinery of that level. It's lean just like C, and in fact it can interoperate with C pretty easily. For a complete overview checkout https://ziglang.org. 
 
 Now that you got a general idea about the level of abstraction in which Zig operates, you won't be surprised to know that there is absolutely no support for reflection at runtime; but what you can't do at runtime, you can certainly do at compile-time.
 
-## Running code at compile-time
+# Running code at compile-time
 
 Let's start with the basics: using the `comptime` keyword to run arbitrary code at compilation-time.
 
-#### Compile-time function calls
+## Compile-time function calls
 
 The following code uses a function to decide the length of a statically-allocated array.
 
@@ -34,7 +34,7 @@ pub fn main() void {
 
 Note how the function definition doesn't have any attribute that states it must be available at compile-time. It's just a normal function, and we request its compile-time execution at the call site.
 
-#### Compile-time blocks
+## Compile-time blocks
 
 You can also use `comptime` to define a compile-time block inside a function. The following example is a case-insensitive string compare function that is optimized for the use-case where one of the two strings is hardcoded. Compile-time execution ensures that the function doesn't get misused.
 
@@ -78,7 +78,7 @@ $ zig build-exe ieq.zig
 
 ```
 
-#### Compile-time code elision
+## Compile-time code elision
 
 Zig can statically resolve control flow expressions that depend on compile-time known values. For example, you can force loop unrolling on `while` / `for` loops and elide branches from `if` / `switch` statements. The following program asks the user for a number and then iteratively applies a list of operations to it:
 
@@ -134,11 +134,11 @@ return acc;
 
 To test that this is really what's happening, paste the program code in https://godbolt.org, select Zig as target language, and then select a version of Zig greater than 0.4.0 (at the moment of writing you must select "zig trunk"). Godbolt will compile the code and show you the generated assembly. Right-click on a line of code, and a contextual menu will let you jump to the assembly code that the line corresponds to. You will notice that neither the `for` loop, nor the `switch` correspond to any assembly. Remove the `inline` keyword, and they will now show up.
 
-## Generics
+# Generics
 
 The `comptime` keyword indicates code regions and values that must be resolved at compile-time. In the previous examples we used it to perform something similar to template metaprogramming, but it can also be used for generic programming, since types are valid compile-time values.
 
-#### Generic functions
+## Generic functions
 
 Since generic programming is tied to `comptime` arguments, Zig doesn't have the *traditional* diamond bracket syntax. Other than that, basic usage of generics is very similar to other languages. The following code is Zig's implementation of `mem.eql`, taken from the standard library. It's used to test two slices for equality.
 
@@ -175,7 +175,7 @@ pub fn parseInt(comptime T: type, buf: []const u8, radix: u8) !T {
 }
 ```
 
-#### Generic structs
+## Generic structs
 
 Before describing how to create generic structs, here's a brief introduction on how structs work in Zig.
 
@@ -257,7 +257,7 @@ my_list.len = 1;
 
 The Zig standard library contains [a couple of fleshed out implementations of linked lists](https://github.com/ziglang/zig/blob/ddf7942aaa6a41296d9338423dcdfb93b915e4df/std/linked_list.zig).
 
-## Compile-time reflection
+# Compile-time reflection
 
 Now that we have covered all the basics, we can finally move onto the things that make Zig metaprogramming truly powerful and fun to use. 
 
@@ -321,7 +321,7 @@ The return type of this function is a bit peculiar. If you look at the signature
 
 So what is `sqrt` trying to do with its return type? It's applying a small optimization when we're passing in an integer value. In that case the function declares its return type as an **unsigned** integer with **half the bit size** of the original input. This means that, if we're passing in an `i64` value, the function will return an `u32` value. This makes sense given what the square root function does. The rest of the declaration then uses reflection to further specialize and report compile-time errors where appropriate.
 
-## In conclusion
+# In conclusion
 
 Compile-time execution is great, especially when the language is very expressive. Without good compile-time metaprogramming, one must resort to macros or codegen, or worse, do a lot of useless work at runtime. 
 
