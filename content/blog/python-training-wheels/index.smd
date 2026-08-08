@@ -6,9 +6,16 @@
 .draft = false,
 ---
 
-As somebody directly involved with an upcoming programming language, I'm often in discussions about how to model things in the ecosystem like, say, the package manager, and how those decisions impact the project in the long term.
+As somebody directly involved with an upcoming programming language, I'm
+often in discussions about how to model things in the ecosystem like, say,
+the package manager, and how those decisions impact the project in the long
+term.
 
-When reading Simon Willison’s excellent blog post "[Things I’ve learned serving on the board of the Python Software Foundation](https://simonwilwillison.net/2024/Sep/18/board-of-the-python-software-foundation/)" (which I recommend reading it before continuing), the part about PyPI (Python Package Index) stood out:
+When reading Simon Willison’s excellent blog post "[Things I’ve learned
+serving on the board of the Python Software
+Foundation](https://simonwillison.net/2024/Sep/18/board-of-the-python-software-foundation/)"
+(which I recommend reading it before continuing), the part about PyPI
+(Python Package Index) stood out:
 
 > PyPI’s numbers are staggering. Today there are 570,000 projects consisting of 12,035,133 files, serving 1.9 billion downloads a day (that number from [PyPI Stats](https://pypistats.org/packages/__all__)). Bandwidth for these downloads is donated by [Fastly](https://www.fastly.com/), a PSF Visionary Sponsor who recently signed [a five year agreement](https://fosstodon.org/@ThePSF/112456715341751673) to continue this service.
 >
