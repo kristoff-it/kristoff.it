@@ -1,0 +1,387 @@
+---
+.title = "Who Should Pay For Source Code Availability?",
+.description = "The story of how I became Radicle-ized.",
+.date = .date("2026-08-09T00:00:00"),
+.layout = "post.shtml",
+---
+I have a project ([Zine](https://zine-ssg.io), a static site generator)
+that has 11 dependencies hosted across GitHub, Codeberg, and self-hosted
+Forgejo instances. **Whenever GitHub or Codeberg is down, fresh builds of my
+project will fail.**
+
+While self-hosted Forgejo instances have significantly better uptime than
+GitHub, they are at greater risk of eventually going down for good and
+breaking my project permanently.
+
+The most direct and practical solution to this problem is to fork/vendor
+everything.
+
+Forking means moving all dependencies to the same host where Zine is. If
+you can clone the main project, you will also be able to clone all its
+dependencies.
+
+Vendoring means taking it one step further: you *commit* all your
+dependencies' source code into your own repo so the act of cloning the
+project gets you literally everything.
+
+If practicality and maximum resilience are things you care a lot about,
+then you might prefer vendoring over forking.
+
+Forking requires you to fork your entire dependency tree (i.e. your
+indirect dependencies as well), and also modify any non-leaf dependency to
+point at your own forks. Vendoring instead is extremely straightforward for
+users of the [Zig](https://ziglang.org) toolchain.
+
+For those who are not in the know, Zig 0.17.0-dev recently changed how
+dependency caching works: the global cache now stores packages as
+compressed archives, and each project has a local `zig-pkg/` directory that
+contains the extracted files of the dependencies used by it. This makes
+vendoring trivial if that's your goal: just check your `zig-pkg/` directory
+into source control. (Otherwise, it's recommended to add it to
+`.gitignore`.)
+
+If you plan to make changes to your dependencies and care about making it
+easier to upstream them, then forking might be preferable to vendoring.
+Even if you don't plan to send a pull request, it's much easier to
+cherry-pick a commit in a fork than to do so from a vendored directory in
+an external project.
+
+Forking/vendoring works, there's no doubt there. **But is it really the best we can do?**
+
+Languages that have a centralized package index (like
+[npmjs.com](https://npmjs.com) or [crates.io](https://crates.io)) don't
+have to worry about these issues because they essentially have the forking
+strategy as a built-in feature (all source code gets 'forked' into a copy
+hosted by the centralized package index), but this approach really leaves
+me unsatisfied because it unnecessarily ties the solution to package
+management. **Our aim should be to make source code reliably available
+always, not just when fetched from a package manager**.
+
+These topics have become more relevant as of late because of the
+instability of GitHub, but in reality the question is not "how can we make
+source code hosting reliable?". We do know how to make code hosting
+reliable, if we really want to. The question is rather: **how much should
+it cost, and who should pay for it?**
+
+As is often the case in our industry, we never wanted to face that
+question, and we've been happy to leech off big tech companies but, as
+always, eventually an answer to the question must be given and, when that
+happens, we're quick to point the finger at the company, yelling
+"enshittification!" with righteous indignation.
+
+And yeah, GitHub is without a doubt enshittifying, same as Discord and many
+other platforms before them; but for how long do we expect to continue
+consuming resources for free? The situation with GitHub is just showing us
+the cracks in a system that was always broken to begin with.
+
+I don't think that companies are without blame, and I'm sure that
+obfuscating the cost equation has its own dedicated chapter in plenty of
+unwritten playbooks, but it's not the companies that should know better.
+It's us. **It's our willful ignorance that creates a distortion that
+companies have to either embrace or exploit to be competitive.**
+
+So, is there a way to make source code reliably available in a way that
+balances out the cost equation?
+
+I would argue that self-hosting a forge is *not* enough to balance the
+equation because it puts the entire cost of making source code available
+onto the creator of said software, but we already established that
+consumers of such code also have an interest in it being reliably
+available, which is what leads to forking and vendoring.
+
+Forking and vendoring are in a sense a way of sharing the cost to keep
+source code available, but they're both inefficient because
+**forked/vendored code is not trivially discoverable and automatically
+usable as a mirror**.
+
+If somebody is interested in one of your dependencies outside the context
+of your project, their package manager won't be able to automatically fetch
+it from your forked/vendored copy. Of course you might not be interested in
+shouldering this cost but, as things stand, that's not really an option
+anyway.
+
+It would be cool if we could do better, because that could help us lower
+the overall cost of keeping source code reliably available for everybody.
+
+# The Radicle Network
+
+[Radicle](https://radicle.network) is a peer to peer (p2p) network where peers seed repositories that they're interested in. 
+
+Some seeds might be interested in making the network more resilient and thus will want to reseed everything (or close to), while others might be interested in making sure that a specific set of projects is guaranteed to be available, restricting their seeding policy to allowing related repositories exclusively.
+
+**Radicle supports Issues and Patches** (aka Pull Requests in GitHub lingo) **in a very interesting manner**: there is no centralized (nor federated) web server that hosts those, because **they are stored in the Git repository itself** as ([CRDT-enabled](https://crdt.tech/)) Git objects that can be re-synced when you announce your changes to the network (run `git push` in concrete terms).
+
+To help you better understand how this feature works, let's focus on Issues using a concrete example. 
+
+Let's say that I'm interested in using Radicle for Zine. Once I publish my repo to the Radicle network I will want to set up my own always-on node to guarantee that Zine is always available, and also to facilitate development. Some other nodes might decide to seed Zine as well, but since Zine is still a small project, I'm not going to count on that for now.
+
+When Alice wants to open an issue, she will do so by opening it in her own seeded copy of Zine (for simplicity, let's say her "fork" using GitHub lingo again). At this point, she will publish her changes to the Radicle network and any node interested in those changes will pick them up. 
+
+My always-on node is configured to seed all copies of Zine, so it is guaranteed to pick up Alice's changes, making them available even when Alice's personal node goes offline.
+
+At this point, when I pull changes from the network, I will see Alice's new Issue and I will be able to comment, label, assign, or close it using Radicle's CLI tool or [desktop application](https://radicle.network/desktop), and the same applies to a hypothetical Patch created by Bob.
+
+Onlookers that are interested in following along will be able to see all source code, Patches and Issues by using a web interface, [like in this example on the `heartwood` repository](https://radicle.network/nodes/seed.radicle.dev/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5/issues/a6c8699effadc3c70f1d2dbfd84a7a5daacee5a2). The web UI is read-only though, as all changes have to be submitted through the Radicle network, which is an interestingly convenient trade-off in light of the rise of AI bots and scrapers. 
+
+There are a few more things that one has to learn in order to understand how Radicle works in practice, so I invite you to check [the official docs](https://radicle.network).
+
+# Reliable source code availability with Radicle
+
+When publishing Zine on Radicle, I will have an interest in also seeding my dependencies from my always-on node, in order to guarantee that users of Zine can also reliably fetch the dependencies required to build Zine successfully.
+
+We're almost back to the forking/vendoring situation, but with a key difference: **seeding my dependencies keeps them discoverable by the network!**
+
+And the same is also true when the roles are swapped: when somebody depends on Zine, they will have an interest in seeding it, making the Zine source code more reliably available to both my benefit and theirs. Additionally, depending on how they fine-tune their seeding policy, users of Zine might opt to seed not just my authoritative copy, but also (all or some of) the "forks" of Zine. By seeding Zine's "forks", they would also seed Issues and Patches, helping collaboration on Zine be more resilient.
+
+I find that this model helps keep the cost equation balanced in a way that closely aligns with everybody's interests, while also being significantly more cost-effective than the "self-hosted forge + forking/vendoring" setup, which essentially squanders a lot of the redundancy.
+
+As I was learning more about Radicle, this is the point where I thought it would be cool for the Zig package manager to support Radicle directly, but it turns out that it's not as straightforward as I first imagined... except that the friction involved is also surprisingly well aligned with the interests of the parties involved!
+
+# Depending on a Radicle repository
+
+In Radicle each node has a cryptographic identity ([DID](https://en.wikipedia.org/wiki/Decentralized_identifier)) which is used both to identify the node within the network and to claim ownership of a repository. 
+
+When you publish a repository to Radicle, the `rad` CLI tool adds to the repository an identity document that ties the repository to the DID of the owner, and the hash of this document becomes the Repository ID (RID). 
+
+This information will also be used by the network to distinguish the authoritative version of the repository from other people's "forks", which is how the Radicle tooling can guarantee that when you clone a repository from the network, you get a copy that [you can trust](https://radicle.network/faq#what-does-radicle-solve-that-isnt-already-solved-by-git-commit-signatures).
+
+When you want to clone a repository from the Radicle network, you run a command like:
+
+```
+$ rad clone rad:z3WukSjzicL8WaZHFALbBwb2r8W52
+```
+
+The argument passed to `clone` in the example above is a `rad` URI containing a Repository ID, which is explicitly not a URL, in the sense that it does not express where the repository should be fetched from; and that's precisely the point. The Radicle CLI tool will interact with the Radicle network to fetch this repository from any connected peer that happens to have the data. 
+
+If we think about two hypothetical variants of a `build.zig.zon` file:
+
+```zig
+// Real syntax
+.dependencies = .{
+  .zine = .{
+    .url = "git+https://github.com/kristoff-it/zine",
+    .hash = "...",
+  },
+},
+```
+
+```zig
+// Hypothetical support for Radicle
+.dependencies = .{
+  .zine = .{
+    .rad = "z3WukSjzicL8WaZHFALbBwb2r8W52",
+    .hash = "...",
+  },
+},
+```
+
+You can see how the key difference is that the first one specifies a location, while the second one does not. 
+
+In the first case the dependency is brittle: whenever GitHub is down, you won't be able to fetch it while, in the second case, as long as there's at least one active Radicle node that seeds the Zine repository, you will be able to fetch it.
+
+ This would be a huge upgrade, but there's a snag: to be able to talk with the Radicle network, you have to be a peer in the network, meaning that if you're not a Radicle user, you won't be able to run `zig build` successfully (in concrete terms you'd need to have a local node running that Zig could talk to).
+
+That's a big problem! 
+
+**Zig is meant to be "dependency zero" software** and we want as many Zig projects as possible to build just by having Zig installed and running `zig build`. This won't always be the case, as some projects will have system dependencies, but it should otherwise work without having a hard dependency on anything non-essential.
+
+At this point I started wondering if there was a way to query the network without being a peer, until I realized that discovery is not the problem, and that I was not thinking about the cost equation!
+
+A node in the Radicle network will be interested in shouldering the cost of being part of the "long-term memory" of the network, which does imply transferring in/out data from/to other Radicle nodes, **but that doesn't mean that the node is willing to shoulder the cost of unauthenticated clients asking to be given a copy of one or more repositories seeded by the node at an unbounded rate**.
+
+As mentioned above, Radicle nodes have an identity and other nodes in the network can decide to ban misbehaving nodes and generally keep tabs on their behavior. On the other hand, `zig build` clients are by nature unauthenticated (also `git` clients, for that matter). In your day-to-day there might not be much difference between the two, but just think about someone's ill-configured CI that keeps hammering your node over and over for no good reason.
+
+If I think about my own use-case, I would be interested in shouldering this external traffic in order to give non-Radicle users access to Zine, but I could understand another node (which might seed Zine) not being willing to do the same.
+
+Luckily this concept is modeled well enough in Radicle as well.
+
+I mentioned earlier when talking about Issues and Patches that onlookers can use a web UI to follow along with development, but that was a slight oversimplification. Radicle nodes by default do not run any HTTP service. It's an entirely optional feature that you can decide to enable based on your interests.
+
+If you do enable the HTTP services, then HTTP clients will be able to access your node and use either a web UI or Git over HTTP to clone the repositories seeded by the node, no Radicle identity required.
+
+![](clone.png "A screenshot of the Radicle web UI that shows how you can clone over HTTP like you would normally do on GitHub, etc.")
+
+In my case, I would want to enable HTTP access on my always-on node and let unauthenticated HTTP clients download Zine (and its dependencies) as needed. Any other node that decides to seed Zine (while also enabling the HTTP interface) would effectively be offering the same service as well.
+
+This means that, while URLs to HTTP-enabled Radicle nodes are not as resilient as RIDs, they are still equal or better than a link to a self-hosted forge, especially because there are many!
+
+For example, `heartwood` can be fetched over HTTP by any of these hosts, and probably many more (it has more than 250 seeds at the time of writing): 
+
+- https://radicle.network/nodes/seed.radicle.dev/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+- https://radicle.network/nodes/index.radicle.garden/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+- https://app.radicle.at/nodes/seed.radicle.at/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+- https://radicle.defelo.de/nodes/radicle.defelo.de/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+- https://radicle.network/nodes/rad.hardenedbsd.org/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+- https://radicle.jarg.io/nodes/radicle.jarg.io/rad:z3gqcJUoA1n9HaHKufZs5FCSGazv5
+
+*Note that the web interface is sometimes the same, but each link references a different host that will be used in the "clone from git" button.*
+
+For the Zig package manager to be able to leverage Radicle, all we actually need would be to simply implement [#14291](https://github.com/ziglang/zig/issues/14291) (support for mirrors). 
+
+As I've already hinted, I'm still in the process of learning how Radicle works, so I'm not sure if this is already in progress, planned, or not in scope but, given my current understanding, I think it would be nice if the `rad` CLI tool had a command to resolve a RID to a set of HTTP URLs, so that you could directly paste them into a mirrors-enabled `build.zig.zon` file, for example.
+
+In the future it might be worth exploring ways to specify a RID in `build.zig.zon` so that it could be *optionally* used to discover new public HTTP hosts or (again, optionally) to connect to the Radicle network when a local node is available (i.e. the user is part of the Radicle network).
+
+# What about Codeberg and Tangled?
+
+When people talk about moving away from GitHub, these two platforms are often mentioned. Let's see how they compare to Radicle.
+## Codeberg
+
+[Codeberg](https://codeberg.org) is a German non-profit organization that runs a public deployment of [Forgejo](https://forgejo.org), which in turn can be reasonably described as a clone of GitHub. This is good for adoption, as it will be easy for a GitHub user to migrate their workflows to Codeberg.
+
+The people who run Codeberg and who maintain Forgejo (there's some overlap there) have also been very good to Zig. Zig is today one of the biggest projects hosted on Codeberg, and the one with the highest number of stars. Because of our size, we have stressed Codeberg's infrastructure in new and "exciting" ways (e.g. by receiving waves of spam).
+
+Throughout this process the maintainers have helped us get unblocked when it came to CI requirements, and have also implemented a few quality of life features that made our lives easier on Codeberg.
+
+On the other hand, our contributors have recently started experiencing problems when attempting to contribute to Zig on Codeberg. 
+
+This is mainly experienced as being unable to fork Zig (the operation times out), which has led us to recommend contributors use [the AGit workflow](https://forgejo.org/docs/latest/user/git-cli/agit-support/), as it lets you create PRs without needing to fork first.
+
+We believe this problem is related to the fact that, in Forgejo, a fork is stored on the server side as a fully separate clone of the original repository, duplicating each Git file (the files are originally hard linked, but any change on either side causes actual duplication), instead of a fork being implemented as a group of namespaced branches stored in a singular repository.
+
+On one hand this design choice makes it harder for Andrew to [fake-commit fake rootkits to the Linux kernel](https://github.com/torvalds/linux/commit/b4061a10fc29010a610ff2b5b20160d7335e69bf), but on the other it makes Forgejo more resource-hungry than Radicle, which uses [Git namespaces](https://git-scm.com/docs/gitnamespaces) for storing "forks" of the same repository.
+
+Somewhat relatedly, Andrew recently made a point in his Systems Distributed talk (the recording is not out yet) about how Codeberg shouldn't need to mimic GitHub when it comes to how collaboration is designed. 
+
+GitHub had a commercial reason to host Issues and PRs in a centralized fashion: vendor lock-in. But Codeberg doesn't have the same set of incentives, so it would have the freedom to design the platform to be more efficient and local-first. [Some discussion](https://codeberg.org/forgejo/discussions/issues/131) on Codeberg also hints at the fact that at least some of the Forgejo contributors agree that it would be nice to get rid of some GitHub-isms.
+
+**Let's finally look at Codeberg from the perspective of keeping source code reliably available and balancing the cost equation.**
+
+In terms of availability, Codeberg is not perfect. The platform has been DDoSed, it has had unplanned downtime, and it also has regular planned downtime as part of its maintenance process. This is all within expected parameters. Codeberg is a centralized platform and, one way or another, some downtime is to be expected. 
+
+Making a centralized platform highly available is hard and expensive, and it's reasonable for Codeberg to aim for a more cost-efficient point on the reliability axis, before the plateau of diminishing returns.
+
+From a cost equation perspective, Codeberg is a non-profit organization that relies on donations. It offers its services for free, but of course this arrangement has its limits. 
+
+One example is the recent policy change that banned LLM projects, which cites as part of their reasoning their heavy cost which is often out of balance with actual usage: ["We all pay for hungry LLMs"](https://blog.codeberg.org/protecting-our-floss-commons-from-llms.html).
+
+That same policy change also included [a ban for projects related to cryptocurrency](https://codeberg.org/Codeberg/org/pulls/1254). In this second case the motivations put forward seem to be more about ethical concerns rather than resource consumption, although the two things are inextricably interconnected.
+
+Some people have described this decision as unfair or shortsighted, but it's in fact a very natural consequence of how the cost equation is kept in balance: **Codeberg gets money from donations**, and those donors are also (roughly speaking) voting members of the non-profit organization, **and it's only natural that they decide to allocate their money according to their interests and beliefs.**
+
+This is another thing that Radicle models nicely: each node decides which repositories it wants to seed based on their own policy. So if you're somebody who doesn't like cryptocurrencies, you can just opt to never seed any of those repositories. Or same with LLM-centric projects.
+
+All in all, I'm happy that Codeberg exists. I wish it would pursue more innovative local-first designs, but other than that I'm happy that it's showing the world that you don't have to rely on big tech companies to build a platform that can serve millions of people.
+
+From my perspective, banning cryptocurrency projects from Codeberg is an unfortunate consequence of how it works, and I'm happy that Radicle gives everybody a fair chance to publish their project, even if I don't plan to seed any cryptocurrency project myself.
+## Tangled
+
+[Tangled](https://tangled.org) is often mentioned alongside Radicle when talking about new forges with a decentralized design.
+
+Tangled is built on atproto, which is the same system that powers Bluesky. In atproto all users have a DID (similarly to Radicle) and a Personal Data Server (PDS) that stores the artifacts generated by them.
+
+An atproto user that uses Bluesky will store in their PDS the entries (essentially JSON files) that correspond to their actions on Bluesky (posting, liking, retweeting). If the same user also uses another service like Tangled, then they will also store in their PDS entries that correspond to their activity there (e.g. Issue comments).
+
+Applications like Bluesky and Tangled will then collect these entries and show them in an aggregated fashion, giving you the user experience of a centralized system, but while keeping each individual PDS as the source of truth.
+
+As a general-purpose system for creating distributed applications, atproto is really interesting, but in my opinion Tangled falls short compared to Radicle when it comes to the specific job of keeping source code highly available (which most likely isn't even a goal for atproto to be fair).
+
+One issue is that Tangled doesn't seem focused on local-first workflows, meaning that it doesn't have a way to download Issues in order to view and manage them while offline. It would definitely be possible to implement this, given how atproto works, although it would be less elegant than Radicle's solution where Issues and PRs are stored in the repository itself, meaning that one pull is enough to get everything at once.
+
+A bigger reason why Radicle is better suited, is that Tangled is federated, while Radicle is p2p. The difference between these two approaches is sometimes hard to see, but here's an aspect that makes it pretty clear: looking at Issues.
+
+On Radicle there is no authoritative view of what "the Issues" of one repository look like. It all depends on your seeding policy. If you decide to seed all "forks", then you will see all Issues that exist on the network, but you could also choose a more restrictive policy, where you only seed "forks" from a short list of authors that you follow. In this second case you wouldn't have to worry about spam because even if a malicious user somewhere is creating spam Issues, those would never reach you (and if you were to choose the 'seed all' policy, you would still be able to ban them). 
+
+Most importantly, this is a choice made per-node. Each Radicle user can choose for themselves what they want to see.
+
+On atproto it should always be possible to deploy a separate AppView (the web interface) of any application that runs on it, but some of the appeal of many applications hosted on it is that users are not forced to face the decentralized reality of the network.
+
+For example one would go to `bsky.com` to look at skeets (goddammit that name) and I've personally never even seen a link to an alternative deployment of that interface. When it comes to Tangled, my understanding is that, even if you deploy your own instance, most people will still discover and interact with the Zig repository through `tangled.org`, which means that we would have to curate our Issues page exactly in the same way as with GitHub and Codeberg.
+
+One last major issue has to do with forks. A fork in Tangled is the same as a fork on GitHub: a separate copy that cannot be automatically used as a mirror (both because there's no automated discovery, but also because there is no enforced cryptographic signing that could be used to distinguish official commits from changes made to the fork). 
+
+That said, I believe that Tangled could in theory implement such a system but, as far as I'm aware, just like there doesn't seem any interest in local-first workflows, there also doesn't seem to be any interest in exploiting redundancy to aim for higher availability of source code.
+
+With that in mind, let's take a look at the cost equation: who pays to keep Tangled up?
+
+The answer, for now, [is VCs and a bunch of other investors](https://blog.tangled.org/seed/).
+
+That's not a problem per se, but we're essentially back to square *GitHub*. Tangled has to offer free services to be competitive with other platforms and eventually it will have to define its own business model to keep going. 
+
+As a forge, Tangled has a reasonable path towards monetization (private repos, CI, enterprise features), but that doesn't change the fact that it will eventually have to face the titular question, inexorably leading to some form of enshittification. 
+
+In favor of Tangled there's the fact that users can self-host their own [Knot](https://docs.tangled.org/knot-self-hosting-guide) (a Git server that speaks atproto, essentially the same as a PDS for code and specific to Tangled), which can shift some costs back to the user, but my understanding is that, in the atproto ecosystem, people self-host PDSs (and Knots) when they want more control over their personal data, and not as a way to share costs. As a telling example, when you sign up to both Bluesky and Tangled, you are offered to use their PDSs (and Knots) for free, which is what the vast majority of users end up doing. 
+
+Additionally, Tangled leverages part of the atproto infrastructure to keep running. I mentioned earlier PDSs and AppViews, but between those are [Relays](https://en.wikipedia.org/wiki/AT_Protocol#Relays_and_the_firehose), which are essentially PDS data aggregators, used by AppViews to more efficiently get updated data from a potentially high number of individual PDSs. 
+
+All of this has a cost, and consumers of resources are not the ones paying for it.
+
+In general I think one should be skeptical of "X but decentralized". Decentralization is guaranteed to be a source of problems and inefficiency, and it's only with good, innovative design that it can provide back enough value to make up for the extra complexity.
+
+In the case of Tangled, my impression is that the whole decentralized setup does not provide enough value back to justify all the extra machinery, even though I find atproto interesting in general. 
+
+To put it bluntly, to me Tangled seems like a GitHub with extra steps, making it less interesting than Codeberg, which innovates on the economics side of things, and which is also cheaper to run by virtue of being a centralized service. By contrast, Tangled requires a lot of machinery to give you an aggregated view of data sourced from a distributed system, and that too has a non-negligible cost made worse by all the spammy LLM-heavy projects that are already overpowering GitHub. 
+
+I doubt Tangled will end up banning LLM-heavy projects, so who's gonna pay for all of that?
+
+# On centralized package registries
+
+We're almost at the end of this post, but first I want to spend a few words on package indexes/registries.
+
+One major reason for the existence of package registries is to guarantee reliable availability of packages. **Most package 'indexes' don't just index but also host and distribute packages, and that has a cost**. Machines and bandwidth are surely a non-trivial cost, but another major one is having on-call staff that can quickly put out fires to guarantee good uptime. 
+
+So, who pays to keep package registries up? 
+
+The answer varies, but it's big tech companies at least in good part, either directly or by sponsoring the organization that runs the package index. When big tech companies don't pay enough to sustain the full cost of running a package registry, individual developers sometimes volunteer their time. You might remember the Rust Foundation saving some people a while ago from having to be *on-call volunteers* (💀) by [paying Ferrous Systems to be the night watch for Crates.io](https://rustfoundation.org/media/adios-pagers-new-developments-on-crates-io/).
+
+**Keeping a centralized system highly available is not cheap**, we understand this very well at Zig Software Foundation, which is why we explicitly avoid designing systems that have such requirements. For example https://ziglang.org (the official website) has no guaranteed uptime and **no ZSF employee or contractor is on call for it**. 
+
+What does that mean for the availability of pre-built Zig binaries? Glad you asked!
+
+After the Zig website [moved from AWS to self-hosting](https://ziglang.org/news/migrate-to-self-hosting/), if the website went down and your CI tried to fetch Zig, the job would fail. A cost-efficient approach, but not the best end user experience. Some time later, thanks to the work done by Matthew Lugg, we announced [community mirrors](https://ziglang.org/download/community-mirrors/), in which we defined how to implement and announce mirrored hosting of prebuilt Zig compiler tarballs.
+
+Today, all the major tools that can be used to fetch a copy of the Zig compiler, will do so by leveraging our community mirrors, starting from [`mlugg/setup-zig`](https://github.com/mlugg/setup-zig), the GitHub/Forgejo Action used by most people to fetch Zig in CI.
+
+A funny detail about this system is that mirrors [can opt to fetch missing tarballs from other mirrors](https://codeberg.org/ziglang/ziglang.org/src/branch/main/MIRRORS.md), and not just from the official Zig website. That kind of reminds me of something :^)
+
+ You will have a very hard time finding a CI job that uses `mlugg/setup-zig` that failed because of a transient network error when fetching Zig. **We have extremely high availability, but without anybody having to pay a premium price for it.**
+
+Ok, back to package registries. Given what we learned in this post, and what is exemplified by the effectiveness of Zig community mirrors, I think it's reasonable to come to the conclusion that **centralized package registries are an inefficient use of resources when compared to how cheaply the redundancy of distributed mirrors can provide extremely high availability**.
+
+One possible counter-argument to my line of reasoning is that some package registries don't really serve source code, but rather prebuilt binaries, like PyPI for example. I've already touched upon this subject in ["The Python Package Index Should Get Rid Of Its Training Wheels"](https://kristoff.it/blog/python-training-wheels/) and the tl;dr is that I firmly believe it's a mistake to have the index consider binaries the source of truth, instead of requiring a reproducible build process for its packages, and treating binary artifacts as outputs that can be cached best-effort (i.e. thrown away and recreated at will) in order to accelerate builds. 
+
+Another interesting case study is Google's Go Module Proxy. The Go programming language uses full URLs for defining imports, and for a long time it would just fetch each package from the provided URL. In 2019 Google announced the Go Module Proxy as a way to guarantee that Go packages would be highly available (no failed CI runs because of a host having downtime) and immutable (e.g. guaranteed to not have been tampered with over time).
+
+The Google Go Module Proxy is essentially a centralized package registry that comes with a set of peculiar tradeoffs. Instead of having package authors upload their packages directly to it, it is instead used as a proxy for all Go package manager client traffic and caches all packages discovered that way.
+
+This approach comes with some extra requirements, like Google having to be able to prove that they didn't [tamper with the data](https://words.filippo.io/go-source/), or the proxy having to sometimes keep a copy of a package the original author deleted (in order to not break builds), while some other times having to *not* store long-term a package (for licensing reasons). [See the Go Module Proxy FAQs](https://words.filippo.io/go-source/) for more information.
+
+Another thing that is problematic with this design is having the proxy discover when new versions of a package have been published, which involves a bunch of polling, sometimes [with disastrous consequences](https://sourcehut.org/blog/2023-01-09-gomodulemirror/) for platforms that host multiple repositories.
+
+How much does it cost to run `proxy.golang.org`? I have no idea, but I doubt it's cheap.
+
+Go developers are lucky that they can depend on Google to keep their open source infrastructure running. Other ecosystems historically have had to worry about this topic a lot more. See this quote from ["Things I’ve learned serving on the board of the Python Software Foundation"](https://simonwillison.net/2024/Sep/18/board-of-the-python-software-foundation/), emphasis mine:
+
+> PyPI’s numbers are staggering. Today there are 570,000 projects consisting of 12,035,133 files, serving 1.9 billion downloads a day (that number from [PyPI Stats](https://pypistats.org/packages/__all__)). Bandwidth for these downloads is donated by [Fastly](https://www.fastly.com/), a PSF Visionary Sponsor who recently signed [a five year agreement](https://fosstodon.org/@ThePSF/112456715341751673) to continue this service.
+>
+> **(This was a big deal—prior to that agreement there was concern over what would happen if Fastly ever decided to end that sponsorship.)**
+
+More recently, the PSF, Rust Foundation and a few other open source organizations have signed a [joint statement on sustainable stewardship](https://openssf.org/blog/2025/09/23/open-infrastructure-is-not-free-a-joint-statement-on-sustainable-stewardship/) of open source package indexes, essentially asking that companies help pay to keep these services up.
+
+I have a controversial perspective on this though: I think we should stop expecting that big tech companies foot the bill for our infrastructure, and instead we should design it so that it's cheaper to run while still being highly available, at which point companies should be asked to pay for what they consume, and not much more than that.
+
+In my opinion, centralized package indexes as a concept have not aged well, and most ecosystems would benefit greatly by being proactive in modernizing their infrastructure. I doubt that anybody involved with open source organizations really enjoys begging big tech companies for one more hit of free credits.
+
+In the case of Zig, even before learning about Radicle, Andrew [had already envisioned](https://github.com/ziglang/zig/issues/23236) a decentralized solution for distributing the cost of keeping source code available.
+# In conclusion
+
+I'm excited about Radicle, but there's still a lot for me to learn before I can be fully confident in it. 
+
+While before in the post I phrased it as a hypothetical, I have in fact already terminated my GitHub subscription and got a hosted Radicle node on [radicle.garden](https://radicle.garden) where I [seed Zine and a few other projects](https://radicle.network/nodes/radicle.kristoff.it).
+
+My next goal is to move for a while development of [Awebo](https://codeberg.org/awebo-chat/awebo/) (alpha-stage self-hostable Discord alternative) to Radicle as an experiment, in order to gain more first-hand experience.
+
+At this point in time I can't say for sure if Radicle is going to work out for me, or if it's going to be a success overall, but there's one thing I can say for sure: **none of the other alternatives that I've mentioned in this post, or that I know of, come even remotely close to how cost-effective Radicle could be when aiming for high availability.**
+
+I'm sure there are a lot of small and medium-sized things that are either missing or that could be improved in Radicle but, when it comes to the big ideas, I just cannot imagine a better arrangement than using a p2p network to implement the "long-term memory" of the source code we all depend upon.
+
+Lastly, I know of at least three different forge projects being written in Zig. 
+
+Radicle is a contender in the space, but I do believe there's also room for solutions that bring some of the local-first advantages, without requiring opting into the extra complexity of a p2p network. I hope my post helps spread awareness about the problem space, and that it inspires everybody to think about interoperability between different local-first solutions.
+
+But, most importantly, I hope to have made clear how important it is to keep in mind the cost equation of everything that you design. 
+
+One of the best things about learning a low-level programming language is gaining access to manual memory management, which can lead you to design software of higher quality than what you could design while believing in the illusion of infinite memory. 
+
+Being aware of the costs involved in a system, and how different parties will end up shouldering such costs, is another constraint that will open the door to new designs of a *radically* superior quality. 
+
