@@ -286,7 +286,7 @@ Most importantly, this is a choice made per-node. Each Radicle user can choose f
 
 On atproto it should always be possible to deploy a separate AppView (the web interface) of any application that runs on it, but some of the appeal of many applications hosted on it is that users are not forced to face the decentralized reality of the network.
 
-For example one would go to `bsky.com` to look at skeets (goddammit that name) and I've personally never even seen a link to an alternative deployment of that interface. When it comes to Tangled, my understanding is that, even if you deploy your own instance, most people will still discover and interact with the Zig repository through `tangled.org`, which means that we would have to curate our Issues page exactly in the same way as with GitHub and Codeberg.
+ For example one would go to `bsky.app` to look at skeets (goddammit that name) and I've personally never even seen a link to an alternative deployment of that interface. When it comes to Tangled, my understanding is that, even if you deploy your own instance, most people will still discover and interact with the Zig repository through `tangled.org`, which means that we would have to curate our Issues page exactly in the same way as with GitHub and Codeberg.
 
 One last major issue has to do with forks. A fork in Tangled is the same as a fork on GitHub: a separate copy that cannot be automatically used as a mirror (both because there's no automated discovery, but also because there is no enforced cryptographic signing that could be used to distinguish official commits from changes made to the fork). 
 
@@ -350,7 +350,12 @@ Another thing that is problematic with this design is having the proxy discover 
 
 How much does it cost to run `proxy.golang.org`? I have no idea, but I doubt it's cheap.
 
-Go developers are lucky that they can depend on Google to keep their open source infrastructure running. Other ecosystems historically have had to worry about this topic a lot more. See this quote from ["Things I’ve learned serving on the board of the Python Software Foundation"](https://simonwillison.net/2024/Sep/18/board-of-the-python-software-foundation/), emphasis mine:
+Go developers are lucky that they can depend on Google to keep their open
+source infrastructure running. Other ecosystems historically have had to
+worry about this topic a lot more. See this quote from ["Things I’ve
+learned serving on the board of the Python Software
+Foundation"](https://simonwillison.net/2024/Sep/18/board-of-the-python-software-foundation/),
+emphasis mine:
 
 > PyPI’s numbers are staggering. Today there are 570,000 projects consisting of 12,035,133 files, serving 1.9 billion downloads a day (that number from [PyPI Stats](https://pypistats.org/packages/__all__)). Bandwidth for these downloads is donated by [Fastly](https://www.fastly.com/), a PSF Visionary Sponsor who recently signed [a five year agreement](https://fosstodon.org/@ThePSF/112456715341751673) to continue this service.
 >
