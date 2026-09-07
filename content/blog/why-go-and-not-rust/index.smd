@@ -94,6 +94,9 @@ This image was taken from [this blog post](https://medium.com/rubrikkgroup/under
 
 Go is a *better* Java / C#, while Rust is not. The clarity that Go can bring to enterprise software development is without a doubt much more valuable than removing garbage collection at the cost of worsening the overall productivity.
 
-Rust is a *better* C++, and even if you occasionally hear that Go is a *better* C, well, that's just not the case. No language with a built-in garbage collector and runtime can be considered a C. And don't be mistaken, Rust is a C++, not a C. <a href="/blog/what-is-zig-comptime" class="internal">If you want a better C, take a look at Zig</a>.
+Rust is a *better* C++, and even if you occasionally hear that Go is a
+*better* C, well, that's just not the case. No language with a built-in
+garbage collector and runtime can be considered a C. And don't be mistaken,
+Rust is a C++, not a C. [If you want a better C, take a look at Zig](what-is-zig-comptime).
 
 Lastly, going back to our story, not all "Why not Rust" questions should be interpreted like in the example above. Sometimes the chilling wind is just in your head and the people asking the dreaded question just want to know your opinion. Let's avoid tying our identity to a single language and embrace practicality first and foremost. Tribal names like Rustacean or Gopher should be avoided, as they are inherently a marketing tool for inducing stronger branding.

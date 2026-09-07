@@ -28,7 +28,7 @@ The memory efficiency gains come in good part also thanks to the use of data-ori
 <iframe title="vimeo-player" src="https://player.vimeo.com/video/649009599?h=0c3307419e" width="640" height="360" allowfullscreen></iframe>
 ```
 
-<br>In this talk Andrew explains how to use data-oriented design principles in practice, using the Zig compiler as a concrete example of what you can gain.
+In this talk Andrew explains how to use data-oriented design principles in practice, using the Zig compiler as a concrete example of what you can gain.
 
 
 ## Custom backends

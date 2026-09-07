@@ -26,7 +26,6 @@ Here's how to do it.
 
 ## 1. Configure ZLS to run a build step on save
 
-<span style="height: 10px;"></span>
 > **WARNING**: note that if you get ZLS through your editor's package manager, you might need to see how you're expected to provide your config options, as that might differ from the normal procedure described below.
 
 Run the ZLS executable and have it tell you where the config file is located:

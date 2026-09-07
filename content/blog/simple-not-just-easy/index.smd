@@ -4,9 +4,21 @@
 .date = .date("2019-07-21T00:00:00"),
 .layout = "post.shtml",
 ---
-<span style="text-align:left; display:inline-block;"><b>Simple → Complex</b></span> is the dimension that describes how irregular and interconnected a system is. Simple systems can be broken down into smaller pieces that are understandable in isolation. If you make changes to one of those pieces, you don't have to fear unexpected ramifications in parts not directly connected to what you're operating on. Complex systems are the exact opposite: you'll need to keep in mind a lot of things and tread carefully.
 
-<span style="text-align:left; display:inline-block;"><b>Easy → Hard</b></span> is the dimension of how much energy and time it takes to successfully execute something. Easy things generally require less preparation and can be done reliably even by inexperienced individuals. By definition, hard stuff requires more effort and not everybody gets it right all the time.
+```=html
+<p>
+<span style="text-align:left; display:inline-block;"><strong>Simple → Complex</strong></span> is the
+dimension that describes how irregular and interconnected a system is.
+Simple systems can be broken down into smaller pieces that are
+understandable in isolation. If you make changes to one of those pieces,
+you don't have to fear unexpected ramifications in parts not directly
+connected to what you're operating on. Complex systems are the exact
+opposite: you'll need to keep in mind a lot of things and tread carefully.
+</p>
+<p>
+<span style="text-align:left; display:inline-block;"><strong>Easy → Hard</strong></span> is the dimension of how much energy and time it takes to successfully execute something. Easy things generally require less preparation and can be done reliably even by inexperienced individuals. By definition, hard stuff requires more effort and not everybody gets it right all the time.
+</p>
+```
 
 It goes without saying that complex things tend to be hard, while simple things tend to be easy, but that's not always the case. Software engineering can shift this balance almost alchemically, although not always for the best.
 
@@ -24,7 +36,7 @@ While in the previous example abstracting did not decrease complexity, it did dr
 
 ## Not all abstraction manages complexity
 
-Abstraction is sometimes introduced just to make things easier. An example would be when you're introducing a new interface with the sole goal of making it easier to swap in and out a replacement for a component. It will take you less effort to make that specific change (fewer references to update), but the box that you just drew is a second layer around a pre-existing block (the concrete class). Think for example about  **Database** <sup>(class)</sup> and **IDatabase** <sup>(interface)</sup>. That interface is only useful for swapping in a new database. If it were a way of abstracting what the class does, it would have had a different name to begin with. 
+Abstraction is sometimes introduced just to make things easier. An example would be when you're introducing a new interface with the sole goal of making it easier to swap in and out a replacement for a component. It will take you less effort to make that specific change (fewer references to update), but the box that you just drew is a second layer around a pre-existing block (the concrete class). Think for example about  **Database** (class) and **IDatabase** (interface). That interface is only useful for swapping in a new database. If it were a way of abstracting what the class does, it would have had a different name to begin with. 
 
 ## Easy is better than hard
 
@@ -77,8 +89,8 @@ I leave it to you to decide if and how that picture translates into toolchains, 
 
 ---
 
-<small>*Thanks for reading my first blog post!  
-My next post will probably be about a new programming language called Zig and some considerations that popped into my mind when using it, but I'm not done complaining about complexity yet. Not all easy complexity is bloat, some takes a different form that definitely deserves a dedicated post, and I didn't touch on the subject of what it takes to actively simplify a system. And there's also the hostile design thing…* </small>
+*Thanks for reading my first blog post!  
+My next post will probably be about a new programming language called Zig and some considerations that popped into my mind when using it, but I'm not done complaining about complexity yet. Not all easy complexity is bloat, some takes a different form that definitely deserves a dedicated post, and I didn't touch on the subject of what it takes to actively simplify a system. And there's also the hostile design thing…*
 
 
 
