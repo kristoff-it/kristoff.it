@@ -1,0 +1,143 @@
+---
+.title = "The Zig Journey",
+.layout = "post.shtml",
+.date = .date("2026-09-23T00:00:00"),
+.draft = false,
+---
+
+A couple of weeks ago I attended [Zigtoberfest](https://zigtoberfest.de), a
+single-day conference organized in Munich.
+
+I was offered the privilege to give some introductory remarks at the
+beginning of the day, and I chose to spend my time offering the audience
+some suggestions on how to approach Zig both as a project and as a
+community, divided in three tiers, aimed respectively at newcomers,
+intermediate, and advanced users of Zig.
+
+I'm not going to repeat everything in this blog post, but I want to
+highlight the point at the core of my speech: the Zig journey.
+
+Coincidentally, this post might also help answer some questions from people
+who don't really understand what is the point of Zig in light of {Go, Rust,
+Modula-2, Mojo, LLMs, ...}.
+
+# 1. Target computers not frameworks
+
+My main piece of advice for newcomers is to learn how to think of a problem
+as a sequence of operations offered by the target system, as opposed to a
+composition of dependencies that offer a higher level -- but limited, and
+potentially even wasteful -- API. This is an extremely useful skill to
+train no matter what ecosystem you're working in, including web
+development.
+
+>Systems programming is a way of modelling software development. It's not
+>about a category of what you are working on, it's a way of looking at the
+>problem. An excellent systems programmer fully understands the systems
+>involved.
+>- [Andrew Kelley @ Systems Distributed '23](https://youtu.be/Qncdi-Fg0-I?si=5MlzI-Ml9kmbRre-)
+
+**This is not to say that you should not use dependencies or frameworks,
+but it is a problem if that's the only thing you know how to do.**
+
+Plenty of trivial applications are best solved by gluing dependencies
+together, but if you ever want to try your hand at creating something
+innovative, then you will want to have full control over the core
+functionality of your program, in order to provide your users with a truly
+new and thoughtfully designed experience.
+
+
+# 2. Design code behavior in depth
+
+If the previous advice was to scrutinize the functional requirements of
+your applications, now my advice for intermediate Zig users is to take
+charge designing *everything else*.
+
+If your application has some important C/C++ dependencies, it makes a big
+difference if users are required to go install them on their own, compared
+to you providing them directly in your Zig build script.
+
+In the former case your application has a de-facto dependency on package
+managers (apt, brew, winget, etc) and is going to break whenever a package
+maintainer changes something in the way they package the dependency (e.g.
+the version, or a feature toggle).
+
+This is also what prompts overuse of containers in some ecosistems, while
+Zig makes it possible to achieve the gold standard of having your
+application build for all systems, **from** all systems, just by running
+`zig build`.
+
+To help with that, I've created All Your Codebase
+([GH](https://github.com/allyourcodebase/),
+[CB](https://codeberg.org/allyourcodebase/)), an
+organization that collects and collectively maintains build scripts for
+C/C++ projects.
+
+This is just one example of designing code behavior in depth. Other
+examples include improving efficiency, removing unnecessary heap allocation,
+and proper fuzzing.
+
+# 3. Make perfect software a reality
+
+The advice for advanced Zig users is to simply find a project that you are
+passionate about, and to bring it to the finish line.
+
+Perfection in this context means that you have fully explored the scope you
+decided to tackle with your application, that you have full ownership of
+the core functionality offered to your users, and that there are no more
+significant non-functional improvements left for you to make.
+
+Depending on the scope of the project, getting to this point can take
+multiple years of work, but it is ultimately how you give meaning to all
+the effort you put into your journey.
+
+# In Conclusion
+
+What I just described is not something unique to Zig. 
+
+You can (and should!) follow the same path in other ecosystems, but Zig is
+both a toolchain and a community that deliberately aims for helping you
+make progress in this journey. While neither the toolchain nor the
+ecosystem is fully mature yet, depending on your personal sensibilities and
+willingness to be an early-ish adopter, Zig might already be the best way
+for you to become a more impactful software engineer.
+
+In "[Hello Systems](https://www.youtube.com/watch?v=w9rkil0dotI)" I talk
+about much harder it is to write a feature-complete static site generator
+in Python compared to a low level language like Zig. This is because once
+you go past the most superficial layer of functionality (turning Markdown
+into HTML), all the abstraction involved with Python makes it impossibly
+hard to fine tune concurrency and many other things.
+
+Thinking that high level programming languages are always the easiest way
+to create software is believing in a falsehood that in turn leads to
+over-reliance on dependencies, and that ultimately disconnects you from
+the reality of what the machine can do.
+
+Learning to understand systems in depth will make you not only better at using
+dependencies, but also at steering LLMs. This might seem counter-intuitive
+at first glance, but it's kind of an obvious truth: how can you evaluate
+the quality of what you get from a dependency or an agent, [if you have no
+idea of what's even
+possible](https://x.com/mitchellh/status/2060088112257372610)?
+
+At the end of my speech at Zigtoberfest, I asked the audience to raise
+their hand if they felt they were making good progress in their Zig
+journey, and pretty much the entire room (of ~100 people) raised their hand
+with confidence.
+
+This was a delightful moment for me because it shows that our collective
+effort (Andrew, core team, event organizers, etc) is truly making the Zig
+Software Foundation's mission a reality.
+
+If you want to hang out with other people who care about furthering their
+understanding of software engineering, join a [Zig Day](https://zig.day)
+near you or attend any other Zig event ([Software You Can Love
+Vancouver](https://softwareyoucanlove.ca) is next month!).
+
+Lastly, please consider [supporting our non-profit
+foundation](https://ziglang.org). This is a moment in time where it's
+becoming increasingly difficult to push a message about self-improvement,
+and Zig Software Foundation relies on popular support for staying
+independent, getting Zig to the finish line without cutting corners, and
+fostering a vibrant global community.
+
