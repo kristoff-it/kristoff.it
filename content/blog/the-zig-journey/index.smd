@@ -61,7 +61,7 @@ managers (apt, brew, winget, etc) and is going to break whenever a package
 maintainer changes something in the way they package the dependency (e.g.
 the version, or a feature toggle).
 
-This is also what prompts overuse of containers in some ecosistems, while
+This is also what prompts overuse of containers in some ecosystems, while
 Zig makes it possible to achieve the gold standard of having your
 application build for all systems, **from** all systems, just by running
 `zig build`.
