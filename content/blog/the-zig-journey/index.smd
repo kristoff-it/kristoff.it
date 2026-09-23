@@ -102,7 +102,7 @@ willingness to be an early-ish adopter, Zig might already be the best way
 for you to become a more impactful software engineer.
 
 In "[Hello Systems](https://www.youtube.com/watch?v=w9rkil0dotI)" I talk
-about much harder it is to write a feature-complete static site generator
+about how much harder it is to write a feature-complete static site generator
 in Python compared to a low level language like Zig. This is because once
 you go past the most superficial layer of functionality (turning Markdown
 into HTML), all the abstraction involved with Python makes it impossibly
